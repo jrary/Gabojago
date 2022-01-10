@@ -3,7 +3,6 @@ package org.techtown.gabojago
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import org.techtown.gabojago.databinding.ActivityMainBinding
-import org.techtown.gabojago.randomPick.HomeFragment
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
