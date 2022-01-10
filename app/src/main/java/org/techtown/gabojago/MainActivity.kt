@@ -2,6 +2,7 @@ package org.techtown.gabojago
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ReportFragment
 import org.techtown.gabojago.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -26,23 +27,23 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
 
-                R.id.lookFragment -> {
+                R.id.recordFragment -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, LookFragment())
+                        .replace(R.id.main_frm, RecordFragment())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
 
-                R.id.searchFragment -> {
+                R.id.goagainFragment -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, SearchFragment())
+                        .replace(R.id.main_frm, GoagainFragment())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
 
-                R.id.lockerFragment -> {
+                R.id.manageFragment -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, LockerFragment())
+                        .replace(R.id.main_frm, ManageFragment())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
