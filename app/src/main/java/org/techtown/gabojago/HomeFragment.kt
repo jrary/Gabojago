@@ -7,18 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.techtown.gabojago.databinding.FragmentHomeBinding
-import org.techtown.gabojago.randomPick.WheelActivity
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-
-        val start = Intent(activity, WheelActivity::class.java)
         binding.homeStartIv.setOnClickListener{
-            startActivity(Intent(start))
+            (context as MainActivity).supportFragmentManager.beginTransaction()
+                .replace(R.id.main_frm, HomeMenuFragment())
+                .commitAllowingStateLoss()
         }
 
         return binding.root
