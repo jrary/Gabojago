@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import org.techtown.gabojago.databinding.ActivityWheelBinding
 import org.techtown.gabojago.databinding.FragmentHomeBinding
 
-class WheelActivity : AppCompatActivity() {
+class ColorActivity : AppCompatActivity() {
     lateinit var binding: ActivityWheelBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
