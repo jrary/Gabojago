@@ -5,13 +5,73 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
+        android:id="@+id/record_Title_tv"
+        android:layout_width="118dp"
+        android:layout_height="37.263dp"
+        android:fontFamily="@font/nanum_square_round_otf_extrabold"
+        android:textStyle="normal"
+        android:textSize="32.3sp"
+        android:textColor="#000000"
+        android:text="기록하자"
+        android:layout_marginTop="77.2dp"
+        android:layout_marginStart="54.7dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/record_month_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Record Fragment"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/nanum_square_round_otf"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#777777"
+        android:letterSpacing="-0.03"
+        android:text="&lt; 12월"
+        android:layout_marginTop="162dp"
+        android:layout_marginStart="17dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/record_date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanum_square_round_otf"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="#6d6d6d"
+        android:letterSpacing="-0.06"
+        android:text="2021년 12월 28일 "
+        android:layout_marginTop="165dp"
+        android:layout_marginEnd="22dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        android:id="@+id/record_calender_view1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#ff6745"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="13dp"
+        app:layout_constraintTop_toBottomOf="@id/record_date_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="-2dp"
+        app:layout_constraintEnd_toEndOf="@id/record_date_tv">
+    </View>
+
+    <View
+        android:id="@+id/record_calender_view2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#ff6745"
+        android:layout_marginTop="92dp"
+        android:layout_marginStart="13dp"
+        app:layout_constraintTop_toBottomOf="@id/record_calender_view1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="-2dp"
+        app:layout_constraintEnd_toEndOf="@id/record_date_tv">
+    </View>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
