@@ -4,14 +4,37 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Splash activity"
+
+    <ImageView
+        android:id="@+id/splash_logo_iv"
+        android:layout_width="150dp"
+        android:layout_height="155dp"
+        android:src="@drawable/splash_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/splash_logo_action_iv"
+        android:layout_width="150dp"
+        android:layout_height="155dp"
+        android:src="@drawable/splash_logo_action"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        />
+
+    <ImageView
+        android:id="@+id/splash_logo_bar_iv"
+        android:layout_width="260dp"
+        android:layout_height="5dp"
+        android:src="@drawable/splash_logo_bar"
+        app:layout_constraintStart_toStartOf="@id/splash_logo_iv"
+        app:layout_constraintBottom_toBottomOf="@id/splash_logo_iv"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
