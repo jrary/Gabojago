@@ -7,10 +7,10 @@ import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
-class LoginSplashActivity :AppCompatActivity() {
+class LoginActivity :AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_splash)
+        setContentView(R.layout.activity_login)
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this,MainActivity::class.java))
             finish()
