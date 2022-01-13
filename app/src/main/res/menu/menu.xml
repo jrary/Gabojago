@@ -5,19 +5,23 @@
     <item
         android:id="@+id/homeFragment"
         app:showAsAction="always"
+        android:icon="@drawable/home"
         android:enabled="true"
         android:title="시작하자"
         tools:ignore="AlwaysShowAction" />
     <item
         android:id="@+id/recordFragment"
+        android:icon="@drawable/pencil"
         app:showAsAction="always"
         android:title="기록하자" />
     <item
         android:id="@+id/goagainFragment"
+        android:icon="@drawable/bookmark"
         app:showAsAction="always"
         android:title="또가자" />
     <item
         android:id="@+id/manageFragment"
+        android:icon="@drawable/person"
         app:showAsAction="always"
         android:title="관리하자" />
 
