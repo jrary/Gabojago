@@ -29,13 +29,14 @@ class SplashActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             binding.splashLogoBarIv.visibility = View.GONE
-            binding.splashLogoIv.visibility = View.GONE
-            binding.splashLogoActionIv.visibility = View.VISIBLE
+//            binding.splashLogoIv.visibility = View.GONE
+//            binding.splashLogoActionIv.visibility = View.VISIBLE
             val animation02 = AnimationUtils.loadAnimation(this, R.anim.anim_toleft_splash_02)
-            binding.splashLogoActionIv.startAnimation(animation02)
+            binding.splashLogoIv.startAnimation(animation02)
         }, 1000)
 
         Handler(Looper.getMainLooper()).postDelayed({
+            binding.splashLogoIv.visibility = View.GONE
             startActivity(Intent(this,LoginActivity::class.java))
             finish()
         }, 1500)

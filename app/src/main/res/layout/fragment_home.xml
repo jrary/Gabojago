@@ -68,7 +68,7 @@
         android:textSize="37.7sp"
         android:textColor="#ff6745"
         android:gravity="center_horizontal"
-        tools:text="가보자GO!"
+        android:text="가보자GO!"
         app:layout_constraintStart_toStartOf="@id/home_start_iv"
         app:layout_constraintEnd_toEndOf="@id/home_start_iv"
         app:layout_constraintTop_toTopOf="@id/home_start_iv"
