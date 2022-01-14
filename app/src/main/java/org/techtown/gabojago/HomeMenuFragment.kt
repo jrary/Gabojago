@@ -17,29 +17,7 @@ class HomeMenuFragment : Fragment() {
     ): View? {
         binding = FragmentHomeMenuBinding.inflate(inflater, container, false)
 
-        binding.homeStartIv.setOnClickListener{
-            (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, HomeMenuFragment())
-                .commitAllowingStateLoss()
-        }
 
-        binding.homeStartIv.setOnClickListener{
-            (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, HomeMenuFragment())
-                .commitAllowingStateLoss()
-        }
-
-        binding.homeStartIv.setOnClickListener{
-            (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, HomeMenuFragment())
-                .commitAllowingStateLoss()
-        }
-
-        binding.homeStartIv.setOnClickListener{
-            (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, HomeMenuFragment())
-                .commitAllowingStateLoss()
-        }
 
         return binding.root
     }

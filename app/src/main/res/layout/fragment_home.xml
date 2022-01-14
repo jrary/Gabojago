@@ -2,17 +2,77 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
+        android:id="@+id/home_title_tv"
+        android:layout_width="281dp"
+        android:layout_height="86dp"
+        android:fontFamily="@font/nanum_square_round_otf_extrabold"
+        android:textStyle="normal"
+        android:textSize="36sp"
+        android:textColor="#000000"
+        android:text="아무도 모르는\n나의 도착지"
+        android:layout_marginTop="130dp"
+        app:layout_constraintStart_toStartOf="@id/home_start_iv"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/home_info_tv"
+        android:layout_width="287dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanum_square_round_otf"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="#ababab"
+        android:lineSpacingExtra="7.1sp"
+        android:bufferType="spannable"
+        tools:text="랜덤에 내 발길을 맡겨볼까?\n새로운 장소를 발견하고 탐험해봐!"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@id/home_start_iv"
+        app:layout_constraintTop_toBottomOf="@id/home_title_tv"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/start_character"
+        android:paddingBottom="170dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/home_start_iv"
+        />
+
+    <ImageView
         android:id="@+id/home_start_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home Fragment"
+        android:src="@drawable/rectangle_start"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
+
+    <TextView
+        android:id="@+id/home_start_tv"
+        android:layout_width="189.713dp"
+        android:layout_height="57.739dp"
+        android:shadowColor="#ff6745"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="1"
+        android:fontFamily="@font/nanum_square_round_otf_extrabold"
+        android:textStyle="normal"
+        android:textSize="37.7sp"
+        android:textColor="#ff6745"
+        android:gravity="center_horizontal"
+        tools:text="가보자GO!"
+        app:layout_constraintStart_toStartOf="@id/home_start_iv"
+        app:layout_constraintEnd_toEndOf="@id/home_start_iv"
+        app:layout_constraintTop_toTopOf="@id/home_start_iv"
+        app:layout_constraintBottom_toBottomOf="@id/home_start_iv"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
