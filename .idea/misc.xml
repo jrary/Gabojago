@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/drawable/bottom_icon_color.xml" value="0.3314814814814815" />
+        <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/drawable/gridview_selecter.xml" value="0.3314814814814815" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/activity_calendar.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/activity_login_splash.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
@@ -18,6 +19,7 @@
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_record.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_report.xml" value="0.10144927536231885" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_wheel.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/item_calendar_gridview.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/menu/menu.xml" value="0.17916666666666667" />
       </map>
     </option>
