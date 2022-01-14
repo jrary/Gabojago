@@ -10,7 +10,7 @@
         android:layout_height="36.1dp"
         android:src="@drawable/pencil_big"
         android:layout_marginStart="17dp"
-        android:layout_marginTop="74dp"
+        android:layout_marginTop="54dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -24,7 +24,7 @@
         android:textSize="32.3sp"
         android:textColor="#000000"
         android:text="기록하자"
-        android:layout_marginTop="77.2dp"
+        android:layout_marginTop="57.2dp"
         android:layout_marginStart="54.7dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +39,7 @@
         android:textColor="#777777"
         android:letterSpacing="-0.03"
         android:text="&lt; 12월"
-        android:layout_marginTop="162dp"
+        android:layout_marginTop="142dp"
         android:layout_marginStart="17dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -54,7 +54,7 @@
         android:textColor="#6d6d6d"
         android:letterSpacing="-0.06"
         android:text="2021년 12월 28일 "
-        android:layout_marginTop="165dp"
+        android:layout_marginTop="145dp"
         android:layout_marginEnd="22dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -91,7 +91,7 @@
         android:layout_height="60dp"
         android:src="@drawable/circle_record_menu"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="651dp"
+        android:layout_marginTop="630dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
