@@ -13,7 +13,7 @@
         android:src="@drawable/pencil_big"
         android:layout_marginStart="17dp"
         android:layout_marginTop="54dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -30,6 +30,17 @@
         android:layout_marginStart="54.7dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/record_character_iv"
+        android:layout_width="145dp"
+        android:layout_height="80dp"
+        android:src="@drawable/character_1"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="84dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/record_month_tv"
@@ -211,6 +222,24 @@
         android:layout_marginEnd="-2dp"
         app:layout_constraintEnd_toEndOf="@id/record_date_tv">
     </View>
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/record_result_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginStart="-4dp"
+        android:layout_marginEnd="-7dp"
+        android:scrollbars="none"
+        tools:listitem="@layout/item_record_result"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="@id/record_calender_view1"
+        app:layout_constraintEnd_toEndOf="@id/record_calender_view1"
+        app:layout_constraintTop_toBottomOf="@id/record_calender_view2"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageView
         android:id="@+id/record_circle_menu_iv"

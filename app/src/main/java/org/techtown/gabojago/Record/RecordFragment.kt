@@ -27,6 +27,9 @@ class RecordFragment : Fragment() {
         val recordWeekRVAdapter = RecordWeekRVAdapter()
         binding.recordWeekRecyclerview.adapter = recordWeekRVAdapter
 
+        val recordResultRVAdapter = RecordResultRVAdapter()
+        binding.recordResultRecyclerview.adapter = recordResultRVAdapter
+
         binding.recordMonthTv.setOnClickListener{
             startActivity(Intent(activity, CalendarActivity::class.java))
         }
