@@ -31,8 +31,20 @@ class SplashActivity : AppCompatActivity() {
             binding.splashLogoBarIv.visibility = View.GONE
 //            binding.splashLogoIv.visibility = View.GONE
 //            binding.splashLogoActionIv.visibility = View.VISIBLE
-            val animation02 = AnimationUtils.loadAnimation(this, R.anim.anim_toleft_splash_02)
-            binding.splashLogoIv.startAnimation(animation02)
+
+//            val rot = AnimationUtils.loadAnimation(this, R.anim.anim_rotate_splash)
+//            val animation02 = AnimationUtils.loadAnimation(this, R.anim.anim_toleft_splash_02)
+//            binding.splashLogoIv.startAnimation(rot)
+//            binding.splashLogoIv.startAnimation(animation02)
+
+            binding.splashLogoIv.animate()
+                    .rotation(0.0f)
+                    .translationX(0f * 150)
+                    .withStartAction{}
+                    .withEndAction{
+                binding.splashLogoIv.rotation = 15.0f;
+                binding.splashLogoIv.translationX = -400f
+            }.start()
         }, 1000)
 
         Handler(Looper.getMainLooper()).postDelayed({

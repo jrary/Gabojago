@@ -3,7 +3,7 @@
         android:duration="500"
         android:fromXDelta="0"
         android:toXDelta="-100%p"
-        android:fromDegrees="0"
-        android:toDegrees="14.44"
         />
+
+
 </set>
