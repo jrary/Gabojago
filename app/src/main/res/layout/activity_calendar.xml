@@ -106,6 +106,7 @@
         />
     
     <LinearLayout
+        android:id="@+id/calendar_week_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -117,8 +118,9 @@
             android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:text="SUN"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:layout_marginStart="17dp"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/nanum_square_round_otf"
             android:textStyle="bold"
             android:textSize="12sp"
@@ -129,8 +131,9 @@
             android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:text="MON"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="11dp"
             android:fontFamily="@font/nanum_square_round_otf"
             android:textStyle="bold"
             android:textSize="12sp"
@@ -140,6 +143,7 @@
             android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:text="TUE"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
             android:layout_marginStart="11dp"
             android:fontFamily="@font/nanum_square_round_otf"
@@ -152,6 +156,7 @@
             android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:text="WED"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
             android:layout_marginStart="11dp"
             android:fontFamily="@font/nanum_square_round_otf"
@@ -164,8 +169,9 @@
             android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:text="THU"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="11dp"
             android:fontFamily="@font/nanum_square_round_otf"
             android:textStyle="bold"
             android:textSize="12sp"
@@ -176,8 +182,9 @@
             android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:text="FRI"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="11dp"
             android:fontFamily="@font/nanum_square_round_otf"
             android:textStyle="bold"
             android:textSize="12sp"
@@ -188,29 +195,31 @@
             android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:text="SAT"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
             android:layout_marginStart="11dp"
+            android:layout_marginEnd="13dp"
             android:fontFamily="@font/nanum_square_round_otf"
             android:textStyle="bold"
             android:textSize="12sp"
             android:textColor="#0053f3"
             />
+
     </LinearLayout>
 
-    <GridView
-        android:layout_marginTop="50dp"
-        android:id="@+id/gridview"
-        android:layout_height="230dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/calendar_gridview"
         android:layout_width="0dp"
-        android:numColumns="7"
-        android:layout_marginStart="10dp"
-        android:listSelector="@drawable/gridview_selecter"
-        tools:listitem="@layout/item_calendar_gridview"
-        android:scrollbars="none"
+        android:layout_height="280dp"
+        android:layout_marginStart="13dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:overScrollMode="never"
-        app:layout_constraintTop_toTopOf="@+id/calendar_calendar_iv"
+        android:scrollbars="none"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@id/calendar_calendar_iv"
         app:layout_constraintStart_toStartOf="@id/calendar_calendar_iv"
-        app:layout_constraintEnd_toEndOf="@id/calendar_calendar_iv" />
+        app:layout_constraintTop_toBottomOf="@id/calendar_week_layout"
+        tools:listitem="@layout/item_calendar_gridview" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,13 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginStart="28dp"
+    android:layout_marginStart="27.8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/item_date_tv"
-        android:layout_width="22dp"
+        android:layout_width="22.5dp"
         android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="1"
         android:fontFamily="@font/nanum_square_round_otf"
         android:gravity="center"
         android:text="10"
