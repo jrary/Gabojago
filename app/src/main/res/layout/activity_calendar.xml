@@ -104,29 +104,113 @@
         app:layout_constraintTop_toBottomOf="@id/calendar_total_number_tv"
         android:layout_marginTop="24dp"
         />
+    
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@id/calendar_calendar_iv"
+        app:layout_constraintEnd_toEndOf="@id/calendar_calendar_iv"
+        app:layout_constraintTop_toTopOf="@id/calendar_calendar_iv">
+
+        <TextView
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:text="SUN"
+            android:gravity="center_horizontal"
+            android:layout_marginStart="17dp"
+            android:fontFamily="@font/nanum_square_round_otf"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="#ff6745"
+            />
+
+        <TextView
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:text="MON"
+            android:gravity="center_horizontal"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/nanum_square_round_otf"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:text="TUE"
+            android:gravity="center_horizontal"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/nanum_square_round_otf"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:text="WED"
+            android:gravity="center_horizontal"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/nanum_square_round_otf"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:text="THU"
+            android:gravity="center_horizontal"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/nanum_square_round_otf"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:text="FRI"
+            android:gravity="center_horizontal"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/nanum_square_round_otf"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:text="SAT"
+            android:gravity="center_horizontal"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/nanum_square_round_otf"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="#0053f3"
+            />
+    </LinearLayout>
 
     <GridView
         android:layout_marginTop="50dp"
         android:id="@+id/gridview"
         android:layout_height="230dp"
-        android:layout_width="260dp"
+        android:layout_width="0dp"
         android:numColumns="7"
+        android:layout_marginStart="10dp"
         android:listSelector="@drawable/gridview_selecter"
         tools:listitem="@layout/item_calendar_gridview"
+        android:scrollbars="none"
+        android:overScrollMode="never"
         app:layout_constraintTop_toTopOf="@+id/calendar_calendar_iv"
         app:layout_constraintStart_toStartOf="@id/calendar_calendar_iv"
-        app:layout_constraintEnd_toEndOf="@id/calendar_calendar_iv"
-        >
-    </GridView>
+        app:layout_constraintEnd_toEndOf="@id/calendar_calendar_iv" />
 
-<!--    <CalendarView-->
-<!--        android:id="@+id/cv_calendar"-->
-<!--        android:layout_width="292dp"-->
-<!--        android:layout_height="360dp"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/calendar_calendar_iv"-->
-<!--        app:layout_constraintStart_toStartOf="@id/calendar_calendar_iv"-->
-<!--        app:mcv_selectionColor="#f79256"-->
-<!--        app:mcv_selectionMode="range" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
