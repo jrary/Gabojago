@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/item_folderrecord_pecil_iv"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@drawable/line_18"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/item_folderrecord_circle_iv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/circle_record_grey"
+        android:scaleType="fitXY"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_folderrecord_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanum_square_round_otf"
+        android:textStyle="bold"
+        android:textSize="10sp"
+        android:layout_marginStart="11dp"
+        android:textColor="#868686"
+        android:text="돌려돌려 돌림판"
+        app:layout_constraintStart_toEndOf="@id/item_folderrecord_circle_iv"
+        app:layout_constraintTop_toTopOf="@id/item_folderrecord_circle_iv"
+        app:layout_constraintBottom_toTopOf="@id/item_folderrecord_result_tv"/>
+
+    <TextView
+        android:id="@+id/item_folderrecord_result_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanum_square_round_otf"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="3dp"
+        android:textColor="#000000"
+        android:text="결과: 버스"
+        app:layout_constraintStart_toStartOf="@id/item_folderrecord_title_tv"
+        app:layout_constraintTop_toBottomOf="@id/item_folderrecord_title_tv"
+        app:layout_constraintBottom_toBottomOf="@id/item_folderrecord_circle_iv"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
