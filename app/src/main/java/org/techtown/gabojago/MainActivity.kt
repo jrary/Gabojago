@@ -3,7 +3,7 @@ package org.techtown.gabojago
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ReportFragment
+import org.techtown.gabojago.Record.RecordFragment
 import org.techtown.gabojago.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
