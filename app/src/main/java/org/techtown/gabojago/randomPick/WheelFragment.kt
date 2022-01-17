@@ -1,31 +1,35 @@
 package org.techtown.gabojago.randomPick
 
-import android.content.Intent
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import org.techtown.gabojago.MainActivity
 import org.techtown.gabojago.databinding.FragmentWheelBinding
-import org.techtown.gabojago.optionPopup.WheelOptionActivity
 
 
 class WheelFragment : Fragment() {
     lateinit var binding: FragmentWheelBinding
 
+    private val activity = context as Activity
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = FragmentWheelBinding.inflate(layoutInflater)
 
         binding.wheelOptionBtn.setOnClickListener {
-          //  startActivity(Intent(this, WheelOptionActivity::class.java))
+            binding.wheelOptionView.visibility = View.VISIBLE
         }
 
-
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
     }
 }

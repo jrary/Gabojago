@@ -1,13 +1,17 @@
 package org.techtown.gabojago
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import org.techtown.gabojago.Record.RecordFragment
 import org.techtown.gabojago.databinding.ActivityMainBinding
+import org.techtown.gabojago.optionPopup.WheelOptionActivity
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    lateinit var act: Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,9 +19,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
+        setJwt(this, "wheelOption", "0")
+
+        if(getJwt(this,"wheelOption").toInt() == 1){
+            openActivity()
+        }
 
         initNavigation()
-
     }
 
     private fun initNavigation() {
@@ -58,4 +66,8 @@ class MainActivity : AppCompatActivity() {
             false
         }
     }
+
+    private fun openActivity(){
+        startActivity(Intent(this, WheelOptionActivity::class.java))
     }
+}
