@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import org.techtown.gabojago.Record.RecordFragment
 import org.techtown.gabojago.databinding.ActivityMainBinding
-import org.techtown.gabojago.optionPopup.WheelOptionFragment
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
