@@ -23,6 +23,12 @@
         <activity android:name=".LoginActivity"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".Record.CalendarActivity" />
+        <activity android:name=".optionPopup.WheelOptionActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            />
+        <activity android:name=".optionPopup.WheelSelectActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            />
     </application>
 
 </manifest>

@@ -3,14 +3,15 @@ package org.techtown.gabojago.optionPopup
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import org.techtown.gabojago.databinding.ActivityWheelOptionBinding
+import org.techtown.gabojago.databinding.ActivityWheelSelectBinding
 
-class WheelOptionActivity : AppCompatActivity() {
+class WheelSelectActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityWheelOptionBinding
+    lateinit var binding: ActivityWheelSelectBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityWheelOptionBinding.inflate(layoutInflater)
+        binding = ActivityWheelSelectBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }

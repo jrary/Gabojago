@@ -1,241 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/wheel_title_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/wheel_title_view"
-            android:layout_width="match_parent"
-            android:layout_height="106dp"
-            android:background="#fafafa"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:elevation="20dp" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nanum_square_round_otf_light"
-                android:layout_marginStart="19dp"
-                android:layout_marginBottom="15dp"
-                android:textStyle="normal"
-                android:textSize="32.2sp"
-                android:textColor="#b0b0b0"
-                android:text="&lt;"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <TextView
-                android:layout_width="192dp"
-                android:layout_height="29dp"
-                android:fontFamily="@font/nanum_square_round_otf_extrabold"
-                android:textStyle="normal"
-                android:layout_marginBottom="15dp"
-                android:textSize="20sp"
-                android:textColor="#000000"
-                android:gravity="center_horizontal"
-                android:text="돌려 돌려 돌림판"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/wheel_contents_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/wheel_title_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-            <TextView
-                android:id="@+id/wheel_info_title_tv"
-                android:layout_width="295dp"
-                android:layout_height="38dp"
-                android:fontFamily="@font/nanum_square_round_otf"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#000000"
-                android:gravity="center_horizontal"
-                android:text="자유롭게 선택지를 만들어 봐!"
-                android:layout_marginTop="33dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                />
-            <TextView
-                android:id="@+id/wheel_info_tv"
-                android:layout_width="301dp"
-                android:layout_height="48dp"
-                android:fontFamily="@font/nanum_square_round_otf"
-                android:textStyle="bold"
-                android:textSize="12sp"
-                android:textColor="#b8b8b8"
-                android:gravity="center_horizontal"
-                android:text="옵션 설정 후\n돌림판을 돌려줘!"
-                app:layout_constraintTop_toBottomOf="@id/wheel_info_title_tv"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-
-                />
-
-            <ImageView
-                android:id="@+id/wheel_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/wheel_back"
-                android:layout_marginTop="15dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/wheel_info_tv"
-                />
-
-            <View
-                android:id="@+id/wheel_spin_view"
-                android:layout_width="237dp"
-                android:layout_height="237dp"
-                android:layout_marginTop="13.5dp"
-                app:layout_constraintStart_toStartOf="@id/wheel_iv"
-                app:layout_constraintEnd_toEndOf="@id/wheel_iv"
-                app:layout_constraintTop_toTopOf="@id/wheel_iv"
-                >
-
-            </View>
-            <ImageView
-                android:id="@+id/wheel_triangle_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/wheel_triangle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/wheel_info_tv"
-                />
-            <ImageView
-                android:id="@+id/wheel_circle_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/wheel_circle"
-                android:layout_marginTop="84.45dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/wheel_triangle_iv"
-                />
-
-
-            <ImageView
-                android:id="@+id/wheel_option_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/rectangle_4"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/wheel_go_btn"
-                app:layout_constraintTop_toBottomOf="@id/wheel_iv"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:shadowColor="#abffffff"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="4"
-                android:fontFamily="@font/nanum_square_round_otf_extrabold"
-                android:textStyle="normal"
-                android:textSize="18sp"
-                android:textColor="#ffffff"
-                android:text="옵션 설정"
-                app:layout_constraintStart_toStartOf="@id/wheel_option_btn"
-                app:layout_constraintEnd_toEndOf="@id/wheel_option_btn"
-                app:layout_constraintTop_toTopOf="@id/wheel_option_btn"
-                app:layout_constraintBottom_toBottomOf="@id/wheel_option_btn"/>
-
-            <ImageView
-                android:id="@+id/wheel_go_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/rectangle_5"
-                app:layout_constraintStart_toEndOf="@id/wheel_option_btn"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/wheel_iv"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:shadowColor="#abffffff"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="4"
-                android:fontFamily="@font/nanum_square_round_otf_extrabold"
-                android:textStyle="normal"
-                android:textSize="18sp"
-                android:textColor="#ffffff"
-                android:text="가보자GO"
-                app:layout_constraintStart_toStartOf="@id/wheel_go_btn"
-                app:layout_constraintEnd_toEndOf="@id/wheel_go_btn"
-                app:layout_constraintTop_toTopOf="@id/wheel_go_btn"
-                app:layout_constraintBottom_toBottomOf="@id/wheel_go_btn"
-                />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/wheel_option_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:visibility="invisible"
-        >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/option_background"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/option_complete"
-            android:layout_marginBottom="33dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/wheel_option_select_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|bottom"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="106dp"
+        android:background="@color/white"
+        android:elevation="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="테스트"
+            android:fontFamily="@font/nanum_square_round_otf_light"
+            android:layout_marginStart="19dp"
+            android:layout_marginBottom="15dp"
+            android:textStyle="normal"
+            android:textSize="32.2sp"
+            android:textColor="#b0b0b0"
+            android:text="&lt;"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:layout_width="192dp"
+            android:layout_height="29dp"
+            android:fontFamily="@font/nanum_square_round_otf_extrabold"
+            android:textStyle="normal"
+            android:layout_marginBottom="15dp"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:gravity="center_horizontal"
+            android:text="돌려 돌려 돌림판"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/wheel_contents_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/wheel_title_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <TextView
+            android:id="@+id/wheel_info_title_tv"
+            android:layout_width="295dp"
+            android:layout_height="38dp"
+            android:fontFamily="@font/nanum_square_round_otf"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:gravity="center_horizontal"
+            android:text="자유롭게 선택지를 만들어 봐!"
+            android:layout_marginTop="33dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+        <TextView
+            android:id="@+id/wheel_info_tv"
+            android:layout_width="301dp"
+            android:layout_height="48dp"
+            android:fontFamily="@font/nanum_square_round_otf"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="#b8b8b8"
+            android:gravity="center_horizontal"
+            android:text="옵션 설정 후\n돌림판을 돌려줘!"
+            app:layout_constraintTop_toBottomOf="@id/wheel_info_title_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            />
+
+        <ImageView
+            android:id="@+id/wheel_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/wheel_back"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wheel_info_tv"
+            />
+
+        <View
+            android:id="@+id/wheel_spin_view"
+            android:layout_width="237dp"
+            android:layout_height="237dp"
+            android:layout_marginTop="13.5dp"
+            app:layout_constraintStart_toStartOf="@id/wheel_iv"
+            app:layout_constraintEnd_toEndOf="@id/wheel_iv"
+            app:layout_constraintTop_toTopOf="@id/wheel_iv"
+            >
+
+        </View>
+        <ImageView
+            android:id="@+id/wheel_triangle_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/wheel_triangle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wheel_info_tv"
+            />
+        <ImageView
+            android:id="@+id/wheel_circle_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/wheel_circle"
+            android:layout_marginTop="84.45dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wheel_triangle_iv"
+            />
+
+
+        <ImageView
+            android:id="@+id/wheel_option_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/rectangle_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/wheel_go_btn"
+            app:layout_constraintTop_toBottomOf="@id/wheel_iv"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shadowColor="#abffffff"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="4"
+            android:fontFamily="@font/nanum_square_round_otf_extrabold"
+            android:textStyle="normal"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:text="옵션 설정"
+            app:layout_constraintStart_toStartOf="@id/wheel_option_btn"
+            app:layout_constraintEnd_toEndOf="@id/wheel_option_btn"
+            app:layout_constraintTop_toTopOf="@id/wheel_option_btn"
+            app:layout_constraintBottom_toBottomOf="@id/wheel_option_btn"/>
+
+        <ImageView
+            android:id="@+id/wheel_go_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/rectangle_5"
+            app:layout_constraintStart_toEndOf="@id/wheel_option_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wheel_iv"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shadowColor="#abffffff"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="4"
+            android:fontFamily="@font/nanum_square_round_otf_extrabold"
+            android:textStyle="normal"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:text="가보자GO"
+            app:layout_constraintStart_toStartOf="@id/wheel_go_btn"
+            app:layout_constraintEnd_toEndOf="@id/wheel_go_btn"
+            app:layout_constraintTop_toTopOf="@id/wheel_go_btn"
+            app:layout_constraintBottom_toBottomOf="@id/wheel_go_btn"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+

@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.techtown.gabojago.databinding.FragmentHomeMenuBinding
-import org.techtown.gabojago.randomPick.ClockFragment
-import org.techtown.gabojago.randomPick.ColorFragment
-import org.techtown.gabojago.randomPick.NumberFragment
-import org.techtown.gabojago.randomPick.WheelFragment
+import org.techtown.gabojago.randomPick.*
 
 class HomeMenuFragment : Fragment() {
     lateinit var binding: FragmentHomeMenuBinding

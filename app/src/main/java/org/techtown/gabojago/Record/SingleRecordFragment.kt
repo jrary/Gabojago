@@ -38,7 +38,6 @@ class SingleRecordFragment : Fragment() {
                 .addToBackStack(null)
                 .commitAllowingStateLoss()
             }
-
     }
 
     private fun init() {
