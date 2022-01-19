@@ -1,6 +1,7 @@
 package org.techtown.gabojago.optionPopup
 
 import android.os.Bundle
+import android.view.View
 import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ class WheelSelectActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWheelSelectBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
         initNumberPicker()
 
@@ -29,7 +31,7 @@ class WheelSelectActivity : AppCompatActivity() {
 
         binding.wheelSelectNumberPicker.wrapSelectorWheel = false
         binding.wheelSelectNumberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        val data1: Array<String> = Array(50){
+        val data1: Array<String> = Array(10){
             i -> i.toString()
         }
         binding.wheelSelectNumberPicker.minValue = 0

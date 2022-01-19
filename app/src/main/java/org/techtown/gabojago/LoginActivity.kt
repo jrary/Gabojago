@@ -6,15 +6,22 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import org.techtown.gabojago.databinding.ActivityLoginBinding
+import org.techtown.gabojago.databinding.ActivityWheelSelectBinding
 
 class LoginActivity :AppCompatActivity() {
+
+    lateinit var binding: ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this,MainActivity::class.java))
-            finish()
-        }, 3000)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
+        binding.loginCompBtn.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            finish()
+        }
     }
 }
