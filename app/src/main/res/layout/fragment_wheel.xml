@@ -49,24 +49,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/wheel_contents_view"
         android:layout_width="match_parent"
-<<<<<<< Updated upstream
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/wheel_title_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-=======
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/wheel_title_view">
 
->>>>>>> Stashed changes
         <TextView
             android:id="@+id/wheel_info_title_tv"
             android:layout_width="295dp"
             android:layout_height="38dp"
-<<<<<<< Updated upstream
             android:fontFamily="@font/nanum_square_round_otf"
             android:textStyle="bold"
             android:textSize="16sp"
@@ -78,25 +69,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             />
-=======
-            android:layout_marginTop="33dp"
-            android:fontFamily="@font/nanum_square_round_otf"
-            android:gravity="center_horizontal"
-            android:text="자유롭게 선택지를 만들어 봐!"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
->>>>>>> Stashed changes
+
         <TextView
             android:id="@+id/wheel_info_tv"
             android:layout_width="301dp"
             android:layout_height="48dp"
             android:fontFamily="@font/nanum_square_round_otf"
-<<<<<<< Updated upstream
             android:textStyle="bold"
             android:textSize="12sp"
             android:textColor="#b8b8b8"
@@ -105,44 +84,24 @@
             app:layout_constraintTop_toBottomOf="@id/wheel_info_title_tv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-=======
-            android:gravity="center_horizontal"
-            android:text="옵션 설정 후\n돌림판을 돌려줘!"
-            android:textColor="#b8b8b8"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/wheel_info_title_tv"
->>>>>>> Stashed changes
-
             />
 
         <ImageView
             android:id="@+id/wheel_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< Updated upstream
             android:src="@drawable/wheel_back"
             android:layout_marginTop="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/wheel_info_tv"
             />
-=======
-            android:layout_marginTop="15dp"
-            android:src="@drawable/wheel_back"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/wheel_info_tv" />
->>>>>>> Stashed changes
 
         <View
             android:id="@+id/wheel_spin_view"
             android:layout_width="237dp"
             android:layout_height="237dp"
             android:layout_marginTop="13.5dp"
-<<<<<<< Updated upstream
             app:layout_constraintStart_toStartOf="@id/wheel_iv"
             app:layout_constraintEnd_toEndOf="@id/wheel_iv"
             app:layout_constraintTop_toTopOf="@id/wheel_iv"
@@ -179,132 +138,17 @@
             app:layout_constraintEnd_toStartOf="@id/wheel_go_btn"
             app:layout_constraintTop_toBottomOf="@id/wheel_iv"
             />
-=======
-            app:layout_constraintEnd_toEndOf="@id/wheel_iv"
-            app:layout_constraintStart_toStartOf="@id/wheel_iv"
-            app:layout_constraintTop_toTopOf="@id/wheel_iv">
 
-        </View>
-
-        <ImageView
-            android:id="@+id/wheel_triangle_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/wheel_triangle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/wheel_info_tv" />
-
-        <ImageView
-            android:id="@+id/wheel_circle_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="84.45dp"
-            android:src="@drawable/wheel_circle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/wheel_triangle_iv" />
-
-
-        <ImageView
-            android:id="@+id/wheel_option_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/rectangle_4"
-            app:layout_constraintEnd_toStartOf="@id/wheel_go_btn"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/wheel_iv" />
->>>>>>> Stashed changes
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-<<<<<<< Updated upstream
-=======
-            android:fontFamily="@font/nanum_square_round_otf_extrabold"
->>>>>>> Stashed changes
-            android:shadowColor="#abffffff"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="4"
-<<<<<<< Updated upstream
-            android:fontFamily="@font/nanum_square_round_otf_extrabold"
-            android:textStyle="normal"
-            android:textSize="18sp"
-            android:textColor="#ffffff"
-            android:text="옵션 설정"
-            app:layout_constraintStart_toStartOf="@id/wheel_option_btn"
-            app:layout_constraintEnd_toEndOf="@id/wheel_option_btn"
-            app:layout_constraintTop_toTopOf="@id/wheel_option_btn"
-            app:layout_constraintBottom_toBottomOf="@id/wheel_option_btn"/>
-=======
-            android:text="옵션 설정"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="@id/wheel_option_btn"
-            app:layout_constraintEnd_toEndOf="@id/wheel_option_btn"
-            app:layout_constraintStart_toStartOf="@id/wheel_option_btn"
-            app:layout_constraintTop_toTopOf="@id/wheel_option_btn" />
->>>>>>> Stashed changes
-
-        <ImageView
-            android:id="@+id/wheel_go_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/rectangle_5"
-<<<<<<< Updated upstream
-            app:layout_constraintStart_toEndOf="@id/wheel_option_btn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/wheel_iv"
-            />
-=======
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/wheel_option_btn"
-            app:layout_constraintTop_toBottomOf="@id/wheel_iv" />
->>>>>>> Stashed changes
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-<<<<<<< Updated upstream
-=======
-            android:fontFamily="@font/nanum_square_round_otf_extrabold"
->>>>>>> Stashed changes
-            android:shadowColor="#abffffff"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="4"
-<<<<<<< Updated upstream
-            android:fontFamily="@font/nanum_square_round_otf_extrabold"
-            android:textStyle="normal"
-            android:textSize="18sp"
-            android:textColor="#ffffff"
-            android:text="가보자GO"
-            app:layout_constraintStart_toStartOf="@id/wheel_go_btn"
-            app:layout_constraintEnd_toEndOf="@id/wheel_go_btn"
-            app:layout_constraintTop_toTopOf="@id/wheel_go_btn"
-            app:layout_constraintBottom_toBottomOf="@id/wheel_go_btn"
-            />
+    <ImageView
+        android:id="@+id/wheel_go_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/rectangle_4"
+        app:layout_constraintStart_toEndOf="@id/wheel_option_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wheel_iv"
+        />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-=======
-            android:text="가보자GO"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="@id/wheel_go_btn"
-            app:layout_constraintEnd_toEndOf="@id/wheel_go_btn"
-            app:layout_constraintStart_toStartOf="@id/wheel_go_btn"
-            app:layout_constraintTop_toTopOf="@id/wheel_go_btn" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
->>>>>>> Stashed changes

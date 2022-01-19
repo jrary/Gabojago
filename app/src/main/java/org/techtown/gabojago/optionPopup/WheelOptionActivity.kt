@@ -1,5 +1,6 @@
 package org.techtown.gabojago.optionPopup
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -11,7 +12,15 @@ import org.techtown.gabojago.Record.CalendarActivity
 import org.techtown.gabojago.databinding.ActivityWheelOptionBinding
 
 class WheelOptionActivity : AppCompatActivity() {
-
+    init{
+        instance = this
+    }
+    companion object{
+        lateinit var instance: WheelOptionActivity
+        fun applicationContext(): Context {
+            return instance.applicationContext
+        }
+    }
     lateinit var binding: ActivityWheelOptionBinding
     var totalProb = 0
 
@@ -21,9 +30,12 @@ class WheelOptionActivity : AppCompatActivity() {
         setContentView(binding.root)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
+
         val optionList = ArrayList<WheelOptionData>()
-       // binding.recordResultRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val wheelOptionRecyclerViewAdapter = WheelOptionRVAdapter(optionList)
+        binding.recordResultRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        val wheelOptionRecyclerViewAdapter = WheelOptionRVAdapter(optionList, this)
+
+       // wheelOptionRecyclerViewAdapter.setMyItemClickListener()
 
         binding.wheelOptionTv.setOnClickListener {
             totalProb += 1
