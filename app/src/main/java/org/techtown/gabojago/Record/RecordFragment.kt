@@ -1,5 +1,6 @@
 package org.techtown.gabojago.Record
 
+import HorizontalItemDecorator
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +13,11 @@ import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentRecordBinding
 import java.text.SimpleDateFormat
 import java.util.*
+import android.view.Display
+
+import android.app.Activity
+import android.graphics.Point
+
 
 class RecordFragment : Fragment() {
 
@@ -32,6 +38,12 @@ class RecordFragment : Fragment() {
 
         val recordResultRVAdapter = RecordResultRVAdapter()
         binding.recordResultRecyclerview.adapter = recordResultRVAdapter
+
+        val width = getScreenSize(this)
+        binding.recordWeekRecyclerview.addItemDecoration(HorizontalItemDecorator(width/54))
+
+
+        binding.recordWeekRecyclerview.setHasFixedSize(true)
 
         recordResultRVAdapter.setMyItemClickListener(object :
             RecordResultRVAdapter.MyItemClickListener {
@@ -86,6 +98,14 @@ class RecordFragment : Fragment() {
         val stringMonth = monthFormat.format(month)
 
         return stringMonth
+    }
+
+    fun getScreenSize(fragment: Fragment): Int {
+        val display = requireActivity().windowManager.defaultDisplay
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        return width
     }
 
 }

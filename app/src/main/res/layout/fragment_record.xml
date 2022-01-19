@@ -10,7 +10,7 @@
         android:id="@+id/record_pecil_big_iv"
         android:layout_width="36.1dp"
         android:layout_height="36.1dp"
-        android:src="@drawable/pencil_big"
+        android:src="@drawable/pencil22"
         android:layout_marginStart="17dp"
         android:layout_marginTop="54dp"
         android:scaleType="fitXY"
@@ -178,17 +178,7 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:layout_marginStart="25dp"
-            android:fontFamily="@font/nanum_square_round_otf"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="#0053f3"
-            />
-        <TextView
-            android:layout_width="17dp"
-            android:layout_height="wrap_content"
-            android:text=" "
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
+            android:layout_marginEnd="25dp"
             android:fontFamily="@font/nanum_square_round_otf"
             android:textStyle="bold"
             android:textSize="16sp"
@@ -200,6 +190,8 @@
         android:id="@+id/record_week_recyclerview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_marginStart="13dp"
         android:layout_marginTop="17dp"
         android:scrollbars="none"
         tools:listitem="@layout/item_record_week"
@@ -233,6 +225,7 @@
         android:layout_marginStart="-4dp"
         android:layout_marginEnd="-7dp"
         android:scrollbars="none"
+        android:fadingEdge="none"
         tools:listitem="@layout/item_record_result"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -247,9 +240,10 @@
         android:layout_height="60dp"
         android:src="@drawable/circle_record_menu"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="630dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
     <ImageView
         android:id="@+id/record_more_iv"

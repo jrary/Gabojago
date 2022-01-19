@@ -1,7 +1,12 @@
 package org.techtown.gabojago
 
+<<<<<<< Updated upstream
 import android.content.Context
 import android.content.Intent
+=======
+import android.app.Activity
+import android.graphics.Point
+>>>>>>> Stashed changes
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -59,4 +64,9 @@ class MainActivity : AppCompatActivity() {
             false
         }
     }
+<<<<<<< Updated upstream
 }
+=======
+
+    }
+>>>>>>> Stashed changes
