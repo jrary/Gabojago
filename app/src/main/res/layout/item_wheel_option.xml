@@ -3,15 +3,57 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/item_record_rectangle_iv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/rectangle12"
+    <EditText
+        android:id="@+id/item_record_name_et"
+        android:layout_width="136dp"
+        android:layout_height="33dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:textSize="14sp"
+        android:background="@drawable/rectangle12"
+        android:inputType="textPersonName"
+        android:layout_marginStart="17dp"
+        android:text="Sample EditText"
+        android:fontFamily="@font/nanum_square_round_otf_extrabold"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/item_record_size_tv"
+        android:layout_width="49dp"
+        android:layout_height="33dp"
+        android:textSize="14sp"
+        android:background="@drawable/rectangle12"
+        android:textColor="@color/black"
+        android:text="1"
+        android:gravity="center"
+        android:fontFamily="@font/nanum_square_round_otf_extrabold"
+        android:layout_margin="5dp"
+        app:layout_constraintStart_toEndOf="@id/item_record_name_et"
+        app:layout_constraintEnd_toStartOf="@id/item_record_prob_tv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/item_record_prob_tv"
+        android:layout_width="49dp"
+        android:layout_height="33dp"
+        android:textSize="14sp"
+        android:background="@drawable/rectangle12"
+        android:textColor="@color/black"
+        android:text="50"
+        android:layout_marginEnd="17dp"
+        android:fontFamily="@font/nanum_square_round_otf_extrabold"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

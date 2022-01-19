@@ -1,6 +1,7 @@
 package org.techtown.gabojago.randomPick
 
 import android.content.Intent
+import android.graphics.Canvas
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import org.techtown.gabojago.databinding.FragmentWheelBinding
 
 class WheelFragment : Fragment() {
     lateinit var binding: FragmentWheelBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,4 +28,6 @@ class WheelFragment : Fragment() {
 
         return binding.root
     }
+
+
 }
