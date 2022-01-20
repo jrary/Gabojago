@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/drawable/bottom_icon_color.xml" value="0.3314814814814815" />
+        <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/drawable/calendarbox.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/drawable/edittext.xml" value="0.36203703703703705" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/drawable/folderresultbox.xml" value="0.36203703703703705" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/drawable/gridview_selecter.xml" value="0.3314814814814815" />
@@ -12,20 +13,21 @@
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/activity_login_splash.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/activity_recordfolder.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/activity_recordmenu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/activity_recordsingle.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/activity_splash.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/activity_wheel_option.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_clock.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_color.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_goagain.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_home.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_home_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_manage.xml" value="0.10144927536231885" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_number.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_record.xml" value="0.22" />
+        <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_record.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_report.xml" value="0.10144927536231885" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_singlerecord.xml" value="0.25" />
-        <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_wheel.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/fragment_wheel.xml" value="0.2914285714285714" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/item_calendar_gridview.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/item_record_folder.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/layout/item_record_result.xml" value="0.36666666666666664" />

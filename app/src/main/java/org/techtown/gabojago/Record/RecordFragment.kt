@@ -1,6 +1,7 @@
 package org.techtown.gabojago.Record
 
 import HorizontalItemDecorator
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,11 +18,20 @@ import android.view.Display
 
 import android.app.Activity
 import android.graphics.Point
+import android.util.TypedValue
+import android.view.animation.AnimationUtils
+import android.view.animation.OvershootInterpolator
+import android.widget.ImageView
 
 
 class RecordFragment : Fragment() {
 
     lateinit var binding: FragmentRecordBinding
+    var add: Boolean = true
+
+    private lateinit var imageViewAdd: ImageView
+    private lateinit var imageViewWrite: ImageView
+    private lateinit var imageViewPhoto: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,11 +49,8 @@ class RecordFragment : Fragment() {
         val recordResultRVAdapter = RecordResultRVAdapter()
         binding.recordResultRecyclerview.adapter = recordResultRVAdapter
 
-        val width = getScreenSize(this)
-        binding.recordWeekRecyclerview.addItemDecoration(HorizontalItemDecorator(width/54))
-
-
-        binding.recordWeekRecyclerview.setHasFixedSize(true)
+        val width  = getScreenSize(this)
+        binding.recordWeekRecyclerview.addItemDecoration(HorizontalItemDecorator(width/42))
 
         recordResultRVAdapter.setMyItemClickListener(object :
             RecordResultRVAdapter.MyItemClickListener {
@@ -62,6 +69,14 @@ class RecordFragment : Fragment() {
     private fun clickevent() {
         binding.recordMonthTv.setOnClickListener {
             startActivity(Intent(activity, CalendarActivity::class.java))
+        }
+
+        binding.recordMoreIv.setOnClickListener {
+            popupMenu()
+        }
+
+        binding.recordCloseIv.setOnClickListener {
+            popupMenu()
         }
 
     }
@@ -100,12 +115,56 @@ class RecordFragment : Fragment() {
         return stringMonth
     }
 
-    fun getScreenSize(fragment: Fragment): Int {
+    fun getScreenSize(fragment : Fragment): Int {
         val display = requireActivity().windowManager.defaultDisplay
         val size = Point()
         display.getSize(size)
         val width = size.x
         return width
+    }
+
+    private fun popupMenu() {
+
+        var px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60f, this.resources.displayMetrics)
+
+        if (add) {
+
+            var writeAnimator = ObjectAnimator.ofFloat(binding.recordFolderplusbackIv, "translationY", 0f, -px)
+            writeAnimator.duration = 400
+            writeAnimator.interpolator = OvershootInterpolator()
+            writeAnimator.target = binding.recordFolderplusbackIv
+            writeAnimator.start()
+
+            var photoAnimator = ObjectAnimator.ofFloat(binding.recordTrashbackIv, "translationY", 0f, -px*2)
+            photoAnimator.duration = 500
+            photoAnimator.interpolator = OvershootInterpolator()
+            photoAnimator.target = binding.recordTrashbackIv
+            photoAnimator.start()
+
+            binding.recordMoreIv.visibility = View.GONE
+            binding.recordCloseIv.visibility = View.VISIBLE
+            binding.recordXIv.visibility = View.VISIBLE
+            add = !add
+        } else {
+
+            var writeAnimator = ObjectAnimator.ofFloat(binding.recordFolderplusbackIv, "translationY", -px, 0f)
+            writeAnimator.duration = 400
+            writeAnimator.interpolator = OvershootInterpolator()
+            writeAnimator.target = binding.recordFolderplusbackIv
+            writeAnimator.start()
+
+            var photoAnimator = ObjectAnimator.ofFloat(binding.recordTrashbackIv, "translationY", -px*2, 0f)
+            photoAnimator.duration = 500
+            photoAnimator.interpolator = OvershootInterpolator()
+            photoAnimator.target = binding.recordTrashbackIv
+            photoAnimator.start()
+
+            binding.recordMoreIv.visibility = View.VISIBLE
+            binding.recordCloseIv.visibility = View.GONE
+            binding.recordXIv.visibility = View.GONE
+
+            add = !add
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package org.techtown.gabojago.Record
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,7 @@ import java.util.*
 class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(){
 
     private val dates = ArrayList<String>()
+    private val dayofweek = arrayListOf("일","월","화","수","목","금","토")
 
     //뷰홀더 생성->호출되는 함수->아이템 뷰 객체를 만들어서 뷰홀더에 던져줌
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,6 +30,14 @@ class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(
         fun bind(position: Int) {
             week(setDate())
             binding.itemDateTv.text = dates[position]
+            binding.itemWeekTv.text = dayofweek[position]
+            when(position){
+                0->binding.itemWeekTv.setTextColor(Color.parseColor("#ff6745"))
+                6->binding.itemWeekTv.setTextColor(Color.parseColor("#0053f3"))
+                else->binding.itemWeekTv.setTextColor(Color.parseColor("#929292"))
+            }
+            binding.itemWeekTv.text = dayofweek[position]
+
         }
 
     }

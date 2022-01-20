@@ -1,5 +1,6 @@
 package org.techtown.gabojago.Record
 
+import HorizontalItemDecorator
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,8 @@ class CalendarActivity :AppCompatActivity() {
 
         val calendarAdapter = CalendarAdapter()
         binding.calendarGridview.adapter = calendarAdapter
+
+        binding.calendarGridview.addItemDecoration(HorizontalItemDecorator( 28))
 
         init()
 
