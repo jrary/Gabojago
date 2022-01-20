@@ -12,14 +12,11 @@ import org.techtown.gabojago.databinding.ItemWheelOptionBinding
 
 class WheelOptionRVAdapter(private val optionList: ArrayList<WheelOptionData>): RecyclerView.Adapter<WheelOptionRVAdapter.ViewHolder>() {
 
-    private val activity : WheelOptionActivity = mContext as WheelOptionActivity
-
+    private lateinit var mItemClickListener: MyItemClickListener
     //클릭 인터페이스
     public interface MyItemClickListener {
-        fun onItemClick(v: View, position: Int)
+        fun onClick(v: View, position: Int)
     }
-
-    private lateinit var mItemClickListener: MyItemClickListener
 
     fun setMyItemClickListener(itemClickListener: MyItemClickListener) {
         mItemClickListener = itemClickListener
@@ -40,18 +37,25 @@ class WheelOptionRVAdapter(private val optionList: ArrayList<WheelOptionData>): 
     override fun onBindViewHolder(holder: WheelOptionRVAdapter.ViewHolder, position: Int) {
         holder.bind(optionList[position])
         holder.binding.itemRecordSizeTv.setOnClickListener {
-            //startActivity(Intent(activity, WheelSelectActivity::class.java))
+            startActivity(Intent(this, WheelSelectActivity::class.java))
         }
     }
 
-    inner class ViewHolder(val binding: ItemWheelOptionBinding) : RecyclerView.ViewHolder(binding.root) {
+    fun recyclerAdapter()
+    inner class ViewHolder(val binding: ItemWheelOptionBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+        fun ViewHolder(view: View){
+            view.setOnClickListener(this)
+        }
+
         fun bind(wheelOption: WheelOptionData){
          //   binding.itemRecordNameEt.getText.toString() = wheelOption.name
             binding.itemRecordSizeTv.text = wheelOption.num.toString()
             binding.itemRecordProbTv.text = wheelOption.prob.toString()
         }
-        fun onItemClicked() {
 
+        override fun onClick(view: View) {
+            mItemClickListener.onClick(view, adapterPosition)
         }
     }
+
 }
