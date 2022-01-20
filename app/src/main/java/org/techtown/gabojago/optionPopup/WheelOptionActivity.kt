@@ -12,15 +12,8 @@ import org.techtown.gabojago.Record.CalendarActivity
 import org.techtown.gabojago.databinding.ActivityWheelOptionBinding
 
 class WheelOptionActivity : AppCompatActivity() {
-    init{
-        instance = this
-    }
-    companion object{
-        lateinit var instance: WheelOptionActivity
-        fun applicationContext(): Context {
-            return instance.applicationContext
-        }
-    }
+
+
     lateinit var binding: ActivityWheelOptionBinding
     var totalProb = 0
 
@@ -33,9 +26,9 @@ class WheelOptionActivity : AppCompatActivity() {
 
         val optionList = ArrayList<WheelOptionData>()
         binding.recordResultRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        val wheelOptionRecyclerViewAdapter = WheelOptionRVAdapter(optionList, this)
+        val wheelOptionRecyclerViewAdapter = WheelOptionRVAdapter(optionList)
 
-       // wheelOptionRecyclerViewAdapter.setMyItemClickListener()
+      //  wheelOptionRecyclerViewAdapter.setMyItemClickListener()
 
         binding.wheelOptionTv.setOnClickListener {
             totalProb += 1
@@ -49,5 +42,7 @@ class WheelOptionActivity : AppCompatActivity() {
         binding.wheelCompBtn.setOnClickListener {
             finish()
         }
+
+
     }
 }
