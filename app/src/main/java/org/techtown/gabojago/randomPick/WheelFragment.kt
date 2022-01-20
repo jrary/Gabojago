@@ -29,5 +29,4 @@ class WheelFragment : Fragment() {
         return binding.root
     }
 
-
 }
