@@ -12,7 +12,7 @@ class HorizontalItemDecorator(private val divHeight : Int) : RecyclerView.ItemDe
         state: RecyclerView.State
     ) {
         super.getItemOffsets(outRect, view, parent, state)
-        outRect.left = divHeight
-        outRect.right = divHeight
+        outRect.left  = divHeight
+        outRect.right  = divHeight
     }
 }

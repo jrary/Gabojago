@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="6dp"
+    android:layout_height="82dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
+    <View
+        android:id="@+id/item_record_rectangle_back_view"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/box"
+        android:elevation="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
         android:id="@+id/item_record_rectangle_iv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/rectangle12"
-        android:scaleType="fitXY"
+        android:layout_height="70dp"
+        android:translationZ="10dp"
+        android:background="@drawable/folderresultbox"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -21,8 +30,8 @@
         android:layout_height="40dp"
         android:src="@drawable/circle_record_grey"
         android:scaleType="fitXY"
+        android:translationZ="10dp"
         android:layout_marginStart="15dp"
-        android:layout_marginBottom="6dp"
         app:layout_constraintStart_toStartOf="@id/item_record_rectangle_iv"
         app:layout_constraintTop_toTopOf="@id/item_record_rectangle_iv"
         app:layout_constraintBottom_toBottomOf="@id/item_record_rectangle_iv"/>
@@ -34,6 +43,7 @@
         android:fontFamily="@font/nanum_square_round_otf"
         android:textStyle="bold"
         android:textSize="10sp"
+        android:translationZ="10dp"
         android:layout_marginStart="11dp"
         android:textColor="#868686"
         android:text="돌려돌려 돌림판"
@@ -48,6 +58,7 @@
         android:fontFamily="@font/nanum_square_round_otf"
         android:textStyle="bold"
         android:textSize="16sp"
+        android:translationZ="10dp"
         android:layout_marginTop="3dp"
         android:textColor="#000000"
         android:text="결과: 버스"
@@ -60,9 +71,9 @@
         android:layout_width="23dp"
         android:layout_height="23dp"
         android:src="@drawable/pencil_record"
+        android:translationZ="10dp"
         android:scaleType="fitXY"
         android:layout_marginEnd="17dp"
-        android:layout_marginBottom="6dp"
         app:layout_constraintEnd_toEndOf="@id/item_record_rectangle_iv"
         app:layout_constraintTop_toTopOf="@id/item_record_rectangle_iv"
         app:layout_constraintBottom_toBottomOf="@id/item_record_rectangle_iv"/>
