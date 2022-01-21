@@ -23,10 +23,16 @@
         <activity android:name=".LoginActivity"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".Record.CalendarActivity" />
-        <activity android:name=".optionPopup.WheelOptionActivity"
+        <activity android:name=".randomPick.wheel.WheelOptionActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />
         <activity android:name=".optionPopup.WheelSelectActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            />
+        <activity android:name=".randomPick.clock.ClockOptionActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            />
+        <activity android:name=".randomPick.clock.ClockSelectActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />
     </application>

@@ -1,18 +1,21 @@
-package org.techtown.gabojago.optionPopup
+package org.techtown.gabojago.randomPick.wheel
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.techtown.gabojago.databinding.ActivityWheelOptionBinding
+import org.techtown.gabojago.optionPopup.WheelOptionData
+import org.techtown.gabojago.optionPopup.WheelSelectActivity
+import org.techtown.gabojago.randomPick.WheelFragment
+import java.util.ArrayList
 
 class WheelOptionActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityWheelOptionBinding
-    private val optionList = ArrayList<WheelOptionData>()
-    var totalProb = 0
+    var optionList = ArrayList<WheelOptionData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,20 +26,9 @@ class WheelOptionActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-        val rvAdapter = WheelOptionRVAdapter(optionList)
-        binding.recordResultRecyclerview.adapter = rvAdapter
-        binding.recordResultRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-        optionList.apply{
-            add(WheelOptionData("옵션 1", 1, 20))
-            add(WheelOptionData("옵션 2", 1, 20))
-            add(WheelOptionData("옵션 3", 1, 20))
-            add(WheelOptionData("옵션 4", 1, 20))
-            add(WheelOptionData("옵션 5", 1, 20))
-
-            rvAdapter.optionList = optionList
-            rvAdapter.notifyDataSetChanged()
-        }
+        val wheelFragment = WheelFragment()
+        val rvAdapter = WheelOptionRVAdapter(wheelFragment.optionList)
+        Log.d("start - ITEMNUM", wheelFragment.optionList.size.toString())
 
         rvAdapter.setMyItemClickListener(object : WheelOptionRVAdapter.MyItemClickListener {
             override fun onItemClick() {
@@ -44,12 +36,17 @@ class WheelOptionActivity : AppCompatActivity() {
             }
         })
 
+        binding.recordResultRecyclerview.adapter = rvAdapter
+        binding.recordResultRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
         binding.wheelOptionTv.setOnClickListener {
-            totalProb += 1
-            optionList.add(WheelOptionData("옵션" + (optionList.size + 1), 1, totalProb/(optionList.size + 1)*100))
+            wheelFragment.totalProb += 1
+            rvAdapter.addItem(wheelFragment.totalProb/(wheelFragment.optionList.size + 1)*100)
         }
 
         binding.wheelCompBtn.setOnClickListener {
+            Log.d("compBtn - ITEMNUM", wheelFragment.optionList.size.toString())
+            wheelFragment.changeIsOpened()
             finish()
         }
     }

@@ -1,4 +1,4 @@
-package org.techtown.gabojago.optionPopup
+package org.techtown.gabojago.randomPick.clock
 
 import android.os.Bundle
 import android.view.View
@@ -6,10 +6,12 @@ import android.view.WindowManager
 import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import org.techtown.gabojago.databinding.ActivityWheelOptionBinding
 import org.techtown.gabojago.databinding.ActivityWheelSelectBinding
 
-class WheelSelectActivity : AppCompatActivity() {
+class ClockSelectActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityWheelSelectBinding
 
@@ -34,22 +36,14 @@ class WheelSelectActivity : AppCompatActivity() {
     }
     private fun initNumberPicker(){
 
-        numberPickerDesign()
-
         binding.wheelSelectNumberPicker.wrapSelectorWheel = false
         binding.wheelSelectNumberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        val data1: Array<String> = Array(10){
+        val data1: Array<String> = Array(13){
             i -> i.toString()
         }
-        binding.wheelSelectNumberPicker.minValue = 0
-        binding.wheelSelectNumberPicker.maxValue = data1.size-1
+        binding.wheelSelectNumberPicker.minValue = 1
+        binding.wheelSelectNumberPicker.maxValue = 12
         binding.wheelSelectNumberPicker.wrapSelectorWheel = false
         binding.wheelSelectNumberPicker.displayedValues = data1
-    }
-
-    private fun numberPickerDesign(){
-
-
-
     }
 }

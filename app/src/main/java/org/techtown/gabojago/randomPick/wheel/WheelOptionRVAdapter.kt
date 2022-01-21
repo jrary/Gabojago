@@ -1,9 +1,10 @@
-package org.techtown.gabojago.optionPopup
+package org.techtown.gabojago.randomPick.wheel
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.databinding.ItemWheelOptionBinding
+import org.techtown.gabojago.optionPopup.WheelOptionData
 import java.util.ArrayList
 
 class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>):
@@ -30,9 +31,16 @@ class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>):
 
     //뷰홀더에 데이터를 바인딩해줘야 할 때마다 호출되는 함수 => 엄청나게 많이 호출
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (position == optionList.size){
+
+        }
+
         holder.bind(optionList[position])
         holder.binding.itemRecordSizeTv.setOnClickListener {
             mItemClickListener.onItemClick()
+        }
+        holder.binding.itemRecordMinus.setOnClickListener{
+            removeItem(position)
         }
     }
 
@@ -46,8 +54,22 @@ class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>):
 
         }
 
-    }
+
+        }
 
     override fun getItemCount(): Int = optionList.size
 
+    private fun removeItem(position: Int){
+        optionList.removeAt(position)
+        notifyDataSetChanged()
+    }
+
+    fun addItem(prob: Int){
+        optionList.add(WheelOptionData("옵션" + optionList.size, 1, prob))
+        notifyDataSetChanged()
+    }
+    override fun getItemViewType(position: Int): Int {
+        return super.getItemViewType(position)
+
+    }
 }

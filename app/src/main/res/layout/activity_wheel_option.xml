@@ -77,8 +77,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/record_result_recyclerview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="338dp"
         android:layout_margin="20dp"
         android:orientation="vertical"
         android:scrollbars="none"
@@ -102,8 +102,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
     <TextView
-        android:layout_width="66dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/nanum_square_round_otf"
         android:textStyle="bold"
         android:textSize="18sp"

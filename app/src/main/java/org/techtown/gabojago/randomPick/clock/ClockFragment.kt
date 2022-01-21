@@ -1,5 +1,6 @@
-package org.techtown.gabojago.randomPick
+package org.techtown.gabojago.randomPick.clock
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,11 @@ class ClockFragment : Fragment() {
     ): View? {
         super.onCreate(savedInstanceState)
         binding = FragmentClockBinding.inflate(layoutInflater)
+
+        binding.clockOptionBtn.setOnClickListener {
+            startActivity(Intent(activity, ClockOptionActivity::class.java))
+        }
+
         return binding.root
     }
 }
