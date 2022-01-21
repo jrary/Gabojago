@@ -2,6 +2,7 @@ package org.techtown.gabojago.optionPopup
 
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +17,10 @@ class WheelSelectActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWheelSelectBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
 
         initNumberPicker()
 

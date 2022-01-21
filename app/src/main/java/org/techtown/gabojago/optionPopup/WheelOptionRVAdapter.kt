@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.databinding.ItemWheelOptionBinding
 import java.util.ArrayList
 
-class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>): RecyclerView.Adapter<WheelOptionRVAdapter.ViewHolder>() {
+class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>):
+    RecyclerView.Adapter<WheelOptionRVAdapter.ViewHolder>() {
 
     //클릭 인터페이스
     interface MyItemClickListener {
@@ -29,7 +30,7 @@ class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>): Recycler
 
     //뷰홀더에 데이터를 바인딩해줘야 할 때마다 호출되는 함수 => 엄청나게 많이 호출
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind()
+        holder.bind(optionList[position])
         holder.binding.itemRecordSizeTv.setOnClickListener {
             mItemClickListener.onItemClick()
         }
@@ -38,13 +39,15 @@ class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>): Recycler
     //뷰홀더
     inner class ViewHolder(val binding: ItemWheelOptionBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
+        fun bind(wheelNum: WheelOptionData) {
+            //   binding.itemRecordNameEt.getText.toString() = wheelNum.name
+            binding.itemRecordSizeTv.text = wheelNum.num.toString()
+            binding.itemRecordProbTv.text = wheelNum.prob.toString()
+
         }
 
     }
 
-    override fun getItemCount(): Int {
-        return 30
-    }
+    override fun getItemCount(): Int = optionList.size
 
 }
