@@ -20,10 +20,13 @@ class WheelSelectActivity : AppCompatActivity() {
 
         initNumberPicker()
 
+        binding.wheelSelectCompBtn.setOnClickListener{
+            finish()
+        }
+
         binding.wheelSelectNumberPicker.setOnValueChangedListener{
             picker, i1, i2 ->
         }
-
     }
     private fun initNumberPicker(){
 

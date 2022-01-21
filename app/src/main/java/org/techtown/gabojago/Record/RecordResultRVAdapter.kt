@@ -9,7 +9,6 @@ import java.util.ArrayList
 
 class RecordResultRVAdapter: RecyclerView.Adapter<RecordResultRVAdapter.ViewHolder>() {
 
-
     //클릭 인터페이스
     interface MyItemClickListener {
         fun onItemClick()

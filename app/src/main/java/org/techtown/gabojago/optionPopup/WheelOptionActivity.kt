@@ -1,20 +1,15 @@
 package org.techtown.gabojago.optionPopup
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import org.techtown.gabojago.R
-import org.techtown.gabojago.Record.CalendarActivity
 import org.techtown.gabojago.databinding.ActivityWheelOptionBinding
 
 class WheelOptionActivity : AppCompatActivity() {
 
-
     lateinit var binding: ActivityWheelOptionBinding
+    private val optionList = ArrayList<WheelOptionData>()
     var totalProb = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,12 +18,24 @@ class WheelOptionActivity : AppCompatActivity() {
         setContentView(binding.root)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
+        val rvAdapter = WheelOptionRVAdapter(optionList)
 
-        val optionList = ArrayList<WheelOptionData>()
-        binding.recordResultRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        val wheelOptionRecyclerViewAdapter = WheelOptionRVAdapter(optionList)
+        optionList.apply{
+            add(WheelOptionData("옵션 1", 1, 20))
+            add(WheelOptionData("옵션 2", 1, 20))
+            add(WheelOptionData("옵션 3", 1, 20))
+            add(WheelOptionData("옵션 4", 1, 20))
+            add(WheelOptionData("옵션 5", 1, 20))
 
-      //  wheelOptionRecyclerViewAdapter.setMyItemClickListener()
+            rvAdapter.optionList = optionList
+            rvAdapter.notifyDataSetChanged()
+        }
+
+        rvAdapter.setMyItemClickListener(object : WheelOptionRVAdapter.MyItemClickListener {
+            override fun onItemClick() {
+                openSelectActivity()
+            }
+        })
 
         binding.wheelOptionTv.setOnClickListener {
             totalProb += 1
@@ -42,7 +49,9 @@ class WheelOptionActivity : AppCompatActivity() {
         binding.wheelCompBtn.setOnClickListener {
             finish()
         }
+    }
 
-
+    private fun openSelectActivity() {
+        startActivity(Intent(this@WheelOptionActivity, WheelSelectActivity::class.java))
     }
 }

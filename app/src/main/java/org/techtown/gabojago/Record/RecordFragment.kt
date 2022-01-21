@@ -54,11 +54,11 @@ class RecordFragment : Fragment() {
 
         recordResultRVAdapter.setMyItemClickListener(object :
             RecordResultRVAdapter.MyItemClickListener {
-
             override fun onItemClick() {
                 changeSingleRecordFragment()
             }
         })
+
 
         clickevent()
         init()

@@ -1,61 +1,50 @@
 package org.techtown.gabojago.optionPopup
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import org.techtown.gabojago.databinding.ItemRecordResultBinding
 import org.techtown.gabojago.databinding.ItemWheelOptionBinding
+import java.util.ArrayList
 
-class WheelOptionRVAdapter(private val optionList: ArrayList<WheelOptionData>): RecyclerView.Adapter<WheelOptionRVAdapter.ViewHolder>() {
+class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>): RecyclerView.Adapter<WheelOptionRVAdapter.ViewHolder>() {
+
+    //클릭 인터페이스
+    interface MyItemClickListener {
+        fun onItemClick()
+    }
 
     private lateinit var mItemClickListener: MyItemClickListener
-    //클릭 인터페이스
-    public interface MyItemClickListener {
-        fun onClick(v: View, position: Int)
-    }
 
     fun setMyItemClickListener(itemClickListener: MyItemClickListener) {
         mItemClickListener = itemClickListener
     }
 
-    override fun getItemCount() = optionList.size
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ViewHolder {
+    //뷰홀더 생성->호출되는 함수->아이템 뷰 객체를 만들어서 뷰홀더에 던져줌
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemWheelOptionBinding =
             ItemWheelOptionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: WheelOptionRVAdapter.ViewHolder, position: Int) {
-        holder.bind(optionList[position])
+    //뷰홀더에 데이터를 바인딩해줘야 할 때마다 호출되는 함수 => 엄청나게 많이 호출
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind()
         holder.binding.itemRecordSizeTv.setOnClickListener {
-            startActivity(Intent(this, WheelSelectActivity::class.java))
+            mItemClickListener.onItemClick()
         }
     }
 
-    fun recyclerAdapter()
-    inner class ViewHolder(val binding: ItemWheelOptionBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
-        fun ViewHolder(view: View){
-            view.setOnClickListener(this)
+    //뷰홀더
+    inner class ViewHolder(val binding: ItemWheelOptionBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind() {
         }
 
-        fun bind(wheelOption: WheelOptionData){
-         //   binding.itemRecordNameEt.getText.toString() = wheelOption.name
-            binding.itemRecordSizeTv.text = wheelOption.num.toString()
-            binding.itemRecordProbTv.text = wheelOption.prob.toString()
-        }
+    }
 
-        override fun onClick(view: View) {
-            mItemClickListener.onClick(view, adapterPosition)
-        }
+    override fun getItemCount(): Int {
+        return 30
     }
 
 }
