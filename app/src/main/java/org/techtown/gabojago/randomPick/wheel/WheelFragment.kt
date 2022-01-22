@@ -1,4 +1,4 @@
-package org.techtown.gabojago.randomPick
+package org.techtown.gabojago.randomPick.wheel
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import org.json.JSONArray
-import org.techtown.gabojago.randomPick.wheel.WheelOptionActivity
 import org.techtown.gabojago.databinding.FragmentWheelBinding
 import org.techtown.gabojago.optionPopup.WheelOptionData
 

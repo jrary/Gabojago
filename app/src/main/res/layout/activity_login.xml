@@ -5,30 +5,64 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/login_comp_btn"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="62dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:background="#F7E600">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="동의하고 시작하기"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:fontFamily="@font/nanum_square_round_otf"-->
+<!--            android:textColor="@color/black"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            />-->
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <TextView
         android:id="@+id/login_comp_btn"
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_box"
+        android:text="그냥 넘어가는 버튼ㅎㅎ\n밑에 버튼 누르면 안 넘어가요"
+        android:padding="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="#F7E600">
+        />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="동의하고 시작하기"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/nanum_square_round_otf"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+    <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
+        android:id="@+id/buttonOathLogin"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#03C75A"
+        />
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="네이버로 시작하기"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/nanum_square_round_otf"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@id/buttonOathLogin"
+        app:layout_constraintEnd_toEndOf="@id/buttonOathLogin"
+        app:layout_constraintTop_toTopOf="@id/buttonOathLogin"
+        app:layout_constraintBottom_toBottomOf="@id/buttonOathLogin"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import org.techtown.gabojago.databinding.FragmentHomeMenuBinding
 import org.techtown.gabojago.randomPick.*
 import org.techtown.gabojago.randomPick.clock.ClockFragment
+import org.techtown.gabojago.randomPick.wheel.WheelFragment
 
 class HomeMenuFragment : Fragment() {
     lateinit var binding: FragmentHomeMenuBinding
