@@ -6,16 +6,27 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import org.techtown.gabojago.HomeFragment
+import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityColorResultBinding
-import org.techtown.gabojago.databinding.ActivityWheelOptionBinding
-import org.techtown.gabojago.optionPopup.WheelOptionData
-import org.techtown.gabojago.optionPopup.WheelSelectActivity
-import java.util.ArrayList
+import java.util.*
 
 class ColorResultActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityColorResultBinding
+    var colorFragment = ColorFragment()
+
+    var randomColor = arrayOf(
+        "빨간색 계열!",
+        "주황색 계열!",
+        "노란색 계열!",
+        "초록색 계열!",
+        "파란색 계열!",
+        "보라색 계열!",
+        "갈색 계열!",
+        "흰색 계열!",
+        "그리고뭐였죠색 계열!",
+        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +40,17 @@ class ColorResultActivity : AppCompatActivity() {
         binding.colorResultQuestionBtn.setOnClickListener{
             binding.colorResultQuestionView.visibility = View.GONE
             binding.colorResultView.visibility = View.VISIBLE
+            binding.colorResultColorTv.text = randomColor[setRandom()]
         }
 
         binding.colorResultRetryBtn.setOnClickListener {
+            colorFragment.setStart = true
             finish()
         }
+    }
+
+    private fun setRandom(): Int{
+        val random = Random()
+        return random.nextInt(9)
     }
 }

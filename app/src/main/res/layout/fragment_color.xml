@@ -55,11 +55,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
-    <View
+    <ImageView
         android:id="@+id/color_card_01_view"
         android:layout_width="43dp"
         android:layout_height="64dp"
-        android:background="@drawable/vending_card"
+        android:src="@drawable/vending_card"
         app:layout_constraintTop_toTopOf="@id/color_vending_iv"
         app:layout_constraintStart_toStartOf="@id/color_vending_iv"
         app:layout_constraintEnd_toEndOf="@id/color_vending_iv"
@@ -68,11 +68,11 @@
         app:layout_constraintVertical_bias="0.13"
         />
 
-    <View
+    <ImageView
         android:id="@+id/color_card_02_view"
         android:layout_width="43dp"
         android:layout_height="64dp"
-        android:background="@drawable/vending_card"
+        android:src="@drawable/vending_card"
         app:layout_constraintTop_toTopOf="@id/color_vending_iv"
         app:layout_constraintStart_toStartOf="@id/color_vending_iv"
         app:layout_constraintEnd_toEndOf="@id/color_vending_iv"
@@ -81,11 +81,11 @@
         app:layout_constraintVertical_bias="0.13"
         />
 
-    <View
+    <ImageView
         android:id="@+id/color_card_03_view"
         android:layout_width="43dp"
         android:layout_height="64dp"
-        android:background="@drawable/vending_card"
+        android:src="@drawable/vending_card"
         app:layout_constraintTop_toTopOf="@id/color_vending_iv"
         app:layout_constraintStart_toStartOf="@id/color_vending_iv"
         app:layout_constraintEnd_toEndOf="@id/color_vending_iv"
@@ -94,11 +94,11 @@
         app:layout_constraintVertical_bias="0.13"
         />
 
-    <View
+    <ImageView
         android:id="@+id/color_card_04_view"
         android:layout_width="43dp"
         android:layout_height="64dp"
-        android:background="@drawable/vending_card"
+        android:src="@drawable/vending_card"
         app:layout_constraintTop_toTopOf="@id/color_vending_iv"
         app:layout_constraintStart_toStartOf="@id/color_vending_iv"
         app:layout_constraintEnd_toEndOf="@id/color_vending_iv"
@@ -107,11 +107,11 @@
         app:layout_constraintVertical_bias="0.345"
         />
 
-    <View
+    <ImageView
         android:id="@+id/color_card_05_view"
         android:layout_width="43dp"
         android:layout_height="64dp"
-        android:background="@drawable/vending_card"
+        android:src="@drawable/vending_card"
         app:layout_constraintTop_toTopOf="@id/color_vending_iv"
         app:layout_constraintStart_toStartOf="@id/color_vending_iv"
         app:layout_constraintEnd_toEndOf="@id/color_vending_iv"
@@ -120,11 +120,11 @@
         app:layout_constraintVertical_bias="0.345"
         />
 
-    <View
+    <ImageView
         android:id="@+id/color_card_06_view"
         android:layout_width="43dp"
         android:layout_height="64dp"
-        android:background="@drawable/vending_card"
+        android:src="@drawable/vending_card"
         app:layout_constraintTop_toTopOf="@id/color_vending_iv"
         app:layout_constraintStart_toStartOf="@id/color_vending_iv"
         app:layout_constraintEnd_toEndOf="@id/color_vending_iv"
@@ -133,11 +133,11 @@
         app:layout_constraintVertical_bias="0.345"
         />
 
-    <View
+    <ImageView
         android:id="@+id/color_card_07_view"
         android:layout_width="43dp"
         android:layout_height="64dp"
-        android:background="@drawable/vending_card"
+        android:src="@drawable/vending_card"
         app:layout_constraintTop_toTopOf="@id/color_vending_iv"
         app:layout_constraintStart_toStartOf="@id/color_vending_iv"
         app:layout_constraintEnd_toEndOf="@id/color_vending_iv"
@@ -146,11 +146,11 @@
         app:layout_constraintVertical_bias="0.561"
         />
 
-    <View
+    <ImageView
         android:id="@+id/color_card_08_view"
         android:layout_width="43dp"
         android:layout_height="64dp"
-        android:background="@drawable/vending_card"
+        android:src="@drawable/vending_card"
         app:layout_constraintTop_toTopOf="@id/color_vending_iv"
         app:layout_constraintStart_toStartOf="@id/color_vending_iv"
         app:layout_constraintEnd_toEndOf="@id/color_vending_iv"
@@ -159,11 +159,11 @@
         app:layout_constraintVertical_bias="0.561"
         />
 
-    <View
+    <ImageView
         android:id="@+id/color_card_09_view"
         android:layout_width="43dp"
         android:layout_height="64dp"
-        android:background="@drawable/vending_card"
+        android:src="@drawable/vending_card"
         app:layout_constraintTop_toTopOf="@id/color_vending_iv"
         app:layout_constraintStart_toStartOf="@id/color_vending_iv"
         app:layout_constraintEnd_toEndOf="@id/color_vending_iv"

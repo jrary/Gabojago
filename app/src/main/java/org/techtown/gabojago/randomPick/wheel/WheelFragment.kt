@@ -6,10 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import org.json.JSONArray
+import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentWheelBinding
 import org.techtown.gabojago.optionPopup.WheelOptionData
 
@@ -17,14 +19,8 @@ import org.techtown.gabojago.optionPopup.WheelOptionData
 class WheelFragment : Fragment() {
     private var gson: Gson = Gson()
     lateinit var binding: FragmentWheelBinding
-    private var isOpen: Boolean = false
     var optionList = ArrayList<WheelOptionData>()
     var totalProb = 5
-
-    fun changeIsOpened() {
-        isOpen = !isOpen
-        activityOpenAnimation(isOpen)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,24 +31,34 @@ class WheelFragment : Fragment() {
 
         binding.wheelOptionBtn.setOnClickListener{
             Log.d("fragment - ITEMNUM", optionList.size.toString())
-            changeIsOpened()
             startActivity(Intent(activity, WheelOptionActivity::class.java))
+        }
+
+        binding.wheelGoBtn.setOnClickListener {
+            binding.wheelInfoTitleTv.visibility = View.GONE
+            binding.wheelInfoTv.visibility = View.GONE
+            val animationOpen = AnimationUtils.loadAnimation(activity, R.anim.anim_open_scale)
+            binding.wheelMainView.startAnimation(animationOpen)
         }
 
         return binding.root
     }
 
-    private fun activityOpenAnimation(open: Boolean){
-        if(open){
-            binding.wheelInfoTitleTv.visibility = View.GONE
-            binding.wheelInfoTv.visibility = View.GONE
-        }
-        else{
-            binding.wheelInfoTitleTv.visibility = View.VISIBLE
-            binding.wheelInfoTv.visibility = View.VISIBLE
-        }
+    override fun onPause() {
+        super.onPause()
+        binding.wheelInfoTitleTv.visibility = View.GONE
+        binding.wheelInfoTv.visibility = View.GONE
+        val animationOpen = AnimationUtils.loadAnimation(activity, R.anim.anim_open_scale)
+        binding.wheelMainView.startAnimation(animationOpen)
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.wheelInfoTitleTv.visibility = View.VISIBLE
+        binding.wheelInfoTv.visibility = View.VISIBLE
+        val animationClose = AnimationUtils.loadAnimation(activity, R.anim.anim_close_scale)
+        binding.wheelMainView.startAnimation(animationClose)
+    }
 
     //여기서부터는 그냥... 저장소
     fun storeJson(){
