@@ -3,6 +3,7 @@ package org.techtown.gabojago.randomPick.color
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,5 +25,14 @@ class ColorResultActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
+
+        binding.colorResultQuestionBtn.setOnClickListener{
+            binding.colorResultQuestionView.visibility = View.GONE
+            binding.colorResultView.visibility = View.VISIBLE
+        }
+
+        binding.colorResultRetryBtn.setOnClickListener {
+            finish()
+        }
     }
 }
