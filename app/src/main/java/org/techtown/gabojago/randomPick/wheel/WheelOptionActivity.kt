@@ -45,8 +45,8 @@ class WheelOptionActivity : AppCompatActivity() {
 
         binding.wheelCompBtn.setOnClickListener {
             Log.d("compBtn - ITEMNUM", wheelFragment.optionList.size.toString())
-            wheelFragment.changeIsOpened()
             finish()
+            wheelFragment.changeIsOpened()
         }
     }
 

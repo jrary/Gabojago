@@ -17,15 +17,13 @@ import org.techtown.gabojago.optionPopup.WheelOptionData
 class WheelFragment : Fragment() {
     private var gson: Gson = Gson()
     lateinit var binding: FragmentWheelBinding
-    private var isOpen: Boolean = true
+    private var isOpen: Boolean = false
     var optionList = ArrayList<WheelOptionData>()
     var totalProb = 5
 
-    fun isOpened(): Boolean{
-        return isOpen
-    }
     fun changeIsOpened() {
-        isOpen = !isOpened()
+        isOpen = !isOpen
+        activityOpenAnimation(isOpen)
     }
 
     override fun onCreateView(
@@ -37,10 +35,22 @@ class WheelFragment : Fragment() {
 
         binding.wheelOptionBtn.setOnClickListener{
             Log.d("fragment - ITEMNUM", optionList.size.toString())
+            changeIsOpened()
             startActivity(Intent(activity, WheelOptionActivity::class.java))
         }
 
         return binding.root
+    }
+
+    private fun activityOpenAnimation(open: Boolean){
+        if(open){
+            binding.wheelInfoTitleTv.visibility = View.GONE
+            binding.wheelInfoTv.visibility = View.GONE
+        }
+        else{
+            binding.wheelInfoTitleTv.visibility = View.VISIBLE
+            binding.wheelInfoTv.visibility = View.VISIBLE
+        }
     }
 
 

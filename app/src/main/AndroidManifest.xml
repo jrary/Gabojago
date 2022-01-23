@@ -37,6 +37,9 @@
         <activity android:name=".randomPick.clock.ClockSelectActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />
+        <activity android:name=".randomPick.color.ColorResultActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar.Dim"
+            />
     </application>
 
 </manifest>
