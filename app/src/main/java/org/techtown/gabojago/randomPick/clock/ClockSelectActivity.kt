@@ -1,5 +1,6 @@
 package org.techtown.gabojago.randomPick.clock
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -14,6 +15,7 @@ import org.techtown.gabojago.databinding.ActivityWheelSelectBinding
 class ClockSelectActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityWheelSelectBinding
+    var pickedNum: Int = 12
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,22 +30,18 @@ class ClockSelectActivity : AppCompatActivity() {
 
         binding.wheelSelectCompBtn.setOnClickListener{
             finish()
-        }
-
-        binding.wheelSelectNumberPicker.setOnValueChangedListener{
-            picker, i1, i2 ->
+            pickedNum = binding.wheelSelectNumberPicker.value
         }
     }
     private fun initNumberPicker(){
 
-        binding.wheelSelectNumberPicker.wrapSelectorWheel = false
-        binding.wheelSelectNumberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        val data1: Array<String> = Array(13){
-            i -> i.toString()
+        val data1: Array<String> = Array(12){
+            i -> (i+1).toString()
         }
         binding.wheelSelectNumberPicker.minValue = 1
         binding.wheelSelectNumberPicker.maxValue = 12
         binding.wheelSelectNumberPicker.wrapSelectorWheel = false
         binding.wheelSelectNumberPicker.displayedValues = data1
+        binding.wheelSelectNumberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
     }
 }

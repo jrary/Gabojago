@@ -1,13 +1,9 @@
 package org.techtown.gabojago.randomPick.color
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import org.techtown.gabojago.HomeFragment
-import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityColorResultBinding
 import java.util.*
 
@@ -22,10 +18,10 @@ class ColorResultActivity : AppCompatActivity() {
         "노란색 계열!",
         "초록색 계열!",
         "파란색 계열!",
-        "보라색 계열!",
+        "검은색 계열!",
         "갈색 계열!",
         "흰색 계열!",
-        "그리고뭐였죠색 계열!",
+        "마젠타 계열!",
         )
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -19,22 +19,24 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val animation01 = AnimationUtils.loadAnimation(this, R.anim.anim_toleft_splash_01)
-        binding.splashView.startAnimation(animation01)
+        Handler().postDelayed({
+            val animation01 = AnimationUtils.loadAnimation(this, R.anim.anim_toleft_splash_01)
+            binding.splashView.startAnimation(animation01)
+        }, 100)
 
         Handler().postDelayed({
             val animationAlpha = AnimationUtils.loadAnimation(this, R.anim.anim_alpha_splash)
             binding.splashLogoBarIv.startAnimation(animationAlpha)
-        }, 300)
+        }, 400)
 
         Handler().postDelayed({
             val animationAlpha = AnimationUtils.loadAnimation(this, R.anim.anim_toleft_splash_02)
             binding.splashLogoIv.startAnimation(animationAlpha)
-        }, 1100)
+        }, 1200)
 
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
-        }, 1400)
+        }, 1500)
     }
 }
