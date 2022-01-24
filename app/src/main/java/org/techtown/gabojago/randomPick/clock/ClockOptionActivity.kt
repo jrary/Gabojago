@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityClockOptionBinding
 
 class ClockOptionActivity : AppCompatActivity() {
@@ -26,6 +27,7 @@ class ClockOptionActivity : AppCompatActivity() {
         }
         binding.clockCompBtn.setOnClickListener {
             finish()
+            overridePendingTransition(R.anim.anim_down, R.anim.anim_none)
         }
     }
 }

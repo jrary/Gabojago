@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityWheelOptionBinding
 import org.techtown.gabojago.optionPopup.WheelOptionData
 import org.techtown.gabojago.optionPopup.WheelSelectActivity
@@ -46,6 +47,7 @@ class WheelOptionActivity : AppCompatActivity() {
         binding.wheelCompBtn.setOnClickListener {
             Log.d("compBtn - ITEMNUM", wheelFragment.optionList.size.toString())
             finish()
+            overridePendingTransition(R.anim.anim_down, R.anim.anim_none)
         }
     }
 

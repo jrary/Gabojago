@@ -32,13 +32,11 @@ class WheelFragment : Fragment() {
         binding.wheelOptionBtn.setOnClickListener{
             Log.d("fragment - ITEMNUM", optionList.size.toString())
             startActivity(Intent(activity, WheelOptionActivity::class.java))
+            activity?.overridePendingTransition(R.anim.anim_up, R.anim.anim_none)
         }
 
         binding.wheelGoBtn.setOnClickListener {
-            binding.wheelInfoTitleTv.visibility = View.GONE
-            binding.wheelInfoTv.visibility = View.GONE
-            val animationOpen = AnimationUtils.loadAnimation(activity, R.anim.anim_open_scale)
-            binding.wheelMainView.startAnimation(animationOpen)
+
         }
 
         return binding.root
@@ -54,10 +52,10 @@ class WheelFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        binding.wheelInfoTitleTv.visibility = View.VISIBLE
-        binding.wheelInfoTv.visibility = View.VISIBLE
         val animationClose = AnimationUtils.loadAnimation(activity, R.anim.anim_close_scale)
         binding.wheelMainView.startAnimation(animationClose)
+        binding.wheelInfoTitleTv.visibility = View.VISIBLE
+        binding.wheelInfoTv.visibility = View.VISIBLE
     }
 
     //여기서부터는 그냥... 저장소
