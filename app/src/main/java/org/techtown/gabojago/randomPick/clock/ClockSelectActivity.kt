@@ -1,21 +1,25 @@
 package org.techtown.gabojago.randomPick.clock
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.view.WindowManager
 import android.widget.NumberPicker
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
-import org.techtown.gabojago.databinding.ActivityWheelOptionBinding
 import org.techtown.gabojago.databinding.ActivityWheelSelectBinding
 
 class ClockSelectActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityWheelSelectBinding
-    var pickedNum: Int = 12
+    var pNum: String = ""
+
+    interface MyTimeClickListener {
+        fun onTimeClick()
+    }
+
+    private lateinit var mTimeClickListener: MyTimeClickListener
+
+    fun setMyTimeClickListener(itemClickListener: MyTimeClickListener) {
+        mTimeClickListener = itemClickListener
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +31,14 @@ class ClockSelectActivity : AppCompatActivity() {
         )
 
         initNumberPicker()
+        binding.wheelSelectNumberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
+            pNum = newVal.toString()
+        }
 
         binding.wheelSelectCompBtn.setOnClickListener{
+            mTimeClickListener.onTimeClick()
             finish()
-            pickedNum = binding.wheelSelectNumberPicker.value
+
         }
     }
     private fun initNumberPicker(){

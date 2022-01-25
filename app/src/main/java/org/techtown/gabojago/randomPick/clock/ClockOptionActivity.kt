@@ -1,6 +1,5 @@
 package org.techtown.gabojago.randomPick.clock
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
@@ -11,7 +10,7 @@ import org.techtown.gabojago.databinding.ActivityClockOptionBinding
 class ClockOptionActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityClockOptionBinding
-    var timeValue: String = "12"
+    var pickedNum: String = "0"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,23 +20,32 @@ class ClockOptionActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
+        val clockSelect = ClockSelectActivity()
         binding.clockStartTv.setOnClickListener {
             startActivity(Intent(this, ClockSelectActivity::class.java))
-            binding.clockStartTv.text = timeValue
+            clockSelect.setMyTimeClickListener(object : ClockSelectActivity.MyTimeClickListener {
+                override fun onTimeClick() {
+                    binding.clockEndTv.text = clockSelect.pNum
+                }
+            })
         }
         binding.clockEndTv.setOnClickListener {
             startActivity(Intent(this, ClockSelectActivity::class.java))
-            binding.clockEndTv.text = timeValue
+            clockSelect.setMyTimeClickListener(object : ClockSelectActivity.MyTimeClickListener {
+                override fun onTimeClick() {
+                    binding.clockEndTv.text = pickedNum
+                }
+            })
         }
         binding.clockCompBtn.setOnClickListener {
             finish()
             overridePendingTransition(R.anim.anim_down, R.anim.anim_none)
         }
+
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        var clockSelectActivity = ClockSelectActivity()
-        timeValue = clockSelectActivity.pickedNum.toString()
+    override fun onResume() {
+        super.onResume()
+
     }
 }
