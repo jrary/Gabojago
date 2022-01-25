@@ -3,14 +3,15 @@ package org.techtown.gabojago.randomPick.color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityColorResultBinding
 import java.util.*
 
 class ColorResultActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityColorResultBinding
-    var colorFragment = ColorFragment()
 
     var randomColor = arrayOf(
         "빨간색 계열!",
@@ -32,15 +33,15 @@ class ColorResultActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
-
+        val animAlphaStart = AnimationUtils.loadAnimation(this, R.anim.anim_alpha_start)
         binding.colorResultQuestionBtn.setOnClickListener{
             binding.colorResultQuestionView.visibility = View.GONE
             binding.colorResultView.visibility = View.VISIBLE
+            binding.colorResultView.startAnimation(animAlphaStart)
             binding.colorResultColorTv.text = randomColor[setRandom()]
         }
 
         binding.colorResultRetryBtn.setOnClickListener {
-            colorFragment.setStart = true
             finish()
         }
     }

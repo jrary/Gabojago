@@ -199,4 +199,18 @@
         app:layout_constraintVertical_bias="0.6"
         />
 
+    <ImageView
+        android:id="@+id/color_card_dropped_view"
+        android:layout_width="30dp"
+        android:layout_height="43dp"
+        android:src="@drawable/vending_card_selected"
+        app:layout_constraintTop_toTopOf="@id/color_vending_iv"
+        app:layout_constraintStart_toStartOf="@id/color_vending_iv"
+        app:layout_constraintEnd_toEndOf="@id/color_vending_iv"
+        app:layout_constraintBottom_toBottomOf="@id/color_vending_iv"
+        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintVertical_bias="0.85"
+        android:visibility="gone"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
