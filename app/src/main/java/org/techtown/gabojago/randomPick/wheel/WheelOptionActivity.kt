@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityWheelOptionBinding
 import org.techtown.gabojago.optionPopup.WheelOptionData
-import org.techtown.gabojago.optionPopup.WheelSelectActivity
 import java.util.ArrayList
 
 class WheelOptionActivity : AppCompatActivity() {

@@ -26,7 +26,7 @@
         <activity android:name=".randomPick.wheel.WheelOptionActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />
-        <activity android:name=".optionPopup.WheelSelectActivity"
+        <activity android:name=".randomPick.wheel.WheelSelectActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />
         <activity android:name=".randomPick.clock.ClockOptionActivity"

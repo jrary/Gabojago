@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.WindowManager
 import android.widget.NumberPicker
 import androidx.appcompat.app.AppCompatActivity
-import org.techtown.gabojago.databinding.ActivityWheelSelectBinding
+import org.techtown.gabojago.databinding.ActivitySelectBinding
 
 class ClockSelectActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityWheelSelectBinding
+    lateinit var binding: ActivitySelectBinding
     var pNum: String = ""
 
     interface MyTimeClickListener {
@@ -23,7 +23,7 @@ class ClockSelectActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityWheelSelectBinding.inflate(layoutInflater)
+        binding = ActivitySelectBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -31,11 +31,11 @@ class ClockSelectActivity : AppCompatActivity() {
         )
 
         initNumberPicker()
-        binding.wheelSelectNumberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
+        binding.selectNumberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
             pNum = newVal.toString()
         }
 
-        binding.wheelSelectCompBtn.setOnClickListener{
+        binding.selectCompBtn.setOnClickListener{
             mTimeClickListener.onTimeClick()
             finish()
 
@@ -46,10 +46,10 @@ class ClockSelectActivity : AppCompatActivity() {
         val data1: Array<String> = Array(12){
             i -> (i+1).toString()
         }
-        binding.wheelSelectNumberPicker.minValue = 1
-        binding.wheelSelectNumberPicker.maxValue = 12
-        binding.wheelSelectNumberPicker.wrapSelectorWheel = false
-        binding.wheelSelectNumberPicker.displayedValues = data1
-        binding.wheelSelectNumberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        binding.selectNumberPicker.minValue = 1
+        binding.selectNumberPicker.maxValue = 12
+        binding.selectNumberPicker.wrapSelectorWheel = false
+        binding.selectNumberPicker.displayedValues = data1
+        binding.selectNumberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
     }
 }

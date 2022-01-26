@@ -45,16 +45,13 @@ class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>):
     }
 
     //뷰홀더
-    inner class ViewHolder(val binding: ItemWheelOptionBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: ItemWheelOptionBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(wheelNum: WheelOptionData) {
-            //   binding.itemRecordNameEt.getText.toString() = wheelNum.name
+            binding.itemRecordNameEt.setText(wheelNum.name)
             binding.itemRecordSizeTv.text = wheelNum.num.toString()
             binding.itemRecordProbTv.text = wheelNum.prob.toString()
 
         }
-
-
         }
 
     override fun getItemCount(): Int = optionList.size
@@ -67,9 +64,5 @@ class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>):
     fun addItem(prob: Int){
         optionList.add(WheelOptionData("옵션" + optionList.size, 1, prob))
         notifyDataSetChanged()
-    }
-    override fun getItemViewType(position: Int): Int {
-        return super.getItemViewType(position)
-
     }
 }
