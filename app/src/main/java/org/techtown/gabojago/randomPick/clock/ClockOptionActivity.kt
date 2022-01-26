@@ -10,8 +10,9 @@ import org.techtown.gabojago.databinding.ActivityClockOptionBinding
 class ClockOptionActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityClockOptionBinding
-    var pickedNum: String = "0"
+    private var pickedNum: String = "0"
     var state: Boolean = true
+    var clockFragment = ClockFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,15 +38,23 @@ class ClockOptionActivity : AppCompatActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        binding.clockStartTv.text = clockFragment.startNum.toString()
+        binding.clockEndTv.text = clockFragment.endNum.toString()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == 100){
             pickedNum = data?.getStringExtra("clock")!!
             if(state){
                 binding.clockStartTv.text = pickedNum
+                clockFragment.updateStartClock(pickedNum.toInt())
             }
             else{
                 binding.clockEndTv.text = pickedNum
+                clockFragment.updateEndClock(pickedNum.toInt())
             }
         }
     }
