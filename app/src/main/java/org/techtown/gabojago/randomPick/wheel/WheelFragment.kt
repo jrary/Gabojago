@@ -37,9 +37,9 @@ class WheelFragment : Fragment() {
         }
 
         binding.wheelGoBtn.setOnClickListener {
-//            Toast.makeText(
-//                "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
-//            ).show()
+            Toast.makeText(
+                context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
+            ).show()
         }
 
         return binding.root

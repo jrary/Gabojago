@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentClockBinding
@@ -25,6 +26,11 @@ class ClockFragment : Fragment() {
         binding.clockOptionBtn.setOnClickListener {
             startActivity(Intent(activity, ClockOptionActivity::class.java))
             activity?.overridePendingTransition(R.anim.anim_up, R.anim.anim_none)
+        }
+        binding.clockGoBtn.setOnClickListener {
+            Toast.makeText(
+                context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
+            ).show()
         }
 
         return binding.root

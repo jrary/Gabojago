@@ -27,7 +27,7 @@ class WheelSelectActivity : AppCompatActivity() {
 
         binding.selectCompBtn.setOnClickListener{
             val intent = Intent()
-            intent.putExtra("clock", res.toString())
+            intent.putExtra("wheel", res.toString())
             setResult(100, intent)
             finish()
         }

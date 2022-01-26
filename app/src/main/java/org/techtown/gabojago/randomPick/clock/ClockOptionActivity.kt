@@ -11,6 +11,7 @@ class ClockOptionActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityClockOptionBinding
     var pickedNum: String = "0"
+    var state: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,22 +21,14 @@ class ClockOptionActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
-        val clockSelect = ClockSelectActivity()
+
         binding.clockStartTv.setOnClickListener {
-            startActivity(Intent(this, ClockSelectActivity::class.java))
-            clockSelect.setMyTimeClickListener(object : ClockSelectActivity.MyTimeClickListener {
-                override fun onTimeClick() {
-                    binding.clockEndTv.text = clockSelect.pNum
-                }
-            })
+            startActivityForResult(Intent(this, ClockSelectActivity::class.java), 100)
+            state = true
         }
         binding.clockEndTv.setOnClickListener {
-            startActivity(Intent(this, ClockSelectActivity::class.java))
-            clockSelect.setMyTimeClickListener(object : ClockSelectActivity.MyTimeClickListener {
-                override fun onTimeClick() {
-                    binding.clockEndTv.text = pickedNum
-                }
-            })
+            startActivityForResult(Intent(this, ClockSelectActivity::class.java), 100)
+            state = false
         }
         binding.clockCompBtn.setOnClickListener {
             finish()
@@ -44,8 +37,16 @@ class ClockOptionActivity : AppCompatActivity() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == 100){
+            pickedNum = data?.getStringExtra("clock")!!
+            if(state){
+                binding.clockStartTv.text = pickedNum
+            }
+            else{
+                binding.clockEndTv.text = pickedNum
+            }
+        }
     }
 }

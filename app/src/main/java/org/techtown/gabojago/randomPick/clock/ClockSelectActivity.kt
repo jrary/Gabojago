@@ -1,5 +1,6 @@
 package org.techtown.gabojago.randomPick.clock
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.NumberPicker
@@ -9,17 +10,7 @@ import org.techtown.gabojago.databinding.ActivitySelectBinding
 class ClockSelectActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySelectBinding
-    var pNum: String = ""
-
-    interface MyTimeClickListener {
-        fun onTimeClick()
-    }
-
-    private lateinit var mTimeClickListener: MyTimeClickListener
-
-    fun setMyTimeClickListener(itemClickListener: MyTimeClickListener) {
-        mTimeClickListener = itemClickListener
-    }
+    var res: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,17 +23,18 @@ class ClockSelectActivity : AppCompatActivity() {
 
         initNumberPicker()
         binding.selectNumberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
-            pNum = newVal.toString()
+            res = newVal
         }
 
         binding.selectCompBtn.setOnClickListener{
-            mTimeClickListener.onTimeClick()
+            val intent = Intent()
+            intent.putExtra("clock", res.toString())
+            setResult(100, intent)
             finish()
-
         }
     }
-    private fun initNumberPicker(){
 
+    private fun initNumberPicker(){
         val data1: Array<String> = Array(12){
             i -> (i+1).toString()
         }

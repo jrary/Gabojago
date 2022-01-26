@@ -58,8 +58,7 @@ class WheelOptionActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == 100){
-            res = data?.getStringExtra("clock")!!
-            Log.d("onActivityResult -", res)
+            res = data?.getStringExtra("wheel")!!
             rvAdapter.updateRecordSize(curPosition, res.toInt())
         }
     }

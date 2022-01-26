@@ -9,8 +9,7 @@ import org.techtown.gabojago.databinding.ItemWheelOptionBinding
 import org.techtown.gabojago.optionPopup.WheelOptionData
 import java.util.ArrayList
 
-class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>):
-    RecyclerView.Adapter<WheelOptionRVAdapter.ViewHolder>() {
+class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>): RecyclerView.Adapter<WheelOptionRVAdapter.ViewHolder>() {
 
     //클릭 인터페이스
     interface MyItemClickListener {
@@ -33,10 +32,6 @@ class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>):
 
     //뷰홀더에 데이터를 바인딩해줘야 할 때마다 호출되는 함수 => 엄청나게 많이 호출
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (position == optionList.size){
-
-        }
-
         holder.bind(optionList[position])
         holder.binding.itemRecordSizeTv.setOnClickListener {
             mItemClickListener.onItemClick(position)
@@ -54,11 +49,6 @@ class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>):
             binding.itemRecordNameEt.setText(wheelNum.name)
             binding.itemRecordSizeTv.text = wheelNum.num.toString()
             binding.itemRecordProbTv.text = wheelNum.prob.toString()
-            //룰렛 돌린 결과를 받아서 여기다가 반영하게 하고 싶었음
-            //binding.itemRecordSizeTv.text = woActivity.res
-        }
-        fun updateSize(wheelNum: WheelOptionData){
-
         }
     }
 

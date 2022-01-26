@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityColorResultBinding
@@ -43,6 +44,11 @@ class ColorResultActivity : AppCompatActivity() {
 
         binding.colorResultRetryBtn.setOnClickListener {
             finish()
+        }
+        binding.colorResultSaveBtn.setOnClickListener {
+            Toast.makeText(
+                this, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
