@@ -1,7 +1,9 @@
 package org.techtown.gabojago.randomPick.wheel
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.databinding.ItemWheelOptionBinding
 import org.techtown.gabojago.optionPopup.WheelOptionData
@@ -12,7 +14,7 @@ class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>):
 
     //클릭 인터페이스
     interface MyItemClickListener {
-        fun onItemClick()
+        fun onItemClick(position: Int)
     }
 
     private lateinit var mItemClickListener: MyItemClickListener
@@ -37,7 +39,9 @@ class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>):
 
         holder.bind(optionList[position])
         holder.binding.itemRecordSizeTv.setOnClickListener {
-            mItemClickListener.onItemClick()
+            mItemClickListener.onItemClick(position)
+            Log.d("RVposition - ", position.toString())
+            holder.bind(optionList[position])
         }
         holder.binding.itemRecordMinus.setOnClickListener{
             removeItem(position)
@@ -50,9 +54,13 @@ class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>):
             binding.itemRecordNameEt.setText(wheelNum.name)
             binding.itemRecordSizeTv.text = wheelNum.num.toString()
             binding.itemRecordProbTv.text = wheelNum.prob.toString()
+            //룰렛 돌린 결과를 받아서 여기다가 반영하게 하고 싶었음
+            //binding.itemRecordSizeTv.text = woActivity.res
+        }
+        fun updateSize(wheelNum: WheelOptionData){
 
         }
-        }
+    }
 
     override fun getItemCount(): Int = optionList.size
 
@@ -62,7 +70,12 @@ class WheelOptionRVAdapter(var optionList: ArrayList<WheelOptionData>):
     }
 
     fun addItem(prob: Int){
-        optionList.add(WheelOptionData("옵션" + optionList.size, 1, prob))
+        optionList.add(WheelOptionData("옵션" + (optionList.size + 1), 1, prob))
+        notifyDataSetChanged()
+    }
+
+    fun updateRecordSize(position: Int, newNum : Int) {
+        optionList[position].num = newNum
         notifyDataSetChanged()
     }
 }

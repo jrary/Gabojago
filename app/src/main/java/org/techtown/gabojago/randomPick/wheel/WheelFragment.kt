@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
@@ -36,7 +37,9 @@ class WheelFragment : Fragment() {
         }
 
         binding.wheelGoBtn.setOnClickListener {
-
+//            Toast.makeText(
+//                "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
+//            ).show()
         }
 
         return binding.root

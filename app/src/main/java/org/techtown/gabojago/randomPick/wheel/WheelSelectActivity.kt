@@ -1,6 +1,8 @@
 package org.techtown.gabojago.randomPick.wheel
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.NumberPicker
@@ -10,7 +12,7 @@ import org.techtown.gabojago.databinding.ActivitySelectBinding
 class WheelSelectActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySelectBinding
-
+    var res: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,11 +26,15 @@ class WheelSelectActivity : AppCompatActivity() {
         initNumberPicker()
 
         binding.selectCompBtn.setOnClickListener{
+            val intent = Intent()
+            intent.putExtra("clock", res.toString())
+            setResult(100, intent)
             finish()
         }
 
         binding.selectNumberPicker.setOnValueChangedListener{
             picker, i1, i2 ->
+            res = i2
         }
     }
     private fun initNumberPicker(){

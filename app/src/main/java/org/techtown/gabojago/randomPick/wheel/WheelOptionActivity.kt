@@ -14,6 +14,10 @@ import java.util.ArrayList
 class WheelOptionActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityWheelOptionBinding
+    var res: String = "0"
+    var curPosition : Int = 0
+    private val wheelFragment = WheelFragment()
+    private val rvAdapter = WheelOptionRVAdapter(wheelFragment.optionList)
     var optionList = ArrayList<WheelOptionData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,32 +29,38 @@ class WheelOptionActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-        val wheelFragment = WheelFragment()
-        val rvAdapter = WheelOptionRVAdapter(wheelFragment.optionList)
-        Log.d("start - ITEMNUM", wheelFragment.optionList.size.toString())
-
         rvAdapter.setMyItemClickListener(object : WheelOptionRVAdapter.MyItemClickListener {
-            override fun onItemClick() {
+            override fun onItemClick(position: Int) {
+                curPosition = position
                 openSelectActivity()
             }
         })
 
+        //Setting RecyclerView
         binding.recordResultRecyclerview.adapter = rvAdapter
         binding.recordResultRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
-        binding.wheelOptionTv.setOnClickListener {
+        //Add the Item
+        binding.wheelPlusBtn.setOnClickListener {
             wheelFragment.totalProb += 1
-            rvAdapter.addItem(wheelFragment.totalProb/(wheelFragment.optionList.size + 1)*100)
+            rvAdapter.addItem(100/wheelFragment.totalProb)
         }
-
+        //Finish
         binding.wheelCompBtn.setOnClickListener {
-            Log.d("compBtn - ITEMNUM", wheelFragment.optionList.size.toString())
             finish()
             overridePendingTransition(R.anim.anim_down, R.anim.anim_none)
         }
     }
 
     private fun openSelectActivity() {
-        startActivity(Intent(this@WheelOptionActivity, WheelSelectActivity::class.java))
+        startActivityForResult(Intent(this@WheelOptionActivity, WheelSelectActivity::class.java), 100)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == 100){
+            res = data?.getStringExtra("clock")!!
+            Log.d("onActivityResult -", res)
+            rvAdapter.updateRecordSize(curPosition, res.toInt())
+        }
     }
 }
