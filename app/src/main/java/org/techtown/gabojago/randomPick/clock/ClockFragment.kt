@@ -1,5 +1,6 @@
 package org.techtown.gabojago.randomPick.clock
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,12 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_clock.view.*
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentClockBinding
 
-
 class ClockFragment : Fragment() {
+
     lateinit var binding: FragmentClockBinding
     var startNum: Int = 12
     var endNum: Int = 12
@@ -26,8 +29,17 @@ class ClockFragment : Fragment() {
         super.onCreate(savedInstanceState)
         binding = FragmentClockBinding.inflate(layoutInflater)
 
+        var getClockOption = registerForActivityResult(
+                ActivityResultContracts.StartActivityForResult()){ result ->
+            if(result.resultCode ==  RESULT_OK){
+                startNum = result.data?.getIntExtra("start", 12)!!
+                endNum = result.data?.getIntExtra("end", 12)!!
+            }
+        }
+
         binding.clockOptionBtn.setOnClickListener {
-            startActivity(Intent(activity, ClockOptionActivity::class.java))
+            val intent = Intent(activity, ClockOptionActivity::class.java)
+            getClockOption.launch(intent)
             activity?.overridePendingTransition(R.anim.anim_up, R.anim.anim_none)
         }
         binding.clockGoBtn.setOnClickListener {
@@ -55,14 +67,6 @@ class ClockFragment : Fragment() {
         checkState()
     }
 
-    fun updateStartClock(sN: Int){
-        startNum = sN
-        Log.d("updateStartClock", startNum.toString())
-    }
-    fun updateEndClock(eN: Int){
-        endNum = eN
-        Log.d("updateEndClock", endNum.toString())
-    }
     private fun checkState(){
         Toast.makeText(
                 context, startNum.toString() +" , "+ endNum.toString(), Toast.LENGTH_SHORT

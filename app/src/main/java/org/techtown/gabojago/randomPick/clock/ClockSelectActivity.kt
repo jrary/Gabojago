@@ -28,8 +28,8 @@ class ClockSelectActivity : AppCompatActivity() {
 
         binding.selectCompBtn.setOnClickListener{
             val intent = Intent()
-            intent.putExtra("clock", res.toString())
-            setResult(100, intent)
+            intent.putExtra("clock", res)
+            setResult(RESULT_OK, intent)
             finish()
         }
     }

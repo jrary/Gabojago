@@ -10,9 +10,9 @@ import org.techtown.gabojago.databinding.ActivityClockOptionBinding
 class ClockOptionActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityClockOptionBinding
-    private var pickedNum: String = "0"
-    var state: Boolean = true
-    var clockFragment = ClockFragment()
+    var clockFragment = ClockFragment() //쓰레기!!!!♥♥♥♥♥♥♥♥♥♥♥♥
+    var startNum: Int = 12
+    var endNum: Int = 12
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,17 +25,18 @@ class ClockOptionActivity : AppCompatActivity() {
 
         binding.clockStartTv.setOnClickListener {
             startActivityForResult(Intent(this, ClockSelectActivity::class.java), 100)
-            state = true
         }
         binding.clockEndTv.setOnClickListener {
-            startActivityForResult(Intent(this, ClockSelectActivity::class.java), 100)
-            state = false
+            startActivityForResult(Intent(this, ClockSelectActivity::class.java), 101)
         }
         binding.clockCompBtn.setOnClickListener {
+            var intent = Intent()
+            intent.putExtra("start", startNum)
+            intent.putExtra("end", endNum)
+            setResult(RESULT_OK, intent)
             finish()
             overridePendingTransition(R.anim.anim_down, R.anim.anim_none)
         }
-
     }
 
     override fun onStart() {
@@ -46,16 +47,13 @@ class ClockOptionActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == 100){
-            pickedNum = data?.getStringExtra("clock")!!
-            if(state){
-                binding.clockStartTv.text = pickedNum
-                clockFragment.updateStartClock(pickedNum.toInt())
-            }
-            else{
-                binding.clockEndTv.text = pickedNum
-                clockFragment.updateEndClock(pickedNum.toInt())
-            }
+        if(requestCode == 100){
+            startNum = data?.getIntExtra("clock", 12)!!
+            binding.clockStartTv.text = startNum.toString()
+        }
+        else if(requestCode == 101){
+            endNum = data?.getIntExtra("clock", 12)!!
+            binding.clockEndTv.text = endNum.toString()
         }
     }
 }
