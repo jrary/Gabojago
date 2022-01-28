@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import org.techtown.gabojago.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentColorBinding
+import org.techtown.gabojago.randomPick.HomeMenuFragment
 
 class ColorFragment : Fragment() {
     lateinit var binding: FragmentColorBinding
@@ -23,6 +25,11 @@ class ColorFragment : Fragment() {
         binding = FragmentColorBinding.inflate(layoutInflater)
 
         binding.colorCard01View.setImageResource(R.drawable.vending_card_selected)
+        binding.colorBackBtn.setOnClickListener {
+            (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, HomeMenuFragment())
+                    .commitAllowingStateLoss()
+        }
         binding.colorBtn.setOnClickListener {
             cardColorAnimation()
             binding.colorBtn.visibility = View.GONE

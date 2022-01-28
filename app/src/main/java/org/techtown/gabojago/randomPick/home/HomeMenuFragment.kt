@@ -1,12 +1,13 @@
-package org.techtown.gabojago
+package org.techtown.gabojago.randomPick
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import org.techtown.gabojago.MainActivity
+import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentHomeMenuBinding
-import org.techtown.gabojago.randomPick.*
 import org.techtown.gabojago.randomPick.clock.ClockFragment
 import org.techtown.gabojago.randomPick.color.ColorFragment
 import org.techtown.gabojago.randomPick.wheel.WheelFragment

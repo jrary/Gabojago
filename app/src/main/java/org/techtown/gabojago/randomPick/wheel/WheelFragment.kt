@@ -12,9 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import org.json.JSONArray
+import org.techtown.gabojago.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentWheelBinding
 import org.techtown.gabojago.optionPopup.WheelOptionData
+import org.techtown.gabojago.randomPick.HomeMenuFragment
 
 
 class WheelFragment : Fragment() {
@@ -35,7 +37,11 @@ class WheelFragment : Fragment() {
             startActivity(Intent(activity, WheelOptionActivity::class.java))
             activity?.overridePendingTransition(R.anim.anim_up, R.anim.anim_none)
         }
-
+        binding.wheelBackBtn.setOnClickListener {
+            (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, HomeMenuFragment())
+                    .commitAllowingStateLoss()
+        }
         binding.wheelGoBtn.setOnClickListener {
             Toast.makeText(
                 context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
