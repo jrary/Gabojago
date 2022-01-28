@@ -120,24 +120,42 @@ class ClockFragment : Fragment() {
     }
 
     private fun moveClock(){
+        var startAngle: Float
+        var endAngle: Float
+        var resAngle: Float
+        if(startNum > endNum){
+            getResClock = getClockResult(startNum, endNum + 12)
+            startAngle = -360f + clockAngle[startNum - 1]
+            endAngle = clockAngle[endNum - 1]
+            if (getResClock <= 12){
+                resAngle = -360f + clockAngle[getResClock - 1]
+            }
+            else{
+                resAngle = clockAngle[getResClock - 1]
+            }
+        }
+        else{
+            getResClock = getClockResult(startNum + 12, endNum)
+            startAngle = clockAngle[getResClock - 1]
+            endAngle = clockAngle[getResClock - 1]
+            resAngle = clockAngle[getResClock - 1]
+        }
         Handler().postDelayed({
-            val rotateAnimation = RotateAnimation(0f, clockAngle[startNum - 1], Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            val rotateAnimation = RotateAnimation(0f, startAngle, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
             rotateAnimation.duration = 300
             rotateAnimation.fillAfter = true
             //   rotateAnimation.interpolator =
             binding.clockArrowIv.startAnimation(rotateAnimation)
-            getResClock = getClockResult(startNum, endNum)
         }, 100)
         Handler().postDelayed({
-            val rotateAnimation = RotateAnimation(clockAngle[startNum - 1], clockAngle[endNum - 1], Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            val rotateAnimation = RotateAnimation(startAngle, endAngle, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
             rotateAnimation.duration = 400
             rotateAnimation.fillAfter = true
             //   rotateAnimation.interpolator =
             binding.clockArrowIv.startAnimation(rotateAnimation)
-            getResClock = getClockResult(startNum, endNum)
         }, 600)
         Handler().postDelayed({
-            val rotateAnimationResult = RotateAnimation(clockAngle[endNum - 1], clockAngle[getResClock - 1], Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            val rotateAnimationResult = RotateAnimation(endAngle, resAngle, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
             rotateAnimationResult.fillAfter = true
             rotateAnimationResult.duration = 300
             //   rotateAnimation.interpolator =
@@ -146,11 +164,8 @@ class ClockFragment : Fragment() {
     }
     private fun getClockResult(start: Int, end: Int): Int{
         val random = Random()
-        return if(start > end){
-            (end + random.nextInt(12+end-start))%12
-        }
-        else{
-            start + random.nextInt(end-start)
-        }
+        val res = (start + random.nextInt(end - start)) % 12
+        Log.d("clockResultRandomFunc", res.toString())
+        return res
     }
 }
