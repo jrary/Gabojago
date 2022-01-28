@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.RotateAnimation
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.graphics.rotationMatrix
@@ -48,21 +49,6 @@ class ClockFragment : Fragment() {
             360f
     )
 
-    var viewArr = arrayOf(
-        binding.clock1,
-        binding.clock2,
-        binding.clock3,
-        binding.clock4,
-        binding.clock5,
-        binding.clock6,
-        binding.clock7,
-        binding.clock8,
-        binding.clock9,
-        binding.clock10,
-        binding.clock11,
-        binding.clock12
-    )
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -79,6 +65,21 @@ class ClockFragment : Fragment() {
             }
         }
 
+        var viewArr = arrayOf(
+            binding.clock1,
+            binding.clock2,
+            binding.clock3,
+            binding.clock4,
+            binding.clock5,
+            binding.clock6,
+            binding.clock7,
+            binding.clock8,
+            binding.clock9,
+            binding.clock10,
+            binding.clock11,
+            binding.clock12
+        )
+
         binding.clockBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
                     .replace(R.id.main_frm, HomeMenuFragment())
@@ -90,7 +91,7 @@ class ClockFragment : Fragment() {
             activity?.overridePendingTransition(R.anim.anim_up, R.anim.anim_none)
         }
         binding.clockGoBtn.setOnClickListener {
-            moveClock()
+            moveClock(viewArr)
             binding.clockOptionBtn.visibility = View.GONE
             binding.clockGoBtn.visibility = View.GONE
             binding.clockInfoTitleTv.visibility = View.INVISIBLE
@@ -110,7 +111,7 @@ class ClockFragment : Fragment() {
             binding.clockRetryBtn.visibility = View.GONE
             binding.clockSaveBtn.visibility = View.GONE
             Handler().postDelayed({
-                moveClock()
+                moveClock(viewArr)
             }, 200)
             Handler().postDelayed({
                 binding.clockResultTv.text = getResClock.toString() + "시 방향"
@@ -146,7 +147,8 @@ class ClockFragment : Fragment() {
     //startNum, endNum의 범위는 1~12이다.
     //index의 범위는 0~11이다
     //getResClock으로 넘겨주는 값은 0~11이고, getResClock으로 리턴받는 값은 1~12이다.
-    private fun moveClock(){
+    //clockRangeSetter로 보내는 값의 범위는 0~11이다
+    private fun moveClock(viewArr: Array<TextView>){
         var startAngle: Float
         var endAngle: Float
         var resAngle: Float
@@ -161,24 +163,21 @@ class ClockFragment : Fragment() {
                 getResClock %= 12
                 resAngle = clockAngle[getResClock - 1]
             }
+            clockRangeSetter(viewArr, startNum - 1, endNum + 12 - 1)
         }
         else{
             getResClock = getClockResult(startNum - 1, endNum - 1)
             startAngle = clockAngle[startNum - 1]
             endAngle = clockAngle[endNum - 1]
             resAngle = clockAngle[getResClock - 1]
+            clockRangeSetter(viewArr, startNum - 1, endNum - 1)
         }
-        clockRangeSetter(startAngle, endAngle)
         clockAnimation(startAngle, endAngle, resAngle)
     }
     private fun getClockResult(start: Int, end: Int): Int{
         val random = Random()
-        Log.d("getStartandEndClock", startNum.toString()+" / "+endNum.toString())
-        Log.d("clockBound01", start.toString()+" / "+end.toString())
         val bound = end - start + 1
-        Log.d("clockBound02", bound.toString())
         val res = start + random.nextInt(bound)
-        Log.d("clockResultRandomFunc", res.toString())
         return res + 1
     }
 
@@ -240,8 +239,12 @@ class ClockFragment : Fragment() {
             binding.clockArrowIv.startAnimation(rotateAnimationResult)
         }, 3600)
     }
-    private fun clockRangeSetter(startAngle: Float, endAngle: Float){
-        binding.clock1.setTextColor(Color.rgb(255,103,69))
-        binding.clock2.setTextColor(Color.rgb(255,147,124))
+    private fun clockRangeSetter(viewArr: Array<TextView>, start: Int, end: Int){
+        viewArr[start].setTextColor(Color.rgb(255,103,69))
+        viewArr[end % 12].setTextColor(Color.rgb(255,103,69))
+        for(i: Int in start..end){
+            Log.d("whereistherange", i.toString())
+            viewArr[i % 12].setTextColor(Color.rgb(255,147,124))
+        }
     }
 }
