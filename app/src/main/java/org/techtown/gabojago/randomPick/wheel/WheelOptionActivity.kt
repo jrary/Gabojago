@@ -3,22 +3,19 @@ package org.techtown.gabojago.randomPick.wheel
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityWheelOptionBinding
-import org.techtown.gabojago.optionPopup.WheelOptionData
 import java.util.ArrayList
 
 class WheelOptionActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityWheelOptionBinding
-    var res: String = "0"
-    var curPosition : Int = 0
-    private val wheelFragment = WheelFragment()
-    private val rvAdapter = WheelOptionRVAdapter(wheelFragment.optionList)
-    var optionList = ArrayList<WheelOptionData>()
+    var optionList = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,37 +26,49 @@ class WheelOptionActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-        rvAdapter.setMyItemClickListener(object : WheelOptionRVAdapter.MyItemClickListener {
-            override fun onItemClick(position: Int) {
-                curPosition = position
-                openSelectActivity()
-            }
-        })
+        if(intent.hasExtra("wheel")){
+            optionList = intent.getStringArrayListExtra("wheel")!!
+        }
+        else{
+            Toast.makeText(
+                this, "못받았는데요", Toast.LENGTH_SHORT
+            ).show()
+        }
 
         //Setting RecyclerView
+        val rvAdapter = WheelOptionRVAdapter(optionList)
         binding.recordResultRecyclerview.adapter = rvAdapter
         binding.recordResultRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        //For when the user set the item num less than two
+        rvAdapter.setMyItemClickListener(object : WheelOptionRVAdapter.MyItemClickListener {
+            override fun onItemClick(size: Int) {
+                if(size < 7){
+                    binding.wheelPlusBtn.visibility = View.VISIBLE
+                }
+                if(size < 2){
+                    showToastMsg()
+                }
+            }
+        })
         //Add the Item
         binding.wheelPlusBtn.setOnClickListener {
-            wheelFragment.totalProb += 1
-            rvAdapter.addItem(100/wheelFragment.totalProb)
+            rvAdapter.addItem()
+            if(optionList.size > 5){
+                binding.wheelPlusBtn.visibility = View.GONE
+            }
         }
         //Finish
         binding.wheelCompBtn.setOnClickListener {
+            var intent = Intent()
+            intent.putExtra("wheel", optionList)
+            setResult(RESULT_OK, intent)
             finish()
             overridePendingTransition(R.anim.anim_down, R.anim.anim_none)
         }
     }
-
-    private fun openSelectActivity() {
-        startActivityForResult(Intent(this@WheelOptionActivity, WheelSelectActivity::class.java), 100)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == 100){
-            res = data?.getStringExtra("wheel")!!
-            rvAdapter.updateRecordSize(curPosition, res.toInt())
-        }
+    fun showToastMsg(){
+        Toast.makeText(
+            this, "2개이하로줄일수없다는멘트", Toast.LENGTH_SHORT
+        ).show()
     }
 }

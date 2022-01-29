@@ -87,6 +87,8 @@ class ClockFragment : Fragment() {
         }
         binding.clockOptionBtn.setOnClickListener {
             val intent = Intent(activity, ClockOptionActivity::class.java)
+            intent.putExtra("start", startNum)
+            intent.putExtra("end", endNum)
             getClockOption.launch(intent)
             activity?.overridePendingTransition(R.anim.anim_up, R.anim.anim_none)
         }
@@ -243,7 +245,6 @@ class ClockFragment : Fragment() {
         viewArr[start].setTextColor(Color.rgb(255,103,69))
         viewArr[end % 12].setTextColor(Color.rgb(255,103,69))
         for(i: Int in start..end){
-            Log.d("whereistherange", i.toString())
             viewArr[i % 12].setTextColor(Color.rgb(255,147,124))
         }
     }

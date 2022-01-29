@@ -2,7 +2,9 @@ package org.techtown.gabojago.randomPick.clock
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityClockOptionBinding
@@ -23,6 +25,8 @@ class ClockOptionActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
+        setStoredClock()
+
         binding.clockStartTv.setOnClickListener {
             startActivityForResult(Intent(this, ClockSelectActivity::class.java), 100)
         }
@@ -39,10 +43,21 @@ class ClockOptionActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        binding.clockStartTv.text = clockFragment.startNum.toString()
-        binding.clockEndTv.text = clockFragment.endNum.toString()
+    private fun setStoredClock(){
+        if(intent.hasExtra("start")){
+            startNum = intent.getIntExtra("start", 0)
+            binding.clockStartTv.text = startNum.toString()
+        }
+        else{
+            binding.clockStartTv.text = "12"
+        }
+        if(intent.hasExtra("end")){
+            endNum = intent.getIntExtra("end", 0)
+            binding.clockEndTv.text = endNum.toString()
+        }
+        else{
+            binding.clockEndTv.text = "12"
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
