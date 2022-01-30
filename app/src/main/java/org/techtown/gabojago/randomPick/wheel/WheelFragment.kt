@@ -2,15 +2,19 @@ package org.techtown.gabojago.randomPick.wheel
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import org.json.JSONArray
@@ -31,10 +35,19 @@ class WheelFragment : Fragment() {
     ): View? {
         binding = FragmentWheelBinding.inflate(layoutInflater)
 
+        var wheelArr = arrayOf(
+            binding.wheel02,
+            binding.wheel03,
+            binding.wheel04,
+            binding.wheel05,
+            binding.wheel06,
+        )
+
         var getWheelOptionArray = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()){ result ->
             if(result.resultCode == Activity.RESULT_OK){
                 optionList = result.data?.getStringArrayListExtra("wheel")!!
+                setWheel(wheelArr)
             }
         }
 
@@ -78,5 +91,11 @@ class WheelFragment : Fragment() {
         binding.wheelMainView.startAnimation(animationClose)
         binding.wheelInfoTitleTv.visibility = View.VISIBLE
         binding.wheelInfoTv.visibility = View.VISIBLE
+    }
+    private fun setWheel(wheelArr: Array<AppCompatImageView>){
+        for(i: Int in 0..4){
+            wheelArr[i].visibility = View.GONE
+        }
+        wheelArr[optionList.size - 2].visibility = View.VISIBLE
     }
 }

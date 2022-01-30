@@ -46,7 +46,7 @@
         android:id="@+id/record_month_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/nanum_square_round_otf"
+        android:fontFamily="@font/apple_sd_gothic_neo_sb"
         android:textStyle="bold"
         android:textSize="18sp"
         android:textColor="#777777"
@@ -61,7 +61,7 @@
         android:id="@+id/record_date_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/nanum_square_round_otf"
+        android:fontFamily="@font/apple_sd_gothic_neo_sb"
         android:textStyle="bold"
         android:textSize="14sp"
         android:textColor="#6d6d6d"
@@ -132,7 +132,7 @@
 <!--        android:id="@+id/record_notify_tv"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
-<!--        android:fontFamily="@font/nanum_square_round_otf"-->
+<!--        android:fontFamily="@font/apple_sd_gothic_neo_sb"-->
 <!--        android:textStyle="bold"-->
 <!--        android:textSize="12sp"-->
 <!--        android:textColor="#777777"-->

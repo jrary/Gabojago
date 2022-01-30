@@ -21,7 +21,7 @@
             android:id="@+id/wheel_back_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nanum_square_round_otf_light"
+            android:fontFamily="@font/apple_sd_gothic_neo_r"
             android:layout_marginStart="19dp"
             android:layout_marginBottom="15dp"
             android:textStyle="normal"
@@ -59,7 +59,7 @@
             android:id="@+id/wheel_info_title_tv"
             android:layout_width="295dp"
             android:layout_height="38dp"
-            android:fontFamily="@font/nanum_square_round_otf"
+            android:fontFamily="@font/apple_sd_gothic_neo_sb"
             android:textStyle="bold"
             android:textSize="16sp"
             android:textColor="#000000"
@@ -74,7 +74,7 @@
             android:id="@+id/wheel_info_tv"
             android:layout_width="301dp"
             android:layout_height="48dp"
-            android:fontFamily="@font/nanum_square_round_otf"
+            android:fontFamily="@font/apple_sd_gothic_neo_sb"
             android:textStyle="bold"
             android:textSize="12sp"
             android:textColor="#b8b8b8"
@@ -106,15 +106,71 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
-        <View
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/wheel_spin_view"
             android:layout_width="237dp"
             android:layout_height="237dp"
-            android:layout_marginTop="13.5dp"
             app:layout_constraintStart_toStartOf="@id/wheel_iv"
             app:layout_constraintEnd_toEndOf="@id/wheel_iv"
             app:layout_constraintTop_toTopOf="@id/wheel_iv"
-            />
+            app:layout_constraintBottom_toBottomOf="@id/wheel_iv"
+            app:layout_constraintVertical_bias="0.1"
+            >
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/wheel_02"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/wheel_02"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/wheel_03"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/wheel_03"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"
+                />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/wheel_04"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/wheel_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"
+                />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/wheel_05"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/wheel_05"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"
+                />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/wheel_06"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/wheel_06"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/wheel_triangle_iv"
@@ -141,8 +197,8 @@
 
         <ImageView
             android:id="@+id/wheel_option_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="140dp"
+            android:layout_height="45dp"
             android:src="@drawable/rectangle_4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/wheel_go_btn"
@@ -164,8 +220,8 @@
 
         <ImageView
             android:id="@+id/wheel_go_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="140dp"
+            android:layout_height="45dp"
             android:src="@drawable/rectangle_5"
             app:layout_constraintStart_toEndOf="@id/wheel_option_btn"
             app:layout_constraintEnd_toEndOf="parent"

@@ -16,7 +16,7 @@
     </style>
     <style name="Widget.BottomNavigationView"
         parent="Widget.Design.BottomNavigationView">
-        <item name="fontFamily">@font/nanum_square_round_otf</item>
+        <item name="fontFamily">@font/apple_sd_gothic_neo_sb</item>
     </style>
 
     <style name="Theme.AppCompat.Transparent.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
@@ -39,7 +39,7 @@
         parent="Theme.AppCompat.Light" >
         <item name="colorAccent">@android:color/white</item>
         <item name="colorControlNormal">@android:color/transparent</item>
-        <item name="android:textColorPrimary">#000000</item>
+        <item name="android:textColorPrimary">#B7B7B7</item>
         <item name="android:textStyle">normal</item>
         <item name="android:background">@android:color/white</item>
         <item name="android:textSize">40sp</item>

@@ -57,14 +57,6 @@ class ClockFragment : Fragment() {
         super.onCreate(savedInstanceState)
         binding = FragmentClockBinding.inflate(layoutInflater)
 
-        var getClockOption = registerForActivityResult(
-                ActivityResultContracts.StartActivityForResult()){ result ->
-            if(result.resultCode ==  RESULT_OK){
-                startNum = result.data?.getIntExtra("start", 12)!!
-                endNum = result.data?.getIntExtra("end", 12)!!
-            }
-        }
-
         var viewArr = arrayOf(
             binding.clock1,
             binding.clock2,
@@ -79,6 +71,20 @@ class ClockFragment : Fragment() {
             binding.clock11,
             binding.clock12
         )
+
+        var getClockOption = registerForActivityResult(
+                ActivityResultContracts.StartActivityForResult()){ result ->
+            if(result.resultCode ==  RESULT_OK){
+                startNum = result.data?.getIntExtra("start", 12)!!
+                endNum = result.data?.getIntExtra("end", 12)!!
+                if(startNum > endNum){
+                    clockRangeSetter(viewArr, startNum - 1, endNum + 12 - 1)
+                }
+                else{
+                    clockRangeSetter(viewArr, startNum - 1, endNum - 1)
+                }
+            }
+        }
 
         binding.clockBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()

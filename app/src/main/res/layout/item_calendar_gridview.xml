@@ -10,7 +10,7 @@
         android:id="@+id/item_gridview_tv"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/nanum_square_round_otf"
+        android:fontFamily="@font/apple_sd_gothic_neo_sb"
         app:layout_constraintHorizontal_weight="1"
         android:gravity="center_horizontal"
         android:text="10"

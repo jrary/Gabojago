@@ -15,11 +15,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         >
 
-        <NumberPicker
+        <com.shawnlin.numberpicker.NumberPicker
             android:id="@+id/select_numberPicker"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:theme="@style/NumberPickerTheme"
+            app:np_selectedTextColor="#000000"
+            app:np_selectedTextSize="64sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/select_comp_btn"
