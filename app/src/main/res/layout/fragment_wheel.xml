@@ -34,8 +34,8 @@
         <TextView
             android:layout_width="192dp"
             android:layout_height="29dp"
-            android:fontFamily="@font/nanum_square_round_otf_extrabold"
-            android:textStyle="normal"
+            android:fontFamily="@font/apple_sd_gothic_neo_sb"
+            android:textStyle="bold"
             android:layout_marginBottom="15dp"
             android:textSize="20sp"
             android:textColor="#000000"
@@ -194,53 +194,82 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <ImageView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/wheel_option_btn"
             android:layout_width="140dp"
             android:layout_height="45dp"
-            android:src="@drawable/rectangle_4"
+            android:background="@drawable/rectangle_4"
+            android:text="옵션 설정"
+            android:shadowColor="#abffffff"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="4"
+            android:fontFamily="@font/apple_sd_gothic_neo_sb"
+            android:textStyle="normal"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/wheel_go_btn"
             app:layout_constraintTop_toBottomOf="@id/wheel_main_view"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nanum_square_round_otf_extrabold"
-            android:textStyle="normal"
-            android:textSize="18sp"
-            android:textColor="#ffffff"
-            android:text="옵션 설정"
-            app:layout_constraintStart_toStartOf="@id/wheel_option_btn"
-            app:layout_constraintEnd_toEndOf="@id/wheel_option_btn"
-            app:layout_constraintTop_toTopOf="@id/wheel_option_btn"
-            app:layout_constraintBottom_toBottomOf="@id/wheel_option_btn"/>
-
-        <ImageView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/wheel_go_btn"
             android:layout_width="140dp"
             android:layout_height="45dp"
-            android:src="@drawable/rectangle_5"
+            android:background="@drawable/rectangle_5"
+            android:text="가보자GO"
+            android:shadowColor="#abffffff"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="4"
+            android:fontFamily="@font/apple_sd_gothic_neo_sb"
+            android:textStyle="normal"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
             app:layout_constraintStart_toEndOf="@id/wheel_option_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/wheel_main_view"
             />
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nanum_square_round_otf_extrabold"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/wheel_retry_btn"
+            android:layout_width="140dp"
+            android:layout_height="45dp"
+            android:background="@drawable/rectangle_4"
+            android:text="다시 돌리기"
+            android:shadowColor="#abffffff"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="4"
+            android:fontFamily="@font/apple_sd_gothic_neo_sb"
             android:textStyle="normal"
             android:textSize="18sp"
             android:textColor="#ffffff"
-            android:text="가보자GO"
-            app:layout_constraintStart_toStartOf="@id/wheel_go_btn"
-            app:layout_constraintEnd_toEndOf="@id/wheel_go_btn"
-            app:layout_constraintTop_toTopOf="@id/wheel_go_btn"
-            app:layout_constraintBottom_toBottomOf="@id/wheel_go_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/wheel_go_btn"
+            app:layout_constraintTop_toBottomOf="@id/wheel_main_view"
+            android:visibility="gone"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/wheel_save_btn"
+            android:layout_width="140dp"
+            android:layout_height="45dp"
+            android:background="@drawable/rectangle_5"
+            android:text="결과 저장"
+            android:shadowColor="#abffffff"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="4"
+            android:fontFamily="@font/apple_sd_gothic_neo_sb"
+            android:textStyle="normal"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            app:layout_constraintStart_toEndOf="@id/wheel_option_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wheel_main_view"
+            android:visibility="gone"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

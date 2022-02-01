@@ -92,7 +92,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/nanum_square_round_otf_extrabold"
+                android:fontFamily="@font/apple_sd_gothic_neo_sb"
                 android:textStyle="normal"
                 android:textSize="18sp"
                 android:textColor="#ffffff"
@@ -117,7 +117,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/nanum_square_round_otf_extrabold"
+                android:fontFamily="@font/apple_sd_gothic_neo_sb"
                 android:textStyle="normal"
                 android:textSize="18sp"
                 android:textColor="#ffffff"
