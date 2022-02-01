@@ -69,7 +69,7 @@
         />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/manage_nickname_comp_btn"
+        android:id="@+id/manage_nickname_modify_btn"
         android:layout_width="31dp"
         android:layout_height="31dp"
         android:background="@drawable/manage_pencil"
@@ -79,9 +79,25 @@
         app:layout_constraintBottom_toBottomOf="@id/manage_nickname_iv"
         />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/manage_nickname_comp_btn"
+        android:layout_width="31dp"
+        android:layout_height="31dp"
+        android:text="완료"
+        android:textSize="11sp"
+        android:textColor="#FF6745"
+        android:fontFamily="@font/apple_sd_gothic_neo_sb"
+        android:background="@null"
+        android:layout_marginEnd="13dp"
+        app:layout_constraintEnd_toEndOf="@id/manage_nickname_iv"
+        app:layout_constraintTop_toTopOf="@id/manage_nickname_iv"
+        app:layout_constraintBottom_toBottomOf="@id/manage_nickname_iv"
+        android:visibility="gone"
+        />
+
     <View
         android:layout_width="322dp"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:background="#b5b5b5"
         android:layout_marginTop="22dp"
         app:layout_constraintStart_toStartOf="parent"
