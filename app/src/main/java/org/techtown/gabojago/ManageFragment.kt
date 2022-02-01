@@ -18,14 +18,13 @@ class ManageFragment : Fragment() {
         binding = FragmentManageBinding.inflate(layoutInflater)
 
         binding.manageNicknameModifyBtn.setOnClickListener {
-            binding.manageNicknameModifyBtn.visibility = View.GONE
-            binding.manageNicknameCompBtn.visibility = View.VISIBLE
+            binding.manageNicknameView.visibility = View.VISIBLE
+            binding.manageNicknameEt.setText(binding.manageNicknameTv.text.toString())
         }
 
         binding.manageNicknameCompBtn.setOnClickListener {
-            binding.manageNicknameModifyBtn.visibility = View.VISIBLE
-            binding.manageNicknameCompBtn.visibility = View.GONE
-            binding.manageNicknameEt.setText(binding.manageNicknameEt.text.toString())
+            binding.manageNicknameView.visibility = View.GONE
+            binding.manageNicknameTv.text = binding.manageNicknameEt.text.toString()
         }
 
         return binding.root
