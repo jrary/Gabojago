@@ -3,14 +3,17 @@ package org.techtown.gabojago.splash
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import kotlinx.android.synthetic.main.activity_login.*
+import org.techtown.gabojago.AuthRetrofitInterface
 import org.techtown.gabojago.MainActivity
 import org.techtown.gabojago.databinding.ActivityLoginBinding
+import org.techtown.gabojago.getRetrofit
 
 class LoginActivity :AppCompatActivity() {
 
@@ -44,7 +47,9 @@ class LoginActivity :AppCompatActivity() {
                 val refreshToken: String = mOAuthLoginInstance.getRefreshToken(baseContext)
                 val expiresAt: Long = mOAuthLoginInstance.getExpiresAt(baseContext)
                 val tokenType: String = mOAuthLoginInstance.getTokenType(baseContext)
+                Log.d("Token", accessToken)
                 Toast.makeText(baseContext,"Login Success", Toast.LENGTH_SHORT).show()
+                val test: AuthRetrofitInterface = getRetrofit().create(AuthRetrofitInterface::class.java)
                 var intent = Intent(this@LoginActivity, MainActivity::class.java)
                 startActivity(intent)
             } else {

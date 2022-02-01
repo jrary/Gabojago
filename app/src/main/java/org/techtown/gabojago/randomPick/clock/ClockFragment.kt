@@ -171,14 +171,14 @@ class ClockFragment : Fragment() {
                 getResClock %= 12
                 resAngle = clockAngle[getResClock - 1]
             }
-            clockRangeSetter(viewArr, startNum - 1, endNum + 12 - 1)
+        //    clockRangeSetter(viewArr, startNum - 1, endNum + 12 - 1)
         }
         else{
             getResClock = getClockResult(startNum - 1, endNum - 1)
             startAngle = clockAngle[startNum - 1]
             endAngle = clockAngle[endNum - 1]
             resAngle = clockAngle[getResClock - 1]
-            clockRangeSetter(viewArr, startNum - 1, endNum - 1)
+       //     clockRangeSetter(viewArr, startNum - 1, endNum - 1)
         }
         clockAnimation(startAngle, endAngle, resAngle)
     }

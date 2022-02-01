@@ -4,11 +4,14 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -23,6 +26,8 @@ import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentWheelBinding
 import org.techtown.gabojago.randomPick.HomeMenuFragment
 import org.techtown.gabojago.randomPick.clock.ClockOptionActivity
+import java.util.*
+import kotlin.collections.ArrayList
 
 class WheelFragment : Fragment() {
     lateinit var binding: FragmentWheelBinding
@@ -48,6 +53,7 @@ class WheelFragment : Fragment() {
             if(result.resultCode == Activity.RESULT_OK){
                 optionList = result.data?.getStringArrayListExtra("wheel")!!
                 setWheel(wheelArr)
+                setOptionName(wheelArr)
             }
         }
 
@@ -63,10 +69,13 @@ class WheelFragment : Fragment() {
                     .commitAllowingStateLoss()
         }
         binding.wheelGoBtn.setOnClickListener {
-            Toast.makeText(
-                context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
-            ).show()
+            moveWheel(wheelArr)
         }
+
+        //결과 저장 버튼
+//        Toast.makeText(
+//            context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
+//        ).show()
 
         return binding.root
     }
@@ -97,5 +106,62 @@ class WheelFragment : Fragment() {
             wheelArr[i].visibility = View.GONE
         }
         wheelArr[optionList.size - 2].visibility = View.VISIBLE
+    }
+    private fun setOptionName(wheelArr: Array<AppCompatImageView>){
+
+    }
+    private fun moveWheel(wheelArr: Array<AppCompatImageView>){
+        val res: Int = getWheelResult()
+        wheelAnimation(res, wheelArr)
+    }
+    private fun getWheelResult(): Int{
+        val random = Random()
+        return random.nextInt(optionList.size)
+    }
+    private fun wheelAnimation(res: Int, wheelArr: Array<AppCompatImageView>){
+        Handler().postDelayed({
+            val rotateAnimation = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            rotateAnimation.duration = 100
+            rotateAnimation.fillAfter = true
+            binding.wheelSpinView.startAnimation(rotateAnimation)
+        }, 100)
+        Handler().postDelayed({
+            val rotateAnimation = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            rotateAnimation.duration = 200
+            rotateAnimation.fillAfter = true
+            binding.wheelSpinView.startAnimation(rotateAnimation)
+        }, 200)
+        Handler().postDelayed({
+            val rotateAnimation = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            rotateAnimation.duration = 300
+            rotateAnimation.fillAfter = true
+            binding.wheelSpinView.startAnimation(rotateAnimation)
+        }, 400)
+        Handler().postDelayed({
+            val rotateAnimation = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            rotateAnimation.duration = 400
+            rotateAnimation.fillAfter = true
+            binding.wheelSpinView.startAnimation(rotateAnimation)
+        }, 700)
+        Handler().postDelayed({
+            val rotateAnimation = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            rotateAnimation.duration = 500
+            rotateAnimation.fillAfter = true
+            binding.wheelSpinView.startAnimation(rotateAnimation)
+        }, 1100)
+        Handler().postDelayed({
+            val rotateAnimation = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            rotateAnimation.duration = 600
+            rotateAnimation.fillAfter = true
+            binding.wheelSpinView.startAnimation(rotateAnimation)
+        }, 1600)
+        var resAngle: Float = ((360/optionList.size) * (res + 0.5f))
+        Handler().postDelayed({
+            val rotateAnimation = RotateAnimation(0f, resAngle, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            rotateAnimation.duration = 700
+            rotateAnimation.fillAfter = true
+            binding.wheelSpinView.startAnimation(rotateAnimation)
+        }, 2200)
+
     }
 }
