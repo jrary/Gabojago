@@ -45,7 +45,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
-        android:textStyle="bold"
         android:textSize="16sp"
         android:layout_marginTop="3dp"
         android:textColor="#000000"
