@@ -17,6 +17,9 @@ class ManageFragment : Fragment() {
     ): View? {
         binding = FragmentManageBinding.inflate(layoutInflater)
 
+        binding.manageNicknameCompBtn.setOnClickListener {
+            binding.test.text = binding.manageNicknameEt.text.toString()
+        }
 
         return binding.root
     }

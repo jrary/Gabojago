@@ -4,14 +4,91 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:id="@+id/manage_icon_iv"
+        android:layout_width="36.1dp"
+        android:layout_height="36.1dp"
+        android:src="@drawable/manage_person"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="54dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <TextView
+        android:id="@+id/record_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Manage Fragment"
+        android:fontFamily="@font/apple_sd_gothic_neo_sb"
+        android:textStyle="bold"
+        android:textSize="32.3sp"
+        android:textColor="#000000"
+        android:text="관리하자"
+        android:layout_marginStart="17dp"
+        app:layout_constraintStart_toEndOf="@id/manage_icon_iv"
+        app:layout_constraintTop_toTopOf="@id/manage_icon_iv"
+        app:layout_constraintBottom_toBottomOf="@id/manage_icon_iv"
+        />
+
+    <TextView
+        android:id="@+id/manage_modify_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/apple_sd_gothic_neo_sb"
+        android:textSize="14sp"
+        android:textColor="#000000"
+        android:text="닉네임 수정하기"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="@id/manage_nickname_iv"
+        app:layout_constraintTop_toBottomOf="@id/manage_icon_iv"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/manage_nickname_iv"
+        android:layout_width="303dp"
+        android:layout_height="45dp"
+        android:src="@drawable/rectangle_16"
+        android:layout_marginTop="7dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/manage_modify_tv"
         />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/manage_nickname_et"
+        android:layout_width="303dp"
+        android:layout_height="45dp"
+        android:textSize="24sp"
+        android:textColor="#000000"
+        android:text="케융"
+        android:background="@null"
+        android:layout_marginStart="13dp"
+        app:layout_constraintStart_toStartOf="@id/manage_nickname_iv"
+        app:layout_constraintTop_toTopOf="@id/manage_nickname_iv"
+        app:layout_constraintBottom_toBottomOf="@id/manage_nickname_iv"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/manage_nickname_comp_btn"
+        android:layout_width="31dp"
+        android:layout_height="31dp"
+        android:background="@drawable/manage_pencil"
+        android:layout_marginEnd="13dp"
+        app:layout_constraintEnd_toEndOf="@id/manage_nickname_iv"
+        app:layout_constraintTop_toTopOf="@id/manage_nickname_iv"
+        app:layout_constraintBottom_toBottomOf="@id/manage_nickname_iv"
+        />
+
+    <View
+        android:layout_width="322dp"
+        android:layout_height="2dp"
+        android:background="#b5b5b5"
+        android:layout_marginTop="22dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/manage_nickname_iv"
+        />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
