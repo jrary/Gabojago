@@ -69,14 +69,37 @@ class WheelFragment : Fragment() {
                     .commitAllowingStateLoss()
         }
         binding.wheelGoBtn.setOnClickListener {
-            moveWheel(wheelArr)
+            binding.wheelOptionBtn.visibility = View.GONE
+            binding.wheelGoBtn.visibility = View.GONE
+            binding.wheelInfoTv.visibility = View.INVISIBLE
+            binding.wheelInfoTitleTv.visibility = View.INVISIBLE
+            val res = moveWheel(wheelArr)
+            Handler().postDelayed({
+                binding.wheelResultTv.text = optionList[res]
+                binding.wheelRetryBtn.visibility = View.VISIBLE
+                binding.wheelSaveBtn.visibility = View.VISIBLE
+                binding.wheelResultTv.visibility = View.VISIBLE
+            }, 3000)
+        }
+        binding.wheelRetryBtn.setOnClickListener {
+            binding.wheelResultTv.visibility = View.GONE
+            binding.wheelRetryBtn.visibility = View.GONE
+            binding.wheelSaveBtn.visibility = View.GONE
+            val res = moveWheel(wheelArr)
+            Handler().postDelayed({
+                binding.wheelResultTv.text = optionList[res]
+                binding.wheelRetryBtn.visibility = View.VISIBLE
+                binding.wheelSaveBtn.visibility = View.VISIBLE
+                binding.wheelResultTv.visibility = View.VISIBLE
+            }, 3000)
         }
 
-        //결과 저장 버튼
-//        Toast.makeText(
-//            context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
-//        ).show()
-
+        binding.wheelSaveBtn.setOnClickListener {
+            Toast.makeText(
+            context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
+            ).show()
+        }
+        
         return binding.root
     }
 
@@ -110,15 +133,17 @@ class WheelFragment : Fragment() {
     private fun setOptionName(wheelArr: Array<AppCompatImageView>){
 
     }
-    private fun moveWheel(wheelArr: Array<AppCompatImageView>){
+    private fun moveWheel(wheelArr: Array<AppCompatImageView>): Int{
         val res: Int = getWheelResult()
-        wheelAnimation(res, wheelArr)
+        wheelAnimation(res)
+        setOptionName(wheelArr)
+        return res
     }
     private fun getWheelResult(): Int{
         val random = Random()
         return random.nextInt(optionList.size)
     }
-    private fun wheelAnimation(res: Int, wheelArr: Array<AppCompatImageView>){
+    private fun wheelAnimation(res: Int){
         Handler().postDelayed({
             val rotateAnimation = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
             rotateAnimation.duration = 100
