@@ -4,9 +4,6 @@ import HorizontalItemDecorator
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.techtown.gabojago.MainActivity
@@ -14,31 +11,51 @@ import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentRecordBinding
 import java.text.SimpleDateFormat
 import java.util.*
-import android.view.Display
 
 import android.app.Activity
+import android.graphics.Color
 import android.graphics.Point
 import android.util.TypedValue
+import android.view.*
 import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
+import androidx.core.view.ViewCompat.canScrollVertically
+import androidx.core.widget.NestedScrollView
+import kotlinx.android.synthetic.main.fragment_record.*
 
 
 class RecordFragment : Fragment() {
 
     lateinit var binding: FragmentRecordBinding
-    var add: Boolean = true
 
-    private lateinit var imageViewAdd: ImageView
-    private lateinit var imageViewWrite: ImageView
-    private lateinit var imageViewPhoto: ImageView
+    var add: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentRecordBinding.inflate(inflater, container, false)
+
+//        binding.recordNestedscrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+//            val view = v.getChildAt(v.getChildCount() - 1) as View
+//            val diff: Int = view.bottom - (v.getHeight() + v.getScrollY())
+//
+//
+//            if (diff == 0) {
+//                binding.recordNotifyTv.visibility = View.VISIBLE
+//            }else {
+//                binding.recordNotifyTv.visibility = View.GONE
+//            }
+//        })
+
+
+        binding.recordFolderresultRecyclerview.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+        binding.recordResultRecyclerview.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         binding.recordWeekRecyclerview.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -49,6 +66,10 @@ class RecordFragment : Fragment() {
         val recordResultRVAdapter = RecordResultRVAdapter()
         binding.recordResultRecyclerview.adapter = recordResultRVAdapter
 
+
+        val recordFolderResultNameRVAdapter = RecordFolderResultNameRVAdapter()
+        binding.recordFolderresultRecyclerview.adapter = recordFolderResultNameRVAdapter
+
         val width  = getScreenSize(this)
         binding.recordWeekRecyclerview.addItemDecoration(HorizontalItemDecorator(width/42))
 
@@ -56,6 +77,13 @@ class RecordFragment : Fragment() {
             RecordResultRVAdapter.MyItemClickListener {
             override fun onItemClick() {
                 changeSingleRecordFragment()
+            }
+        })
+
+        recordFolderResultNameRVAdapter.setMyItemClickListener(object :
+            RecordFolderResultNameRVAdapter.MyItemClickListener {
+            override fun onItemClick() {
+                changeFolderRecordFragment()
             }
         })
 
@@ -72,10 +100,17 @@ class RecordFragment : Fragment() {
         }
 
         binding.recordMoreIv.setOnClickListener {
+            binding.recordBlurView.visibility = View.VISIBLE
             popupMenu()
         }
 
         binding.recordCloseIv.setOnClickListener {
+            binding.recordBlurView.visibility = View.GONE
+            popupMenu()
+        }
+
+        binding.recordBlurView.setOnClickListener {
+            binding.recordBlurView.visibility = View.GONE
             popupMenu()
         }
 
@@ -89,6 +124,17 @@ class RecordFragment : Fragment() {
     private fun changeSingleRecordFragment() {
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, SingleRecordFragment().apply {
+                arguments = Bundle().apply {
+                }
+            })
+            .addToBackStack(null)
+            .commitAllowingStateLoss()
+
+    }
+
+    private fun changeFolderRecordFragment() {
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, FolderRecordFragment().apply {
                 arguments = Bundle().apply {
                 }
             })
@@ -129,42 +175,41 @@ class RecordFragment : Fragment() {
 
         if (add) {
 
-            var writeAnimator = ObjectAnimator.ofFloat(binding.recordFolderplusbackIv, "translationY", 0f, -px)
+            var writeAnimator = ObjectAnimator.ofFloat(binding.recordFolderplusIv, "translationY", 0f, -px)
             writeAnimator.duration = 400
             writeAnimator.interpolator = OvershootInterpolator()
-            writeAnimator.target = binding.recordFolderplusbackIv
+            writeAnimator.target = binding.recordFolderplusIv
             writeAnimator.start()
 
-            var photoAnimator = ObjectAnimator.ofFloat(binding.recordTrashbackIv, "translationY", 0f, -px*2)
+            var photoAnimator = ObjectAnimator.ofFloat(binding.recordTrashIv, "translationY", 0f, -px*2)
             photoAnimator.duration = 500
             photoAnimator.interpolator = OvershootInterpolator()
-            photoAnimator.target = binding.recordTrashbackIv
+            photoAnimator.target = binding.recordTrashIv
             photoAnimator.start()
 
             binding.recordMoreIv.visibility = View.GONE
             binding.recordCloseIv.visibility = View.VISIBLE
-            binding.recordXIv.visibility = View.VISIBLE
             add = !add
         } else {
 
-            var writeAnimator = ObjectAnimator.ofFloat(binding.recordFolderplusbackIv, "translationY", -px, 0f)
+            var writeAnimator = ObjectAnimator.ofFloat(binding.recordFolderplusIv, "translationY", -px, 0f)
             writeAnimator.duration = 400
             writeAnimator.interpolator = OvershootInterpolator()
-            writeAnimator.target = binding.recordFolderplusbackIv
+            writeAnimator.target = binding.recordFolderplusIv
             writeAnimator.start()
 
-            var photoAnimator = ObjectAnimator.ofFloat(binding.recordTrashbackIv, "translationY", -px*2, 0f)
+            var photoAnimator = ObjectAnimator.ofFloat(binding.recordTrashIv, "translationY", -px*2, 0f)
             photoAnimator.duration = 500
             photoAnimator.interpolator = OvershootInterpolator()
-            photoAnimator.target = binding.recordTrashbackIv
+            photoAnimator.target = binding.recordTrashIv
             photoAnimator.start()
 
             binding.recordMoreIv.visibility = View.VISIBLE
             binding.recordCloseIv.visibility = View.GONE
-            binding.recordXIv.visibility = View.GONE
 
             add = !add
         }
     }
 
 }
+

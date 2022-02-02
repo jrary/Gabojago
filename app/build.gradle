@@ -67,6 +67,9 @@ dependencies {
     implementation 'com.naver.nid:naveridlogin-android-sdk:4.2.6'
     implementation "com.kakao.sdk:v2-user:2.0.1"
 
+    //Blur effect
+    implementation 'com.github.mmin18:realtimeblurview:1.2.1'
+
     //NumberPicker custom
     implementation 'io.github.ShawnLin013:number-picker:2.4.13'
 }

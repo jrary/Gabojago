@@ -1,7 +1,10 @@
 package org.techtown.gabojago.Record
 
+import android.content.ContentValues.TAG
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.databinding.ItemRecordWeekBinding
@@ -28,7 +31,12 @@ class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(
     //뷰홀더
     inner class ViewHolder(val binding: ItemRecordWeekBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
-            week(setDate())
+            val today = week(setDate())
+            if(today == position){
+                binding.itemWeekToday.visibility = View.VISIBLE
+            }else {
+                binding.itemWeekToday.visibility = View.GONE
+            }
             binding.itemDateTv.text = dates[position]
             binding.itemWeekTv.text = dayofweek[position]
             when(position){
@@ -37,6 +45,7 @@ class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(
                 else->binding.itemWeekTv.setTextColor(Color.parseColor("#929292"))
             }
             binding.itemWeekTv.text = dayofweek[position]
+
 
         }
 
@@ -47,14 +56,15 @@ class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(
     }
 
     /** * 특정 날짜의 같은 한 주간의 날짜 범위 * @param eventDate ex) 2020-10-10 * */
-    fun week(eventDate: String) {
+    fun week(eventDate: String) : Int {
         val dateArray = eventDate.split("-").toTypedArray()
         val cal = Calendar.getInstance()
         cal [dateArray[0].toInt(), dateArray[1].toInt() - 1] = dateArray[2].toInt()
         // 일주일의 첫날을 일요일로 지정한다
         cal.firstDayOfWeek = Calendar.SUNDAY
         // 시작일과 특정날짜의 차이를 구한다
-        val dayOfWeek = cal[Calendar.DAY_OF_WEEK] - cal.firstDayOfWeek
+        val dayOfWeek = cal[Calendar.DAY_OF_WEEK] - cal.firstDayOfWeek+1
+        val today = cal[Calendar.DAY_OF_WEEK] -1
         // 해당 주차의 첫째날을 지정한다
         cal.add(Calendar.DAY_OF_MONTH, -dayOfWeek)
         val sf = SimpleDateFormat("dd")
@@ -63,6 +73,7 @@ class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(
             cal.add(Calendar.DAY_OF_MONTH, 1)
             dates.add(sf.format(cal.time))
         }
+        return today
     }
 
     fun setDate() : String{

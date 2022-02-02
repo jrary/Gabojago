@@ -1,37 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="82dp"
+    android:layout_height="70dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <View
-        android:id="@+id/item_record_rectangle_back_view"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/box"
-        android:elevation="6dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <View
+    <ImageView
         android:id="@+id/item_record_rectangle_iv"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:translationZ="10dp"
-        android:background="@drawable/folderresultbox"
+        android:background="@drawable/rectangle_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/item_record_circle_iv"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
         android:src="@drawable/circle_record_grey"
         android:scaleType="fitXY"
-        android:translationZ="10dp"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="8.5dp"
         app:layout_constraintStart_toStartOf="@id/item_record_rectangle_iv"
         app:layout_constraintTop_toTopOf="@id/item_record_rectangle_iv"
         app:layout_constraintBottom_toBottomOf="@id/item_record_rectangle_iv"/>
@@ -41,11 +30,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
-        android:textStyle="bold"
         android:textSize="10sp"
-        android:translationZ="10dp"
-        android:layout_marginStart="11dp"
-        android:textColor="#868686"
+        android:layout_marginStart="15dp"
+        android:textColor="#FFA844"
         android:text="돌려돌려 돌림판"
         app:layout_constraintStart_toEndOf="@id/item_record_circle_iv"
         app:layout_constraintTop_toTopOf="@id/item_record_circle_iv"
@@ -56,9 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
-        android:textStyle="bold"
         android:textSize="16sp"
-        android:translationZ="10dp"
         android:layout_marginTop="3dp"
         android:textColor="#000000"
         android:text="결과: 버스"
@@ -66,17 +51,28 @@
         app:layout_constraintTop_toBottomOf="@id/item_record_title_tv"
         app:layout_constraintBottom_toBottomOf="@id/item_record_circle_iv"/>
 
+    <TextView
+        android:id="@+id/item_record_clock_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/apple_sd_gothic_neo_sb"
+        android:textSize="9sp"
+        android:layout_marginStart="10dp"
+        android:textColor="#868686"
+        android:text="16:45"
+        app:layout_constraintStart_toEndOf="@id/item_record_result_tv"
+        app:layout_constraintBottom_toBottomOf="@id/item_record_result_tv"/>
+
     <ImageView
         android:id="@+id/item_record_pecil_iv"
-        android:layout_width="23dp"
-        android:layout_height="23dp"
-        android:src="@drawable/pencil_record"
-        android:translationZ="10dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="20dp"
         android:scaleType="fitXY"
-        android:layout_marginEnd="17dp"
+        android:src="@drawable/memo_pencil"
+        app:layout_constraintBottom_toBottomOf="@id/item_record_circle_iv"
         app:layout_constraintEnd_toEndOf="@id/item_record_rectangle_iv"
-        app:layout_constraintTop_toTopOf="@id/item_record_rectangle_iv"
-        app:layout_constraintBottom_toBottomOf="@id/item_record_rectangle_iv"/>
+        app:layout_constraintTop_toTopOf="@id/item_record_circle_iv" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
