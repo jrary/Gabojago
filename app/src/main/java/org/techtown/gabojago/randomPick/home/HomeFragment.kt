@@ -9,6 +9,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
 import androidx.fragment.app.Fragment
 import org.techtown.gabojago.databinding.FragmentHomeBinding
 import org.techtown.gabojago.randomPick.HomeMenuFragment
@@ -33,6 +35,18 @@ class HomeFragment : Fragment() {
                 .replace(R.id.main_frm, HomeMenuFragment())
                 .commitAllowingStateLoss()
         }
+
+        val rotate = RotateAnimation(0f, 21.92f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        rotate.fillAfter = true
+        binding.homeStartIv.startAnimation(rotate)
+
+        val rotate02 = RotateAnimation(0f, -21.02f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        rotate02.fillAfter = true
+        binding.homeDice01Iv.startAnimation(rotate02)
+
+        val rotate03 = RotateAnimation(0f, -45f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        rotate03.fillAfter = true
+        binding.homeDice02Iv.startAnimation(rotate03)
 
         return binding.root
     }

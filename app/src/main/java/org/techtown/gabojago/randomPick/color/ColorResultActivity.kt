@@ -35,11 +35,27 @@ class ColorResultActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         val animAlphaStart = AnimationUtils.loadAnimation(this, R.anim.anim_alpha_start)
+
+        var randomColorImageArr = arrayOf(
+            R.drawable.color_red,
+            R.drawable.color_orange,
+            R.drawable.color_yellow,
+            R.drawable.color_green,
+            R.drawable.color_blue,
+            R.drawable.color_black,
+            R.drawable.color_brown,
+            R.drawable.color_white,
+            R.drawable.color_magenta,
+        )
+
         binding.colorResultQuestionBtn.setOnClickListener{
             binding.colorResultQuestionView.visibility = View.GONE
             binding.colorResultView.visibility = View.VISIBLE
             binding.colorResultView.startAnimation(animAlphaStart)
-            binding.colorResultColorTv.text = randomColor[setRandom()]
+
+            var randRes = setRandom()
+            binding.colorResultColorTv.text = randomColor[randRes]
+            binding.colorResultColorIv.setImageResource(randomColorImageArr[randRes])
         }
 
         binding.colorResultRetryBtn.setOnClickListener {

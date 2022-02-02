@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/wheel_background_iv"
-        android:layout_width="307dp"
-        android:layout_height="512dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/option_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

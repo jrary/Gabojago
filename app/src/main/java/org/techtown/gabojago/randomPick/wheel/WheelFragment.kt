@@ -2,30 +2,23 @@ package org.techtown.gabojago.randomPick.wheel
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.RotateAnimation
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
-import com.google.gson.Gson
-import org.json.JSONArray
 import org.techtown.gabojago.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentWheelBinding
 import org.techtown.gabojago.randomPick.HomeMenuFragment
-import org.techtown.gabojago.randomPick.clock.ClockOptionActivity
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -45,7 +38,21 @@ class WheelFragment : Fragment() {
             binding.wheel03,
             binding.wheel04,
             binding.wheel05,
-            binding.wheel06,
+            binding.wheel06
+        )
+
+        var wheelOptionNameArr = arrayOf(
+            binding.wheelOption01Tv,
+            binding.wheelOption02Tv,
+            binding.wheelOption03Tv,
+            binding.wheelOption04Tv,
+            binding.wheelOption05Tv,
+            binding.wheelOption06Tv,
+            binding.wheelOption07Tv,
+            binding.wheelOption08Tv,
+            binding.wheelOption09Tv,
+            binding.wheelOption10Tv,
+            binding.wheelOption11Tv,
         )
 
         var getWheelOptionArray = registerForActivityResult(
@@ -53,7 +60,7 @@ class WheelFragment : Fragment() {
             if(result.resultCode == Activity.RESULT_OK){
                 optionList = result.data?.getStringArrayListExtra("wheel")!!
                 setWheel(wheelArr)
-                setOptionName(wheelArr)
+                setOptionName(wheelArr, wheelOptionNameArr)
             }
         }
 
@@ -69,6 +76,8 @@ class WheelFragment : Fragment() {
                     .commitAllowingStateLoss()
         }
         binding.wheelGoBtn.setOnClickListener {
+            val animationStart = AnimationUtils.loadAnimation(activity, R.anim.anim_wheel_scale)
+            binding.wheelMainView.startAnimation(animationStart)
             binding.wheelOptionBtn.visibility = View.GONE
             binding.wheelGoBtn.visibility = View.GONE
             binding.wheelInfoTv.visibility = View.INVISIBLE
@@ -130,13 +139,53 @@ class WheelFragment : Fragment() {
         }
         wheelArr[optionList.size - 2].visibility = View.VISIBLE
     }
-    private fun setOptionName(wheelArr: Array<AppCompatImageView>){
+    private fun setOptionName(wheelArr: Array<AppCompatImageView>, wheelOptionNameArr: Array<AppCompatTextView>){
 
+        for(i: Int in 0..10){
+            wheelOptionNameArr[i].visibility = View.GONE
+        }
+
+        when (optionList.size) {
+            2 -> {
+                wheelOptionNameArr[1].visibility = View.VISIBLE
+                wheelOptionNameArr[5].visibility = View.VISIBLE
+            }
+            3 -> {
+                wheelOptionNameArr[7].visibility = View.VISIBLE
+                wheelOptionNameArr[3].visibility = View.VISIBLE
+                wheelOptionNameArr[8].visibility = View.VISIBLE
+            }
+            4 -> {
+                wheelOptionNameArr[0].visibility = View.VISIBLE
+                wheelOptionNameArr[2].visibility = View.VISIBLE
+                wheelOptionNameArr[4].visibility = View.VISIBLE
+                wheelOptionNameArr[6].visibility = View.VISIBLE
+            }
+            5 -> {
+                wheelOptionNameArr[0].visibility = View.VISIBLE
+                wheelOptionNameArr[9].visibility = View.VISIBLE
+                wheelOptionNameArr[3].visibility = View.VISIBLE
+                wheelOptionNameArr[10].visibility = View.VISIBLE
+                wheelOptionNameArr[6].visibility = View.VISIBLE
+            }
+            6 -> {
+                wheelOptionNameArr[0].visibility = View.VISIBLE
+                wheelOptionNameArr[1].visibility = View.VISIBLE
+                wheelOptionNameArr[2].visibility = View.VISIBLE
+                wheelOptionNameArr[4].visibility = View.VISIBLE
+                wheelOptionNameArr[5].visibility = View.VISIBLE
+                wheelOptionNameArr[6].visibility = View.VISIBLE
+            }
+            else -> {
+                Toast.makeText(
+                    context, "Text Setting Error!", Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
     private fun moveWheel(wheelArr: Array<AppCompatImageView>): Int{
         val res: Int = getWheelResult()
         wheelAnimation(res)
-        setOptionName(wheelArr)
         return res
     }
     private fun getWheelResult(): Int{

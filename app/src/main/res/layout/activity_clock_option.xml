@@ -55,7 +55,6 @@
         android:layout_height="wrap_content"
         android:text="시 방향"
         android:textSize="24sp"
-        android:textStyle="bold"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
         android:textColor="@color/black"
         android:layout_marginStart="10dp"
@@ -100,7 +99,6 @@
         android:layout_height="wrap_content"
         android:text="시 방향"
         android:textSize="24sp"
-        android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
@@ -136,8 +134,8 @@
 
     <ImageView
         android:id="@+id/clock_comp_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="247dp"
+        android:layout_height="51dp"
         android:src="@drawable/option_complete"
         android:layout_marginBottom="33dp"
         app:layout_constraintStart_toStartOf="parent"

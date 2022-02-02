@@ -93,14 +93,14 @@ class ColorFragment : Fragment() {
         Handler().postDelayed({
             val anim_drop_03 = AnimationUtils.loadAnimation(activity, R.anim.anim_card_drop_03)
             binding.colorCardDroppedView.startAnimation(anim_drop_03)
-        }, 3100) //delay + 300
+        }, 3400) //delay + 300(stop) + 300
         Handler().postDelayed({
             startActivity(Intent(activity, ColorResultActivity::class.java))
             activity?.overridePendingTransition(R.anim.anim_alpha_start, R.anim.anim_none)
-        }, 3330) //delay + 330
+        }, 3630) //delay + 330
         Handler().postDelayed({
             binding.colorCardDroppedView.visibility = View.GONE
-        }, 3500) //delay + 70
+        }, 3800) //delay + 70
     }
 
     override fun onResume() {

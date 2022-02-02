@@ -31,7 +31,7 @@
         <TextView
             android:layout_width="192dp"
             android:layout_height="29dp"
-            android:fontFamily="@font/nanum_square_round_otf_extrabold"
+            android:fontFamily="@font/apple_sd_gothic_neo_sb"
             android:textStyle="normal"
             android:layout_marginBottom="15dp"
             android:textSize="20sp"
@@ -74,8 +74,8 @@
 
         <ImageView
             android:id="@+id/home_menu_wheel_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/menu_roulette"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +89,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/apple_sd_gothic_neo_sb"
-            android:textStyle="bold"
             android:textSize="12sp"
             android:textColor="#000000"
             android:gravity="center_horizontal"
@@ -115,8 +114,8 @@
 
         <ImageView
             android:id="@+id/home_menu_clock_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/menu_clock"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -130,7 +129,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/apple_sd_gothic_neo_sb"
-            android:textStyle="bold"
             android:textSize="12sp"
             android:textColor="#000000"
             android:gravity="center_horizontal"
@@ -156,8 +154,8 @@
 
         <ImageView
             android:id="@+id/home_menu_number_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/menu_roulette"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -171,7 +169,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/apple_sd_gothic_neo_sb"
-            android:textStyle="bold"
             android:textSize="12sp"
             android:textColor="#000000"
             android:gravity="center_horizontal"
@@ -197,8 +194,8 @@
 
         <ImageView
             android:id="@+id/home_menu_color_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/menu_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -212,7 +209,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/apple_sd_gothic_neo_sb"
-            android:textStyle="bold"
             android:textSize="12sp"
             android:textColor="#000000"
             android:gravity="center_horizontal"
