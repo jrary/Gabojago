@@ -10,6 +10,7 @@ import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentHomeMenuBinding
 import org.techtown.gabojago.randomPick.clock.ClockFragment
 import org.techtown.gabojago.randomPick.color.ColorFragment
+import org.techtown.gabojago.randomPick.number.NumberFragment
 import org.techtown.gabojago.randomPick.wheel.WheelFragment
 
 class HomeMenuFragment : Fragment() {

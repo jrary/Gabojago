@@ -97,7 +97,7 @@
                 android:textStyle="normal"
                 android:textSize="18sp"
                 android:textColor="#ffffff"
-                android:text="다시 돌리기"
+                android:text="다시 뽑기"
                 app:layout_constraintStart_toStartOf="@id/color_result_retry_btn"
                 app:layout_constraintEnd_toEndOf="@id/color_result_retry_btn"
                 app:layout_constraintTop_toTopOf="@id/color_result_retry_btn"
