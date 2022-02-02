@@ -29,8 +29,8 @@ class LoginActivity :AppCompatActivity() {
         setContentView(binding.root)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
-//        val anim = AnimationUtils.loadAnimation(this, R.anim.anim_login_down)
-//        binding.loginBackgroundIv.startAnimation(anim)
+        val anim = AnimationUtils.loadAnimation(this, R.anim.anim_login_down)
+        binding.loginBackgroundIv.startAnimation(anim)
 
         mContext = this
 
@@ -60,7 +60,6 @@ class LoginActivity :AppCompatActivity() {
             } else {
                 val errorCode: String = mOAuthLoginInstance.getLastErrorCode(mContext).code
                 val errorDesc = mOAuthLoginInstance.getLastErrorDesc(mContext)
-
                 Toast.makeText(
                     baseContext, "errorCode:" + errorCode
                             + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT

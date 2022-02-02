@@ -108,7 +108,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/wheel_main_view"
             android:layout_width="268dp"
-            android:layout_height="341dp"
+            android:layout_height="370dp"
             android:layout_marginTop="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +134,7 @@
             app:layout_constraintEnd_toEndOf="@id/wheel_iv"
             app:layout_constraintTop_toTopOf="@id/wheel_iv"
             app:layout_constraintBottom_toBottomOf="@id/wheel_iv"
-            app:layout_constraintVertical_bias="0.08"
+            app:layout_constraintVertical_bias="0.18"
             >
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/wheel_02"
@@ -228,7 +228,7 @@
             android:textStyle="normal"
             android:textSize="18sp"
             android:textColor="#ffffff"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/wheel_go_btn"
             app:layout_constraintTop_toBottomOf="@id/wheel_main_view"
@@ -248,7 +248,7 @@
             android:textStyle="normal"
             android:textSize="18sp"
             android:textColor="#ffffff"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toEndOf="@id/wheel_option_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/wheel_main_view"
