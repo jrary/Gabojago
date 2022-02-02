@@ -60,7 +60,6 @@
             android:layout_width="295dp"
             android:layout_height="38dp"
             android:fontFamily="@font/apple_sd_gothic_neo_sb"
-            android:textStyle="bold"
             android:textSize="16sp"
             android:textColor="#000000"
             android:gravity="center_horizontal"
@@ -108,8 +107,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/wheel_main_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="268dp"
+            android:layout_height="341dp"
             android:layout_marginTop="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -129,13 +128,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/wheel_spin_view"
-            android:layout_width="237dp"
-            android:layout_height="237dp"
+            android:layout_width="260dp"
+            android:layout_height="260dp"
             app:layout_constraintStart_toStartOf="@id/wheel_iv"
             app:layout_constraintEnd_toEndOf="@id/wheel_iv"
             app:layout_constraintTop_toTopOf="@id/wheel_iv"
             app:layout_constraintBottom_toBottomOf="@id/wheel_iv"
-            app:layout_constraintVertical_bias="0.1"
+            app:layout_constraintVertical_bias="0.08"
             >
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/wheel_02"
@@ -195,8 +194,8 @@
 
         <ImageView
             android:id="@+id/wheel_triangle_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="38.4dp"
+            android:layout_height="34.17dp"
             android:src="@drawable/wheel_triangle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -204,13 +203,13 @@
             />
         <ImageView
             android:id="@+id/wheel_circle_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32.4dp"
+            android:layout_height="32.4dp"
             android:src="@drawable/wheel_circle"
-            android:layout_marginTop="84.45dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/wheel_triangle_iv"
+            app:layout_constraintTop_toTopOf="@id/wheel_spin_view"
+            app:layout_constraintBottom_toBottomOf="@id/wheel_spin_view"
             />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -229,6 +228,7 @@
             android:textStyle="normal"
             android:textSize="18sp"
             android:textColor="#ffffff"
+            android:layout_marginTop="25dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/wheel_go_btn"
             app:layout_constraintTop_toBottomOf="@id/wheel_main_view"
@@ -248,6 +248,7 @@
             android:textStyle="normal"
             android:textSize="18sp"
             android:textColor="#ffffff"
+            android:layout_marginTop="25dp"
             app:layout_constraintStart_toEndOf="@id/wheel_option_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/wheel_main_view"

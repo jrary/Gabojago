@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/wheel_background_iv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="307dp"
+        android:layout_height="512dp"
         android:background="@drawable/option_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,8 +95,8 @@
 
     <ImageView
         android:id="@+id/wheel_comp_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="247dp"
+        android:layout_height="51dp"
         android:src="@drawable/option_complete"
         android:layout_marginBottom="33dp"
         app:layout_constraintStart_toStartOf="parent"
