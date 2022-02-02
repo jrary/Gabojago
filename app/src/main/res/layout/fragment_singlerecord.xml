@@ -50,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/white"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toTopOf="@id/single_record_complete_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,9 +73,9 @@
             <ImageView
                 android:id="@+id/single_record_rectangle_iv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/rectangle12"
+                android:src="@drawable/rectangle_orange"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -83,8 +84,8 @@
                 android:id="@+id/single_record_circle_iv"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginBottom="6dp"
+                android:layout_marginStart="17dp"
+                android:layout_marginBottom="8.5dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/circle_record_grey"
                 app:layout_constraintBottom_toBottomOf="@id/single_record_rectangle_iv"
@@ -100,7 +101,6 @@
                 android:text="돌려돌려 돌림판"
                 android:textColor="#868686"
                 android:textSize="10sp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/single_record_result_tv"
                 app:layout_constraintStart_toEndOf="@id/single_record_circle_iv"
                 app:layout_constraintTop_toTopOf="@id/single_record_circle_iv" />
@@ -114,22 +114,11 @@
                 android:text="결과: 버스"
                 android:textColor="#000000"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/single_record_circle_iv"
                 app:layout_constraintStart_toStartOf="@id/single_record_title_tv"
                 app:layout_constraintTop_toBottomOf="@id/single_record_title_tv" />
 
-            <ImageView
-                android:id="@+id/single_record_pecil_iv"
-                android:layout_width="23dp"
-                android:layout_height="23dp"
-                android:layout_marginEnd="17dp"
-                android:layout_marginBottom="6dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/pencil_record"
-                app:layout_constraintBottom_toBottomOf="@id/single_record_rectangle_iv"
-                app:layout_constraintEnd_toEndOf="@id/single_record_rectangle_iv"
-                app:layout_constraintTop_toTopOf="@id/single_record_rectangle_iv" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -245,9 +234,9 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="32dp"
-                android:padding="12dp"
+                android:padding="13dp"
                 android:background="@drawable/rectangle_32"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 android:textColor="#000000"
                 android:gravity="clip_vertical"
                 android:maxLength="1000"

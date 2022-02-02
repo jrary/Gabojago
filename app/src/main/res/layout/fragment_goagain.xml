@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/goagain_bookmark_iv"
-            android:layout_width="26.7dp"
-            android:layout_height="33.3dp"
+            android:layout_width="27dp"
+            android:layout_height="34dp"
             android:src="@drawable/bookmark"
             android:scaleType="centerCrop"
             android:layout_marginStart="20dp"
@@ -27,16 +27,16 @@
 
         <TextView
             android:id="@+id/goagain_Title_tv"
-            android:layout_width="118dp"
-            android:layout_height="37.263dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/nanum_square_round_otf_extrabold"
             android:textStyle="normal"
             android:textSize="32.3sp"
             android:textColor="#000000"
             android:text="또 가자"
-            android:layout_marginTop="57dp"
-            android:layout_marginStart="55dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/goagain_bookmark_iv"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

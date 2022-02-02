@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="76dp"
     android:layout_gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -14,13 +14,12 @@
         android:layout_weight="1"
         android:gravity="center"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
-        android:textStyle="bold"
         android:textSize="16sp"
         android:textColor="#ff6745"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="@id/item_date_tv"
         app:layout_constraintEnd_toEndOf="@id/item_date_tv"
-        />
+        app:layout_constraintBottom_toTopOf="@id/item_date_tv" />
 
     <TextView
         android:id="@+id/item_date_tv"
@@ -33,9 +32,19 @@
         android:text="10"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_week_tv"/>
+        app:layout_constraintTop_toBottomOf="@id/item_week_tv"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/item_week_today"
+        android:layout_width="38dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/daycustom"
+        app:layout_constraintTop_toTopOf="@id/item_week_tv"
+        app:layout_constraintBottom_toBottomOf="@id/item_date_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

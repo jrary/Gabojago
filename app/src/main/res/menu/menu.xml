@@ -11,7 +11,7 @@
         tools:ignore="AlwaysShowAction" />
     <item
         android:id="@+id/recordFragment"
-        android:icon="@drawable/pencil"
+        android:icon="@drawable/memo_pencil_bottom"
         app:showAsAction="always"
         android:title="기록하자" />
     <item
