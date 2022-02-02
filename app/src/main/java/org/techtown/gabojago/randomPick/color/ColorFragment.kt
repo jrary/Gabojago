@@ -97,10 +97,10 @@ class ColorFragment : Fragment() {
         Handler().postDelayed({
             startActivity(Intent(activity, ColorResultActivity::class.java))
             activity?.overridePendingTransition(R.anim.anim_alpha_start, R.anim.anim_none)
-        }, 3130) //delay + 30
+        }, 3330) //delay + 330
         Handler().postDelayed({
             binding.colorCardDroppedView.visibility = View.GONE
-        }, 3200) //delay + 70
+        }, 3500) //delay + 70
     }
 
     override fun onResume() {

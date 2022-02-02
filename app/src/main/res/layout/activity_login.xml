@@ -46,7 +46,7 @@
         android:id="@+id/login_title_02_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="로그인 후 서비스를 이용하실 수 있습니다"
+        android:text="로그인 후 서비스를 이용하실 수 있습니다."
         android:textSize="13sp"
         android:textColor="#000000"
         android:fontFamily="@font/apple_sd_gothic_neo_r"

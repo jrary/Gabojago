@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.nhn.android.naverlogin.OAuthLogin
@@ -12,6 +13,7 @@ import com.nhn.android.naverlogin.OAuthLoginHandler
 import kotlinx.android.synthetic.main.activity_login.*
 import org.techtown.gabojago.AuthRetrofitInterface
 import org.techtown.gabojago.MainActivity
+import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityLoginBinding
 import org.techtown.gabojago.getRetrofit
 
@@ -26,6 +28,9 @@ class LoginActivity :AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
+        val anim = AnimationUtils.loadAnimation(this, R.anim.anim_login_down)
+        binding.loginBackgroundIv.startAnimation(anim)
 
         mContext = this
 
