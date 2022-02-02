@@ -29,8 +29,8 @@ class LoginActivity :AppCompatActivity() {
         setContentView(binding.root)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
-        val anim = AnimationUtils.loadAnimation(this, R.anim.anim_login_down)
-        binding.loginBackgroundIv.startAnimation(anim)
+//        val anim = AnimationUtils.loadAnimation(this, R.anim.anim_login_down)
+//        binding.loginBackgroundIv.startAnimation(anim)
 
         mContext = this
 
