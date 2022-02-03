@@ -19,7 +19,7 @@
     <TextView
         android:id="@+id/wheel_option_tv"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
         android:textStyle="bold"
         android:textSize="18sp"
@@ -48,7 +48,7 @@
         android:id="@+id/record_result_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="13dp"
         android:orientation="vertical"
         android:scrollbars="none"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

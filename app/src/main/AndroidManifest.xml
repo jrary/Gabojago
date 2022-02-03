@@ -21,27 +21,31 @@
             </intent-filter>
         </activity>
         <activity android:name=".splash.LoginActivity"/>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Record.CalendarActivity" />
-        <activity android:name=".randomPick.wheel.WheelOptionActivity"
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"
+            />
+        <activity android:name=".menu.record.CalendarActivity"
+            />
+        <activity android:name=".menu.randomPick.wheel.WheelOptionActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
+            />
+        <activity android:name=".menu.randomPick.clock.ClockOptionActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />
-        <activity android:name=".randomPick.clock.ClockOptionActivity"
+        <activity android:name=".menu.randomPick.clock.ClockSelectActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />
-        <activity android:name=".randomPick.clock.ClockSelectActivity"
+        <activity android:name=".menu.randomPick.number.NumberOptionActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />
-        <activity android:name=".randomPick.number.NumberOptionActivity"
+        <activity android:name=".menu.randomPick.number.NumberSelectActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />
-        <activity android:name=".randomPick.number.NumberSelectActivity"
+        <activity android:name=".menu.randomPick.number.NumberSelectNumActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />
-        <activity android:name=".randomPick.number.NumberSelectNumActivity"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            />
-        <activity android:name=".randomPick.color.ColorResultActivity"
+        <activity android:name=".menu.randomPick.color.ColorResultActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar.Dim"
             />
     </application>

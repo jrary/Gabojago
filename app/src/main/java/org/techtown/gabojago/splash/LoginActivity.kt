@@ -52,7 +52,6 @@ class LoginActivity :AppCompatActivity() {
                 val refreshToken: String = mOAuthLoginInstance.getRefreshToken(baseContext)
                 val expiresAt: Long = mOAuthLoginInstance.getExpiresAt(baseContext)
                 val tokenType: String = mOAuthLoginInstance.getTokenType(baseContext)
-                Log.d("Token", accessToken)
                 Toast.makeText(baseContext,"Login Success", Toast.LENGTH_SHORT).show()
                 val test: AuthRetrofitInterface = getRetrofit().create(AuthRetrofitInterface::class.java)
                 var intent = Intent(this@LoginActivity, MainActivity::class.java)
