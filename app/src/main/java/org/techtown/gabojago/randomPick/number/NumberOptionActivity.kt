@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityNumberOptionBinding
-import org.techtown.gabojago.randomPick.clock.ClockSelectActivity
 
 class NumberOptionActivity : AppCompatActivity() {
 

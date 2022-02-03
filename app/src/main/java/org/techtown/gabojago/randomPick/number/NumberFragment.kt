@@ -40,7 +40,9 @@ class NumberFragment : Fragment() {
                 isOverlap = result.data?.getBooleanExtra("overlap", true)!!
                 resArray = getNumbers()
                 Log.d("GETNUMBEROPTION", startNum.toString()+" "+ endNum.toString()+" "+num.toString()+" "+isOverlap.toString())
-                Log.d("GETRESARRAY", resArray.toString())
+                for(i: Int in 0 until num){
+                    Log.d("GETRESARRAY", resArray[i].toString())
+                }
             }
         }
 

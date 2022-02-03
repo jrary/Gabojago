@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="50dp">
 
     <EditText
         android:id="@+id/item_record_name_et"
-        android:layout_width="150dp"
+        android:layout_width="261dp"
         android:layout_height="33dp"
         android:layout_weight="1"
         android:ems="10"
@@ -24,30 +24,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
         />
 
     <View
         android:id="@+id/item_record_minus"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:background="@drawable/option_minus"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/item_record_name_et"
-        app:layout_constraintBottom_toBottomOf="@id/item_record_name_et"
-        app:layout_constraintHorizontal_bias="0.725"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.84"
 
         />
 
-    <View
-        android:layout_width="9dp"
-        android:layout_height="1.5dp"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X"
+        android:textSize="18sp"
+        android:fontFamily="@font/apple_sd_gothic_neo_r"
+        android:textColor="#ffffff"
+        android:backgroundTint="@null"
         app:layout_constraintStart_toStartOf="@id/item_record_minus"
         app:layout_constraintEnd_toEndOf="@id/item_record_minus"
         app:layout_constraintTop_toTopOf="@id/item_record_minus"
         app:layout_constraintBottom_toBottomOf="@id/item_record_minus"
-        android:background="#ffffff"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

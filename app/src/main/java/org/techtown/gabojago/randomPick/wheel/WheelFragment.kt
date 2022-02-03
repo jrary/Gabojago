@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,14 @@ import kotlin.collections.ArrayList
 class WheelFragment : Fragment() {
     lateinit var binding: FragmentWheelBinding
     var optionList = ArrayList<String>()
+
+    private val wheelText = arrayOf(
+        arrayOf(2, 8),
+        arrayOf(1, 5, 9),
+        arrayOf(0, 4, 6, 10),
+        arrayOf(0, 3, 5, 7, 10),
+        arrayOf(0, 2, 4, 6, 8, 10)
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -145,42 +154,10 @@ class WheelFragment : Fragment() {
             wheelOptionNameArr[i].visibility = View.GONE
         }
 
-        when (optionList.size) {
-            2 -> {
-                wheelOptionNameArr[1].visibility = View.VISIBLE
-                wheelOptionNameArr[5].visibility = View.VISIBLE
-            }
-            3 -> {
-                wheelOptionNameArr[7].visibility = View.VISIBLE
-                wheelOptionNameArr[3].visibility = View.VISIBLE
-                wheelOptionNameArr[8].visibility = View.VISIBLE
-            }
-            4 -> {
-                wheelOptionNameArr[0].visibility = View.VISIBLE
-                wheelOptionNameArr[2].visibility = View.VISIBLE
-                wheelOptionNameArr[4].visibility = View.VISIBLE
-                wheelOptionNameArr[6].visibility = View.VISIBLE
-            }
-            5 -> {
-                wheelOptionNameArr[0].visibility = View.VISIBLE
-                wheelOptionNameArr[9].visibility = View.VISIBLE
-                wheelOptionNameArr[3].visibility = View.VISIBLE
-                wheelOptionNameArr[10].visibility = View.VISIBLE
-                wheelOptionNameArr[6].visibility = View.VISIBLE
-            }
-            6 -> {
-                wheelOptionNameArr[0].visibility = View.VISIBLE
-                wheelOptionNameArr[1].visibility = View.VISIBLE
-                wheelOptionNameArr[2].visibility = View.VISIBLE
-                wheelOptionNameArr[4].visibility = View.VISIBLE
-                wheelOptionNameArr[5].visibility = View.VISIBLE
-                wheelOptionNameArr[6].visibility = View.VISIBLE
-            }
-            else -> {
-                Toast.makeText(
-                    context, "Text Setting Error!", Toast.LENGTH_SHORT
-                ).show()
-            }
+        var opListSizeInIndex = optionList.size - 2
+        for(i: Int in 0..(wheelText[opListSizeInIndex].size - 1)){
+            wheelOptionNameArr[wheelText[opListSizeInIndex][i]].visibility = View.VISIBLE
+            wheelOptionNameArr[wheelText[opListSizeInIndex][i]].text = optionList[i]
         }
     }
     private fun moveWheel(wheelArr: Array<AppCompatImageView>): Int{
@@ -229,7 +206,7 @@ class WheelFragment : Fragment() {
             rotateAnimation.fillAfter = true
             binding.wheelSpinView.startAnimation(rotateAnimation)
         }, 1600)
-        var resAngle: Float = ((360/optionList.size) * (res + 0.5f))
+        var resAngle: Float = (360/optionList.size) * (optionList.size - res - 0.5f)
         Handler().postDelayed({
             val rotateAnimation = RotateAnimation(0f, resAngle, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
             rotateAnimation.duration = 700
