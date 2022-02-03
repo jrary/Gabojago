@@ -26,13 +26,19 @@
         <activity android:name=".randomPick.wheel.WheelOptionActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />
-        <activity android:name=".randomPick.wheel.WheelSelectActivity"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            />
         <activity android:name=".randomPick.clock.ClockOptionActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />
         <activity android:name=".randomPick.clock.ClockSelectActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            />
+        <activity android:name=".randomPick.number.NumberOptionActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            />
+        <activity android:name=".randomPick.number.NumberSelectActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            />
+        <activity android:name=".randomPick.number.NumberSelectNumActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />
         <activity android:name=".randomPick.color.ColorResultActivity"

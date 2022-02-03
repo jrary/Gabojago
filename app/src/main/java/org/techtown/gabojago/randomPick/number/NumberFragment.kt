@@ -2,6 +2,7 @@ package org.techtown.gabojago.randomPick.number
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +37,10 @@ class NumberFragment : Fragment() {
                 startNum = result.data?.getIntExtra("start", 0)!!
                 endNum = result.data?.getIntExtra("end", 0)!!
                 num = result.data?.getIntExtra("num", 0)!!
+                isOverlap = result.data?.getBooleanExtra("overlap", true)!!
                 resArray = getNumbers()
+                Log.d("GETNUMBEROPTION", startNum.toString()+" "+ endNum.toString()+" "+num.toString()+" "+isOverlap.toString())
+                Log.d("GETRESARRAY", resArray.toString())
             }
         }
 
