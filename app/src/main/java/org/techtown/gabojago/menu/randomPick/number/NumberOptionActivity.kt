@@ -51,6 +51,11 @@ class NumberOptionActivity : AppCompatActivity() {
                     this, "숫자의 범위보다 뽑을 숫자의 개수가 더 많습니다", Toast.LENGTH_SHORT
                 ).show()
             }
+            else if(num == 0){
+                Toast.makeText(
+                    this, "0개의 숫자는 뽑을 수 없습니다", Toast.LENGTH_SHORT
+                ).show()
+            }
             else{
                 var intent = Intent()
                 intent.putExtra("start", startNum)

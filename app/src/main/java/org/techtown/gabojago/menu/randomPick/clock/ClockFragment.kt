@@ -92,7 +92,7 @@ class ClockFragment : Fragment() {
             activity?.overridePendingTransition(R.anim.anim_up, R.anim.anim_none)
         }
         binding.clockGoBtn.setOnClickListener {
-            moveClock(viewArr)
+            moveClock()
             binding.clockOptionBtn.visibility = View.GONE
             binding.clockGoBtn.visibility = View.GONE
             binding.clockInfoTitleTv.visibility = View.INVISIBLE
@@ -112,7 +112,7 @@ class ClockFragment : Fragment() {
             binding.clockRetryBtn.visibility = View.GONE
             binding.clockSaveBtn.visibility = View.GONE
             Handler().postDelayed({
-                moveClock(viewArr)
+                moveClock()
             }, 200)
             Handler().postDelayed({
                 binding.clockResultTv.text = getResClock.toString() + "시 방향"
@@ -149,7 +149,7 @@ class ClockFragment : Fragment() {
     //index의 범위는 0~11이다
     //getResClock으로 넘겨주는 값은 0~11이고, getResClock으로 리턴받는 값은 1~12이다.
     //clockRangeSetter로 보내는 값의 범위는 0~11이다
-    private fun moveClock(viewArr: Array<TextView>){
+    private fun moveClock(){
         var startAngle: Float
         var endAngle: Float
         var resAngle: Float
