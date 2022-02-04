@@ -3,4 +3,8 @@
     <string name="client_id">6dp8qdfztnBLiguo_gLx</string>
     <string name="client_secret">77OipGRnx9</string>
     <string name="client_name">gabojago</string>
+    <string name="morph_item_radius">Morph Item Radius:</string>
+    <string name="morph_corner_radius">Morph Corner Radius:</string>
+    <string name="morph_vertical_offset">Morph Vertical Offset:</string>
+    <string name="value_dp">%ddp</string>
 </resources>

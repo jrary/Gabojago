@@ -30,17 +30,6 @@
         app:layout_constraintStart_toEndOf="@id/record_pecil_big_iv"
         app:layout_constraintTop_toTopOf="@id/record_pecil_big_iv" />
 
-    <!--    <ImageView-->
-    <!--        android:id="@+id/record_character_iv"-->
-    <!--        android:layout_width="145dp"-->
-    <!--        android:layout_height="80dp"-->
-    <!--        android:layout_marginTop="84dp"-->
-    <!--        android:layout_marginEnd="4dp"-->
-    <!--        android:scaleType="fitXY"-->
-    <!--        android:src="@drawable/character_1"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <TextView
         android:id="@+id/record_month_tv"
         android:layout_width="wrap_content"
@@ -107,6 +96,21 @@
         app:layout_constraintTop_toBottomOf="@id/record_week_recyclerview"
         app:layout_constraintBottom_toTopOf="@id/record_nestedscrollview"/>
 
+    <TextView
+        android:id="@+id/record_notify_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/apple_sd_gothic_neo_sb"
+        android:gravity="bottom|center"
+        android:text="기록은 최대30개까지 가능해!"
+        android:textColor="#80777777"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
 
 
     <androidx.core.widget.NestedScrollView
@@ -166,22 +170,17 @@
                 android:scrollbars="none"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constrainedWidth="true"
-                app:layout_constraintBottom_toBottomOf="@id/record_notify_tv"
+                app:layout_constraintBottom_toBottomOf="@id/record_nothing_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/record_division_view"
                 tools:listitem="@layout/item_record_result" />
 
-            <TextView
-                android:id="@+id/record_notify_tv"
+            <View
+                android:id="@+id/record_nothing_view"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
-                android:layout_marginBottom="2dp"
                 android:fontFamily="@font/apple_sd_gothic_neo_sb"
-                android:gravity="center"
-                android:text="저장은 최대30개까지 가능합니다"
-                android:textColor="#80777777"
-                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -202,7 +201,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
         app:realtimeBlurRadius="10dp"
-        app:realtimeOverlayColor="#8000" />
+        app:realtimeOverlayColor="#00000000" />
 
 
     <ImageView

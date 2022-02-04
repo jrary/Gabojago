@@ -72,4 +72,11 @@ dependencies {
 
     //NumberPicker custom
     implementation 'io.github.ShawnLin013:number-picker:2.4.13'
+
+    //Bottomnavigation view
+    implementation 'com.github.simformsolutions:SSCustomBottomNavigation:3.2'
+    // navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
+
 }

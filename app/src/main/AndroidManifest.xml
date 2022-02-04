@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".splash.LoginActivity"/>
         <activity android:name=".MainActivity"
+<<<<<<< Updated upstream
             android:windowSoftInputMode="adjustPan"
             />
         <activity android:name=".menu.record.CalendarActivity"
@@ -34,6 +35,11 @@
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />
         <activity android:name=".menu.randomPick.clock.ClockSelectActivity"
+=======
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Record.CalendarActivity" />
+        <activity android:name=".randomPick.wheel.WheelOptionActivity"
+>>>>>>> Stashed changes
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />
         <activity android:name=".menu.randomPick.number.NumberOptionActivity"

@@ -17,23 +17,20 @@
         android:id="@+id/item_record_circle_iv"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:src="@drawable/circle_record_grey"
-        android:scaleType="fitXY"
+        android:src="@drawable/resultimage_1"
         android:layout_marginStart="17dp"
         android:layout_marginBottom="8.5dp"
         app:layout_constraintStart_toStartOf="@id/item_record_rectangle_iv"
         app:layout_constraintTop_toTopOf="@id/item_record_rectangle_iv"
         app:layout_constraintBottom_toBottomOf="@id/item_record_rectangle_iv"/>
 
-    <TextView
-        android:id="@+id/item_record_title_tv"
+    <ImageView
+        android:id="@+id/item_record_title_iv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/apple_sd_gothic_neo_sb"
-        android:textSize="10sp"
-        android:layout_marginStart="15dp"
-        android:textColor="#FFA844"
-        android:text="돌려돌려 돌림판"
+        android:layout_height="13dp"
+        android:src="@drawable/dolimpan"
+        android:scaleType="fitStart"
+        android:layout_marginStart="11dp"
         app:layout_constraintStart_toEndOf="@id/item_record_circle_iv"
         app:layout_constraintTop_toTopOf="@id/item_record_circle_iv"
         app:layout_constraintBottom_toTopOf="@id/item_record_result_tv"/>
@@ -47,8 +44,8 @@
         android:layout_marginTop="3dp"
         android:textColor="#000000"
         android:text="결과: 버스"
-        app:layout_constraintStart_toStartOf="@id/item_record_title_tv"
-        app:layout_constraintTop_toBottomOf="@id/item_record_title_tv"
+        app:layout_constraintStart_toStartOf="@id/item_record_title_iv"
+        app:layout_constraintTop_toBottomOf="@id/item_record_title_iv"
         app:layout_constraintBottom_toBottomOf="@id/item_record_circle_iv"/>
 
     <TextView
@@ -57,11 +54,13 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
         android:textSize="9sp"
-        android:layout_marginStart="10dp"
-        android:textColor="#868686"
+        android:layout_marginStart="84dp"
+        android:textColor="#BFBFBF"
+        android:gravity="top"
+        android:layout_marginBottom="0.5dp"
         android:text="16:45"
-        app:layout_constraintStart_toEndOf="@id/item_record_result_tv"
-        app:layout_constraintBottom_toBottomOf="@id/item_record_result_tv"/>
+        app:layout_constraintStart_toEndOf="@id/item_record_circle_iv"
+        app:layout_constraintBottom_toBottomOf="@id/item_record_title_iv"/>
 
     <ImageView
         android:id="@+id/item_record_pecil_iv"

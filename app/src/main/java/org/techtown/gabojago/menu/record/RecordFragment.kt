@@ -16,9 +16,14 @@ import android.graphics.Point
 import android.util.TypedValue
 import android.view.*
 import android.view.animation.OvershootInterpolator
+<<<<<<< Updated upstream:app/src/main/java/org/techtown/gabojago/menu/record/RecordFragment.kt
 import org.techtown.gabojago.record.RecordResultRVAdapter
 import org.techtown.gabojago.record.RecordWeekRVAdapter
 import org.techtown.gabojago.record.SingleRecordFragment
+=======
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+>>>>>>> Stashed changes:app/src/main/java/org/techtown/gabojago/Record/RecordFragment.kt
 
 
 class RecordFragment : Fragment() {
@@ -33,18 +38,6 @@ class RecordFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentRecordBinding.inflate(inflater, container, false)
-
-//        binding.recordNestedscrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-//            val view = v.getChildAt(v.getChildCount() - 1) as View
-//            val diff: Int = view.bottom - (v.getHeight() + v.getScrollY())
-//
-//
-//            if (diff == 0) {
-//                binding.recordNotifyTv.visibility = View.VISIBLE
-//            }else {
-//                binding.recordNotifyTv.visibility = View.GONE
-//            }
-//        })
 
 
         binding.recordFolderresultRecyclerview.layoutManager =
@@ -110,6 +103,10 @@ class RecordFragment : Fragment() {
             popupMenu()
         }
 
+        binding.recordFolderplusIv.setOnClickListener{
+            DialogFolderMake().show((context as MainActivity).supportFragmentManager,"dialog")
+        }
+
     }
 
     private fun init() {
@@ -119,7 +116,7 @@ class RecordFragment : Fragment() {
 
     private fun changeSingleRecordFragment() {
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, SingleRecordFragment().apply {
+            .replace(R.id.main_fl_container, SingleRecordFragment().apply {
                 arguments = Bundle().apply {
                 }
             })

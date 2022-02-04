@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,28 +8,43 @@
     tools:context=".MainActivity">
 
     <FrameLayout
-        android:id="@+id/main_frm"
+        android:id="@+id/main_fl_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/main_bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        app:layout_constraintBottom_toTopOf="@id/main_bnv"
-        app:layout_constraintTop_toTopOf="parent" />
+        <fragment
+            android:id="@+id/main_frm"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/bottom_nav_graph" />
+    </FrameLayout>
 
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/main_bnv"
+    <com.simform.custombottomnavigation.SSCustomBottomNavigation
+        android:id="@+id/main_bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:background="@color/white"
-        app:itemIconTint="@drawable/bottom_icon_color"
-        app:itemTextColor="@drawable/bottom_icon_color"
-        app:itemBackground="@color/white"
-        app:itemIconSize="25dp"
-        android:theme="@style/Widget.BottomNavigationView"
-        app:labelVisibilityMode="unlabeled"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu" />
-
+        app:layout_constraintTop_toBottomOf="@+id/main_fl_container"
+        app:menu="@menu/menu"
+        app:ss_backgroundBottomColor="#ffffff"
+        app:ss_circleColor="#FFAD9C"
+        app:ss_countBackgroundColor="#FFAD9C"
+        app:ss_countTextColor="#ffffff"
+        app:ss_defaultIconColor="#939393"
+        app:ss_iconTextColor="#939393"
+        app:ss_iconTextSize="14sp"
+        app:ss_rippleColor="#2f424242"
+        app:ss_selectedIconColor="#FF6745"
+        app:ss_selectedIconTextColor="#FF6745"
+        app:ss_shadowColor="#1f212121"
+        app:ss_waveHeight="7" />
 </androidx.constraintlayout.widget.ConstraintLayout>
