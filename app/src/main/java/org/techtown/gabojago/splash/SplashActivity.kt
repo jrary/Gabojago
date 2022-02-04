@@ -37,6 +37,7 @@ class SplashActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, LoginActivity::class.java))
+            overridePendingTransition(R.anim.anim_alpha_start_longer, R.anim.anim_none)
             finish()
         }, 2500)
     }
