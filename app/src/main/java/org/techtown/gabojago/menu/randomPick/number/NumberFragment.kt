@@ -121,10 +121,26 @@ class NumberFragment : Fragment() {
         var resNumbers = arrayOfNulls<Int>(num)
         val random = Random()
         val bound = endNum - startNum + 1
-        for(i: Int in 0 until num){
-            val res = startNum + random.nextInt(bound)
-            resNumbers[i] = res
+        if(isOverlap){
+            for(i: Int in 0 until num){
+                val res = startNum + random.nextInt(bound)
+                resNumbers[i] = res
+            }
         }
+        else{
+            var i = 0
+            while(i < num){
+                val res = startNum + random.nextInt(bound)
+                resNumbers[i] = res
+                for(j: Int in 0 until i){
+                    if(resNumbers[j] == resNumbers[i]){
+                        i--
+                    }
+                }
+                i++
+            }
+        }
+
         return resNumbers
     }
     private fun showAnimation(ballArr: Array<AppCompatImageView>, resTextArr: Array<AppCompatTextView>){

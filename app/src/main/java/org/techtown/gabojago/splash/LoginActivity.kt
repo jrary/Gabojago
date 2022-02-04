@@ -3,6 +3,7 @@ package org.techtown.gabojago.splash
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -29,19 +30,17 @@ class LoginActivity :AppCompatActivity() {
         setContentView(binding.root)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
-        val anim = AnimationUtils.loadAnimation(this, R.anim.anim_login_down)
-        binding.loginBackgroundIv.startAnimation(anim)
+        Handler().postDelayed({
+            binding.loginBackgroundIv.visibility = View.VISIBLE
+            val animDrop = AnimationUtils.loadAnimation(this, R.anim.anim_login_down)
+            binding.loginBackgroundIv.startAnimation(animDrop)
+        }, 500)
 
         mContext = this
 
         mOAuthLoginInstance = OAuthLogin.getInstance()
         mOAuthLoginInstance.init(mContext, "6dp8qdfztnBLiguo_gLx", "77OipGRnx9", "Gabojago")
         binding.loginNaverBtn.setOAuthLoginHandler(mOAuthLoginHandler)
-
-        binding.loginCompBtn.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-            finish()
-        }
     }
 
     private val mOAuthLoginHandler: OAuthLoginHandler = object: OAuthLoginHandler(){

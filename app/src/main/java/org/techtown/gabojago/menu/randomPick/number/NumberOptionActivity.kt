@@ -46,7 +46,7 @@ class NumberOptionActivity : AppCompatActivity() {
                     this, "숫자 범위를 다시 설정해 주세요", Toast.LENGTH_SHORT
                 ).show()
             }
-            else if(((endNum - startNum) < num) && !isOverlap){
+            else if(((endNum - startNum) < (num - 1)) && !isOverlap){
                 Toast.makeText(
                     this, "숫자의 범위보다 뽑을 숫자의 개수가 더 많습니다", Toast.LENGTH_SHORT
                 ).show()

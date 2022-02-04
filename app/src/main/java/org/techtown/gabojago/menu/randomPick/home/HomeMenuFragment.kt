@@ -34,14 +34,14 @@ class HomeMenuFragment : Fragment() {
                     .replace(R.id.main_frm, ClockFragment())
                     .commitAllowingStateLoss()
         }
+        binding.homeMenuColorView.setOnClickListener{
+            (context as MainActivity).supportFragmentManager.beginTransaction()
+                .replace(R.id.main_frm, ColorFragment())
+                .commitAllowingStateLoss()
+        }
         binding.homeMenuNumberView.setOnClickListener{
             (context as MainActivity).supportFragmentManager.beginTransaction()
                     .replace(R.id.main_frm, NumberFragment())
-                    .commitAllowingStateLoss()
-        }
-        binding.homeMenuColorView.setOnClickListener{
-            (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, ColorFragment())
                     .commitAllowingStateLoss()
         }
 

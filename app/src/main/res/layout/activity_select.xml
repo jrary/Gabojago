@@ -18,10 +18,12 @@
         <com.shawnlin.numberpicker.NumberPicker
             android:id="@+id/select_numberPicker"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="231dp"
             android:theme="@style/NumberPickerTheme"
             app:np_selectedTextColor="#000000"
             app:np_selectedTextSize="64sp"
+            app:np_textSize="36sp"
+            app:np_dividerColor="#00000000"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/select_comp_btn"
@@ -57,13 +59,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="#FF603D" />
+            android:background="#23354f" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nanum_square_round_otf_extrabold"
-            android:textStyle="normal"
+            android:fontFamily="@font/apple_sd_gothic_neo_sb"
+            android:textStyle="bold"
             android:textSize="18sp"
             android:textColor="#ffffff"
             app:layout_constraintStart_toStartOf="parent"
