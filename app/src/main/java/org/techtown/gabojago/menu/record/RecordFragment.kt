@@ -16,9 +16,11 @@ import android.graphics.Point
 import android.util.TypedValue
 import android.view.*
 import android.view.animation.OvershootInterpolator
+import org.techtown.gabojago.Record.DialogFolderMake
 import org.techtown.gabojago.record.RecordResultRVAdapter
 import org.techtown.gabojago.record.RecordWeekRVAdapter
 import org.techtown.gabojago.record.SingleRecordFragment
+
 
 
 class RecordFragment : Fragment() {
@@ -33,18 +35,6 @@ class RecordFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentRecordBinding.inflate(inflater, container, false)
-
-//        binding.recordNestedscrollview.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-//            val view = v.getChildAt(v.getChildCount() - 1) as View
-//            val diff: Int = view.bottom - (v.getHeight() + v.getScrollY())
-//
-//
-//            if (diff == 0) {
-//                binding.recordNotifyTv.visibility = View.VISIBLE
-//            }else {
-//                binding.recordNotifyTv.visibility = View.GONE
-//            }
-//        })
 
 
         binding.recordFolderresultRecyclerview.layoutManager =
@@ -108,6 +98,10 @@ class RecordFragment : Fragment() {
         binding.recordBlurView.setOnClickListener {
             binding.recordBlurView.visibility = View.GONE
             popupMenu()
+        }
+
+        binding.recordFolderplusIv.setOnClickListener{
+            DialogFolderMake().show((context as MainActivity).supportFragmentManager,"dialog")
         }
 
     }

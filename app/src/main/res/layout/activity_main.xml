@@ -11,25 +11,40 @@
         android:id="@+id/main_frm"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/main_bnv"
         app:layout_constraintTop_toTopOf="parent" />
 
 
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/main_bnv"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="58dp"-->
+<!--        android:background="@color/white"-->
+<!--        app:itemIconTint="@drawable/bottom_icon_color"-->
+<!--        app:itemTextColor="@drawable/bottom_icon_color"-->
+<!--        app:itemBackground="@color/white"-->
+<!--        app:itemIconSize="25dp"-->
+<!--        android:theme="@style/Widget.BottomNavigationView"-->
+<!--        app:labelVisibilityMode="unlabeled"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:menu="@menu/menu" />-->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_bnv"
         android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:background="@color/white"
-        app:itemIconTint="@drawable/bottom_icon_color"
-        app:itemTextColor="@drawable/bottom_icon_color"
-        app:itemBackground="@color/white"
-        app:itemIconSize="25dp"
-        android:theme="@style/Widget.BottomNavigationView"
+        android:layout_height="80dp"
+        app:menu="@menu/menu"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
         app:labelVisibilityMode="unlabeled"
+        android:background="@drawable/bottom_back1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu" />
+        android:theme="@style/BottomNavigationView"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

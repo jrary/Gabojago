@@ -9,7 +9,7 @@
         android:id="@+id/item_folderrecord_pecil_iv"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:src="@drawable/line_18"
+        android:src="@drawable/line_gray"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,22 +19,19 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/circle_record_grey"
-        android:scaleType="fitXY"
+        android:src="@drawable/resultimage_1"
         android:layout_marginStart="5dp"
         android:layout_marginBottom="6dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/item_folderrecord_title_tv"
+    <ImageView
+        android:id="@+id/item_folderrecord_title_iv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/apple_sd_gothic_neo_sb"
-        android:textSize="10sp"
+        android:layout_height="13dp"
+        android:src="@drawable/dolimpan"
+        android:scaleType="fitStart"
         android:layout_marginStart="11dp"
-        android:textColor="#868686"
-        android:text="돌려돌려 돌림판"
         app:layout_constraintStart_toEndOf="@id/item_folderrecord_circle_iv"
         app:layout_constraintTop_toTopOf="@id/item_folderrecord_circle_iv"
         app:layout_constraintBottom_toTopOf="@id/item_folderrecord_result_tv"/>
@@ -45,11 +42,11 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
         android:textSize="16sp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="2dp"
         android:textColor="#000000"
         android:text="결과: 버스"
-        app:layout_constraintStart_toStartOf="@id/item_folderrecord_title_tv"
-        app:layout_constraintTop_toBottomOf="@id/item_folderrecord_title_tv"
+        app:layout_constraintStart_toStartOf="@id/item_folderrecord_title_iv"
+        app:layout_constraintTop_toBottomOf="@id/item_folderrecord_title_iv"
         app:layout_constraintBottom_toBottomOf="@id/item_folderrecord_circle_iv"/>
 
 

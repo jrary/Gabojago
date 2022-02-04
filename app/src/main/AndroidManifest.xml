@@ -31,11 +31,8 @@
             android:windowSoftInputMode="adjustPan"
             />
         <activity android:name=".menu.randomPick.clock.ClockOptionActivity"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            />
-        <activity android:name=".menu.randomPick.clock.ClockSelectActivity"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            />
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" />
+        <activity android:name=".menu.randomPick.clock.ClockSelectActivity" />
         <activity android:name=".menu.randomPick.number.NumberOptionActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             />

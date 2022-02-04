@@ -45,4 +45,17 @@
         <item name="android:textSize">40sp</item>
     </style>
 
+    <style name="BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemBackground">@color/white</item>
+        <item name="itemIconTint">@drawable/bottom_icon_color</item>
+        <item name="itemTextColor">@drawable/bottom_icon_color</item>
+        <item name="textAllCaps">true</item>
+        <item name="paddingStart">42dp</item>
+        <item name="paddingEnd">42dp</item>
+    </style>
+
+    <style name="TextAppearance.BottomNavigation.Overline" parent="TextAppearance.MaterialComponents.Overline">
+        <item name="android:textSize">8sp</item>
+    </style>
+
 </resources>
