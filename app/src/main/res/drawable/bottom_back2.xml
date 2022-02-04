@@ -1,9 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-
-
-    <item
-        android:drawable="@drawable/recordbottom"
-        android:backgroundTint = "@color/transparent"
-        />
-</layer-list>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/record_default" android:state_checked="false"/>
+    <item android:drawable="@drawable/record_select" android:state_checked="true"/>
+</selector>

@@ -5,6 +5,8 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.get
+import androidx.core.view.size
 import org.techtown.gabojago.menu.record.RecordFragment
 import org.techtown.gabojago.databinding.ActivityMainBinding
 import org.techtown.gabojago.menu.goAgain.GoagainFragment
@@ -32,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         binding.mainBnv.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.homeFragment -> {
-                    binding.mainBnv.setBackgroundResource(R.drawable.bottom_back1)
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, HomeFragment())
                         .commitAllowingStateLoss()
@@ -40,7 +41,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.recordFragment -> {
-                    binding.mainBnv.setBackgroundResource(R.drawable.bottom_back2)
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, RecordFragment())
                         .commitAllowingStateLoss()
@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.goagainFragment -> {
-                    binding.mainBnv.setBackgroundResource(R.drawable.bottom_back3)
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, GoagainFragment())
                         .commitAllowingStateLoss()
@@ -56,7 +55,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.manageFragment -> {
-                    binding.mainBnv.setBackgroundResource(R.drawable.bottom_back4)
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, ManageFragment())
                         .commitAllowingStateLoss()
