@@ -16,14 +16,11 @@ import android.graphics.Point
 import android.util.TypedValue
 import android.view.*
 import android.view.animation.OvershootInterpolator
-<<<<<<< Updated upstream:app/src/main/java/org/techtown/gabojago/menu/record/RecordFragment.kt
+import org.techtown.gabojago.Record.DialogFolderMake
 import org.techtown.gabojago.record.RecordResultRVAdapter
 import org.techtown.gabojago.record.RecordWeekRVAdapter
 import org.techtown.gabojago.record.SingleRecordFragment
-=======
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
->>>>>>> Stashed changes:app/src/main/java/org/techtown/gabojago/Record/RecordFragment.kt
+
 
 
 class RecordFragment : Fragment() {
@@ -116,7 +113,7 @@ class RecordFragment : Fragment() {
 
     private fun changeSingleRecordFragment() {
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_fl_container, SingleRecordFragment().apply {
+            .replace(R.id.main_frm, SingleRecordFragment().apply {
                 arguments = Bundle().apply {
                 }
             })

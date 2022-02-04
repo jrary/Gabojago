@@ -51,7 +51,7 @@ class FolderRecordFragment : Fragment() {
     }
 
     fun hideBottomNavigation(bool: Boolean) {
-        val bottomNavigation: BottomNavigationView = requireActivity().findViewById(R.id.main_bottom_navigation)
+        val bottomNavigation: BottomNavigationView = requireActivity().findViewById(R.id.main_bnv)
         if (bool == true)
             bottomNavigation.visibility = View.GONE
         else
