@@ -13,8 +13,8 @@ import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import kotlinx.android.synthetic.main.activity_login.*
 import org.techtown.gabojago.*
-import org.techtown.gabojago.auth.AuthService
 import org.techtown.gabojago.databinding.ActivityLoginBinding
+import org.techtown.gabojago.main.setJwt
 
 class LoginActivity :AppCompatActivity(), LoginView {
 
@@ -54,8 +54,11 @@ class LoginActivity :AppCompatActivity(), LoginView {
                 val expiresAt: Long = mOAuthLoginInstance.getExpiresAt(baseContext)
                 val tokenType: String = mOAuthLoginInstance.getTokenType(baseContext)
 
+                Log.d("ACCESSTOKEN", accessToken)
+
                 val authService = AuthService()
                 authService.setLoginView(this@LoginActivity)
+
                 authService.login(accessToken)
 
             } else {
