@@ -3,15 +3,14 @@ package org.techtown.gabojago.menu.record
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.techtown.gabojago.databinding.ItemRecordFoldernameBinding
+import org.techtown.gabojago.R
+import org.techtown.gabojago.databinding.ItemRecordResultBinding
 
-
-class RecordFolderResultNameRVAdapter: RecyclerView.Adapter<RecordFolderResultNameRVAdapter.ViewHolder>() {
+class DialogSelectRVAdapter: RecyclerView.Adapter<DialogSelectRVAdapter.ViewHolder>() {
 
     //클릭 인터페이스
     interface MyItemClickListener {
         fun onItemClick()
-        fun onItemView()
     }
 
     private lateinit var mItemClickListener: MyItemClickListener
@@ -22,8 +21,8 @@ class RecordFolderResultNameRVAdapter: RecyclerView.Adapter<RecordFolderResultNa
 
     //뷰홀더 생성->호출되는 함수->아이템 뷰 객체를 만들어서 뷰홀더에 던져줌
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding: ItemRecordFoldernameBinding =
-            ItemRecordFoldernameBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding: ItemRecordResultBinding =
+            ItemRecordResultBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(binding)
     }
@@ -32,26 +31,21 @@ class RecordFolderResultNameRVAdapter: RecyclerView.Adapter<RecordFolderResultNa
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind()
         holder.itemView.setOnClickListener {
-            mItemClickListener.onItemView()
-        }
-        holder.binding.folderRecordPecilIv.setOnClickListener {
-            mItemClickListener.onItemClick()
+            holder.binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.rectangle_gray_select)
         }
     }
 
     //뷰홀더
-    inner class ViewHolder(val binding: ItemRecordFoldernameBinding) :
+    inner class ViewHolder(val binding: ItemRecordResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
-            val recordFolderResultRVAdapter = RecordFolderResultRVAdapter()
-            binding.itemRecordResultRecyclerview.adapter = recordFolderResultRVAdapter
 
         }
 
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return 4
     }
 
 }

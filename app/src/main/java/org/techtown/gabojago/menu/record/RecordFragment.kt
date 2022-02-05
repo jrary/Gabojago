@@ -71,6 +71,10 @@ class RecordFragment : Fragment() {
             override fun onItemClick() {
                 changeFolderRecordFragment()
             }
+
+            override fun onItemView() {
+
+            }
         })
 
 
@@ -101,7 +105,7 @@ class RecordFragment : Fragment() {
         }
 
         binding.recordFolderplusIv.setOnClickListener{
-            DialogFolderMake().show((context as MainActivity).supportFragmentManager,"dialog")
+            DialogFolderSelect().show((context as MainActivity).supportFragmentManager,"dialog")
         }
 
     }

@@ -5,19 +5,24 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/homeFragment"
-            android:icon="@drawable/go"
+            android:icon="@drawable/bottom_back1"
+            app:showAsAction="always"
+            android:enabled="true"
             android:title="" />
         <item
             android:id="@+id/recordFragment"
-            android:icon="@drawable/memo_pencil_bottom"
+            android:icon="@drawable/bottom_back2"
+            app:showAsAction="always"
             android:title="" />
         <item
             android:id="@+id/goagainFragment"
-            android:icon="@drawable/bookmark"
+            android:icon="@drawable/bottom_back3"
+            app:showAsAction="always"
             android:title="" />
         <item
             android:id="@+id/manageFragment"
-            android:icon="@drawable/person"
+            android:icon="@drawable/bottom_back4"
+            app:showAsAction="always"
             android:title="" />
     </group>
 
