@@ -19,7 +19,7 @@ fun getJwt(context: Context, name: String): String{
 }
 fun getRetrofit(): Retrofit {
     val retrofit = Retrofit.Builder()
-        .baseUrl("http://13.125.121.202")
+        .baseUrl("http://dev.gabojago.shop")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

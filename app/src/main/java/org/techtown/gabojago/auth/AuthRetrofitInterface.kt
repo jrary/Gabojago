@@ -1,10 +1,12 @@
-package org.techtown.gabojago
+package org.techtown.gabojago.auth
 
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.POST
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface AuthRetrofitInterface {
-    @POST("/auth/naver")
-    fun login(@Body params: HashMap<String, Any>): Call<AuthResponse>
+    @GET("/auth/naver")
+    fun login(
+        @Query("access_token") access_token: String
+    ): Call<AuthResponse>
 }

@@ -1,14 +1,14 @@
-package org.techtown.gabojago
+package org.techtown.gabojago.auth
 
 import com.google.gson.annotations.SerializedName
 
 data class Auth(
-    @SerializedName("userIdx") val userIdx: Int,
+    @SerializedName("type") val type: String,
     @SerializedName("jwt") val jwt: String)
 
 data class AuthResponse(
     @SerializedName("isSuccess") val isSuccess: Boolean,
     @SerializedName("code") val code: Int,
     @SerializedName("message") val message: String,
-    @SerializedName("result") val result: Auth?
+    @SerializedName("result") val result: String
 )
