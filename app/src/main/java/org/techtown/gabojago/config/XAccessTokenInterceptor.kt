@@ -1,10 +1,5 @@
 package org.techtown.gabojago.config
 
-import okhttp3.Interceptor
-import okhttp3.Request
-import okhttp3.Response
-import org.techtown.gabojago.getJwt
-
 //class XAccessTokenInterceptor: Interceptor {
 //    override fun intercept(chain: Interceptor.Chain): Response {
 //        val builder: Request.Builder = chain.request().newBuilder()

@@ -1,4 +1,4 @@
-package org.techtown.gabojago.splash
+package org.techtown.gabojago.start.login
 
 import android.content.Context
 import android.content.Intent
@@ -12,13 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import kotlinx.android.synthetic.main.activity_login.*
-import org.techtown.gabojago.AuthRetrofitInterface
-import org.techtown.gabojago.MainActivity
-import org.techtown.gabojago.R
+import org.techtown.gabojago.*
 import org.techtown.gabojago.databinding.ActivityLoginBinding
-import org.techtown.gabojago.getRetrofit
+import org.techtown.gabojago.main.setJwt
 
-class LoginActivity :AppCompatActivity() {
+class LoginActivity :AppCompatActivity(), LoginView {
 
     lateinit var binding: ActivityLoginBinding
     lateinit var mOAuthLoginInstance: OAuthLogin
@@ -41,20 +39,28 @@ class LoginActivity :AppCompatActivity() {
         mOAuthLoginInstance = OAuthLogin.getInstance()
         mOAuthLoginInstance.init(mContext, "6dp8qdfztnBLiguo_gLx", "77OipGRnx9", "Gabojago")
         binding.loginNaverBtn.setOAuthLoginHandler(mOAuthLoginHandler)
+
+        binding.loginBackgroundIv.setOnClickListener {
+            var intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private val mOAuthLoginHandler: OAuthLoginHandler = object: OAuthLoginHandler(){
         override fun run(success: Boolean) {
             if (success) {
-                Toast.makeText(baseContext,"Login Success", Toast.LENGTH_SHORT).show()
                 val accessToken: String = mOAuthLoginInstance.getAccessToken(baseContext)
                 val refreshToken: String = mOAuthLoginInstance.getRefreshToken(baseContext)
                 val expiresAt: Long = mOAuthLoginInstance.getExpiresAt(baseContext)
                 val tokenType: String = mOAuthLoginInstance.getTokenType(baseContext)
-                Toast.makeText(baseContext,"Login Success", Toast.LENGTH_SHORT).show()
-                val test: AuthRetrofitInterface = getRetrofit().create(AuthRetrofitInterface::class.java)
-                var intent = Intent(this@LoginActivity, MainActivity::class.java)
-                startActivity(intent)
+
+                Log.d("ACCESSTOKEN", accessToken)
+
+                val authService = AuthService()
+                authService.setLoginView(this@LoginActivity)
+
+                authService.login(accessToken)
+
             } else {
                 val errorCode: String = mOAuthLoginInstance.getLastErrorCode(mContext).code
                 val errorDesc = mOAuthLoginInstance.getLastErrorDesc(mContext)
@@ -62,6 +68,26 @@ class LoginActivity :AppCompatActivity() {
                     baseContext, "errorCode:" + errorCode
                             + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT
                 ).show()
+            }
+        }
+    }
+
+    override fun onLoginSuccess(userJwt: String) {
+        setJwt(this, "userJwt", userJwt)
+        Log.d("JWTCONNECT?", userJwt)
+        var intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun onLoginFailure(code: Int, message: String) {
+        when(code){
+            400, 5013, 5014, 5015 -> {
+                Toast.makeText(
+                    baseContext, message, Toast.LENGTH_SHORT
+                ).show()
+            }
+            else -> {
+                Log.d("WHYWHYWHYWHY", code.toString())
             }
         }
     }

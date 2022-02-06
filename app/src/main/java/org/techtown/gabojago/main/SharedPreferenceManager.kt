@@ -1,4 +1,4 @@
-package org.techtown.gabojago
+package org.techtown.gabojago.main
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +19,7 @@ fun getJwt(context: Context, name: String): String{
 }
 fun getRetrofit(): Retrofit {
     val retrofit = Retrofit.Builder()
-        .baseUrl("http://13.125.121.202")
+        .baseUrl("https://dev.gabojago.shop")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

@@ -1,4 +1,4 @@
-package org.techtown.gabojago.splash
+package org.techtown.gabojago.start
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +9,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivitySplashBinding
+import org.techtown.gabojago.start.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
 
