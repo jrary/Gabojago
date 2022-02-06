@@ -25,3 +25,4 @@ fun getRetrofit(): Retrofit {
 
     return retrofit
 }
+

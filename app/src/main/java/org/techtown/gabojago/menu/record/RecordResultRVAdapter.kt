@@ -1,15 +1,16 @@
-package org.techtown.gabojago.record
+package org.techtown.gabojago.menu.record
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import org.techtown.gabojago.data.SingleRecord
 import org.techtown.gabojago.databinding.ItemRecordResultBinding
 
-class RecordResultRVAdapter: RecyclerView.Adapter<RecordResultRVAdapter.ViewHolder>() {
+class RecordResultRVAdapter(private val recordList: ArrayList<SingleRecord>): RecyclerView.Adapter<RecordResultRVAdapter.ViewHolder>() {
 
     //클릭 인터페이스
     interface MyItemClickListener {
-        fun onItemClick()
+        fun onItemClick(record:SingleRecord)
     }
 
     private lateinit var mItemClickListener: MyItemClickListener
@@ -28,22 +29,23 @@ class RecordResultRVAdapter: RecyclerView.Adapter<RecordResultRVAdapter.ViewHold
 
     //뷰홀더에 데이터를 바인딩해줘야 할 때마다 호출되는 함수 => 엄청나게 많이 호출
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind()
+        holder.bind(recordList[position])
         holder.binding.itemRecordPecilIv.setOnClickListener {
-            mItemClickListener.onItemClick()
+            mItemClickListener.onItemClick(recordList[position])
         }
     }
 
     //뷰홀더
     inner class ViewHolder(val binding: ItemRecordResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
+        fun bind(record: SingleRecord) {
+            binding.itemRecordResultTv.text = record.resultType
+            binding.itemRecordCircleIv.setImageResource(record.coverImg!!)
+            binding.itemRecordTitleIv.setImageResource(record.typeImg!!)
         }
 
     }
 
-    override fun getItemCount(): Int {
-        return 4
-    }
+    override fun getItemCount(): Int =recordList.size
 
 }

@@ -23,6 +23,7 @@
         <activity android:name=".splash.LoginActivity"/>
         <activity android:name=".MainActivity"
             android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
             />
         <activity android:name=".menu.record.CalendarActivity"
             />

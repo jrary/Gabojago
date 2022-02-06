@@ -13,19 +13,19 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 import android.graphics.Point
+import android.provider.Settings.Global.putString
 import android.util.TypedValue
 import android.view.*
 import android.view.animation.OvershootInterpolator
-import org.techtown.gabojago.Record.DialogFolderMake
-import org.techtown.gabojago.record.RecordResultRVAdapter
-import org.techtown.gabojago.record.RecordWeekRVAdapter
-import org.techtown.gabojago.record.SingleRecordFragment
-
+import com.google.gson.Gson
+import org.techtown.gabojago.data.SingleRecord
 
 
 class RecordFragment : Fragment() {
 
     lateinit var binding: FragmentRecordBinding
+
+    var records= ArrayList<SingleRecord>()
 
     var add: Boolean = true
 
@@ -49,7 +49,7 @@ class RecordFragment : Fragment() {
         val recordWeekRVAdapter = RecordWeekRVAdapter()
         binding.recordWeekRecyclerview.adapter = recordWeekRVAdapter
 
-        val recordResultRVAdapter = RecordResultRVAdapter()
+        val recordResultRVAdapter = RecordResultRVAdapter(records)
         binding.recordResultRecyclerview.adapter = recordResultRVAdapter
 
 
@@ -61,8 +61,8 @@ class RecordFragment : Fragment() {
 
         recordResultRVAdapter.setMyItemClickListener(object :
             RecordResultRVAdapter.MyItemClickListener {
-            override fun onItemClick() {
-                changeSingleRecordFragment()
+            override fun onItemClick(record :SingleRecord) {
+                changeSingleRecordFragment(record)
             }
         })
 
@@ -80,6 +80,7 @@ class RecordFragment : Fragment() {
 
         clickevent()
         init()
+        initData(records)
 
         return binding.root
     }
@@ -105,7 +106,10 @@ class RecordFragment : Fragment() {
         }
 
         binding.recordFolderplusIv.setOnClickListener{
-            DialogFolderSelect().show((context as MainActivity).supportFragmentManager,"dialog")
+            DialogFolderSelect(records).show((context as MainActivity).supportFragmentManager,"dialog")
+            val gson = Gson()
+            val recordJson = gson.toJson(records)
+            arguments?.putString("recordList", recordJson)
         }
 
     }
@@ -115,10 +119,52 @@ class RecordFragment : Fragment() {
         binding.recordMonthTv.setText(setMonth())
     }
 
-    private fun changeSingleRecordFragment() {
+    private fun initData(records : ArrayList<SingleRecord>){
+        records.add(
+            SingleRecord(
+                0,
+                "제목없음",
+                "버스",
+                R.drawable.resultimage_dolimpan_gray,
+                false,
+                R.drawable.dolimpan
+            ))
+        records.add(
+            SingleRecord(
+                1,
+                "제목없음",
+                "4,7",
+                R.drawable.resultimage_random_gray,
+                false,
+                R.drawable.binglebingle
+            ))
+        records.add(
+            SingleRecord(
+                2,
+                "제목없음",
+                "9시 방향",
+                R.drawable.resultimage_nsibang,
+                false,
+                R.drawable.nsibanghiang
+            ))
+        records.add(
+            SingleRecord(
+                3,
+                "제목없음",
+                "9시 방향",
+                R.drawable.resultimage_japangi,
+                false,
+                R.drawable.nsibanghiang
+            ))
+    }
+
+    private fun changeSingleRecordFragment(record: SingleRecord) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, SingleRecordFragment().apply {
                 arguments = Bundle().apply {
+                    val gson = Gson()
+                    val recordJson = gson.toJson(record)
+                    putString("record", recordJson)
                 }
             })
             .addToBackStack(null)
