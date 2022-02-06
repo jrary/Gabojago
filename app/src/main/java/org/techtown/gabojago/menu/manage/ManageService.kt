@@ -21,7 +21,7 @@ class ManageService {
 
     fun getNickname(userJwt: String) {
         val manageService = getRetrofit().create(ManageRetrofitInterface::class.java)
-        manageService.getNickname(ManageRequest(userJwt)).enqueue(object : Callback<NicknameResponse> {
+        manageService.getNickname(userJwt).enqueue(object : Callback<NicknameResponse> {
             override fun onResponse(call: Call<NicknameResponse>, response: Response<NicknameResponse>) {
                 Log.d("NICKNAMEACT/Response", response.toString())
                 val resp = response.body()!!
@@ -43,19 +43,17 @@ class ManageService {
     fun modifyNickname(userJwt: String, newNickname: String) {
         val manageService = getRetrofit().create(ManageRetrofitInterface::class.java)
 
-        manageService.modifyNickname(userJwt, newNickname).enqueue(object : Callback<NewNicknameResponse> {
+        manageService.modifyNickname(userJwt, NewNickName(newNickname)).enqueue(object : Callback<NewNicknameResponse> {
             override fun onResponse(call: Call<NewNicknameResponse>, response: Response<NewNicknameResponse>) {
                 Log.d("MODIFYACT/Response", response.toString())
                 val resp = response.body()!!
                 Log.d("MODIFYACT/Code", resp.code.toString())
 
-                when (resp.code) {
-                    1000 -> {
-                        newNicknameView.onModifyNicknameSuccess(resp.message)
-                    }
-                    else -> {
+                if (resp.isSuccess) {
+                        newNicknameView.onModifyNicknameSuccess(newNickname)
+                }
+                else {
                         newNicknameView.onModifyNicknameFailure(resp.code, resp.message)
-                    }
                 }
             }
             override fun onFailure(call: Call<NewNicknameResponse>, t: Throwable) {

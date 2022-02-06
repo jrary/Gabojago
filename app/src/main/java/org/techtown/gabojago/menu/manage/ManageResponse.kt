@@ -10,6 +10,10 @@ data class NicknameResult(
     @SerializedName("userNickname") val userNickname: String
 )
 
+data class NewNickName(
+    @SerializedName("userNickname") val userNickname: String
+)
+
 data class NicknameResponse(
     @SerializedName("isSuccess") val isSuccess: Boolean,
     @SerializedName("code") val code: Int,

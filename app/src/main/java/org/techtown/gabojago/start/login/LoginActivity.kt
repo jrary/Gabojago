@@ -54,7 +54,7 @@ class LoginActivity :AppCompatActivity(), LoginView {
                 val expiresAt: Long = mOAuthLoginInstance.getExpiresAt(baseContext)
                 val tokenType: String = mOAuthLoginInstance.getTokenType(baseContext)
 
-                Log.d("ACCESSTOKEN", accessToken)
+      //          Log.d("ACCESSTOKEN", accessToken)
 
                 val authService = AuthService()
                 authService.setLoginView(this@LoginActivity)
@@ -74,7 +74,6 @@ class LoginActivity :AppCompatActivity(), LoginView {
 
     override fun onLoginSuccess(userJwt: String) {
         setJwt(this, "userJwt", userJwt)
-        Log.d("JWTCONNECT?", userJwt)
         var intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
     }
@@ -87,7 +86,7 @@ class LoginActivity :AppCompatActivity(), LoginView {
                 ).show()
             }
             else -> {
-                Log.d("WHYWHYWHYWHY", code.toString())
+                Log.d("LOGIN_failure_noCode", code.toString())
             }
         }
     }
