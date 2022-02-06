@@ -6,12 +6,12 @@ import retrofit2.http.*
 interface ManageRetrofitInterface {
     @GET("app/user/nickname")
     fun getNickname(
-        @Header("x-access-token") xAccessToken: ManageRequest
+        @Header("x-access-token") xAccessToken: String
     ): Call<NicknameResponse>
 
-    @PATCH("/auth/user/newNickname")
+    @PATCH("app/user/newNickname")
     fun modifyNickname(
         @Header("x-access-token") xAccessToken: String,
-        @Body newNickname: String,
+        @Body newNickname: NewNickName,
     ): Call<NewNicknameResponse>
 }
