@@ -33,14 +33,14 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView {
         }
 
         binding.manageNicknameCompBtn.setOnClickListener {
-            binding.manageNicknameView.visibility = View.GONE
             val modifyNickname = binding.manageNicknameEt.text.toString()
             if(modifyNickname.length >= 25){
                 Toast.makeText(
-                    activity, "length", Toast.LENGTH_SHORT
+                    activity, "닉네임을 25자 이하로 설정해 주세요", Toast.LENGTH_SHORT
                 ).show()
             }
             else{
+                binding.manageNicknameView.visibility = View.GONE
                 manageService.modifyNickname(userJwt, modifyNickname)
             }
         }
@@ -53,19 +53,9 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView {
     }
 
     override fun onNicknameFailure(code: Int, message: String) {
-        when(code){
-            400, 2013 -> {
-                Toast.makeText(
-                    activity, message, Toast.LENGTH_SHORT
-                ).show()
-            }
-            3000 -> {
-                Log.d("Token Error", message)
-            }
-            else -> {
-                Log.d("GETNICK_failure_noCode", code.toString())
-            }
-        }
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun onModifyNicknameSuccess(newNickName: String) {
@@ -73,18 +63,8 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView {
     }
 
     override fun onModifyNicknameFailure(code: Int, message: String) {
-        when(code){
-            400, 2013, 2017, 7002 -> {
-                Toast.makeText(
-                    activity, message, Toast.LENGTH_SHORT
-                ).show()
-            }
-            3000 -> {
-                Log.d("Token Error", message)
-            }
-            else -> {
-                Log.d("MODIFY_failure_noCode", code.toString())
-            }
-        }
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
     }
 }

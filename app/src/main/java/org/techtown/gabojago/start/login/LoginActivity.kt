@@ -40,10 +40,6 @@ class LoginActivity :AppCompatActivity(), LoginView {
         mOAuthLoginInstance.init(mContext, "6dp8qdfztnBLiguo_gLx", "77OipGRnx9", "Gabojago")
         binding.loginNaverBtn.setOAuthLoginHandler(mOAuthLoginHandler)
 
-        binding.loginBackgroundIv.setOnClickListener {
-            var intent = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     private val mOAuthLoginHandler: OAuthLoginHandler = object: OAuthLoginHandler(){
@@ -76,17 +72,26 @@ class LoginActivity :AppCompatActivity(), LoginView {
         setJwt(this, "userJwt", userJwt)
         var intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     override fun onLoginFailure(code: Int, message: String) {
         when(code){
-            400, 5013, 5014, 5015 -> {
+            400, 5014 -> {
                 Toast.makeText(
                     baseContext, message, Toast.LENGTH_SHORT
                 ).show()
             }
+            5013, 5015 -> {
+                Toast.makeText(
+                    baseContext, "로그인 시스템에 문제가 발생하였습니다.", Toast.LENGTH_SHORT
+                ).show()
+                Log.d("LOGINERROR", message)
+            }
             else -> {
-                Log.d("LOGIN_failure_noCode", code.toString())
+                Toast.makeText(
+                    baseContext, message, Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
