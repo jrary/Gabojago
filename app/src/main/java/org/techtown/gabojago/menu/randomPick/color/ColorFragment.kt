@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import org.techtown.gabojago.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentColorBinding
 import org.techtown.gabojago.menu.randomPick.home.HomeMenuFragment
+import org.techtown.gabojago.menu.randomPick.home.RandomView
 
 class ColorFragment : Fragment() {
     lateinit var binding: FragmentColorBinding
@@ -47,31 +49,26 @@ class ColorFragment : Fragment() {
         Handler().postDelayed({
             binding.colorCard01View.setImageResource(R.drawable.vending_card)
             binding.colorCard09View.setImageResource(R.drawable.vending_card_selected)
-       //     binding.colorCard01View.startAnimation(animAlphaStart)
             binding.colorCard09View.startAnimation(animAlphaStart)
         }, 400)
         Handler().postDelayed({
             binding.colorCard09View.setImageResource(R.drawable.vending_card)
             binding.colorCard07View.setImageResource(R.drawable.vending_card_selected)
-       //     binding.colorCard09View.startAnimation(animAlphaStart)
             binding.colorCard07View.startAnimation(animAlphaStart)
         }, 800)
         Handler().postDelayed({
             binding.colorCard07View.setImageResource(R.drawable.vending_card)
             binding.colorCard02View.setImageResource(R.drawable.vending_card_selected)
-         //   binding.colorCard07View.startAnimation(animAlphaStart)
             binding.colorCard02View.startAnimation(animAlphaStart)
         }, 1200)
         Handler().postDelayed({
             binding.colorCard02View.setImageResource(R.drawable.vending_card)
             binding.colorCard06View.setImageResource(R.drawable.vending_card_selected)
-       //     binding.colorCard02View.startAnimation(animAlphaStart)
             binding.colorCard06View.startAnimation(animAlphaStart)
         }, 1600)
         Handler().postDelayed({
             binding.colorCard06View.setImageResource(R.drawable.vending_card)
             binding.colorCard05View.setImageResource(R.drawable.vending_card_selected)
-       //     binding.colorCard06View.startAnimation(animAlphaStart)
             binding.colorCard05View.startAnimation(animAlphaStart)
         }, 2000)
 

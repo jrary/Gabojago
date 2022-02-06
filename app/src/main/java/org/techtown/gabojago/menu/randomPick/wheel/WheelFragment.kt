@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,14 +19,18 @@ import androidx.fragment.app.Fragment
 import org.techtown.gabojago.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentWheelBinding
+import org.techtown.gabojago.main.getJwt
+import org.techtown.gabojago.menu.manage.ManageService
 import org.techtown.gabojago.menu.randomPick.home.HomeMenuFragment
+import org.techtown.gabojago.menu.randomPick.home.RandomService
+import org.techtown.gabojago.menu.randomPick.home.RandomView
 import java.util.*
 import kotlin.collections.ArrayList
 
-class WheelFragment : Fragment() {
+class WheelFragment : Fragment(), RandomView {
     lateinit var binding: FragmentWheelBinding
     var optionList = ArrayList<String>()
-
+    var res: Int = -1
     private val wheelText = arrayOf(
         arrayOf(2, 8),
         arrayOf(1, 5, 9),
@@ -90,7 +95,7 @@ class WheelFragment : Fragment() {
             binding.wheelGoBtn.visibility = View.GONE
             binding.wheelInfoTv.visibility = View.INVISIBLE
             binding.wheelInfoTitleTv.visibility = View.INVISIBLE
-            val res = moveWheel(wheelArr)
+            res = moveWheel(wheelArr)
             Handler().postDelayed({
                 binding.wheelResultTv.text = optionList[res]
                 binding.wheelRetryBtn.visibility = View.VISIBLE
@@ -102,7 +107,7 @@ class WheelFragment : Fragment() {
             binding.wheelResultTv.visibility = View.GONE
             binding.wheelRetryBtn.visibility = View.GONE
             binding.wheelSaveBtn.visibility = View.GONE
-            val res = moveWheel(wheelArr)
+            res = moveWheel(wheelArr)
             Handler().postDelayed({
                 binding.wheelResultTv.text = optionList[res]
                 binding.wheelRetryBtn.visibility = View.VISIBLE
@@ -112,9 +117,18 @@ class WheelFragment : Fragment() {
         }
 
         binding.wheelSaveBtn.setOnClickListener {
-            Toast.makeText(
-            context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
-            ).show()
+            if(res == -1){
+                Toast.makeText(
+                    context, "No value", Toast.LENGTH_SHORT
+                ).show()
+            }
+            else{
+                val randomService = RandomService()
+                randomService.setRandomView(this@WheelFragment)
+
+                val userJwt = getJwt(requireContext(), "userJwt")
+                randomService.storeResult(userJwt, optionList[res], "A")
+            }
         }
         
         return binding.root
@@ -205,7 +219,7 @@ class WheelFragment : Fragment() {
             rotateAnimation.fillAfter = true
             binding.wheelSpinView.startAnimation(rotateAnimation)
         }, 1600)
-        var resAngle: Float = (360/optionList.size) * (optionList.size - res - 0.5f)
+        val resAngle: Float = (360/optionList.size) * (optionList.size - res - 0.5f)
         Handler().postDelayed({
             val rotateAnimation = RotateAnimation(0f, resAngle, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
             rotateAnimation.duration = 700
@@ -213,5 +227,17 @@ class WheelFragment : Fragment() {
             binding.wheelSpinView.startAnimation(rotateAnimation)
         }, 2200)
 
+    }
+
+    override fun onRandomResultSuccess() {
+        Toast.makeText(
+            context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onRandomResultFailure(code: Int, message: String) {
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
     }
 }

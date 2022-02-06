@@ -8,22 +8,26 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityColorResultBinding
+import org.techtown.gabojago.main.getJwt
+import org.techtown.gabojago.menu.randomPick.home.RandomService
+import org.techtown.gabojago.menu.randomPick.home.RandomView
 import java.util.*
 
-class ColorResultActivity : AppCompatActivity() {
+class ColorResultActivity : AppCompatActivity(), RandomView {
 
     lateinit var binding: ActivityColorResultBinding
+    var randRes: Int = -1
 
     var randomColor = arrayOf(
-        "빨간색 계열!",
-        "주황색 계열!",
-        "노란색 계열!",
-        "초록색 계열!",
-        "파란색 계열!",
-        "검은색 계열!",
-        "갈색 계열!",
-        "흰색 계열!",
-        "마젠타 계열!",
+        "빨간색 계열",
+        "주황색 계열",
+        "노란색 계열",
+        "초록색 계열",
+        "파란색 계열",
+        "검은색 계열",
+        "갈색 계열",
+        "흰색 계열",
+        "마젠타 계열",
         )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +57,7 @@ class ColorResultActivity : AppCompatActivity() {
             binding.colorResultView.visibility = View.VISIBLE
             binding.colorResultView.startAnimation(animAlphaStart)
 
-            var randRes = setRandom()
+            randRes = setRandom()
             binding.colorResultColorTv.text = randomColor[randRes]
             binding.colorResultColorIv.setImageResource(randomColorImageArr[randRes])
         }
@@ -62,14 +66,35 @@ class ColorResultActivity : AppCompatActivity() {
             finish()
         }
         binding.colorResultSaveBtn.setOnClickListener {
-            Toast.makeText(
-                this, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
-            ).show()
+            if(randRes == -1){
+                Toast.makeText(
+                    this, "No value", Toast.LENGTH_SHORT
+                ).show()
+            }
+            else{
+                val randomService = RandomService()
+                randomService.setRandomView(this)
+
+                val userJwt = getJwt(this, "userJwt")
+                randomService.storeResult(userJwt, randomColor[randRes], "C")
+            }
         }
     }
 
     private fun setRandom(): Int{
         val random = Random()
         return random.nextInt(9)
+    }
+
+    override fun onRandomResultSuccess() {
+        Toast.makeText(
+            this, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onRandomResultFailure(code: Int, message: String) {
+        Toast.makeText(
+            this, message, Toast.LENGTH_SHORT
+        ).show()
     }
 }

@@ -18,10 +18,13 @@ import androidx.fragment.app.Fragment
 import org.techtown.gabojago.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentClockBinding
+import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.randomPick.home.HomeMenuFragment
+import org.techtown.gabojago.menu.randomPick.home.RandomService
+import org.techtown.gabojago.menu.randomPick.home.RandomView
 import java.util.*
 
-class ClockFragment : Fragment() {
+class ClockFragment : Fragment(), RandomView {
 
     lateinit var binding: FragmentClockBinding
     var startNum: Int = 12
@@ -122,9 +125,18 @@ class ClockFragment : Fragment() {
             }, 4900)
         }
         binding.clockSaveBtn.setOnClickListener{
-            Toast.makeText(
-                    context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
-            ).show()
+            if(getResClock == -1){
+                Toast.makeText(
+                    activity, "No value", Toast.LENGTH_SHORT
+                ).show()
+            }
+            else{
+                val randomService = RandomService()
+                randomService.setRandomView(this@ClockFragment)
+
+                val userJwt = getJwt(requireContext(), "userJwt")
+                randomService.storeResult(userJwt, getResClock.toString() + "시 방향", "B")
+            }
         }
         return binding.root
     }
@@ -246,5 +258,17 @@ class ClockFragment : Fragment() {
         for(i: Int in start..end){
             viewArr[i % 12].setTextColor(Color.rgb(255,147,124))
         }
+    }
+
+    override fun onRandomResultSuccess() {
+        Toast.makeText(
+            context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onRandomResultFailure(code: Int, message: String) {
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
     }
 }
