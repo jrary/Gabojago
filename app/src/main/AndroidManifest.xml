@@ -25,7 +25,7 @@
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".menu.record.CalendarActivity"
+        <activity android:name=".menu.record.calender.CalendarActivity"
             />
         <activity android:name=".menu.randomPick.wheel.WheelOptionActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"

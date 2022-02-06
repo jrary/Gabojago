@@ -13,12 +13,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 import android.graphics.Point
-import android.provider.Settings.Global.putString
 import android.util.TypedValue
 import android.view.*
 import android.view.animation.OvershootInterpolator
 import com.google.gson.Gson
 import org.techtown.gabojago.data.SingleRecord
+import org.techtown.gabojago.menu.record.calender.CalendarActivity
 
 
 class RecordFragment : Fragment() {
