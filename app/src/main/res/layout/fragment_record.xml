@@ -22,8 +22,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:fontFamily="@font/nanum_square_round_otf_extrabold"
+        android:fontFamily="@font/apple_sd_gothic_neo_sb"
         android:text="기록하자"
+        android:textStyle="bold"
         android:textColor="#000000"
         android:textSize="32.3sp"
         app:layout_constraintBottom_toBottomOf="@id/record_pecil_big_iv"
@@ -217,8 +218,8 @@
 
     <ImageView
         android:id="@+id/record_close_iv"
-        android:layout_width="54dp"
-        android:layout_height="54dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="7dp"
         android:src="@drawable/x"
@@ -229,8 +230,8 @@
 
     <ImageView
         android:id="@+id/record_trash_iv"
-        android:layout_width="54dp"
-        android:layout_height="54dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="7dp"
         android:src="@drawable/trash"
@@ -240,8 +241,8 @@
 
     <ImageView
         android:id="@+id/record_folderplus_iv"
-        android:layout_width="54dp"
-        android:layout_height="54dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="7dp"
         android:src="@drawable/folder_plus"

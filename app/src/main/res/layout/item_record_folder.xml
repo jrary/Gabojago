@@ -16,10 +16,10 @@
 
     <ImageView
         android:id="@+id/item_folderrecord_circle_iv"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/resultimage_1"
+        android:src="@drawable/resultimage_dolimpan_gray"
         android:layout_marginStart="5dp"
         android:layout_marginBottom="6dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
         android:textSize="16sp"
         android:layout_marginTop="2dp"
         android:textColor="#000000"
-        android:text="결과: 버스"
+        android:text="버스"
         app:layout_constraintStart_toStartOf="@id/item_folderrecord_title_iv"
         app:layout_constraintTop_toBottomOf="@id/item_folderrecord_title_iv"
         app:layout_constraintBottom_toBottomOf="@id/item_folderrecord_circle_iv"/>

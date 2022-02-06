@@ -1,4 +1,4 @@
-package org.techtown.gabojago.record
+package org.techtown.gabojago.menu.record
 
 import android.graphics.Color
 import android.view.LayoutInflater
