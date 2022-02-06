@@ -35,7 +35,7 @@ class ManageService {
                 }
             }
             override fun onFailure(call: Call<NicknameResponse>, t: Throwable) {
-                nicknameView.onNicknameFailure(400, "Network Error")
+                nicknameView.onNicknameFailure(400, t.message!!)
             }
         })
     }
@@ -57,7 +57,7 @@ class ManageService {
                 }
             }
             override fun onFailure(call: Call<NewNicknameResponse>, t: Throwable) {
-                newNicknameView.onModifyNicknameFailure(400, "Network Error")
+                newNicknameView.onModifyNicknameFailure(400, t.message!!)
             }
         })
     }
