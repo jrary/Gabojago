@@ -196,7 +196,7 @@
             android:id="@+id/home_menu_number_iv"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/menu_roulette"
+            android:src="@drawable/menu_number"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -225,7 +225,7 @@
         android:id="@+id/home_menu_character_iv"
         android:layout_width="233dp"
         android:layout_height="134dp"
-        android:src="@drawable/menu_character"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_menu_color_view"
         app:layout_constraintBottom_toBottomOf="parent"
