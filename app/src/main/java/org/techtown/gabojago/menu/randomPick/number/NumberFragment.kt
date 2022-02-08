@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
@@ -17,10 +18,13 @@ import androidx.fragment.app.Fragment
 import org.techtown.gabojago.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentNumberBinding
+import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.randomPick.home.HomeMenuFragment
+import org.techtown.gabojago.menu.randomPick.home.RandomService
+import org.techtown.gabojago.menu.randomPick.home.RandomView
 import java.util.*
 
-class NumberFragment : Fragment() {
+class NumberFragment : Fragment(), RandomView {
     lateinit var binding: FragmentNumberBinding
     var startNum: Int = 0
     var endNum: Int = 0
@@ -114,6 +118,28 @@ class NumberFragment : Fragment() {
             binding.numberContentsView.startAnimation(animAlphaStart)
         }
 
+        binding.numberSaveBtn.setOnClickListener {
+            if(resArray.isEmpty()){
+                Toast.makeText(
+                    context, "No value", Toast.LENGTH_SHORT
+                ).show()
+            }
+            else{
+                val randomService = RandomService()
+                randomService.setRandomView(this@NumberFragment)
+
+                var numberResString = ""
+                for(i in 0..resArray.size - 1){
+                    numberResString = numberResString + " " + resArray[i].toString()
+                }
+
+                Log.d("NUMBERRESULT", numberResString)
+
+                val userJwt = getJwt(requireContext(), "userJwt")
+                randomService.storeResult(userJwt, numberResString, "D")
+            }
+        }
+
         return binding.root
     }
     //Get the RESULT NUMBER -> RESARRAY
@@ -183,5 +209,16 @@ class NumberFragment : Fragment() {
             binding.numberRetryBtn.visibility = View.VISIBLE
             binding.numberSaveBtn.visibility = View.VISIBLE
         }, 300 + 700 * resArray.size.toLong())
+    }
+    override fun onRandomResultSuccess() {
+        Toast.makeText(
+            context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onRandomResultFailure(code: Int, message: String) {
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
     }
 }

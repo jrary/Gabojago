@@ -37,6 +37,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".menu.randomPick.clock.ClockSelectActivity"
             android:screenOrientation="portrait"/>
+
         <activity android:name=".menu.randomPick.number.NumberOptionActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             android:screenOrientation="portrait"/>
