@@ -74,7 +74,9 @@ dependencies {
     implementation 'io.github.ShawnLin013:number-picker:2.4.13'
 
     //Bottomnavigation view
-    implementation 'com.tbuonomo:morph-bottom-navigation:1.0.1'
+    implementation 'androidx.navigation:navigation-fragment:2.3.2'
+    implementation 'androidx.navigation:navigation-ui:2.3.2'
+
 
 
 }

@@ -50,14 +50,14 @@ class RecordFolderResultNameRVAdapter: RecyclerView.Adapter<RecordFolderResultNa
         holder.binding.folderRecordFolderIv.setOnClickListener {
             val inflater = LayoutInflater.from(holder.binding.folderRecordFolderIv.context)
             val popup = PopupWindow(inflater.inflate(R.layout.popup_menu, null, false),
-                260,
-                200,
+                280,
+                240,
                 true)
             val location=IntArray(2)
             holder.binding.folderRecordFolderIv.getLocationOnScreen(location)
 
 
-            popup.showAtLocation(holder.binding.folderRecordFolderIv, Gravity.NO_GRAVITY, location[0]-30, location[1]+60)
+            popup.showAtLocation(holder.binding.folderRecordFolderIv, Gravity.NO_GRAVITY, location[0]-100, location[1]+100)
         }
     }
 

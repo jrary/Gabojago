@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/homeFragment"
             android:icon="@drawable/bottom_back1"
             app:showAsAction="always"
-            android:enabled="true"
             android:title="" />
         <item
             android:id="@+id/recordFragment"
