@@ -102,6 +102,9 @@ class RecordLookFragment: Fragment() {
         resultList.add(recordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
         resultList.add(recordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
         resultList.add(recordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
+        resultList.add(recordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
+        resultList.add(recordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
+        resultList.add(recordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
 
         return resultList
     }
