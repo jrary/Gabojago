@@ -16,6 +16,8 @@ import java.util.*
 
 class CalendarActivity :AppCompatActivity(), NicknameAdventureView {
     lateinit var binding: ActivityCalendarBinding
+    var viewDate = ""
+    var minus = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,10 +25,13 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView {
         setContentView(binding.root)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
+        init()
+        monthClick()
+
         val gridLayoutManager = GridLayoutManager(this, 7)
         binding.calendarGridview.layoutManager = gridLayoutManager
 
-        val calendarAdapter = CalendarAdapter()
+        val calendarAdapter = CalendarAdapter(viewDate)
         binding.calendarGridview.adapter = calendarAdapter
 
         binding.calendarGridview.addItemDecoration(HorizontalItemDecorator( 28))
@@ -36,21 +41,76 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView {
         calendarService.setNicknameAdventureView(this@CalendarActivity)
         calendarService.getNicknameAdventure(userJwt)
 
-        init()
-
     }
 
     private fun init() {
-        binding.calendarDateTv.setText(setdate())
+        binding.calendarDateTv.text= setMonth()
     }
 
-    private fun setdate() : String{
+    private fun monthClick() {
+        val cal = Calendar.getInstance()
+        val dateArray = initDate().split("-").toTypedArray()
+        cal.set(dateArray[0].toInt(), dateArray[1].toInt() - 1, 1)
+        viewDate = cal.get(Calendar.YEAR)
+            .toString() + "-" + (cal.get(Calendar.MONTH) + 1).toString() + "-" + "01"
+        val registerDateArray = setRegisterDate("2021-07-23T03:20:17.000Z")
+        binding.calendarNextTv.setOnClickListener {
+            if (cal.get(Calendar.YEAR) > dateArray[0].toInt() || (cal.get(Calendar.YEAR) == dateArray[0].toInt() && cal.get(
+                    Calendar.MONTH + 1) > dateArray[1].toInt())
+            ) {
+                Toast.makeText(
+                    this, "기록이 없는 달이야!", Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                cal.add(Calendar.MONTH, +1)
+            }
+            binding.calendarDateTv.text = cal.get(Calendar.YEAR).toString() + ", " + (cal.get(
+                Calendar.MONTH) + 1).toString() + "월"
+            viewDate = cal.get(Calendar.YEAR)
+                .toString() + "-" + (cal.get(Calendar.MONTH) + 1).toString() + "-" + "01"
+            val calendarAdapter = CalendarAdapter(viewDate)
+            binding.calendarGridview.adapter = calendarAdapter
+        }
+
+        binding.calendarPreviewTv.setOnClickListener {
+            if ((cal.get(Calendar.YEAR) > registerDateArray[0].toInt() && cal.get(Calendar.MONTH) == 11) || (cal.get(
+                    Calendar.YEAR) == registerDateArray[0].toInt() && cal.get(Calendar.MONTH) + 1 <= registerDateArray[1].toInt())
+            ) {
+                Toast.makeText(
+                    this, "기록이 없는 달이야!", Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                cal.add(Calendar.MONTH, -1)
+            }
+            binding.calendarDateTv.text = cal.get(Calendar.YEAR)
+                .toString() + ", " + (cal.get(Calendar.MONTH) + 1).toString() + "월"
+            viewDate = cal.get(Calendar.YEAR)
+                .toString() + "-" + (cal.get(Calendar.MONTH) + 1).toString() + "-" + "01"
+            val calendarAdapter = CalendarAdapter(viewDate)
+            binding.calendarGridview.adapter = calendarAdapter
+        }
+    }
+
+    private fun setMonth() : String{
         val now: Long = System.currentTimeMillis()
         val date = Date(now)
         val dateFormat = SimpleDateFormat("yyyy, MM월", Locale("ko", "KR"))
         val stringDate = dateFormat.format(date)
 
         return stringDate
+    }
+
+    fun initDate() : String{
+        val now: Long = System.currentTimeMillis()
+        val date = Date(now)
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale("ko", "KR"))
+        val stringDate = dateFormat.format(date)
+        return stringDate
+    }
+
+    private fun setRegisterDate(registerDate :String) : Array<String> {
+        val dateArray = registerDate.split("-").toTypedArray()
+        return dateArray
     }
 
     override fun onNicknameAdventureSuccess(userNicknameAdventure: NicknameAdventureResult) {

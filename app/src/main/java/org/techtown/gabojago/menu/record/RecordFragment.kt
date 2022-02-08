@@ -11,7 +11,6 @@ import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentRecordBinding
 import java.text.SimpleDateFormat
 import java.util.*
-
 import android.graphics.Point
 import android.util.TypedValue
 import android.view.*
@@ -19,11 +18,15 @@ import android.view.animation.OvershootInterpolator
 import com.google.gson.Gson
 import org.techtown.gabojago.data.SingleRecord
 import org.techtown.gabojago.menu.record.calender.CalendarActivity
+import kotlinx.android.synthetic.main.item_record_foldername.*
+import android.view.LayoutInflater
+import org.techtown.gabojago.databinding.ItemRecordFoldernameBinding
 
 
 class RecordFragment : Fragment() {
 
     lateinit var binding: FragmentRecordBinding
+    lateinit var binding2: ItemRecordFoldernameBinding
 
     var records= ArrayList<SingleRecord>()
 
@@ -35,6 +38,7 @@ class RecordFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentRecordBinding.inflate(inflater, container, false)
+        binding2 = ItemRecordFoldernameBinding.inflate(inflater, container, false)
 
 
         binding.recordFolderresultRecyclerview.layoutManager =
@@ -68,7 +72,7 @@ class RecordFragment : Fragment() {
 
         recordFolderResultNameRVAdapter.setMyItemClickListener(object :
             RecordFolderResultNameRVAdapter.MyItemClickListener {
-            override fun onItemClick() {
+            override fun onItemClickPencil() {
                 changeFolderRecordFragment()
             }
 
@@ -84,6 +88,22 @@ class RecordFragment : Fragment() {
 
         return binding.root
     }
+
+//    inner class PopupMenuListener : PopupWindow.OnMenuItemClickListener {
+//        override fun onMenuItemClick(p0: MenuItem?): Boolean {
+//            when (p0?.itemId) {
+//                R.id.menu_modify ->
+//                    Toast.makeText(
+//                        requireContext(), "수정", Toast.LENGTH_SHORT
+//                    ).show()
+//                R.id.menu_folderdelete ->
+//                    Toast.makeText(
+//                        requireContext(), "폴더해제", Toast.LENGTH_SHORT
+//                    ).show()
+//            }
+//            return false
+//        }
+//    }
 
     private fun clickevent() {
         binding.recordMonthTv.setOnClickListener {

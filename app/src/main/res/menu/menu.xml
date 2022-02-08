@@ -7,7 +7,6 @@
             android:id="@+id/homeFragment"
             android:icon="@drawable/bottom_back1"
             app:showAsAction="always"
-            android:enabled="true"
             android:title="" />
         <item
             android:id="@+id/recordFragment"
