@@ -220,4 +220,16 @@ class NumberFragment : Fragment(), RandomView {
             activity, message, Toast.LENGTH_SHORT
         ).show()
     }
+
+    override fun onPause() {
+        super.onPause()
+        val animationOpen = AnimationUtils.loadAnimation(activity, R.anim.anim_open_scale)
+        binding.numberMainIv.startAnimation(animationOpen)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val animationClose = AnimationUtils.loadAnimation(activity, R.anim.anim_close_scale)
+        binding.numberMainIv.startAnimation(animationClose)
+    }
 }

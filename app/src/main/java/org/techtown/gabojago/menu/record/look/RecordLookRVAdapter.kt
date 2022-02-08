@@ -4,11 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.databinding.ItemLookPickBinding
-import org.techtown.gabojago.databinding.ItemRecordFolderBinding
-import org.techtown.gabojago.menu.randomPick.wheel.WheelOptionRVAdapter
 import java.util.*
 
-class RecordLookRVAdapter(var pickedList: ArrayList<recordLook>): RecyclerView.Adapter<RecordLookRVAdapter.ViewHolder>() {
+class RecordLookRVAdapter(var pickedList: ArrayList<RecordLook>): RecyclerView.Adapter<RecordLookRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemLookPickBinding =
@@ -23,7 +21,7 @@ class RecordLookRVAdapter(var pickedList: ArrayList<recordLook>): RecyclerView.A
 
     inner class ViewHolder(val binding: ItemLookPickBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(pickedItem: recordLook) {
+        fun bind(pickedItem: RecordLook) {
             binding.resultPickTimeTv.text = pickedItem.time
             binding.resultPickTypeTv.text = pickedItem.type
             binding.resultPickContentsTv.text = pickedItem.contents

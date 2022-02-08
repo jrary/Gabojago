@@ -4,14 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentRecordLookBinding
-import org.techtown.gabojago.menu.record.RecordFolderResultRVAdapter
 import org.techtown.gabojago.menu.record.RecordFragment
 import java.util.*
 
@@ -131,17 +128,17 @@ class RecordLookFragment: Fragment() {
     }
 
     //Function to store the Random value in the RecyclerView
-    private fun getRandomResultList(): ArrayList<recordLook> {
-        var resultList = ArrayList<recordLook>()
+    private fun getRandomResultList(): ArrayList<RecordLook> {
+        var resultList = ArrayList<RecordLook>()
 
-        resultList.add(recordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
-        resultList.add(recordLook("12:34", "N시 방향", "9시 방향"))
-        resultList.add(recordLook("12:34", "색깔 뽑기", "검은색 계열"))
-        resultList.add(recordLook("12:34", "숫자 뽑기", "2,1,10,7"))
-        resultList.add(recordLook("12:34", "돌려돌려 돌림판", "버스"))
-        resultList.add(recordLook("12:34", "N시 방향", "2시 방향"))
-        resultList.add(recordLook("12:34", "색깔 뽑기", "노란색 계열"))
-        resultList.add(recordLook("12:34", "숫자 뽑기", "8,17,3,2,9,15"))
+        resultList.add(RecordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
+        resultList.add(RecordLook("12:34", "N시 방향", "9시 방향"))
+        resultList.add(RecordLook("12:34", "색깔 뽑기", "검은색 계열"))
+        resultList.add(RecordLook("12:34", "숫자 뽑기", "2,1,10,7"))
+        resultList.add(RecordLook("12:34", "돌려돌려 돌림판", "버스"))
+        resultList.add(RecordLook("12:34", "N시 방향", "2시 방향"))
+        resultList.add(RecordLook("12:34", "색깔 뽑기", "노란색 계열"))
+        resultList.add(RecordLook("12:34", "숫자 뽑기", "8,17,3,2,9,15"))
 
         return resultList
     }
