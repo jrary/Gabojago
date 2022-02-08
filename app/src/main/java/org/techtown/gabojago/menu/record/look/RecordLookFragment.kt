@@ -146,6 +146,7 @@ class RecordLookFragment: Fragment() {
         return resultList
     }
 
+    //Function to set the star rate
     private fun setStarState(star: Double) {
         var starArr = arrayOf(
             binding.recordLookStar01LeftIv,
