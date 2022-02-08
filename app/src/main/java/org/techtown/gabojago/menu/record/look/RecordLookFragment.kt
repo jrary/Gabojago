@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
@@ -18,6 +19,7 @@ class RecordLookFragment: Fragment() {
     lateinit var binding: FragmentRecordLookBinding
     private val MIN_SCALE = 0.85f
     private val MIN_ALPHA = 0.5f
+    var isOpened: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,18 +28,28 @@ class RecordLookFragment: Fragment() {
     ): View? {
         binding = FragmentRecordLookBinding.inflate(inflater, container, false)
 
+        //Set Viewpager and Indicator
         var imageArr = getImageList()
         binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageArr)
         binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.recordLookPictureVp.setPageTransformer(ZoomOutPageTransformer())
         binding.recordLookCircleIndicator.setViewPager2(binding.recordLookPictureVp)
 
-        val resultList = getRandomResultList()
+        //Set Rating star
+        setStarState(2.5)
 
+        //Set RecyclerView
+        val resultList = getRandomResultList()
         val recordLookRVAdapter = RecordLookRVAdapter(resultList)
         binding.recordResultRecyclerview.adapter = recordLookRVAdapter
 
-        binding.recordLookBackBtn.setOnClickListener{
+        //Open RecyclerView Event
+        binding.recordLookView.setOnClickListener {
+            randomIsOpened(isOpened)
+        }
+
+        //Go to the Previous page
+        binding.recordLookBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, RecordFragment().apply {
                     arguments = Bundle().apply {
@@ -49,14 +61,7 @@ class RecordLookFragment: Fragment() {
         return binding.root
     }
 
-    private fun getImageList(): ArrayList<Int>{
-
-//        for(i in 0..LookImageList.size - 1){
-//            imageArr.add(LookImageList[i])
-//        }
-        return arrayListOf<Int>(R.drawable.record_look_example_img, R.drawable.record_look_example_img, R.drawable.record_look_example_img)
-    }
-
+    //Animation on the ViewPager
     inner class ZoomOutPageTransformer : ViewPager2.PageTransformer {
         override fun transformPage(view: View, position: Float) {
             view.apply {
@@ -95,17 +100,68 @@ class RecordLookFragment: Fragment() {
         }
     }
 
-    private fun getRandomResultList(): ArrayList<recordLook>{
+    //Set the state of RecyclerView
+    private fun randomIsOpened(toOpen: Boolean) {
+        if (toOpen) {
+            binding.recordLookArrowBtn.setImageResource(R.drawable.result_look_arrow_clicked)
+            binding.recordResultRecyclerview.visibility = View.VISIBLE
+        } else {
+            binding.recordLookArrowBtn.setImageResource(R.drawable.result_look_arrow)
+            binding.recordResultRecyclerview.visibility = View.GONE
+        }
+        isOpened = !isOpened
+    }
+
+    //Function to store the Image in the ViewPager
+    private fun getImageList(): ArrayList<Int> {
+
+        var imageList = ArrayList<Int>()
+
+        imageList.add(R.drawable.record_look_example_img)
+        imageList.add(R.drawable.record_look_example_img)
+        imageList.add(R.drawable.record_look_example_img)
+        imageList.add(R.drawable.record_look_example_img)
+        imageList.add(R.drawable.record_look_example_img)
+        imageList.add(R.drawable.record_look_example_img)
+        imageList.add(R.drawable.record_look_example_img)
+        imageList.add(R.drawable.record_look_example_img)
+        imageList.add(R.drawable.record_look_example_img)
+
+        return imageList
+    }
+
+    //Function to store the Random value in the RecyclerView
+    private fun getRandomResultList(): ArrayList<recordLook> {
         var resultList = ArrayList<recordLook>()
 
         resultList.add(recordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
-        resultList.add(recordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
-        resultList.add(recordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
-        resultList.add(recordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
-        resultList.add(recordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
-        resultList.add(recordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
-        resultList.add(recordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
+        resultList.add(recordLook("12:34", "N시 방향", "9시 방향"))
+        resultList.add(recordLook("12:34", "색깔 뽑기", "검은색 계열"))
+        resultList.add(recordLook("12:34", "숫자 뽑기", "2,1,10,7"))
+        resultList.add(recordLook("12:34", "돌려돌려 돌림판", "버스"))
+        resultList.add(recordLook("12:34", "N시 방향", "2시 방향"))
+        resultList.add(recordLook("12:34", "색깔 뽑기", "노란색 계열"))
+        resultList.add(recordLook("12:34", "숫자 뽑기", "8,17,3,2,9,15"))
 
         return resultList
+    }
+
+    private fun setStarState(star: Double) {
+        var starArr = arrayOf(
+            binding.recordLookStar01LeftIv,
+            binding.recordLookStar01RightIv,
+            binding.recordLookStar02LeftIv,
+            binding.recordLookStar02RightIv,
+            binding.recordLookStar03LeftIv,
+            binding.recordLookStar03RightIv,
+            binding.recordLookStar04LeftIv,
+            binding.recordLookStar04RightIv,
+            binding.recordLookStar05LeftIv,
+            binding.recordLookStar05RightIv
+        )
+
+        for(i in 0..(star*2).toInt() - 1){
+            starArr[i].visibility = View.VISIBLE
+        }
     }
 }

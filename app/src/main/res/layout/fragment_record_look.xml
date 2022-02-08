@@ -36,6 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/record_look_title_view"
+        app:layout_constraintBottom_toBottomOf="parent"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -45,6 +46,7 @@
                 android:id="@+id/record_look_picture_vp"
                 android:layout_width="match_parent"
                 android:layout_height="360dp"
+                android:layout_marginTop="90dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -103,7 +105,7 @@
                     android:id="@+id/record_look_star_01_iv"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/record_look_star"
+                    android:src="@drawable/record_look_star_nonselected"
                     app:layout_constraintEnd_toStartOf="@id/record_look_star_02_iv"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -112,7 +114,7 @@
                     android:id="@+id/record_look_star_02_iv"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/record_look_star"
+                    android:src="@drawable/record_look_star_nonselected"
                     app:layout_constraintEnd_toStartOf="@id/record_look_star_03_iv"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -121,7 +123,7 @@
                     android:id="@+id/record_look_star_03_iv"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/record_look_star"
+                    android:src="@drawable/record_look_star_nonselected"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -131,7 +133,7 @@
                     android:id="@+id/record_look_star_04_iv"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/record_look_star"
+                    android:src="@drawable/record_look_star_nonselected"
                     app:layout_constraintStart_toEndOf="@id/record_look_star_03_iv"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -140,10 +142,111 @@
                     android:id="@+id/record_look_star_05_iv"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/record_look_star"
+                    android:src="@drawable/record_look_star_nonselected"
                     app:layout_constraintStart_toEndOf="@id/record_look_star_04_iv"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/record_look_star_01_left_iv"
+                    android:layout_width="8dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/record_look_star_left"
+                    app:layout_constraintStart_toStartOf="@id/record_look_star_01_iv"
+                    app:layout_constraintTop_toTopOf="@id/record_look_star_01_iv"
+                    app:layout_constraintBottom_toBottomOf="@id/record_look_star_01_iv"
+                    android:visibility="gone"
+                    />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/record_look_star_01_right_iv"
+                    android:layout_width="8dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/record_look_star_right"
+                    app:layout_constraintEnd_toEndOf="@id/record_look_star_01_iv"
+                    app:layout_constraintTop_toTopOf="@id/record_look_star_01_iv"
+                    app:layout_constraintBottom_toBottomOf="@id/record_look_star_01_iv"
+                    android:visibility="gone"
+                    />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/record_look_star_02_left_iv"
+                    android:layout_width="8dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/record_look_star_left"
+                    app:layout_constraintStart_toStartOf="@id/record_look_star_02_iv"
+                    app:layout_constraintTop_toTopOf="@id/record_look_star_02_iv"
+                    app:layout_constraintBottom_toBottomOf="@id/record_look_star_02_iv"
+                    android:visibility="gone"
+                    />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/record_look_star_02_right_iv"
+                    android:layout_width="8dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/record_look_star_right"
+                    app:layout_constraintEnd_toEndOf="@id/record_look_star_02_iv"
+                    app:layout_constraintTop_toTopOf="@id/record_look_star_02_iv"
+                    app:layout_constraintBottom_toBottomOf="@id/record_look_star_02_iv"
+                    android:visibility="gone"
+                    />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/record_look_star_03_left_iv"
+                    android:layout_width="8dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/record_look_star_left"
+                    app:layout_constraintStart_toStartOf="@id/record_look_star_03_iv"
+                    app:layout_constraintTop_toTopOf="@id/record_look_star_03_iv"
+                    app:layout_constraintBottom_toBottomOf="@id/record_look_star_03_iv"
+                    android:visibility="gone"
+                    />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/record_look_star_03_right_iv"
+                    android:layout_width="8dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/record_look_star_right"
+                    app:layout_constraintEnd_toEndOf="@id/record_look_star_03_iv"
+                    app:layout_constraintTop_toTopOf="@id/record_look_star_03_iv"
+                    app:layout_constraintBottom_toBottomOf="@id/record_look_star_03_iv"
+                    android:visibility="gone"
+                    />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/record_look_star_04_left_iv"
+                    android:layout_width="8dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/record_look_star_left"
+                    app:layout_constraintStart_toStartOf="@id/record_look_star_04_iv"
+                    app:layout_constraintTop_toTopOf="@id/record_look_star_04_iv"
+                    app:layout_constraintBottom_toBottomOf="@id/record_look_star_04_iv"
+                    android:visibility="gone"
+                    />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/record_look_star_04_right_iv"
+                    android:layout_width="8dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/record_look_star_right"
+                    app:layout_constraintEnd_toEndOf="@id/record_look_star_04_iv"
+                    app:layout_constraintTop_toTopOf="@id/record_look_star_04_iv"
+                    app:layout_constraintBottom_toBottomOf="@id/record_look_star_04_iv"
+                    android:visibility="gone"
+                    />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/record_look_star_05_left_iv"
+                    android:layout_width="8dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/record_look_star_left"
+                    app:layout_constraintStart_toStartOf="@id/record_look_star_05_iv"
+                    app:layout_constraintTop_toTopOf="@id/record_look_star_05_iv"
+                    app:layout_constraintBottom_toBottomOf="@id/record_look_star_05_iv"
+                    android:visibility="gone"
+                    />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/record_look_star_05_right_iv"
+                    android:layout_width="8dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/record_look_star_right"
+                    app:layout_constraintEnd_toEndOf="@id/record_look_star_05_iv"
+                    app:layout_constraintTop_toTopOf="@id/record_look_star_05_iv"
+                    app:layout_constraintBottom_toBottomOf="@id/record_look_star_05_iv"
+                    android:visibility="gone"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -174,12 +277,14 @@
                 >
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/record_look_arrow_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
                     android:src="@drawable/result_look_arrow"
                     android:background="@null"
+                    android:layout_marginBottom="10dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     />
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/record_look_result_tv"
@@ -202,8 +307,6 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:overScrollMode="never"
-                android:scrollbars="none"
                 tools:listitem="@layout/item_look_pick"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
