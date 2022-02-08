@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.techtown.gabojago.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentClockBinding
@@ -246,5 +247,17 @@ class ClockFragment : Fragment() {
         for(i: Int in start..end){
             viewArr[i % 12].setTextColor(Color.rgb(255,147,124))
         }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        hideBottomNavigation(false)
+    }
+
+    fun hideBottomNavigation(bool: Boolean) {
+        val bottomNavigation: BottomNavigationView = requireActivity().findViewById(R.id.main_bnv)
+        if (bool == true)
+            bottomNavigation.visibility = View.GONE
+        else
+            bottomNavigation.visibility = View.VISIBLE
     }
 }

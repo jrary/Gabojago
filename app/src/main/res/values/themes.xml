@@ -54,8 +54,4 @@
         <item name="paddingEnd">42dp</item>
     </style>
 
-    <style name="TextAppearance.BottomNavigation.Overline" parent="TextAppearance.MaterialComponents.Overline">
-        <item name="android:textSize">8sp</item>
-    </style>
-
 </resources>

@@ -1,20 +1,29 @@
 package org.techtown.gabojago.menu.record.calender
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.databinding.ItemCalendarGridviewBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CalendarAdapter : RecyclerView.Adapter <CalendarAdapter.ViewHolder>() {
+class CalendarAdapter(private val viewDate: String) : RecyclerView.Adapter <CalendarAdapter.ViewHolder>() {
 
     private val days = ArrayList<String>()
+    var month =""
+    var year =""
+    var todayYear = 0
+    var todayMonth = 0
+    var todayDate = 0
 
     //뷰홀더 생성->호출되는 함수->아이템 뷰 객체를 만들어서 뷰홀더에 던져줌
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemCalendarGridviewBinding = ItemCalendarGridviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
+        setEmptyDate(viewDate)
         return ViewHolder(binding)
     }
 
@@ -27,21 +36,27 @@ class CalendarAdapter : RecyclerView.Adapter <CalendarAdapter.ViewHolder>() {
     //뷰홀더
     inner class ViewHolder(val binding: ItemCalendarGridviewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
-            setEmptyDate(setDate())
             binding.itemGridviewTv.text = days[position]
+
+            if(days[position]!="") {
+                today()
+                if (todayYear == year.toInt()&&todayMonth==month.toInt() && todayDate==days[position].toInt()) {
+                    binding.itemGridviewTodayIv.visibility = View.VISIBLE
+                } else {
+                    binding.itemGridviewTodayIv.visibility = View.GONE
+                }
+            }
 
         }
 
     }
 
 
-    override fun getItemCount(): Int {
-        return 42
-    }
+    override fun getItemCount(): Int = setEmptyDate(viewDate)
 
 
 
-    private fun setEmptyDate(eventDate: String) {
+    private fun setEmptyDate(eventDate: String) :Int{
         val dateArray = eventDate.split("-").toTypedArray()
         val cal = Calendar.getInstance()
         cal.set(dateArray[0].toInt(), dateArray[1].toInt() - 1, 1)
@@ -50,25 +65,40 @@ class CalendarAdapter : RecyclerView.Adapter <CalendarAdapter.ViewHolder>() {
         for (i in 1 until dayNum) {
             days.add("")
         }
-        setCalendarDate(cal.get(Calendar.MONTH) + 1)
+        val daySize = setCalendarDate(cal.get(Calendar.MONTH) + 1)
+        month =(cal.get(Calendar.MONTH) + 1).toString()
+        year = cal.get(Calendar.YEAR).toString()
+        return (dayNum+daySize)
     }
 
-    private fun setCalendarDate(month: Int) {
+    private fun setCalendarDate(month: Int) : Int{
         val cal = Calendar.getInstance()
         cal.set(Calendar.MONTH, month - 1)
         for (i in 0 until cal.getActualMaximum(Calendar.DAY_OF_MONTH)) {
             days.add(""+(i+1))
         }
+        return cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     }
 
-    fun setDate() : String{
+    private fun today() {
         val now: Long = System.currentTimeMillis()
         val date = Date(now)
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale("ko", "KR"))
-        val stringDate = dateFormat.format(date)
-
-        return stringDate
+        val yearFormat = SimpleDateFormat("yyyy", Locale("ko", "KR"))
+        val monthFormat = SimpleDateFormat("MM", Locale("ko", "KR"))
+        val dateFormat = SimpleDateFormat("dd", Locale("ko", "KR"))
+        todayYear = yearFormat.format(date).toInt()
+        todayMonth = monthFormat.format(date).toInt()
+        todayDate = dateFormat.format(date).toInt()
     }
+
+//    fun setDate() : String{
+//        val now: Long = System.currentTimeMillis()
+//        val date = Date(now)
+//        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale("ko", "KR"))
+//        val stringDate = dateFormat.format(date)
+//
+//        return stringDate
+//    }
 
 }
 

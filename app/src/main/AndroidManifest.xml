@@ -13,38 +13,41 @@
         android:theme="@style/Theme.Gabojago">
 
         <activity android:name=".start.SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".start.login.LoginActivity"/>
+        <activity android:name=".start.login.LoginActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".MainActivity"
             android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait"/>
         <activity android:name=".menu.record.calender.CalendarActivity"
-            />
+            android:screenOrientation="portrait"/>
         <activity android:name=".menu.randomPick.wheel.WheelOptionActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             android:windowSoftInputMode="adjustPan"
-            />
+            android:screenOrientation="portrait"/>
         <activity android:name=".menu.randomPick.clock.ClockOptionActivity"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" />
-        <activity android:name=".menu.randomPick.clock.ClockSelectActivity" />
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".menu.randomPick.clock.ClockSelectActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".menu.randomPick.number.NumberOptionActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            />
+            android:screenOrientation="portrait"/>
         <activity android:name=".menu.randomPick.number.NumberSelectActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            />
+            android:screenOrientation="portrait"/>
         <activity android:name=".menu.randomPick.number.NumberSelectNumActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            />
+            android:screenOrientation="portrait"/>
         <activity android:name=".menu.randomPick.color.ColorResultActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar.Dim"
-            />
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

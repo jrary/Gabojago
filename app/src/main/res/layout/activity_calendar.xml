@@ -94,27 +94,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/calendar_total_tv"/>
 
-    <View
-        android:id="@+id/calendar_calendar_back_view"
-        android:layout_width="0dp"
-        android:layout_height="360dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/box"
-        android:elevation="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/calendar_total_number_tv"
-        android:layout_marginTop="50dp"
-        />
 
-    <View
+    <ImageView
         android:id="@+id/calendar_calendar_iv"
         android:layout_width="0dp"
         android:layout_height="360dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/calendarbox"
+        android:background="@drawable/calendar_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calendar_total_number_tv"
@@ -125,7 +112,7 @@
         android:id="@+id/calendar_week_layout"
         android:layout_width="0dp"
         android:layout_height="15dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:translationZ="10dp"
         app:layout_constraintStart_toStartOf="@id/calendar_gridview"
         app:layout_constraintEnd_toEndOf="@id/calendar_gridview"
@@ -223,6 +210,7 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:overScrollMode="never"
         android:scrollbars="none"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:translationZ="10dp"
         app:layout_constraintEnd_toEndOf="@id/calendar_calendar_iv"
