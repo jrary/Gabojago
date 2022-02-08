@@ -22,6 +22,7 @@ import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.randomPick.home.HomeMenuFragment
 import org.techtown.gabojago.menu.randomPick.home.RandomService
 import org.techtown.gabojago.menu.randomPick.home.RandomView
+import org.techtown.gabojago.menu.record.RecordFragment
 import java.util.*
 
 class ClockFragment : Fragment(), RandomView {
@@ -83,7 +84,11 @@ class ClockFragment : Fragment(), RandomView {
 
         binding.clockBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, HomeMenuFragment())
+                .replace(R.id.main_frm, HomeMenuFragment().apply {
+                    arguments = Bundle().apply {
+                    }
+                })
+                .addToBackStack(null)
                 .commitAllowingStateLoss()
         }
         binding.clockOptionBtn.setOnClickListener {

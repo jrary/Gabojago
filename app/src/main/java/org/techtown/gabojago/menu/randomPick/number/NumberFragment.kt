@@ -81,7 +81,11 @@ class NumberFragment : Fragment(), RandomView {
 
         binding.numberBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, HomeMenuFragment())
+                .replace(R.id.main_frm, HomeMenuFragment().apply {
+                    arguments = Bundle().apply {
+                    }
+                })
+                .addToBackStack(null)
                 .commitAllowingStateLoss()
         }
 

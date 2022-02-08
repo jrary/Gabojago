@@ -17,7 +17,7 @@ import android.view.*
 import android.view.animation.OvershootInterpolator
 import com.google.gson.Gson
 import org.techtown.gabojago.data.SingleRecord
-import org.techtown.gabojago.menu.record.calender.CalendarActivity
+import org.techtown.gabojago.menu.record.calendar.CalendarActivity
 import kotlinx.android.synthetic.main.item_record_foldername.*
 import android.view.LayoutInflater
 import org.techtown.gabojago.databinding.ItemRecordFoldernameBinding

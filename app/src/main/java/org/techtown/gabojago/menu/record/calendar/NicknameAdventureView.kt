@@ -1,4 +1,4 @@
-package org.techtown.gabojago.menu.record.calender
+package org.techtown.gabojago.menu.record.calendar
 
 interface NicknameAdventureView {
     fun onNicknameAdventureSuccess(userNicknameAdventure: NicknameAdventureResult)

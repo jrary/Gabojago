@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentHomeBinding
+import org.techtown.gabojago.menu.record.FolderRecordFragment
 import org.techtown.gabojago.menu.record.look.RecordLookFragment
 
 class HomeFragment : Fragment() {
@@ -34,13 +35,21 @@ class HomeFragment : Fragment() {
 
         binding.homeStartIv.setOnClickListener{
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, HomeMenuFragment())
+                .replace(R.id.main_frm, HomeMenuFragment().apply {
+                    arguments = Bundle().apply {
+                    }
+                })
+                .addToBackStack(null)
                 .commitAllowingStateLoss()
         }
 
         binding.homeDice02Iv.setOnClickListener{
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, RecordLookFragment())
+                .replace(R.id.main_frm, RecordLookFragment().apply {
+                    arguments = Bundle().apply {
+                    }
+                })
+                .addToBackStack(null)
                 .commitAllowingStateLoss()
         }
 

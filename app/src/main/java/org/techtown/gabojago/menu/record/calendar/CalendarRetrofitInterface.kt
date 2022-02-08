@@ -1,4 +1,4 @@
-package org.techtown.gabojago.menu.record.calender
+package org.techtown.gabojago.menu.record.calendar
 
 import retrofit2.Call
 import retrofit2.http.*

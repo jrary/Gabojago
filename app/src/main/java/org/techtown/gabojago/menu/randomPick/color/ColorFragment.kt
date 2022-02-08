@@ -15,6 +15,7 @@ import org.techtown.gabojago.menu.randomPick.home.HomeMenuFragment
 
 class ColorFragment : Fragment() {
     lateinit var binding: FragmentColorBinding
+    var isRunning: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,10 +28,16 @@ class ColorFragment : Fragment() {
         binding.colorCard01View.setImageResource(R.drawable.vending_card_selected)
         binding.colorBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, HomeMenuFragment())
-                    .commitAllowingStateLoss()
+                .replace(R.id.main_frm, HomeMenuFragment().apply {
+                    arguments = Bundle().apply {
+                    }
+                })
+                .addToBackStack(null)
+                .commitAllowingStateLoss()
         }
+
         binding.colorBtn.setOnClickListener {
+            binding.colorBtn.isEnabled = false
             cardColorAnimation()
             binding.colorBtn.visibility = View.GONE
             binding.colorClickedBtn.visibility = View.VISIBLE
@@ -38,8 +45,8 @@ class ColorFragment : Fragment() {
                 binding.colorBtn.visibility = View.VISIBLE
                 binding.colorClickedBtn.visibility = View.GONE
             }, 300)
-
         }
+
         return binding.root
     }
     private fun cardColorAnimation(){
@@ -95,6 +102,7 @@ class ColorFragment : Fragment() {
         }, 3630) //delay + 330
         Handler().postDelayed({
             binding.colorCardDroppedView.visibility = View.GONE
+            binding.colorBtn.isEnabled = true
         }, 3800) //delay + 70
     }
 

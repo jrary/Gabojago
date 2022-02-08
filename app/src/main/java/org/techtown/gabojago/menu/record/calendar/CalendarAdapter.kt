@@ -1,11 +1,8 @@
-package org.techtown.gabojago.menu.record.calender
+package org.techtown.gabojago.menu.record.calendar
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.databinding.ItemCalendarGridviewBinding
 import java.text.SimpleDateFormat

@@ -1,4 +1,4 @@
-package org.techtown.gabojago.menu.record.calender
+package org.techtown.gabojago.menu.record.calendar
 
 import com.google.gson.annotations.SerializedName
 
