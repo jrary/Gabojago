@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".start.login.LoginActivity"/>
-        <activity android:name=".MainActivity"
+        <activity android:name=".main.MainActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             />
