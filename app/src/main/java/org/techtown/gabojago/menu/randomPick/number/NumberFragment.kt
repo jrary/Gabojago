@@ -140,9 +140,11 @@ class NumberFragment : Fragment(), RandomView {
 
                 var numberResString = ""
                 for(i in 0..resArray.size - 1){
-                    numberResString = numberResString + " " + resArray[i].toString()
+                    numberResString = when(i){
+                        0 -> resArray[i].toString()
+                        else -> numberResString + "," + resArray[i].toString()
+                    }
                 }
-
                 Log.d("NUMBERRESULT", numberResString)
 
                 val userJwt = getJwt(requireContext(), "userJwt")
@@ -226,13 +228,13 @@ class NumberFragment : Fragment(), RandomView {
         binding.numberLoadingTv.visibility = View.VISIBLE
         for(i in 0..5){
             Handler().postDelayed({
-                binding.numberLoadingTv.text = "잠시만 기다려 주세요."
+                binding.numberLoadingTv.text = "결과 저장 중."
             }, (500 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.numberLoadingTv.text = "잠시만 기다려 주세요.."
+                binding.numberLoadingTv.text = "결과 저장 중.."
             }, (1000 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.numberLoadingTv.text = "잠시만 기다려 주세요..."
+                binding.numberLoadingTv.text = "결과 저장 중..."
             }, (1500 + 1500 * i).toLong())
         }
     }

@@ -19,6 +19,7 @@ import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentWheelBinding
 import org.techtown.gabojago.main.getJwt
+import org.techtown.gabojago.menu.randomPick.home.HomeFragment
 import org.techtown.gabojago.menu.randomPick.home.HomeMenuFragment
 import org.techtown.gabojago.menu.randomPick.home.RandomService
 import org.techtown.gabojago.menu.randomPick.home.RandomView
@@ -239,22 +240,24 @@ class WheelFragment : Fragment(), RandomView {
         binding.wheelLoadingTv.visibility = View.VISIBLE
         for(i in 0..5){
             Handler().postDelayed({
-                binding.wheelLoadingTv.text = "잠시만 기다려 주세요."
+                binding.wheelLoadingTv.text = "결과 저장 중."
             }, (500 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.wheelLoadingTv.text = "잠시만 기다려 주세요.."
+                binding.wheelLoadingTv.text = "결과 저장 중.."
             }, (1000 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.wheelLoadingTv.text = "잠시만 기다려 주세요..."
+                binding.wheelLoadingTv.text = "결과 저장 중..."
             }, (1500 + 1500 * i).toLong())
         }
     }
 
     override fun onRandomResultSuccess() {
-        binding.wheelLoadingTv.visibility = View.GONE
         Toast.makeText(
             context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
         ).show()
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, WheelFragment())
+            .commitAllowingStateLoss()
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {

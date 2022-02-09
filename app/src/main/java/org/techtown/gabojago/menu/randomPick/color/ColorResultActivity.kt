@@ -91,13 +91,13 @@ class ColorResultActivity : AppCompatActivity(), RandomView {
         binding.colorLoadingTv.visibility = View.VISIBLE
         for(i in 0..5){
             Handler().postDelayed({
-                binding.colorLoadingTv.text = "잠시만 기다려 주세요."
+                binding.colorLoadingTv.text = "결과 저장 중."
             }, (500 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.colorLoadingTv.text = "잠시만 기다려 주세요.."
+                binding.colorLoadingTv.text = "결과 저장 중.."
             }, (1000 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.colorLoadingTv.text = "잠시만 기다려 주세요..."
+                binding.colorLoadingTv.text = "결과 저장 중..."
             }, (1500 + 1500 * i).toLong())
         }
     }
