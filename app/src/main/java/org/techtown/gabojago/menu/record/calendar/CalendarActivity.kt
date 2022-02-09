@@ -14,10 +14,12 @@ import org.techtown.gabojago.main.getJwt
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CalendarActivity :AppCompatActivity(), NicknameAdventureView {
+class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTimeView {
     lateinit var binding: ActivityCalendarBinding
     var viewDate = ""
     var minus = 0
+    var userJoinDate = ""
+    var yearMonth = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +28,7 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
         init()
+        setMonth()
         monthClick()
 
         val gridLayoutManager = GridLayoutManager(this, 7)
@@ -37,9 +40,15 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView {
         binding.calendarGridview.addItemDecoration(HorizontalItemDecorator( 28))
 
         val userJwt = getJwt(this, "userJwt")
+        val now: Long = System.currentTimeMillis()
+        val date = Date(now)
+        val dateFormat2 = SimpleDateFormat("yyyyMM", Locale("ko", "KR"))
+        yearMonth = dateFormat2.format(date).toInt()
         val calendarService = CalendarService()
         calendarService.setNicknameAdventureView(this@CalendarActivity)
+        calendarService.setAdventureTimeView(this@CalendarActivity)
         calendarService.getNicknameAdventure(userJwt)
+        calendarService.getAdventureTime(userJwt,yearMonth)
 
     }
 
@@ -53,7 +62,7 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView {
         cal.set(dateArray[0].toInt(), dateArray[1].toInt() - 1, 1)
         viewDate = cal.get(Calendar.YEAR)
             .toString() + "-" + (cal.get(Calendar.MONTH) + 1).toString() + "-" + "01"
-        val registerDateArray = setRegisterDate("2021-07-23T03:20:17.000Z")
+        val registerDateArray = setRegisterDate(userJoinDate)
         binding.calendarNextTv.setOnClickListener {
             if (cal.get(Calendar.YEAR) > dateArray[0].toInt() || (cal.get(Calendar.YEAR) == dateArray[0].toInt() && cal.get(
                     Calendar.MONTH + 1) > dateArray[1].toInt())
@@ -96,7 +105,6 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView {
         val date = Date(now)
         val dateFormat = SimpleDateFormat("yyyy, MM월", Locale("ko", "KR"))
         val stringDate = dateFormat.format(date)
-
         return stringDate
     }
 
@@ -119,7 +127,18 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView {
 
     override fun onNicknameAdventureFailure(code: Int, message: String) {
         Toast.makeText(
-            this, "Failed.", Toast.LENGTH_SHORT
+            this, message, Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onAdventureTimeSuccess(adventureTime: AdventureTimeResult) {
+        userJoinDate = adventureTime.userJoinDate
+        binding.calendarTotalNumberTv.text = adventureTime.monthlyAdventureTimes
+    }
+
+    override fun onAdventureTimeFailure(code: Int, message: String) {
+        Toast.makeText(
+            this, message, Toast.LENGTH_SHORT
         ).show()
     }
 }

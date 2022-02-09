@@ -1,22 +1,13 @@
 package org.techtown.gabojago.menu.record
 
-import android.content.Context
-import android.location.Location
-import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupWindow
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.NonDisposableHandle.parent
-import org.techtown.gabojago.R
-import org.techtown.gabojago.databinding.ActivityCalendarBinding.inflate
+import org.techtown.gabojago.data.SingleRecord
 import org.techtown.gabojago.databinding.ItemRecordFoldernameBinding
-import org.techtown.gabojago.databinding.PopupMenuBinding
 
 
-
-class RecordFolderResultNameRVAdapter: RecyclerView.Adapter<RecordFolderResultNameRVAdapter.ViewHolder>() {
+class DialogDeleteRVAdapter() : RecyclerView.Adapter<DialogDeleteRVAdapter.ViewHolder>() {
 
     //클릭 인터페이스
     interface MyItemClickListener {
@@ -46,18 +37,6 @@ class RecordFolderResultNameRVAdapter: RecyclerView.Adapter<RecordFolderResultNa
         }
         holder.binding.folderRecordPecilIv.setOnClickListener {
             mItemClickListener.onItemClickPencil()
-        }
-        holder.binding.folderRecordFolderIv.setOnClickListener {
-            val inflater = LayoutInflater.from(holder.binding.folderRecordFolderIv.context)
-            val popup = PopupWindow(inflater.inflate(R.layout.popup_menu, null, false),
-                310,
-                240,
-                true)
-            val location=IntArray(2)
-            holder.binding.folderRecordFolderIv.getLocationOnScreen(location)
-
-
-            popup.showAtLocation(holder.binding.folderRecordFolderIv, Gravity.NO_GRAVITY, location[0]-130, location[1]+100)
         }
     }
 

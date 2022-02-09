@@ -88,23 +88,6 @@ class RecordFragment : Fragment() {
 
         return binding.root
     }
-
-//    inner class PopupMenuListener : PopupWindow.OnMenuItemClickListener {
-//        override fun onMenuItemClick(p0: MenuItem?): Boolean {
-//            when (p0?.itemId) {
-//                R.id.menu_modify ->
-//                    Toast.makeText(
-//                        requireContext(), "수정", Toast.LENGTH_SHORT
-//                    ).show()
-//                R.id.menu_folderdelete ->
-//                    Toast.makeText(
-//                        requireContext(), "폴더해제", Toast.LENGTH_SHORT
-//                    ).show()
-//            }
-//            return false
-//        }
-//    }
-
     private fun clickevent() {
         binding.recordMonthTv.setOnClickListener {
             startActivity(Intent(activity, CalendarActivity::class.java))
@@ -127,6 +110,13 @@ class RecordFragment : Fragment() {
 
         binding.recordFolderplusIv.setOnClickListener{
             DialogFolderSelect(records).show((context as MainActivity).supportFragmentManager,"dialog")
+            val gson = Gson()
+            val recordJson = gson.toJson(records)
+            arguments?.putString("recordList", recordJson)
+        }
+
+        binding.recordTrashIv.setOnClickListener{
+            DialogFolderDelete(records).show((context as MainActivity).supportFragmentManager,"dialog")
             val gson = Gson()
             val recordJson = gson.toJson(records)
             arguments?.putString("recordList", recordJson)

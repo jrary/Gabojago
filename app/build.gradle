@@ -49,7 +49,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'com.google.android.material:material:1.4.2-alpha02'
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.google.code.gson:gson:2.8.7'
 
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
@@ -73,11 +73,15 @@ dependencies {
     //NumberPicker custom
     implementation 'io.github.ShawnLin013:number-picker:2.4.13'
 
+    //RatingBar
+    implementation 'com.hedgehog.ratingbar:app:1.1.2'
+
     //Bottomnavigation view
     implementation 'androidx.navigation:navigation-fragment:2.3.2'
     implementation 'androidx.navigation:navigation-ui:2.3.2'
 
     //ViewPager2 indicator
     implementation 'com.tbuonomo:dotsindicator:4.2'
+
 
 }
