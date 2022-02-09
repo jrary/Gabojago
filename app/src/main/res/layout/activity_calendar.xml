@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
         android:textStyle="bold"
-        android:textSize="14sp"
+        android:textSize="20sp"
         android:textColor="#b3000000"
         android:gravity="center_horizontal"
         android:text="&lt;"
@@ -22,7 +22,7 @@
 
     <TextView
         android:id="@+id/calendar_date_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
         android:textStyle="bold"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
         android:textStyle="bold"
-        android:textSize="14sp"
+        android:textSize="20sp"
         android:textColor="#b3000000"
         android:gravity="center_horizontal"
         android:text="&gt;"

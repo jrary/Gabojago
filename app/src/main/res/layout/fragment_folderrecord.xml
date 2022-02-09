@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:hedgehog="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/folder_record_title_view"
@@ -59,10 +60,11 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/folder_record_result_layout"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
@@ -75,31 +77,31 @@
                     android:id="@+id/foler_record_title_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/apple_sd_gothic_neo_sb"
-                    android:textSize="14sp"
-                    android:textColor="#FFA38E"
                     android:layout_marginStart="23sp"
                     android:layout_marginTop="15dp"
+                    android:fontFamily="@font/apple_sd_gothic_neo_sb"
                     android:text="크로플 맛집 찾음"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="#FFA38E"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toTopOf="@+id/record_result_recyclerview"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/record_result_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="15dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginEnd="10dp"
+                    android:orientation="vertical"
                     android:overScrollMode="never"
                     android:scrollbars="none"
-                    tools:listitem="@layout/item_record_folder"
-                    android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/foler_record_title_tv"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    tools:listitem="@layout/item_record_folder" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -119,46 +121,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/folder_record_result_layout" />
 
-            <LinearLayout
-                android:id="@+id/folder_record_starscore_layout"
-                android:layout_width="0dp"
-                android:layout_height="18dp"
+
+
+            <com.hedgehog.ratingbar.RatingBar
+                android:id="@+id/folder_record_starscore"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_gravity="bottom"
                 android:layout_marginStart="34.2dp"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal"
+                android:layout_weight=".3"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/folder_record_score_tv">
+                app:layout_constraintTop_toBottomOf="@id/folder_record_score_tv"
+                app:layout_constraintBottom_toTopOf="@id/folder_record_picture_tv"
+                app:starImageHeight="25dp"
+                app:starImageWidth="30dp"
+                hedgehog:clickable="true"
+                android:contextClickable="true"
+                hedgehog:starCount="5"
+                hedgehog:starEmpty="@drawable/scorestar"
+                hedgehog:starFill="@drawable/scorestar_fill"
+                hedgehog:starHalf="@drawable/scorestar_half" />
 
-                <ImageView
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:src="@drawable/scorestar" />
-
-                <ImageView
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:layout_marginStart="6dp"
-                    android:src="@drawable/scorestar" />
-
-                <ImageView
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:layout_marginStart="6dp"
-                    android:src="@drawable/scorestar" />
-
-                <ImageView
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:layout_marginStart="6dp"
-                    android:src="@drawable/scorestar" />
-
-                <ImageView
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:layout_marginStart="6dp"
-                    android:src="@drawable/scorestar" />
-
-            </LinearLayout>
 
             <TextView
                 android:id="@+id/folder_record_picture_tv"
@@ -172,27 +156,61 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/folder_record_score_tv"
-                app:layout_constraintTop_toBottomOf="@id/folder_record_starscore_layout" />
+                app:layout_constraintTop_toBottomOf="@id/folder_record_starscore" />
 
-            <ImageView
-                android:id="@+id/folder_record_picture_iv"
-                android:layout_width="60dp"
+            <HorizontalScrollView
+                android:id="@+id/folder_record_horizontalscroll"
+                android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_marginStart="36dp"
                 android:layout_marginTop="7dp"
-                android:src="@drawable/rectangle_31"
+                android:overScrollMode="never"
+                android:scrollbars="none"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/folder_record_picture_tv" />
+                app:layout_constraintTop_toBottomOf="@id/folder_record_picture_tv">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/folder_record_plus_iv"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/plus"
-                app:layout_constraintBottom_toBottomOf="@id/folder_record_picture_iv"
-                app:layout_constraintEnd_toEndOf="@id/folder_record_picture_iv"
-                app:layout_constraintStart_toStartOf="@id/folder_record_picture_iv"
-                app:layout_constraintTop_toTopOf="@id/folder_record_picture_iv" />
+                <ImageView
+                    android:id="@+id/folder_record_picture_iv"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="36dp"
+                    android:src="@drawable/camera"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/folder_record_plus_iv"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/apple_sd_gothic_neo_sb"
+                    android:gravity="center"
+                    android:text="0/10"
+                    android:textColor="#797979"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="@id/folder_record_picture_iv"
+                    app:layout_constraintEnd_toEndOf="@id/folder_record_picture_iv"
+                    app:layout_constraintStart_toStartOf="@id/folder_record_picture_iv"
+                    app:layout_constraintTop_toTopOf="@id/folder_record_picture_iv" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/folder_record_picture_recyclerview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/folder_record_picture_iv"
+                    tools:listitem="@layout/itempicture" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </HorizontalScrollView>
 
             <TextView
                 android:id="@+id/folder_record_write_tv"
@@ -206,26 +224,26 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/folder_record_picture_tv"
-                app:layout_constraintTop_toBottomOf="@id/folder_record_picture_iv" />
+                app:layout_constraintTop_toBottomOf="@id/folder_record_horizontalscroll" />
 
 
             <EditText
                 android:id="@+id/folder_record_write_et"
                 android:layout_width="0dp"
                 android:layout_height="210dp"
-                android:fontFamily="@font/apple_sd_gothic_neo_sb"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="32dp"
-                android:padding="12dp"
                 android:background="@drawable/rectangle_32"
-                android:textSize="14sp"
-                android:textColor="#000000"
+                android:fontFamily="@font/apple_sd_gothic_neo_sb"
                 android:gravity="clip_vertical"
                 android:hint="기록해보세요"
+                android:padding="12dp"
+                android:textColor="#000000"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/folder_record_write_tv"/>
+                app:layout_constraintTop_toBottomOf="@id/folder_record_write_tv" />
 
             <TextView
                 android:id="@+id/folder_record_charactersnum_tv"
@@ -259,17 +277,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textColor="#ffffff"
         android:gravity="center_horizontal"
         android:text="완료"
-        app:layout_constraintStart_toStartOf="@id/folder_record_complete_view"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/folder_record_complete_view"
         app:layout_constraintEnd_toEndOf="@id/folder_record_complete_view"
-        app:layout_constraintTop_toTopOf="@id/folder_record_complete_view"
-        app:layout_constraintBottom_toBottomOf="@id/folder_record_complete_view"/>
-
-
+        app:layout_constraintStart_toStartOf="@id/folder_record_complete_view"
+        app:layout_constraintTop_toTopOf="@id/folder_record_complete_view" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
