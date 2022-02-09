@@ -17,6 +17,9 @@ class RandomService {
 
     fun storeResult(userJwt: String, result: String, type: String) {
         val randomService = getRetrofit().create(RandomRetrofitInterface::class.java)
+
+        randomView.onRandomLoading()
+
         randomService.storeRandom(userJwt, RandomResultRequest(result, type)).enqueue(object : Callback<RandomResultResponse> {
             override fun onResponse(call: Call<RandomResultResponse>, response: Response<RandomResultResponse>) {
                 Log.d("RANDOMSTOREACT/Response", response.toString())

@@ -14,7 +14,7 @@ import java.util.*
 
 class RecordLookFragment: Fragment() {
     lateinit var binding: FragmentRecordLookBinding
-    private val MIN_SCALE = 0.85f
+    private val MIN_SCALE = 0.95f
     private val MIN_ALPHA = 0.5f
     var isOpened: Boolean = false
 

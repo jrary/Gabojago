@@ -99,17 +99,24 @@ class ClockFragment : Fragment(), RandomView {
             activity?.overridePendingTransition(R.anim.anim_up, R.anim.anim_none)
         }
         binding.clockGoBtn.setOnClickListener {
-            moveClock()
-            binding.clockOptionBtn.visibility = View.GONE
-            binding.clockGoBtn.visibility = View.GONE
-            binding.clockInfoTitleTv.visibility = View.INVISIBLE
-            binding.clockInfoTv.visibility = View.INVISIBLE
-            Handler().postDelayed({
-                binding.clockResultTv.text = getResClock.toString() + "시 방향"
-                binding.clockRetryBtn.visibility = View.VISIBLE
-                binding.clockSaveBtn.visibility = View.VISIBLE
-                binding.clockResultTv.visibility = View.VISIBLE
-            }, 4700)
+            if(startNum == endNum){
+                Toast.makeText(
+                    context, "옵션을 설정한 후에 실행해 주세요", Toast.LENGTH_SHORT
+                ).show()
+            }
+            else{
+                moveClock()
+                binding.clockOptionBtn.visibility = View.GONE
+                binding.clockGoBtn.visibility = View.GONE
+                binding.clockInfoTitleTv.visibility = View.INVISIBLE
+                binding.clockInfoTv.visibility = View.INVISIBLE
+                Handler().postDelayed({
+                    binding.clockResultTv.text = getResClock.toString() + "시 방향"
+                    binding.clockRetryBtn.visibility = View.VISIBLE
+                    binding.clockSaveBtn.visibility = View.VISIBLE
+                    binding.clockResultTv.visibility = View.VISIBLE
+                }, 4700)
+            }
         }
         binding.clockRetryBtn.setOnClickListener {
             val rotateAnimationResult = RotateAnimation(0F,
@@ -308,14 +315,31 @@ class ClockFragment : Fragment(), RandomView {
         }
     }
 
+    override fun onRandomLoading() {
+        binding.clockLoadingTv.visibility = View.VISIBLE
+        for(i in 0..5){
+            Handler().postDelayed({
+                binding.clockLoadingTv.text = "잠시만 기다려 주세요."
+            }, (500 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.clockLoadingTv.text = "잠시만 기다려 주세요.."
+            }, (1000 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.clockLoadingTv.text = "잠시만 기다려 주세요..."
+            }, (1500 + 1500 * i).toLong())
+        }
+    }
 
     override fun onRandomResultSuccess() {
+        binding.clockLoadingTv.visibility = View.GONE
+        binding.clockSaveBtn.isEnabled = false
         Toast.makeText(
             context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
         ).show()
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
+        binding.clockLoadingTv.visibility = View.GONE
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT
         ).show()

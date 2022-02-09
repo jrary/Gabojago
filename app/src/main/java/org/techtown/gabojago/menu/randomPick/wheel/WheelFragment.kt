@@ -235,13 +235,30 @@ class WheelFragment : Fragment(), RandomView {
 
     }
 
+    override fun onRandomLoading() {
+        binding.wheelLoadingTv.visibility = View.VISIBLE
+        for(i in 0..5){
+            Handler().postDelayed({
+                binding.wheelLoadingTv.text = "잠시만 기다려 주세요."
+            }, (500 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.wheelLoadingTv.text = "잠시만 기다려 주세요.."
+            }, (1000 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.wheelLoadingTv.text = "잠시만 기다려 주세요..."
+            }, (1500 + 1500 * i).toLong())
+        }
+    }
+
     override fun onRandomResultSuccess() {
+        binding.wheelLoadingTv.visibility = View.GONE
         Toast.makeText(
             context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
         ).show()
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
+        binding.wheelLoadingTv.visibility = View.GONE
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT
         ).show()

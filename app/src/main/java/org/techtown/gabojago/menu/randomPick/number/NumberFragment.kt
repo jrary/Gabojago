@@ -29,7 +29,7 @@ class NumberFragment : Fragment(), RandomView {
     var endNum: Int = 0
     var num: Int = 0
     var isOverlap: Boolean = false
-    lateinit var resArray: Array<Int?>
+    private var resArray: Array<Int?> = (arrayOf(-1,))
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -100,18 +100,25 @@ class NumberFragment : Fragment(), RandomView {
         }
 
         binding.numberGoBtn.setOnClickListener {
-            Handler().postDelayed({
-                binding.numberOptionBtn.visibility = View.GONE
-                binding.numberGoBtn.visibility = View.GONE
-            }, 50)
-            Handler().postDelayed({
-                val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start)
-                binding.numberGroundIv.visibility = View.VISIBLE
-                binding.numberGroundIv.startAnimation(animAlphaStart)
-            }, 50)
-            Handler().postDelayed({
-                showAnimation(ballGroundArr, resTextArr)
-            }, 300)
+            if(resArray[0] == -1){
+                Toast.makeText(
+                    context, "옵션을 설정한 후 실행해 주세요", Toast.LENGTH_SHORT
+                ).show()
+            }
+            else{
+                Handler().postDelayed({
+                    binding.numberOptionBtn.visibility = View.GONE
+                    binding.numberGoBtn.visibility = View.GONE
+                }, 50)
+                Handler().postDelayed({
+                    val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start)
+                    binding.numberGroundIv.visibility = View.VISIBLE
+                    binding.numberGroundIv.startAnimation(animAlphaStart)
+                }, 50)
+                Handler().postDelayed({
+                    showAnimation(ballGroundArr, resTextArr)
+                }, 300)
+            }
         }
 
         binding.numberRetryBtn.setOnClickListener {
@@ -142,9 +149,9 @@ class NumberFragment : Fragment(), RandomView {
                 randomService.storeResult(userJwt, numberResString, "D")
             }
         }
-
         return binding.root
     }
+
     //Get the RESULT NUMBER -> RESARRAY
     private fun getNumbers(): Array<Int?> {
         var resNumbers = arrayOfNulls<Int>(num)
@@ -169,9 +176,9 @@ class NumberFragment : Fragment(), RandomView {
                 i++
             }
         }
-
         return resNumbers
     }
+
     private fun showAnimation(ballArr: Array<AppCompatImageView>, resTextArr: Array<AppCompatTextView>){
         val dropBall = AnimationUtils.loadAnimation(activity, R.anim.anim_ball_drop)
         val resetBall = AnimationUtils.loadAnimation(activity, R.anim.anim_ball_reset)
@@ -196,6 +203,7 @@ class NumberFragment : Fragment(), RandomView {
             resAnimation(resTextArr)
         }, (1000 + 1800 * resArray.size).toLong())
     }
+
     private fun resAnimation(resTextArr: Array<AppCompatTextView>){
         val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start_longer)
         binding.numberContentsView.visibility = View.GONE
@@ -213,13 +221,32 @@ class NumberFragment : Fragment(), RandomView {
             binding.numberSaveBtn.visibility = View.VISIBLE
         }, 300 + 700 * resArray.size.toLong())
     }
+
+    override fun onRandomLoading() {
+        binding.numberLoadingTv.visibility = View.VISIBLE
+        for(i in 0..5){
+            Handler().postDelayed({
+                binding.numberLoadingTv.text = "잠시만 기다려 주세요."
+            }, (500 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.numberLoadingTv.text = "잠시만 기다려 주세요.."
+            }, (1000 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.numberLoadingTv.text = "잠시만 기다려 주세요..."
+            }, (1500 + 1500 * i).toLong())
+        }
+    }
+
     override fun onRandomResultSuccess() {
+        binding.numberLoadingTv.visibility = View.GONE
+        binding.numberSaveBtn.isEnabled = false
         Toast.makeText(
             context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
         ).show()
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
+        binding.numberLoadingTv.visibility = View.GONE
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT
         ).show()

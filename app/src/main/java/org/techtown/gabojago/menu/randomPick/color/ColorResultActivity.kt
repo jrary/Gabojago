@@ -1,6 +1,7 @@
 package org.techtown.gabojago.menu.randomPick.color
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
@@ -86,7 +87,23 @@ class ColorResultActivity : AppCompatActivity(), RandomView {
         return random.nextInt(9)
     }
 
+    override fun onRandomLoading() {
+        binding.colorLoadingTv.visibility = View.VISIBLE
+        for(i in 0..5){
+            Handler().postDelayed({
+                binding.colorLoadingTv.text = "잠시만 기다려 주세요."
+            }, (500 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.colorLoadingTv.text = "잠시만 기다려 주세요.."
+            }, (1000 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.colorLoadingTv.text = "잠시만 기다려 주세요..."
+            }, (1500 + 1500 * i).toLong())
+        }
+    }
+
     override fun onRandomResultSuccess() {
+        binding.colorLoadingTv.visibility = View.GONE
         Toast.makeText(
             this, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
         ).show()
@@ -94,6 +111,7 @@ class ColorResultActivity : AppCompatActivity(), RandomView {
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
+        binding.colorLoadingTv.visibility = View.GONE
         Toast.makeText(
             this, message, Toast.LENGTH_SHORT
         ).show()
