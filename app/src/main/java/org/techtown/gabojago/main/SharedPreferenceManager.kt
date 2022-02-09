@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 fun setJwt(context: Context, name: String, jwt: String) {
     val spf = context.getSharedPreferences(name, AppCompatActivity.MODE_PRIVATE)
@@ -20,6 +21,7 @@ fun getJwt(context: Context, name: String): String{
 fun getRetrofit(): Retrofit {
     val retrofit = Retrofit.Builder()
         .baseUrl("https://dev.gabojago.shop")
+        .addConverterFactory(ScalarsConverterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

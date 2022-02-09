@@ -133,7 +133,7 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
 
     override fun onAdventureTimeSuccess(adventureTime: AdventureTimeResult) {
         userJoinDate = adventureTime.userJoinDate
-        binding.calendarTotalNumberTv.text = adventureTime.monthlyAdventureTimes
+        binding.calendarTotalNumberTv.text = adventureTime.monthlyAdventureTimes.toString()
     }
 
     override fun onAdventureTimeFailure(code: Int, message: String) {

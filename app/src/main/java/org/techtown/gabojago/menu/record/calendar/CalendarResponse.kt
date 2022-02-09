@@ -8,7 +8,7 @@ data class NicknameAdventureResult(
 
 data class AdventureTimeResult(
     @SerializedName("userjoindate") val userJoinDate: String,
-    @SerializedName("monthlyAdventureTimes") val monthlyAdventureTimes: String
+    @SerializedName("monthlyAdventureTimes") val monthlyAdventureTimes: Int
 )
 
 data class NicknameAdventureResponse(

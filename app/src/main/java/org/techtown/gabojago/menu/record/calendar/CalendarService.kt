@@ -41,7 +41,7 @@ class CalendarService {
 
     fun getAdventureTime(userJwt: String, yearMonth: Int) {
         val calendarService = getRetrofit().create(CalendarRetrofitInterface::class.java)
-        calendarService.getAdventureTime(userJwt,yearMonth).enqueue(object : Callback<AdventureTimeResponse> {
+        calendarService.getAdventureTime(userJwt, yearMonth).enqueue(object : Callback<AdventureTimeResponse> {
             override fun onResponse(call: Call<AdventureTimeResponse>, response: Response<AdventureTimeResponse>) {
                 Log.d("TIME/Response", response.toString())
                 val resp = response.body()!!
@@ -62,7 +62,8 @@ class CalendarService {
                 }
             }
             override fun onFailure(call: Call<AdventureTimeResponse>, t: Throwable) {
-                adventureTimeView.onAdventureTimeFailure(400, "Network Error")
+                adventureTimeView.onAdventureTimeFailure(400, t.toString())
+                Log.d("CALENDARGETADV", t.toString())
             }
         })
     }
