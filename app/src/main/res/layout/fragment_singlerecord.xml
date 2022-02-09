@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/single_record_title_view"
@@ -136,80 +137,93 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/single_record_result_layout" />
 
-        <LinearLayout
-            android:id="@+id/single_record_starscore_layout"
-            android:layout_width="0dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="34.2dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/single_record_score_tv">
+            <RatingBar
+                android:id="@+id/single_record_starscore"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="-28dp"
+                android:numStars="5"
+                android:rating="3"
+                android:stepSize="0.5"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                android:foregroundGravity="left"
+                app:layout_constraintStart_toStartOf="parent"
+                android:progressBackgroundTint="#bfbfbf"
+                android:progressTint="#000000"
+                app:layout_constraintTop_toBottomOf="@id/single_record_score_tv"
+                app:layout_constraintBottom_toTopOf="@id/single_record_picture_tv" />
 
-            <ImageView
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:src="@drawable/scorestar" />
 
-            <ImageView
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:layout_marginStart="6dp"
-                android:src="@drawable/scorestar" />
+            <TextView
+                android:id="@+id/single_record_picture_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/apple_sd_gothic_neo_sb"
+                android:gravity="center_horizontal"
+                android:text="사진 첨부할래?"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/single_record_score_tv"
+                app:layout_constraintTop_toBottomOf="@id/single_record_starscore" />
 
-            <ImageView
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:layout_marginStart="6dp"
-                android:src="@drawable/scorestar" />
+            <HorizontalScrollView
+                android:id="@+id/single_record_horizontalscroll"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginTop="7dp"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/single_record_picture_tv">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:layout_marginStart="6dp"
-                android:src="@drawable/scorestar" />
+                    <ImageView
+                        android:id="@+id/single_record_picture_iv"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="36dp"
+                        android:src="@drawable/camera"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:layout_marginStart="6dp"
-                android:src="@drawable/scorestar" />
+                    <TextView
+                        android:id="@+id/single_record_picturenum_tv"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:fontFamily="@font/apple_sd_gothic_neo_sb"
+                        android:gravity="center"
+                        android:text="0/10"
+                        android:textColor="#797979"
+                        android:textSize="11sp"
+                        app:layout_constraintBottom_toBottomOf="@id/single_record_picture_iv"
+                        app:layout_constraintEnd_toEndOf="@id/single_record_picture_iv"
+                        app:layout_constraintStart_toStartOf="@id/single_record_picture_iv"
+                        app:layout_constraintTop_toTopOf="@id/single_record_picture_iv" />
 
-        </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/single_record_picture_recyclerview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal"
+                        android:overScrollMode="never"
+                        android:scrollbars="none"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/single_record_picture_iv"
+                        tools:listitem="@layout/itempicture" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/single_record_picture_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/apple_sd_gothic_neo_sb"
-            android:gravity="center_horizontal"
-            android:text="사진 첨부할래?"
-            android:textColor="#000000"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/single_record_score_tv"
-            app:layout_constraintTop_toBottomOf="@id/single_record_starscore_layout" />
+            </HorizontalScrollView>
 
-        <ImageView
-            android:id="@+id/single_record_picture_iv"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="7dp"
-            android:src="@drawable/rectangle_31"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/single_record_picture_tv" />
 
-        <ImageView
-            android:id="@+id/single_record_plus_iv"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:src="@drawable/plus"
-            app:layout_constraintBottom_toBottomOf="@id/single_record_picture_iv"
-            app:layout_constraintEnd_toEndOf="@id/single_record_picture_iv"
-            app:layout_constraintStart_toStartOf="@id/single_record_picture_iv"
-            app:layout_constraintTop_toTopOf="@id/single_record_picture_iv" />
 
         <TextView
             android:id="@+id/single_record_write_tv"
@@ -223,7 +237,7 @@
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/single_record_picture_tv"
-            app:layout_constraintTop_toBottomOf="@id/single_record_picture_iv" />
+            app:layout_constraintTop_toBottomOf="@id/single_record_horizontalscroll" />
 
 
             <EditText
@@ -266,7 +280,7 @@
         android:id="@+id/single_record_complete_view"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="#ffa38e"
+        android:background="#23354F"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -279,7 +293,7 @@
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
         android:gravity="center_horizontal"
         android:text="완료"
         app:layout_constraintStart_toStartOf="@id/single_record_complete_view"
