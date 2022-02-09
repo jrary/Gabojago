@@ -1,6 +1,7 @@
-package org.techtown.gabojago.menu.record
+package org.techtown.gabojago.menu.record.dialog
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.R
@@ -35,10 +36,10 @@ class DialogSelectRVAdapter(private val recordList: ArrayList<SingleRecord>): Re
         holder.itemView.setOnClickListener {
             if(!recordList[position].isSelected!!) {
                 recordList[position].isSelected= true
-                holder.binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.rectangle_gray_select)
+                holder.binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.single_select_rectangle)
             }else{
                 recordList[position].isSelected= false
-                holder.binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.rectangle_gray)
+                holder.binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.rectangle_orange)
             }
         }
     }
@@ -47,6 +48,8 @@ class DialogSelectRVAdapter(private val recordList: ArrayList<SingleRecord>): Re
     inner class ViewHolder(val binding: ItemRecordResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(record: SingleRecord) {
+            binding.itemRecordRectangleIv.setImageResource(R.drawable.rectangle_orange)
+            binding.itemRecordPecilIv.visibility = View.GONE
             binding.itemRecordResultTv.text = record.resultType
             binding.itemRecordCircleIv.setImageResource(record.coverImg!!)
             binding.itemRecordTitleIv.setImageResource(record.typeImg!!)

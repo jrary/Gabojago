@@ -10,7 +10,8 @@ class RecordResultRVAdapter(private val recordList: ArrayList<SingleRecord>): Re
 
     //클릭 인터페이스
     interface MyItemClickListener {
-        fun onItemClick(record:SingleRecord)
+        fun onItemClick(recordIdx:Int)
+        fun onItemView()
     }
 
     private lateinit var mItemClickListener: MyItemClickListener
@@ -30,8 +31,11 @@ class RecordResultRVAdapter(private val recordList: ArrayList<SingleRecord>): Re
     //뷰홀더에 데이터를 바인딩해줘야 할 때마다 호출되는 함수 => 엄청나게 많이 호출
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(recordList[position])
+        holder.itemView.setOnClickListener{
+            mItemClickListener.onItemView()
+        }
         holder.binding.itemRecordPecilIv.setOnClickListener {
-            mItemClickListener.onItemClick(recordList[position])
+            mItemClickListener.onItemClick(position)
         }
     }
 

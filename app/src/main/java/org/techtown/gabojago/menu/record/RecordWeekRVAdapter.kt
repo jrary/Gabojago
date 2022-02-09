@@ -38,8 +38,8 @@ class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(
             binding.itemDateTv.text = dates[position]
             binding.itemWeekTv.text = dayofweek[position]
             when(position){
-                0->binding.itemWeekTv.setTextColor(Color.parseColor("#ff6745"))
-                6->binding.itemWeekTv.setTextColor(Color.parseColor("#0053f3"))
+                0->binding.itemWeekTv.setTextColor(Color.parseColor("#fc8f77"))
+                6->binding.itemWeekTv.setTextColor(Color.parseColor("#7EA6F4"))
                 else->binding.itemWeekTv.setTextColor(Color.parseColor("#929292"))
             }
             binding.itemWeekTv.text = dayofweek[position]

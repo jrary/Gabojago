@@ -30,15 +30,15 @@
         android:layout_height="20dp"
         android:layout_marginEnd="20dp"
         android:scaleType="fitXY"
-        android:src="@drawable/memo_pencil"
+        android:src="@drawable/memo_pencil_bluegray"
         app:layout_constraintBottom_toBottomOf="@id/folder_record_title_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/folder_record_title_tv" />
 
     <ImageView
         android:id="@+id/folder_record_folder_iv"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
         android:layout_marginEnd="18dp"
         android:src="@drawable/folder_gray"
         app:layout_constraintBottom_toBottomOf="@id/folder_record_title_tv"

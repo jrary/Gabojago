@@ -1,4 +1,4 @@
-package org.techtown.gabojago.Record
+package org.techtown.gabojago.menu.record.dialog
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

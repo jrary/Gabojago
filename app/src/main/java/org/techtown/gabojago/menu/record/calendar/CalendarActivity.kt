@@ -1,7 +1,5 @@
 
 
-
-
 package org.techtown.gabojago.menu.record.calendar
 import HorizontalItemDecorator
 import android.os.Bundle
@@ -20,6 +18,7 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
     var minus = 0
     var userJoinDate = ""
     var yearMonth = 0
+    lateinit var registerDateArray : Array<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +39,8 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
         binding.calendarGridview.addItemDecoration(HorizontalItemDecorator( 28))
 
         val userJwt = getJwt(this, "userJwt")
-        val now: Long = System.currentTimeMillis()
-        val date = Date(now)
         val dateFormat2 = SimpleDateFormat("yyyyMM", Locale("ko", "KR"))
-        yearMonth = dateFormat2.format(date).toInt()
+        yearMonth = dateFormat2.format(monthClick()).toInt()
         val calendarService = CalendarService()
         calendarService.setNicknameAdventureView(this@CalendarActivity)
         calendarService.setAdventureTimeView(this@CalendarActivity)
@@ -56,13 +53,12 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
         binding.calendarDateTv.text= setMonth()
     }
 
-    private fun monthClick() {
+    private fun monthClick() : Long{
         val cal = Calendar.getInstance()
         val dateArray = initDate().split("-").toTypedArray()
         cal.set(dateArray[0].toInt(), dateArray[1].toInt() - 1, 1)
         viewDate = cal.get(Calendar.YEAR)
             .toString() + "-" + (cal.get(Calendar.MONTH) + 1).toString() + "-" + "01"
-        val registerDateArray = setRegisterDate(userJoinDate)
         binding.calendarNextTv.setOnClickListener {
             if (cal.get(Calendar.YEAR) > dateArray[0].toInt() || (cal.get(Calendar.YEAR) == dateArray[0].toInt() && cal.get(
                     Calendar.MONTH + 1) > dateArray[1].toInt())
@@ -98,13 +94,15 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
             val calendarAdapter = CalendarAdapter(viewDate)
             binding.calendarGridview.adapter = calendarAdapter
         }
+        return cal.timeInMillis
     }
 
     private fun setMonth() : String{
         val now: Long = System.currentTimeMillis()
         val date = Date(now)
-        val dateFormat = SimpleDateFormat("yyyy, MM월", Locale("ko", "KR"))
-        val stringDate = dateFormat.format(date)
+        val dateFormat = SimpleDateFormat("yyyy", Locale("ko", "KR"))
+        val dateFormat2 = SimpleDateFormat("MM", Locale("ko", "KR"))
+        val stringDate = dateFormat.format(date)+", "+(dateFormat2.format(date).toInt()).toString()+"월"
         return stringDate
     }
 
@@ -133,6 +131,7 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
 
     override fun onAdventureTimeSuccess(adventureTime: AdventureTimeResult) {
         userJoinDate = adventureTime.userJoinDate.date
+        registerDateArray=setRegisterDate(userJoinDate)
         binding.calendarTotalNumberTv.text = adventureTime.monthlyAdventureTimes.monthlyTimes.toString()
     }
 

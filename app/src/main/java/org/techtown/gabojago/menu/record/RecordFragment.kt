@@ -18,9 +18,11 @@ import android.view.animation.OvershootInterpolator
 import com.google.gson.Gson
 import org.techtown.gabojago.data.SingleRecord
 import org.techtown.gabojago.menu.record.calendar.CalendarActivity
-import kotlinx.android.synthetic.main.item_record_foldername.*
 import android.view.LayoutInflater
 import org.techtown.gabojago.databinding.ItemRecordFoldernameBinding
+import org.techtown.gabojago.menu.record.dialog.DialogFolderDelete
+import org.techtown.gabojago.menu.record.dialog.DialogFolderSelect
+import org.techtown.gabojago.menu.record.look.RecordLookFragment
 
 
 class RecordFragment : Fragment() {
@@ -65,19 +67,22 @@ class RecordFragment : Fragment() {
 
         recordResultRVAdapter.setMyItemClickListener(object :
             RecordResultRVAdapter.MyItemClickListener {
-            override fun onItemClick(record :SingleRecord) {
-                changeSingleRecordFragment(record)
+            override fun onItemClick(recordIdx :Int) {
+                changeSingleRecordFragment(recordIdx)
+            }
+            override fun onItemView() {
+                changeRecordFragment()
             }
         })
 
         recordFolderResultNameRVAdapter.setMyItemClickListener(object :
             RecordFolderResultNameRVAdapter.MyItemClickListener {
-            override fun onItemClickPencil() {
-                changeFolderRecordFragment()
+            override fun onItemClickPencil(folderIdx:Int) {
+                changeFolderRecordFragment(folderIdx)
             }
 
             override fun onItemView() {
-
+                changeRecordFragment()
             }
         })
 
@@ -168,13 +173,10 @@ class RecordFragment : Fragment() {
             ))
     }
 
-    private fun changeSingleRecordFragment(record: SingleRecord) {
+    private fun changeSingleRecordFragment(recordIdx: Int) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, SingleRecordFragment().apply {
+            .replace(R.id.main_frm, SingleRecordFragment(recordIdx).apply {
                 arguments = Bundle().apply {
-                    val gson = Gson()
-                    val recordJson = gson.toJson(record)
-                    putString("record", recordJson)
                 }
             })
             .addToBackStack(null)
@@ -182,15 +184,25 @@ class RecordFragment : Fragment() {
 
     }
 
-    private fun changeFolderRecordFragment() {
+    private fun changeFolderRecordFragment(folderIdx:Int) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, FolderRecordFragment().apply {
+            .replace(R.id.main_frm, FolderRecordFragment(folderIdx).apply {
                 arguments = Bundle().apply {
                 }
             })
             .addToBackStack(null)
             .commitAllowingStateLoss()
 
+    }
+
+    private fun changeRecordFragment(){
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, RecordLookFragment().apply {
+                arguments = Bundle().apply {
+                }
+            })
+            .addToBackStack(null)
+            .commitAllowingStateLoss()
     }
 
     private fun setdate(): String {
@@ -205,8 +217,8 @@ class RecordFragment : Fragment() {
     private fun setMonth(): String {
         val now: Long = System.currentTimeMillis()
         val month = Date(now)
-        val monthFormat = SimpleDateFormat("< MM월", Locale("ko", "KR"))
-        val stringMonth = monthFormat.format(month)
+        val monthFormat = SimpleDateFormat("MM", Locale("ko", "KR"))
+        val stringMonth = "< "+(monthFormat.format(month).toInt()).toString()+"월"
 
         return stringMonth
     }
