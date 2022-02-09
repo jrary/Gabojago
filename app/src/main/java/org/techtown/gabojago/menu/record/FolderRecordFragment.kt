@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import org.techtown.gabojago.MainActivity
+import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentFolderrecordBinding
 

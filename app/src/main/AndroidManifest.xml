@@ -23,12 +23,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".start.login.LoginActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity"
+        <activity android:name=".main.MainActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
-        <activity android:name=".menu.record.calender.CalendarActivity"
+
+        <activity android:name=".menu.record.calendar.CalendarActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".menu.randomPick.wheel.WheelOptionActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"

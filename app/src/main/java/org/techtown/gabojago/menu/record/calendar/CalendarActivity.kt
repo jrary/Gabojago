@@ -2,7 +2,7 @@
 
 
 
-package org.techtown.gabojago.menu.record.calender
+package org.techtown.gabojago.menu.record.calendar
 import HorizontalItemDecorator
 import android.os.Bundle
 import android.view.View

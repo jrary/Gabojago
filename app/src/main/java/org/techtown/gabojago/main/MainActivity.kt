@@ -1,12 +1,9 @@
-package org.techtown.gabojago
+package org.techtown.gabojago.main
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.get
-import androidx.core.view.size
+import org.techtown.gabojago.R
 import org.techtown.gabojago.menu.record.RecordFragment
 import org.techtown.gabojago.databinding.ActivityMainBinding
 import org.techtown.gabojago.menu.goAgain.GoagainFragment

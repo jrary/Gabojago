@@ -2,31 +2,23 @@ package org.techtown.gabojago.menu.record
 
 import HorizontalItemDecorator
 import android.animation.ObjectAnimator
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentRecordBinding
 import java.text.SimpleDateFormat
 import java.util.*
-
 import android.graphics.Point
 import android.util.TypedValue
 import android.view.*
 import android.view.animation.OvershootInterpolator
-import android.widget.PopupMenu
-import android.widget.PopupWindow
 import com.google.gson.Gson
 import org.techtown.gabojago.data.SingleRecord
-import org.techtown.gabojago.menu.record.calender.CalendarActivity
-import android.widget.Toast
-import androidx.core.view.size
+import org.techtown.gabojago.menu.record.calendar.CalendarActivity
 import kotlinx.android.synthetic.main.item_record_foldername.*
-import org.techtown.gabojago.MainActivity
-import android.view.Gravity
-
 import android.view.LayoutInflater
 import org.techtown.gabojago.databinding.ItemRecordFoldernameBinding
 

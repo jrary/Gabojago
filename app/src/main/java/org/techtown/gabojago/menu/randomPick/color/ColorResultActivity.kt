@@ -90,6 +90,7 @@ class ColorResultActivity : AppCompatActivity(), RandomView {
         Toast.makeText(
             this, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
         ).show()
+        finish()
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {

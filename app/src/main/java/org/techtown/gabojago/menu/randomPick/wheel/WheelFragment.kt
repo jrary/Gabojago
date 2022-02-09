@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,16 +15,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
-import org.techtown.gabojago.MainActivity
+import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentWheelBinding
 import org.techtown.gabojago.main.getJwt
-import org.techtown.gabojago.menu.manage.ManageService
 import org.techtown.gabojago.menu.randomPick.home.HomeMenuFragment
 import org.techtown.gabojago.menu.randomPick.home.RandomService
 import org.techtown.gabojago.menu.randomPick.home.RandomView
 import java.util.*
-import kotlin.collections.ArrayList
 
 class WheelFragment : Fragment(), RandomView {
     lateinit var binding: FragmentWheelBinding
@@ -73,7 +70,7 @@ class WheelFragment : Fragment(), RandomView {
             if(result.resultCode == Activity.RESULT_OK){
                 optionList = result.data?.getStringArrayListExtra("wheel")!!
                 setWheel(wheelArr)
-                setOptionName(wheelArr, wheelOptionNameArr)
+                setOptionName(wheelOptionNameArr)
             }
         }
 
@@ -85,8 +82,12 @@ class WheelFragment : Fragment(), RandomView {
         }
         binding.wheelBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, HomeMenuFragment())
-                    .commitAllowingStateLoss()
+                .replace(R.id.main_frm, HomeMenuFragment().apply {
+                    arguments = Bundle().apply {
+                    }
+                })
+                .addToBackStack(null)
+                .commitAllowingStateLoss()
         }
         binding.wheelGoBtn.setOnClickListener {
             val animationStart = AnimationUtils.loadAnimation(activity, R.anim.anim_wheel_scale)
@@ -95,7 +96,7 @@ class WheelFragment : Fragment(), RandomView {
             binding.wheelGoBtn.visibility = View.GONE
             binding.wheelInfoTv.visibility = View.INVISIBLE
             binding.wheelInfoTitleTv.visibility = View.INVISIBLE
-            res = moveWheel(wheelArr)
+            res = moveWheel()
             Handler().postDelayed({
                 binding.wheelResultTv.text = optionList[res]
                 binding.wheelRetryBtn.visibility = View.VISIBLE
@@ -107,7 +108,7 @@ class WheelFragment : Fragment(), RandomView {
             binding.wheelResultTv.visibility = View.GONE
             binding.wheelRetryBtn.visibility = View.GONE
             binding.wheelSaveBtn.visibility = View.GONE
-            res = moveWheel(wheelArr)
+            res = moveWheel()
             Handler().postDelayed({
                 binding.wheelResultTv.text = optionList[res]
                 binding.wheelRetryBtn.visibility = View.VISIBLE
@@ -155,13 +156,15 @@ class WheelFragment : Fragment(), RandomView {
         binding.wheelInfoTitleTv.visibility = View.VISIBLE
         binding.wheelInfoTv.visibility = View.VISIBLE
     }
+
     private fun setWheel(wheelArr: Array<AppCompatImageView>){
         for(i: Int in 0..4){
             wheelArr[i].visibility = View.GONE
         }
         wheelArr[optionList.size - 2].visibility = View.VISIBLE
     }
-    private fun setOptionName(wheelArr: Array<AppCompatImageView>, wheelOptionNameArr: Array<AppCompatTextView>){
+
+    private fun setOptionName(wheelOptionNameArr: Array<AppCompatTextView>){
 
         for(i: Int in 0..10){
             wheelOptionNameArr[i].visibility = View.GONE
@@ -173,15 +176,18 @@ class WheelFragment : Fragment(), RandomView {
             wheelOptionNameArr[wheelText[opListSizeInIndex][i]].text = optionList[i]
         }
     }
-    private fun moveWheel(wheelArr: Array<AppCompatImageView>): Int{
+
+    private fun moveWheel(): Int{
         val res: Int = getWheelResult()
         wheelAnimation(res)
         return res
     }
+
     private fun getWheelResult(): Int{
         val random = Random()
         return random.nextInt(optionList.size)
     }
+
     private fun wheelAnimation(res: Int){
         Handler().postDelayed({
             val rotateAnimation = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)

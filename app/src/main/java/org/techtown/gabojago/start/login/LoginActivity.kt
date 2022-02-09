@@ -14,6 +14,7 @@ import com.nhn.android.naverlogin.OAuthLoginHandler
 import kotlinx.android.synthetic.main.activity_login.*
 import org.techtown.gabojago.*
 import org.techtown.gabojago.databinding.ActivityLoginBinding
+import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.main.setJwt
 
 class LoginActivity :AppCompatActivity(), LoginView {

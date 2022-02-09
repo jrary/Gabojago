@@ -76,5 +76,12 @@ dependencies {
     //RatingBar
     implementation 'com.hedgehog.ratingbar:app:1.1.2'
 
+    //Bottomnavigation view
+    implementation 'androidx.navigation:navigation-fragment:2.3.2'
+    implementation 'androidx.navigation:navigation-ui:2.3.2'
+
+    //ViewPager2 indicator
+    implementation 'com.tbuonomo:dotsindicator:4.2'
+
 
 }

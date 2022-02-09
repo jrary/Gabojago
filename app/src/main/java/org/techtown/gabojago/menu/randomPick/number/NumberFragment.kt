@@ -8,14 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
-import org.techtown.gabojago.MainActivity
+import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentNumberBinding
 import org.techtown.gabojago.main.getJwt
@@ -82,7 +81,11 @@ class NumberFragment : Fragment(), RandomView {
 
         binding.numberBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, HomeMenuFragment())
+                .replace(R.id.main_frm, HomeMenuFragment().apply {
+                    arguments = Bundle().apply {
+                    }
+                })
+                .addToBackStack(null)
                 .commitAllowingStateLoss()
         }
 
@@ -220,5 +223,17 @@ class NumberFragment : Fragment(), RandomView {
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT
         ).show()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val animationOpen = AnimationUtils.loadAnimation(activity, R.anim.anim_open_scale)
+        binding.numberMainIv.startAnimation(animationOpen)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val animationClose = AnimationUtils.loadAnimation(activity, R.anim.anim_close_scale)
+        binding.numberMainIv.startAnimation(animationClose)
     }
 }
