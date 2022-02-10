@@ -78,6 +78,7 @@ class NumberFragment : Fragment(), RandomView {
             binding.numberResult09Tv,
             binding.numberResult10Tv
         )
+        val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start_longer)
 
         binding.numberBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
@@ -107,13 +108,11 @@ class NumberFragment : Fragment(), RandomView {
             }
             else{
                 Handler().postDelayed({
-                    binding.numberOptionBtn.visibility = View.GONE
-                    binding.numberGoBtn.visibility = View.GONE
+                    binding.numberContentsView.visibility = View.GONE
                 }, 50)
                 Handler().postDelayed({
-                    val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start)
-                    binding.numberGroundIv.visibility = View.VISIBLE
-                    binding.numberGroundIv.startAnimation(animAlphaStart)
+                    binding.numberAnimationView.visibility = View.VISIBLE
+                    binding.numberAnimationView.startAnimation(animAlphaStart)
                 }, 50)
                 Handler().postDelayed({
                     showAnimation(ballGroundArr, resTextArr)
@@ -122,7 +121,6 @@ class NumberFragment : Fragment(), RandomView {
         }
 
         binding.numberRetryBtn.setOnClickListener {
-            val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start_longer)
             binding.numberResultView.visibility = View.GONE
             binding.numberContentsView.visibility = View.VISIBLE
             binding.numberContentsView.startAnimation(animAlphaStart)
@@ -186,29 +184,56 @@ class NumberFragment : Fragment(), RandomView {
         val resetBall = AnimationUtils.loadAnimation(activity, R.anim.anim_ball_reset)
         val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start_longer)
         for(i in 0..resArray.size - 1){
-            //Main Animation
+            Handler().postDelayed({
+                spinDrawBoxAnimation()
+            }, 3000 * i.toLong())
             Handler().postDelayed({
                 binding.numberDropBallIv.visibility = View.VISIBLE
                 binding.numberDropBallIv.startAnimation(animAlphaStart)
-            }, 200 + 1800 * i.toLong())
+            }, 1400 + 3000 * i.toLong())
             Handler().postDelayed({
                 binding.numberDropBallIv.startAnimation(dropBall) //400ms
-            }, 1000 + 1800 * i.toLong())
+            }, 2200 + 3000 * i.toLong())
             Handler().postDelayed({
                 binding.numberDropBallIv.visibility = View.GONE
                 binding.numberDropBallIv.startAnimation(resetBall)
                 ballArr[i].visibility = View.VISIBLE
                 ballArr[i].startAnimation(animAlphaStart) //500ms
-            }, 1300 + 1800 * i.toLong())
+            }, 2500 + 3000 * i.toLong())
         }
         Handler().postDelayed({
             resAnimation(resTextArr)
-        }, (1000 + 1800 * resArray.size).toLong())
+        }, (1000 + 3000 * resArray.size).toLong())
+    }
+
+    private fun spinDrawBoxAnimation(){
+        var numberBallsArr = arrayOf(
+            R.drawable.number_balls_01,
+            R.drawable.number_balls_02,
+            R.drawable.number_balls_03,
+            R.drawable.number_balls_04,
+            R.drawable.number_balls_05,
+            R.drawable.number_balls_06,
+            R.drawable.number_balls_07,
+            R.drawable.number_balls_08,
+            R.drawable.number_balls_09,
+            R.drawable.number_balls_10,
+            R.drawable.number_balls_11,
+            R.drawable.number_balls_12,
+            R.drawable.number_balls_13,
+            R.drawable.number_balls_14,
+            R.drawable.number_balls_15
+        )
+        for(i in 0..14){
+            Handler().postDelayed({
+                binding.numberAnimationBallIv.setImageResource(numberBallsArr[i])
+            }, 200 * i.toLong())
+        }
     }
 
     private fun resAnimation(resTextArr: Array<AppCompatTextView>){
         val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start_longer)
-        binding.numberContentsView.visibility = View.GONE
+        binding.numberAnimationView.visibility = View.GONE
         binding.numberResultView.visibility = View.VISIBLE
         binding.numberResultView.startAnimation(animAlphaStart)
         for(i in 0..resArray.size - 1){
@@ -216,12 +241,12 @@ class NumberFragment : Fragment(), RandomView {
                 resTextArr[i].text = resArray[i].toString()
                 resTextArr[i].visibility = View.VISIBLE
                 resTextArr[i].startAnimation(animAlphaStart) //200ms
-            }, 700 * i.toLong())
+            }, 700)
         }
         Handler().postDelayed({
             binding.numberRetryBtn.visibility = View.VISIBLE
             binding.numberSaveBtn.visibility = View.VISIBLE
-        }, 300 + 700 * resArray.size.toLong())
+        }, 1000)
     }
 
     override fun onRandomLoading() {
