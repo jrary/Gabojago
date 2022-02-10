@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/number_title_view"
         android:layout_width="match_parent"
-        android:layout_height="106dp"
+        android:layout_height="90dp"
         android:background="@color/white"
         android:elevation="20dp"
         app:layout_constraintStart_toStartOf="parent"

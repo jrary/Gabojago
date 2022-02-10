@@ -43,16 +43,6 @@ class HomeFragment : Fragment() {
                 .commitAllowingStateLoss()
         }
 
-        binding.homeDice02Iv.setOnClickListener{
-            (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, RecordLookFragment().apply {
-                    arguments = Bundle().apply {
-                    }
-                })
-                .addToBackStack(null)
-                .commitAllowingStateLoss()
-        }
-
         val rotate = RotateAnimation(0f, 21.92f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
         rotate.fillAfter = true
         binding.homeStartIv.startAnimation(rotate)
