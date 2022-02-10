@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/item_folderrecord_pecil_iv"
+        android:id="@+id/item_folderrecord_line_iv"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:src="@drawable/line_gray"

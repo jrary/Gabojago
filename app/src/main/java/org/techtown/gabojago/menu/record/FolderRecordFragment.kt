@@ -10,7 +10,7 @@ import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentFolderrecordBinding
 
-class FolderRecordFragment : Fragment() {
+class FolderRecordFragment(folderIdx:Int) : Fragment() {
     lateinit var binding: FragmentFolderrecordBinding
 
     override fun onCreateView(

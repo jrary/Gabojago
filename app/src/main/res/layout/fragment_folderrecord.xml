@@ -34,12 +34,12 @@
         <TextView
             android:layout_width="192dp"
             android:layout_height="29dp"
-            android:fontFamily="@font/nanum_square_round_otf_extrabold"
+            android:fontFamily="@font/apple_sd_gothic_neo_sb"
             android:gravity="center_horizontal"
             android:text="기록하자"
             android:textColor="#000000"
             android:textSize="20sp"
-            android:textStyle="normal"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/folder_record_backarrow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
+                <EditText
                     android:id="@+id/foler_record_title_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -81,6 +81,7 @@
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/apple_sd_gothic_neo_sb"
                     android:text="크로플 맛집 찾음"
+                    android:background="@color/transparent"
                     android:textColor="#FFA38E"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toTopOf="@+id/record_result_recyclerview"
@@ -121,34 +122,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/folder_record_result_layout" />
 
-
-
-            <com.hedgehog.ratingbar.RatingBar
+            <RatingBar
                 android:id="@+id/folder_record_starscore"
-                android:layout_width="150dp"
-                android:layout_height="30dp"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="34.2dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight=".3"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="-28dp"
+                android:numStars="5"
+                android:rating="3"
+                android:stepSize="0.5"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                android:foregroundGravity="left"
                 app:layout_constraintStart_toStartOf="parent"
+                android:progressBackgroundTint="#bfbfbf"
+                android:progressTint="#000000"
                 app:layout_constraintTop_toBottomOf="@id/folder_record_score_tv"
-                app:layout_constraintBottom_toTopOf="@id/folder_record_picture_tv"
-                app:starImageHeight="25dp"
-                app:starImageWidth="30dp"
-                hedgehog:clickable="true"
-                android:contextClickable="true"
-                hedgehog:starCount="5"
-                hedgehog:starEmpty="@drawable/scorestar"
-                hedgehog:starFill="@drawable/scorestar_fill"
-                hedgehog:starHalf="@drawable/scorestar_half" />
+                app:layout_constraintBottom_toTopOf="@id/folder_record_picture_tv" />
 
 
             <TextView
                 android:id="@+id/folder_record_picture_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/apple_sd_gothic_neo_sb"
                 android:gravity="center_horizontal"
                 android:text="사진 첨부할래?"
@@ -181,7 +177,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/folder_record_plus_iv"
+                    android:id="@+id/folder_record_picturenum_tv"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"

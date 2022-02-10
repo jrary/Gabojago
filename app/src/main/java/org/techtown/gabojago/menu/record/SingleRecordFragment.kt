@@ -10,9 +10,10 @@ import org.techtown.gabojago.databinding.FragmentSinglerecordBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
+import org.techtown.gabojago.data.SingleRecord
 
 
-class SingleRecordFragment : Fragment() {
+class SingleRecordFragment(recordIdx:Int) : Fragment() {
     lateinit var binding: FragmentSinglerecordBinding
 
     override fun onCreateView(
@@ -21,6 +22,9 @@ class SingleRecordFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSinglerecordBinding.inflate(inflater, container, false)
+
+        val recordPictureRVAdapter = RecordPictureRVAdapter()
+        binding.singleRecordPictureRecyclerview.adapter = recordPictureRVAdapter
 
         clickevent()
         init()

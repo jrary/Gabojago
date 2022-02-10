@@ -1,18 +1,16 @@
-package org.techtown.gabojago.menu.record
+package org.techtown.gabojago.menu.record.dialog
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.techtown.gabojago.data.SingleRecord
-import org.techtown.gabojago.databinding.ItemRecordFoldernameBinding
+import org.techtown.gabojago.R
+import org.techtown.gabojago.databinding.ItemRecordFolderBinding
 
-
-class DialogDeleteRVAdapter() : RecyclerView.Adapter<DialogDeleteRVAdapter.ViewHolder>() {
+class DialogDeleteResultRVAdapter: RecyclerView.Adapter<DialogDeleteResultRVAdapter.ViewHolder>() {
 
     //클릭 인터페이스
     interface MyItemClickListener {
-        fun onItemClickPencil()
-        fun onItemView()
+        fun onItemClick()
     }
 
     private lateinit var mItemClickListener: MyItemClickListener
@@ -23,8 +21,8 @@ class DialogDeleteRVAdapter() : RecyclerView.Adapter<DialogDeleteRVAdapter.ViewH
 
     //뷰홀더 생성->호출되는 함수->아이템 뷰 객체를 만들어서 뷰홀더에 던져줌
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding: ItemRecordFoldernameBinding =
-            ItemRecordFoldernameBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding: ItemRecordFolderBinding =
+            ItemRecordFolderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(binding)
     }
@@ -33,26 +31,21 @@ class DialogDeleteRVAdapter() : RecyclerView.Adapter<DialogDeleteRVAdapter.ViewH
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind()
         holder.itemView.setOnClickListener {
-            mItemClickListener.onItemView()
-        }
-        holder.binding.folderRecordPecilIv.setOnClickListener {
-            mItemClickListener.onItemClickPencil()
+            mItemClickListener.onItemClick()
         }
     }
 
     //뷰홀더
-    inner class ViewHolder(val binding: ItemRecordFoldernameBinding) :
+    inner class ViewHolder(val binding: ItemRecordFolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
-            val recordFolderResultRVAdapter = RecordFolderResultRVAdapter()
-            binding.itemRecordResultRecyclerview.adapter = recordFolderResultRVAdapter
-
+            binding.itemFolderrecordLineIv.setImageResource(R.drawable.line_18)
         }
 
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return 3
     }
 
 }

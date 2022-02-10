@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/record_look_title_view"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="50dp"
         android:background="#fafafa"
         android:elevation="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,19 +20,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="44dp"
             android:fontFamily="@font/apple_sd_gothic_neo_r"
             android:text="&lt;"
             android:textColor="#b0b0b0"
             android:textSize="32.2sp"
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/record_look_title_view"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="never"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/record_look_title_view"
@@ -45,8 +46,8 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/record_look_picture_vp"
                 android:layout_width="match_parent"
-                android:layout_height="360dp"
-                android:layout_marginTop="90dp"
+                android:layout_height="330dp"
+                android:layout_marginTop="50dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -58,7 +59,7 @@
                 android:layout_height="wrap_content"
                 app:dotsColor="#111111"
                 app:dotsStrokeColor="#aaaaaa"
-                app:dotsSize="10dp"
+                app:dotsSize="7dp"
                 app:dotsCornerRadius="5dp"
                 app:dotsClickable="true"
                 android:layout_marginTop="15dp"
@@ -72,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="구구당"
-                android:textSize="27sp"
+                android:textSize="22sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/apple_sd_gothic_neo_sb"
                 android:textStyle="bold"
@@ -275,23 +276,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/record_look_contents_tv"
                 >
-                <androidx.appcompat.widget.AppCompatImageButton
+                <ImageButton
                     android:id="@+id/record_look_arrow_btn"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:src="@drawable/result_look_arrow"
                     android:background="@null"
+                    android:scaleType="fitXY"
                     android:layout_marginBottom="10dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     />
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/record_look_result_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="뽑기 결과 보기"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/apple_sd_gothic_neo_r"
                     android:layout_marginStart="20dp"

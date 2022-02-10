@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/item_gridview_tv"
-        android:layout_width="22dp"
+        android:layout_width="24dp"
         android:layout_height="22dp"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
         app:layout_constraintHorizontal_weight="1"
