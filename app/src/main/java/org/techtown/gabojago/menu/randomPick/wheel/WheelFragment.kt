@@ -252,12 +252,15 @@ class WheelFragment : Fragment(), RandomView {
     }
 
     override fun onRandomResultSuccess() {
+        binding.wheelLoadingTv.visibility = View.GONE
         Toast.makeText(
             context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
         ).show()
-        (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, WheelFragment())
-            .commitAllowingStateLoss()
+        binding.wheelSaveBtn.setOnClickListener {
+            Toast.makeText(
+                context, "이미 결과가 저장되었습니다.", Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {

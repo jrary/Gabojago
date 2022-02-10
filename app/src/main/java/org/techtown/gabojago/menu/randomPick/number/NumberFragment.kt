@@ -241,10 +241,14 @@ class NumberFragment : Fragment(), RandomView {
 
     override fun onRandomResultSuccess() {
         binding.numberLoadingTv.visibility = View.GONE
-        binding.numberSaveBtn.isEnabled = false
         Toast.makeText(
             context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
         ).show()
+        binding.numberSaveBtn.setOnClickListener {
+            Toast.makeText(
+                context, "이미 결과가 저장되었습니다.", Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
