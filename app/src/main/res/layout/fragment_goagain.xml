@@ -18,7 +18,7 @@
             android:id="@+id/goagain_bookmark_iv"
             android:layout_width="27dp"
             android:layout_height="34dp"
-            android:src="@drawable/bookmark"
+            android:src="@drawable/bookmark_orange"
             android:scaleType="centerCrop"
             android:layout_marginStart="20dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,24 +55,13 @@
 
     <ImageView
         android:id="@+id/goagain_circle_plus_iv"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/circle_record_menu"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:src="@drawable/goagain_plus"
         android:scaleType="centerCrop"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="7dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <ImageView
-        android:id="@+id/goagain_plus_iv"
-        android:layout_width="23.3dp"
-        android:layout_height="23.3dp"
-        android:src="@drawable/plus"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="@id/goagain_circle_plus_iv"
-        app:layout_constraintEnd_toEndOf="@id/goagain_circle_plus_iv"
-        app:layout_constraintTop_toTopOf="@id/goagain_circle_plus_iv"
-        app:layout_constraintBottom_toBottomOf="@id/goagain_circle_plus_iv"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

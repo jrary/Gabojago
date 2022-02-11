@@ -9,7 +9,7 @@ interface CalendarRetrofitInterface {
         @Header("x-access-token") xAccessToken: String
     ): Call<NicknameAdventureResponse>
 
-    @GET("/app/monthlyadventuretimes/:{yearmonth}")
+    @GET("/app/calendar/:{yearmonth}")
     fun getAdventureTime(
         @Header("x-access-token") xAccessToken: String,
         @Path("yearmonth") yearMonth: Int

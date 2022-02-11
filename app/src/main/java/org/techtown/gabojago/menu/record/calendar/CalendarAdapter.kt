@@ -1,16 +1,21 @@
 package org.techtown.gabojago.menu.record.calendar
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.NonDisposableHandle.parent
 import org.techtown.gabojago.databinding.ItemCalendarGridviewBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CalendarAdapter(private val viewDate: String) : RecyclerView.Adapter <CalendarAdapter.ViewHolder>() {
+class CalendarAdapter(private val viewDate: String) : RecyclerView.Adapter <CalendarAdapter.ViewHolder>(), AdventureTimeView {
 
     private val days = ArrayList<String>()
+    val randomresultdateList = ArrayList<String>()
     var month =""
     var year =""
     var todayYear = 0
@@ -35,6 +40,22 @@ class CalendarAdapter(private val viewDate: String) : RecyclerView.Adapter <Cale
         fun bind(position: Int) {
             binding.itemGridviewTv.text = days[position]
 
+            if(randomresultdateList.size != 0) {
+                for (i in 0 until randomresultdateList.size) {
+                    val creatDateArray = setCreatDate(randomresultdateList[i])
+                    if (days[position] != "") {
+                        today()
+                        if (todayYear == creatDateArray[0].toInt() && todayMonth == creatDateArray[1].toInt() && days[position].toInt() == creatDateArray[2].toInt()) {
+                            binding.itemGridviewRecordIv.visibility = View.VISIBLE
+                        } else {
+                            binding.itemGridviewRecordIv.visibility = View.GONE
+                        }
+
+                    }
+
+                }
+            }
+
             if(days[position]!="") {
                 today()
                 if (todayYear == year.toInt()&&todayMonth==month.toInt() && todayDate==days[position].toInt()) {
@@ -42,6 +63,7 @@ class CalendarAdapter(private val viewDate: String) : RecyclerView.Adapter <Cale
                 } else {
                     binding.itemGridviewTodayIv.visibility = View.GONE
                 }
+
             }
 
         }
@@ -86,6 +108,23 @@ class CalendarAdapter(private val viewDate: String) : RecyclerView.Adapter <Cale
         todayYear = yearFormat.format(date).toInt()
         todayMonth = monthFormat.format(date).toInt()
         todayDate = dateFormat.format(date).toInt()
+    }
+
+    private fun setCreatDate(creatDate :String) : Array<String> {
+        val dateArray = creatDate.split("-","T").toTypedArray()
+        return dateArray
+    }
+
+    override fun onAdventureTimeSuccess(adventureTime: AdventureTimeResult) {
+        if(adventureTime.randomresultdateList.size!=0) {
+            for (i in 0 until adventureTime.randomresultdateList.size) {
+                randomresultdateList.add(adventureTime.randomresultdateList[i].creatAt)
+            }
+        }
+    }
+
+    override fun onAdventureTimeFailure(code: Int, message: String) {
+        Log.e("모험횟수 받아오기 오류",message)
     }
 
 //    fun setDate() : String{

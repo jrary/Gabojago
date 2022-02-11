@@ -16,13 +16,14 @@ import org.techtown.gabojago.databinding.PopupMenuBinding
 
 
 
-class RecordFolderResultNameRVAdapter: RecyclerView.Adapter<RecordFolderResultNameRVAdapter.ViewHolder>() {
+class RecordFolderResultNameRVAdapter(): RecyclerView.Adapter<RecordFolderResultNameRVAdapter.ViewHolder>(){
 
     //클릭 인터페이스
     interface MyItemClickListener {
         fun onItemClickPencil(folderIdx:Int)
         fun onItemView()
     }
+
 
     private lateinit var mItemClickListener: MyItemClickListener
 
@@ -75,5 +76,7 @@ class RecordFolderResultNameRVAdapter: RecyclerView.Adapter<RecordFolderResultNa
     override fun getItemCount(): Int {
         return 2
     }
+
+
 
 }

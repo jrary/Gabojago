@@ -2,7 +2,9 @@
 
 package org.techtown.gabojago.menu.record.calendar
 import HorizontalItemDecorator
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +20,7 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
     var minus = 0
     var userJoinDate = ""
     var yearMonth = 0
-    lateinit var registerDateArray : Array<String>
+    var registerDateArray = arrayOf<String>("","","")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,7 +110,9 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
 
     fun initDate() : String{
         val now: Long = System.currentTimeMillis()
+        Log.e("long타입1",now.toString())
         val date = Date(now)
+        Log.e("long타입2",date.toString())
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale("ko", "KR"))
         val stringDate = dateFormat.format(date)
         return stringDate
@@ -130,9 +134,9 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
     }
 
     override fun onAdventureTimeSuccess(adventureTime: AdventureTimeResult) {
-        userJoinDate = adventureTime.userJoinDate.date
-        registerDateArray=setRegisterDate(userJoinDate)
-        binding.calendarTotalNumberTv.text = adventureTime.monthlyAdventureTimes.monthlyTimes.toString()
+        userJoinDate = adventureTime.userJoinDate
+        registerDateArray = setRegisterDate(userJoinDate)
+        binding.calendarTotalNumberTv.text = adventureTime.monthlyAdventureTimes.toString()
     }
 
     override fun onAdventureTimeFailure(code: Int, message: String) {
