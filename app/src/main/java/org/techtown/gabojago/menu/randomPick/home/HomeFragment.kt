@@ -11,14 +11,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentHomeBinding
+import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.FolderRecordFragment
+import org.techtown.gabojago.menu.record.RecordService
 import org.techtown.gabojago.menu.record.look.RecordLookFragment
+import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), RecordCountView {
     lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
@@ -43,6 +47,14 @@ class HomeFragment : Fragment() {
                 .commitAllowingStateLoss()
         }
 
+        binding.homeDice01Iv.setOnClickListener {
+            val recordService = RecordService()
+            recordService.setRecordCountView(this@HomeFragment)
+
+            val userJwt = getJwt(requireContext(), "userJwt")
+            recordService.recordCount(userJwt)
+        }
+
         val rotate = RotateAnimation(0f, 21.92f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
         rotate.fillAfter = true
         binding.homeStartIv.startAnimation(rotate)
@@ -56,5 +68,15 @@ class HomeFragment : Fragment() {
         binding.homeDice02Iv.startAnimation(rotate03)
 
         return binding.root
+    }
+
+    override fun onRecordCountSuccess(result: Int) {
+        Log.d("NUMBERNUMBER", result.toString())
+    }
+
+    override fun onRecordCountFailure(code: Int, message: String) {
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
     }
 }

@@ -2,12 +2,17 @@ package org.techtown.gabojago.menu.record
 
 import android.util.Log
 import org.techtown.gabojago.main.getRetrofit
+import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-//
-//class RecordService {
+
+class RecordService {
+    private lateinit var recordCountView: RecordCountView
+    fun setRecordCountView(recordCountView: RecordCountView){
+        this.recordCountView = recordCountView
+    }
 //    private lateinit var randomResultView: RandomResultView
 //    private lateinit var recordFolderMakeView: RecordFolderMakeView
 //
@@ -85,3 +90,36 @@ import retrofit2.Response
 //        })
 //    }
 //}
+
+    fun recordCount(userJwt: String) {
+        val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
+        recordService.getDateCount(userJwt, "20220211").enqueue(object :
+            Callback<RecordCountResponse> {
+            override fun onResponse( call: Call<RecordCountResponse>,
+                response: Response<RecordCountResponse>
+            ) {
+                Log.d("RECORDCOUNT/Response", response.toString())
+                val resp = response.body()!!
+                Log.d("RECORDCOUNT/Code", resp.code.toString())
+
+                if (resp.isSuccess) {
+                    recordCountView.onRecordCountSuccess(resp.result)
+                } else {
+                    when (resp.code) {
+                        2012 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                        2000 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                        3000 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                        5007 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                        2013 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                        5016 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<RecordCountResponse>, t: Throwable) {
+                recordCountView.onRecordCountFailure(400, t.toString())
+                Log.d("CALENDARGETADV", t.toString())
+            }
+        })
+    }
+}

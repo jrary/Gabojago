@@ -32,3 +32,10 @@ import com.google.gson.annotations.SerializedName
 //    @SerializedName("code") val code: Int,
 //    @SerializedName("message") val message: String
 //)
+
+data class RecordCountResponse(
+    @SerializedName("isSuccess") val isSuccess: Boolean,
+    @SerializedName("code") val code: Int,
+    @SerializedName("message") val message: String,
+    @SerializedName("result") val result: Int
+)

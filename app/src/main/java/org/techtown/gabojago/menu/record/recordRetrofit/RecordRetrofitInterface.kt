@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
 
-//interface RecordRetrofitInterface {
+interface RecordRetrofitInterface {
 //    @GET("/app/randomresultList/:{date}")
 //    fun getRandomResultList(
 //        @Header("x-access-token") xAccessToken: String,
@@ -19,3 +19,10 @@ import retrofit2.http.Path
 //        @Body randomResultIdx : ArrayList<Int>
 //    ): Call<RecordFolderMakeResponse>
 //}
+
+    @GET("/app/randomresultcount/{date}")
+    fun getDateCount(
+        @Header("x-access-token") xAccessToken: String,
+        @Path("date") date: String
+    ): Call<RecordCountResponse>
+}
