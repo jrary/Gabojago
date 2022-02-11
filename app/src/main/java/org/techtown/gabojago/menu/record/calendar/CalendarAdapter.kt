@@ -118,7 +118,7 @@ class CalendarAdapter(private val viewDate: String) : RecyclerView.Adapter <Cale
     override fun onAdventureTimeSuccess(adventureTime: AdventureTimeResult) {
         if(adventureTime.randomresultdateList.size!=0) {
             for (i in 0 until adventureTime.randomresultdateList.size) {
-                randomresultdateList.add(adventureTime.randomresultdateList[i].creatAt)
+                randomresultdateList.add(adventureTime.randomresultdateList[i].createAt)
             }
         }
     }
