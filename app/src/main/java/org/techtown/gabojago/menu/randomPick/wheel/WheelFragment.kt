@@ -106,6 +106,9 @@ class WheelFragment : Fragment(), RandomView {
             }, 3000)
         }
         binding.wheelRetryBtn.setOnClickListener {
+            binding.wheelSaveBtn.setOnClickListener {
+                saveWheel()
+            }
             binding.wheelResultTv.visibility = View.GONE
             binding.wheelRetryBtn.visibility = View.GONE
             binding.wheelSaveBtn.visibility = View.GONE
@@ -119,21 +122,25 @@ class WheelFragment : Fragment(), RandomView {
         }
 
         binding.wheelSaveBtn.setOnClickListener {
-            if(res == -1){
-                Toast.makeText(
-                    context, "No value", Toast.LENGTH_SHORT
-                ).show()
-            }
-            else{
-                val randomService = RandomService()
-                randomService.setRandomView(this@WheelFragment)
-
-                val userJwt = getJwt(requireContext(), "userJwt")
-                randomService.storeResult(userJwt, optionList[res], "A")
-            }
+            saveWheel()
         }
         
         return binding.root
+    }
+
+    private fun saveWheel(){
+        if(res == -1){
+            Toast.makeText(
+                context, "No value", Toast.LENGTH_SHORT
+            ).show()
+        }
+        else{
+            val randomService = RandomService()
+            randomService.setRandomView(this@WheelFragment)
+
+            val userJwt = getJwt(requireContext(), "userJwt")
+            randomService.storeResult(userJwt, optionList[res], "A")
+        }
     }
 
     override fun onStart() {
