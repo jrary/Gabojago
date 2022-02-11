@@ -97,11 +97,11 @@ class ColorFragment : Fragment() {
             binding.colorCardDroppedView.startAnimation(anim_drop_03)
         }, 3400) //delay + 300(stop) + 300
         Handler().postDelayed({
+            binding.colorCardDroppedView.visibility = View.GONE
             startActivity(Intent(activity, ColorResultActivity::class.java))
             activity?.overridePendingTransition(R.anim.anim_alpha_start, R.anim.anim_none)
         }, 3630) //delay + 330
         Handler().postDelayed({
-            binding.colorCardDroppedView.visibility = View.GONE
             binding.colorBtn.isEnabled = true
         }, 3800) //delay + 70
     }

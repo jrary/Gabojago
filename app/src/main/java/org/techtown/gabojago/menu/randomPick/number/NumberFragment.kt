@@ -281,10 +281,13 @@ class NumberFragment : Fragment(), RandomView {
         )
 
         for(i in 0..resArray.size-1) {
+            if((resArray[i]!! / 10000) > 0){
+                resTextArr[i].setTextSize(TypedValue.COMPLEX_UNIT_SP, 13.5f)
+            }
+            else{
+                resTextArr[i].setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
+            }
             resTextArr[i].updateLayoutParams1<ConstraintLayout.LayoutParams> {
-                if((resArray[i]!! / 10000) > 0){
-                    resTextArr[i].setTextSize(TypedValue.COMPLEX_UNIT_SP, 13.5f)
-                }
                 horizontalBias = resultBallPosArr[resArray.size-1][i].ht;
                 verticalBias = resultBallPosArr[resArray.size-1][i].vt
             }
