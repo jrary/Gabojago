@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/item_gridview_tv"
-        android:layout_width="24dp"
+        android:layout_width="22dp"
         android:layout_height="22dp"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
         app:layout_constraintHorizontal_weight="1"
@@ -21,8 +21,8 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
     <ImageView
         android:id="@+id/item_gridview_record_iv"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:src="@drawable/record_calendar"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="@id/item_gridview_tv"

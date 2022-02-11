@@ -19,7 +19,7 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
     var viewDate = ""
     var minus = 0
     var userJoinDate = ""
-    var yearMonth = 0
+    var yearMonth = ""
     var registerDateArray = arrayOf<String>("","","")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +42,7 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
 
         val userJwt = getJwt(this, "userJwt")
         val dateFormat2 = SimpleDateFormat("yyyyMM", Locale("ko", "KR"))
-        yearMonth = dateFormat2.format(monthClick()).toInt()
+        yearMonth = dateFormat2.format(monthClick())
         val calendarService = CalendarService()
         calendarService.setNicknameAdventureView(this@CalendarActivity)
         calendarService.setAdventureTimeView(this@CalendarActivity)
@@ -135,8 +135,9 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
 
     override fun onAdventureTimeSuccess(adventureTime: AdventureTimeResult) {
         userJoinDate = adventureTime.userJoinDate
+        Log.e("user",adventureTime.userJoinDate)
         registerDateArray = setRegisterDate(userJoinDate)
-        binding.calendarTotalNumberTv.text = ((adventureTime.monthlyAdventureTimes).toInt()).toString()
+        binding.calendarTotalNumberTv.text = (adventureTime.monthlyAdventureTimes).toString()
     }
 
     override fun onAdventureTimeFailure(code: Int, message: String) {

@@ -95,7 +95,35 @@
         app:layout_constraintEnd_toEndOf="@id/record_calender_view1"
         app:layout_constraintStart_toStartOf="@id/record_calender_view1"
         app:layout_constraintTop_toBottomOf="@id/record_week_recyclerview"
-        app:layout_constraintBottom_toTopOf="@id/record_nestedscrollview"/>
+        app:layout_constraintBottom_toTopOf="@id/record_count_tv"/>
+
+    <TextView
+        android:id="@+id/record_count_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/apple_sd_gothic_neo_sb"
+        android:gravity="center"
+        android:text="5"
+        android:textColor="#ff6745"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/record_calender_view2" />
+
+    <TextView
+        android:id="@+id/record_totalcount_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="1dp"
+        android:fontFamily="@font/apple_sd_gothic_neo_sb"
+        android:gravity="center"
+        android:text="/30"
+        android:textColor="#797979"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/record_count_tv"
+        app:layout_constraintTop_toTopOf="@id/record_count_tv" />
 
     <TextView
         android:id="@+id/record_notify_tv"
@@ -119,13 +147,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
         android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/record_calender_view2"
         app:layout_constraintStart_toStartOf="@id/record_calender_view2"
-        app:layout_constraintTop_toBottomOf="@id/record_calender_view2">
+        app:layout_constraintTop_toBottomOf="@id/record_count_tv">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

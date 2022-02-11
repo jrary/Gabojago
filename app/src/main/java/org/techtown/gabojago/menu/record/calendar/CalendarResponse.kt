@@ -9,11 +9,11 @@ data class NicknameAdventureResult(
 
 data class AdventureTimeResult(
     @SerializedName("userjoindate") val userJoinDate: String,
-    @SerializedName("monthlyAdventureTimes") val monthlyAdventureTimes: Number,
-    @SerializedName("randomresultdateList") val randomresultdateList: ArrayList<CreatAt>
+    @SerializedName("monthlyAdventureTimes") val monthlyAdventureTimes: Int,
+    @SerializedName("randomresultdateList") val randomresultdateList: ArrayList<CreateAt>
 )
 
-data class CreatAt(
+data class CreateAt(
     @SerializedName("createAt") val createAt: String
 )
 
