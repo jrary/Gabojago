@@ -66,6 +66,11 @@ class ColorResultActivity : AppCompatActivity(), RandomView {
         binding.colorResultRetryBtn.setOnClickListener {
             finish()
         }
+
+        binding.colorResultQuitBtn.setOnClickListener {
+            finish()
+        }
+
         binding.colorResultSaveBtn.setOnClickListener {
             if(randRes == -1){
                 Toast.makeText(
@@ -107,7 +112,12 @@ class ColorResultActivity : AppCompatActivity(), RandomView {
         Toast.makeText(
             this, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
         ).show()
-        finish()
+
+        binding.colorResultSaveBtn.setOnClickListener {
+            Toast.makeText(
+                this, "이미 결과가 저장되었습니다.", Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {

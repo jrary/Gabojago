@@ -4,24 +4,31 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.constraintlayout.widget.*
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import org.techtown.gabojago.main.MainActivity
+import org.intellij.lang.annotations.JdkConstants
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentNumberBinding
+import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.randomPick.home.HomeMenuFragment
 import org.techtown.gabojago.menu.randomPick.home.RandomService
 import org.techtown.gabojago.menu.randomPick.home.RandomView
 import java.util.*
+import androidx.core.view.updateLayoutParams as updateLayoutParams1
 
 class NumberFragment : Fragment(), RandomView {
     lateinit var binding: FragmentNumberBinding
@@ -29,12 +36,12 @@ class NumberFragment : Fragment(), RandomView {
     var endNum: Int = 0
     var num: Int = 0
     var isOverlap: Boolean = false
-    private var resArray: Array<Int?> = (arrayOf(-1,))
+    private var resArray: Array<Int?> = (arrayOf(-1))
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         super.onCreate(savedInstanceState)
         binding = FragmentNumberBinding.inflate(layoutInflater)
@@ -47,7 +54,8 @@ class NumberFragment : Fragment(), RandomView {
                 num = result.data?.getIntExtra("num", 0)!!
                 isOverlap = result.data?.getBooleanExtra("overlap", true)!!
                 resArray = getNumbers()
-                Log.d("GETNUMBEROPTION", startNum.toString()+" "+ endNum.toString()+" "+num.toString()+" "+isOverlap.toString())
+                Log.d("GETNUMBEROPTION",
+                    startNum.toString() + " " + endNum.toString() + " " + num.toString() + " " + isOverlap.toString())
                 for(i: Int in 0 until num){
                     Log.d("GETRESARRAY", resArray[i].toString())
                 }
@@ -78,6 +86,7 @@ class NumberFragment : Fragment(), RandomView {
             binding.numberResult09Tv,
             binding.numberResult10Tv
         )
+        val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start_longer)
 
         binding.numberBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
@@ -107,49 +116,37 @@ class NumberFragment : Fragment(), RandomView {
             }
             else{
                 Handler().postDelayed({
-                    binding.numberOptionBtn.visibility = View.GONE
-                    binding.numberGoBtn.visibility = View.GONE
+                    binding.numberContentsView.visibility = View.GONE
                 }, 50)
                 Handler().postDelayed({
-                    val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start)
-                    binding.numberGroundIv.visibility = View.VISIBLE
-                    binding.numberGroundIv.startAnimation(animAlphaStart)
+                    binding.numberAnimationView.visibility = View.VISIBLE
+                    binding.numberAnimationView.startAnimation(animAlphaStart)
                 }, 50)
                 Handler().postDelayed({
-                    showAnimation(ballGroundArr, resTextArr)
+                    showAnimation(ballGroundArr)
                 }, 300)
+                Handler().postDelayed({
+                    resAnimation(resTextArr)
+                }, (1000 + 3000 * resArray.size).toLong())
             }
         }
 
         binding.numberRetryBtn.setOnClickListener {
-            val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start_longer)
+            for(i in 0..9){
+                ballGroundArr[i].visibility = View.GONE
+                resTextArr[i].visibility = View.GONE
+            }
+            binding.numberResultBallIv.visibility = View.GONE
             binding.numberResultView.visibility = View.GONE
             binding.numberContentsView.visibility = View.VISIBLE
             binding.numberContentsView.startAnimation(animAlphaStart)
+            binding.numberSaveBtn.setOnClickListener {
+                saveNumbers()
+            }
         }
 
         binding.numberSaveBtn.setOnClickListener {
-            if(resArray.isEmpty()){
-                Toast.makeText(
-                    context, "No value", Toast.LENGTH_SHORT
-                ).show()
-            }
-            else{
-                val randomService = RandomService()
-                randomService.setRandomView(this@NumberFragment)
-
-                var numberResString = ""
-                for(i in 0..resArray.size - 1){
-                    numberResString = when(i){
-                        0 -> resArray[i].toString()
-                        else -> numberResString + "," + resArray[i].toString()
-                    }
-                }
-                Log.d("NUMBERRESULT", numberResString)
-
-                val userJwt = getJwt(requireContext(), "userJwt")
-                randomService.storeResult(userJwt, numberResString, "D")
-            }
+            saveNumbers()
         }
         return binding.root
     }
@@ -181,47 +178,144 @@ class NumberFragment : Fragment(), RandomView {
         return resNumbers
     }
 
-    private fun showAnimation(ballArr: Array<AppCompatImageView>, resTextArr: Array<AppCompatTextView>){
+    private fun showAnimation(ballArr: Array<AppCompatImageView>){
         val dropBall = AnimationUtils.loadAnimation(activity, R.anim.anim_ball_drop)
         val resetBall = AnimationUtils.loadAnimation(activity, R.anim.anim_ball_reset)
         val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start_longer)
         for(i in 0..resArray.size - 1){
-            //Main Animation
+            Handler().postDelayed({
+                spinDrawBoxAnimation()
+            }, 3000 * i.toLong())
             Handler().postDelayed({
                 binding.numberDropBallIv.visibility = View.VISIBLE
                 binding.numberDropBallIv.startAnimation(animAlphaStart)
-            }, 200 + 1800 * i.toLong())
+            }, 1400 + 3000 * i.toLong())
             Handler().postDelayed({
                 binding.numberDropBallIv.startAnimation(dropBall) //400ms
-            }, 1000 + 1800 * i.toLong())
+            }, 2200 + 3000 * i.toLong())
             Handler().postDelayed({
                 binding.numberDropBallIv.visibility = View.GONE
                 binding.numberDropBallIv.startAnimation(resetBall)
                 ballArr[i].visibility = View.VISIBLE
                 ballArr[i].startAnimation(animAlphaStart) //500ms
-            }, 1300 + 1800 * i.toLong())
+            }, 2500 + 3000 * i.toLong())
         }
-        Handler().postDelayed({
-            resAnimation(resTextArr)
-        }, (1000 + 1800 * resArray.size).toLong())
+
+    }
+
+    private fun spinDrawBoxAnimation(){
+        var numberBallsArr = arrayOf(
+            R.drawable.number_balls_01,
+            R.drawable.number_balls_02,
+            R.drawable.number_balls_03,
+            R.drawable.number_balls_04,
+            R.drawable.number_balls_05,
+            R.drawable.number_balls_06,
+            R.drawable.number_balls_07,
+            R.drawable.number_balls_08,
+            R.drawable.number_balls_09,
+            R.drawable.number_balls_10,
+            R.drawable.number_balls_11,
+            R.drawable.number_balls_12,
+            R.drawable.number_balls_13,
+            R.drawable.number_balls_14,
+            R.drawable.number_balls_15
+        )
+        for(i in 0..14){
+            Handler().postDelayed({
+                binding.numberAnimationBallIv.setImageResource(numberBallsArr[i])
+            }, 200 * i.toLong())
+        }
     }
 
     private fun resAnimation(resTextArr: Array<AppCompatTextView>){
+
+        var numResBallArr = arrayOf(
+            R.drawable.number_result_balls_01,
+            R.drawable.number_result_balls_02,
+            R.drawable.number_result_balls_03,
+            R.drawable.number_result_balls_04,
+            R.drawable.number_result_balls_05,
+            R.drawable.number_result_balls_06,
+            R.drawable.number_result_balls_07,
+            R.drawable.number_result_balls_08,
+            R.drawable.number_result_balls_09,
+            R.drawable.number_result_balls_10
+        )
+
         val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start_longer)
-        binding.numberContentsView.visibility = View.GONE
+        binding.numberAnimationView.visibility = View.GONE
         binding.numberResultView.visibility = View.VISIBLE
         binding.numberResultView.startAnimation(animAlphaStart)
+        setTextView(resTextArr)
+        binding.numberResultBallIv.setImageResource(numResBallArr[resArray.size - 1])
         for(i in 0..resArray.size - 1){
             Handler().postDelayed({
                 resTextArr[i].text = resArray[i].toString()
                 resTextArr[i].visibility = View.VISIBLE
+                binding.numberResultBallIv.visibility = View.VISIBLE
                 resTextArr[i].startAnimation(animAlphaStart) //200ms
-            }, 700 * i.toLong())
+                binding.numberResultBallIv.startAnimation(animAlphaStart) //200ms
+            }, 700)
         }
         Handler().postDelayed({
             binding.numberRetryBtn.visibility = View.VISIBLE
             binding.numberSaveBtn.visibility = View.VISIBLE
-        }, 300 + 700 * resArray.size.toLong())
+        }, 1000)
+    }
+
+    private fun setTextView(resTextArr: Array<AppCompatTextView>){
+
+        data class Coord( val ht: Float, val vt: Float)
+        val resultBallPosArr = arrayOf(
+            arrayOf(Coord(0.5f, 0.49f)), //1
+            arrayOf(Coord(0.38f, 0.5f), Coord(0.62f, 0.5f)), //2
+            arrayOf(Coord(0.26f, 0.5f), Coord(0.5f, 0.5f), Coord(0.74f, 0.5f)), //3
+            arrayOf(Coord(0.38f, 0.385f), Coord(0.62f, 0.385f), Coord( 0.38f,0.615f), Coord(0.62f,0.615f)), //4
+            arrayOf(Coord(0.262f,0.5f), Coord(0.5f,0.275f), Coord(0.5f,0.5f), Coord(0.5f,0.725f), Coord(0.739f,0.5f)), //5
+            arrayOf(Coord(0.256f,0.4f), Coord(0.5f,0.4f), Coord(0.744f,0.4f), Coord(0.378f,0.5f), Coord(0.621f,0.5f), Coord(0.5f,0.595f)), //6
+            arrayOf(Coord(0.382f,0.385f), Coord(0.62f,0.385f), Coord(0.262f,0.5f), Coord(0.5f,0.5f), Coord(0.741f,0.5f), Coord(0.382f,0.615f), Coord(0.62f,0.615f)), //7
+            arrayOf(Coord(0.255f,0.4f), Coord(0.5f,0.4f), Coord(0.745f,0.4f), Coord(0.378f,0.5f), Coord(0.622f,0.5f), Coord(0.255f,0.6f), Coord(0.5f,0.6f), Coord(0.745f,0.6f)), //8
+            arrayOf(Coord(0.5f,0.275f), Coord(0.382f,0.39f), Coord(0.62f,0.39f), Coord(0.262f,0.5f), Coord(0.5f,0.5f), Coord(0.739f,0.5f), Coord(0.382f,0.615f), Coord(0.62f,0.615f), Coord(0.5f,0.725f)), //9
+            arrayOf(Coord(0.378f,0.35f), Coord(0.622f,0.35f), Coord(0.255f,0.45f), Coord(0.5f,0.45f), Coord(0.745f,0.45f), Coord(0.378f,0.545f), Coord(0.622f,0.548f), Coord(0.255f,0.645f), Coord(0.5f,0.645f), Coord(0.745f,0.645f)), //10
+        )
+
+        for(i in 0..resArray.size-1) {
+            if((resArray[i]!! / 10000) > 0){
+                resTextArr[i].setTextSize(TypedValue.COMPLEX_UNIT_SP, 13.5f)
+            }
+            else{
+                resTextArr[i].setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
+            }
+            resTextArr[i].updateLayoutParams1<ConstraintLayout.LayoutParams> {
+                horizontalBias = resultBallPosArr[resArray.size-1][i].ht;
+                verticalBias = resultBallPosArr[resArray.size-1][i].vt
+            }
+        }
+    }
+
+    private fun saveNumbers(){
+        if(resArray.isEmpty()){
+            Toast.makeText(
+                context, "No value", Toast.LENGTH_SHORT
+            ).show()
+        }
+        else{
+            val randomService = RandomService()
+            randomService.setRandomView(this@NumberFragment)
+
+            var numberResString = ""
+            for(i in 0..resArray.size - 1){
+                numberResString = when(i){
+                    0 -> resArray[i].toString()
+                    else -> numberResString + "," + resArray[i].toString()
+                }
+            }
+            Log.d("NUMBERRESULT", numberResString)
+
+            val userJwt = getJwt(requireContext(), "userJwt")
+            randomService.storeResult(userJwt, numberResString, "D")
+        }
     }
 
     override fun onRandomLoading() {
@@ -241,10 +335,14 @@ class NumberFragment : Fragment(), RandomView {
 
     override fun onRandomResultSuccess() {
         binding.numberLoadingTv.visibility = View.GONE
-        binding.numberSaveBtn.isEnabled = false
         Toast.makeText(
             context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
         ).show()
+        binding.numberSaveBtn.setOnClickListener {
+            Toast.makeText(
+                context, "이미 결과가 저장되었습니다.", Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {

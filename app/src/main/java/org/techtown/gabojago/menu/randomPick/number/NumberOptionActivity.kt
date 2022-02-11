@@ -2,6 +2,7 @@ package org.techtown.gabojago.menu.randomPick.number
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,10 +29,14 @@ class NumberOptionActivity : AppCompatActivity() {
         setStoredNum()
 
         binding.numberStartTv.setOnClickListener {
-            startActivityForResult(Intent(this, NumberSelectActivity::class.java), 100)
+            startNum = binding.numberStartTv.text.toString().toInt()
+            binding.numberStartTv.setText(startNum.toString().toString())
+            Log.d("STARTNUM", startNum.toString())
         }
         binding.numberEndTv.setOnClickListener {
-            startActivityForResult(Intent(this, NumberSelectActivity::class.java), 101)
+            endNum = binding.numberEndTv.text.toString().toInt()
+            binding.numberEndTv.setText(endNum.toString())
+            Log.d("ENDTNUM", endNum.toString())
         }
         binding.numberNumberTv.setOnClickListener {
             startActivityForResult(Intent(this, NumberSelectNumActivity::class.java), 102)
@@ -72,17 +77,17 @@ class NumberOptionActivity : AppCompatActivity() {
     private fun setStoredNum(){
         if(intent.hasExtra("start")){
             startNum = intent.getIntExtra("start", 0)
-            binding.numberStartTv.text = startNum.toString()
+            binding.numberStartTv.setText(startNum.toString())
         }
         else{
-            binding.numberStartTv.text = "0"
+            binding.numberStartTv.setText("0")
         }
         if(intent.hasExtra("end")){
             endNum = intent.getIntExtra("end", 0)
-            binding.numberEndTv.text = endNum.toString()
+            binding.numberEndTv.setText(endNum.toString())
         }
         else{
-            binding.numberEndTv.text = "0"
+            binding.numberEndTv.setText("0")
         }
         if(intent.hasExtra("num")){
             num = intent.getIntExtra("num", 0)
@@ -102,15 +107,15 @@ class NumberOptionActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == 100){
-            startNum = data?.getIntExtra("number", 0)!!
-            binding.numberStartTv.text = startNum.toString()
-        }
-        else if(requestCode == 101){
-            endNum = data?.getIntExtra("number", 0)!!
-            binding.numberEndTv.text = endNum.toString()
-        }
-        else if(requestCode == 102){
+//        if(requestCode == 100){
+//            startNum = data?.getIntExtra("number", 0)!!
+//            binding.numberStartTv.text = startNum.toString()
+//        }
+//        else if(requestCode == 101){
+//            endNum = data?.getIntExtra("number", 0)!!
+//            binding.numberEndTv.text = endNum.toString()
+//        }
+        if(requestCode == 102){
             num = data?.getIntExtra("number", 0)!!
             binding.numberNumberTv.text = num.toString()
         }

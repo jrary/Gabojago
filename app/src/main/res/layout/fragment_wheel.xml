@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/wheel_title_view"
         android:layout_width="match_parent"
-        android:layout_height="106dp"
+        android:layout_height="90dp"
         android:background="@color/white"
         android:elevation="20dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -195,8 +195,9 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/wheel_option_01_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="옵션 1"
                 android:textColor="#000000"
                 android:textSize="20sp"
@@ -211,8 +212,9 @@
                 />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/wheel_option_02_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="옵션 2"
                 android:textColor="#000000"
                 android:textSize="20sp"
@@ -227,8 +229,9 @@
                 />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/wheel_option_03_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="옵션 1"
                 android:textColor="#000000"
                 android:textSize="20sp"
@@ -242,8 +245,9 @@
                 />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/wheel_option_04_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="옵션 4"
                 android:textColor="#000000"
                 android:textSize="20sp"
@@ -258,8 +262,9 @@
                 />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/wheel_option_05_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="옵션 5"
                 android:textColor="#000000"
                 android:textSize="20sp"
@@ -274,8 +279,9 @@
                 />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/wheel_option_06_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="옵션 6"
                 android:textColor="#000000"
                 android:textSize="20sp"
@@ -290,8 +296,9 @@
                 />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/wheel_option_07_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="옵션 7"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
@@ -306,8 +313,9 @@
                 />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/wheel_option_08_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="옵션 8"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
@@ -322,8 +330,9 @@
                 />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/wheel_option_09_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="옵션 2"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
@@ -338,8 +347,9 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/wheel_option_10_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="옵션 10"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
@@ -354,8 +364,9 @@
                 />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/wheel_option_11_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="옵션 11"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
@@ -443,7 +454,7 @@
             android:fontFamily="@font/apple_sd_gothic_neo_sb"
             android:textStyle="normal"
             android:textSize="18sp"
-            android:textColor="#ffffff"
+            android:textColor="#23354F"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/wheel_save_btn"
             app:layout_constraintTop_toBottomOf="@id/wheel_main_view"

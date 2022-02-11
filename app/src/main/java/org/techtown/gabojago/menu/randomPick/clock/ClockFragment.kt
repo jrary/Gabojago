@@ -119,6 +119,9 @@ class ClockFragment : Fragment(), RandomView {
             }
         }
         binding.clockRetryBtn.setOnClickListener {
+            binding.clockSaveBtn.setOnClickListener {
+                saveClock()
+            }
             val rotateAnimationResult = RotateAnimation(0F,
                 0F,
                 Animation.RELATIVE_TO_SELF,
@@ -141,19 +144,23 @@ class ClockFragment : Fragment(), RandomView {
             }, 4900)
         }
         binding.clockSaveBtn.setOnClickListener {
-            if (getResClock == -1) {
-                Toast.makeText(
-                    activity, "No value", Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                val randomService = RandomService()
-                randomService.setRandomView(this@ClockFragment)
-
-                val userJwt = getJwt(requireContext(), "userJwt")
-                randomService.storeResult(userJwt, getResClock.toString() + "시 방향", "B")
-            }
+            saveClock()
         }
         return binding.root
+    }
+
+    private fun saveClock(){
+        if (getResClock == -1) {
+            Toast.makeText(
+                activity, "No value", Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            val randomService = RandomService()
+            randomService.setRandomView(this@ClockFragment)
+
+            val userJwt = getJwt(requireContext(), "userJwt")
+            randomService.storeResult(userJwt, getResClock.toString() + "시 방향", "B")
+        }
     }
 
     override fun onPause() {
@@ -332,10 +339,14 @@ class ClockFragment : Fragment(), RandomView {
 
     override fun onRandomResultSuccess() {
         binding.clockLoadingTv.visibility = View.GONE
-        binding.clockSaveBtn.isEnabled = false
         Toast.makeText(
             context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
         ).show()
+        binding.clockSaveBtn.setOnClickListener {
+            Toast.makeText(
+                context, "이미 결과가 저장되었습니다.", Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {

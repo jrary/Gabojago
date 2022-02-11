@@ -47,6 +47,18 @@
             android:visibility="gone"
             >
 
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/color_result_quit_btn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/close_dialog"
+                android:background="@null"
+                android:layout_margin="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
             <TextView
                 android:id="@+id/color_result_color_tv"
                 android:layout_width="wrap_content"

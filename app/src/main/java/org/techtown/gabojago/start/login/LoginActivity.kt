@@ -71,6 +71,7 @@ class LoginActivity :AppCompatActivity(), LoginView {
 
     override fun onLoginSuccess(userJwt: String) {
         setJwt(this, "userJwt", userJwt)
+        Log.d("USERJWT", userJwt)
         var intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
         finish()
