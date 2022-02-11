@@ -25,10 +25,11 @@ import org.techtown.gabojago.menu.record.dialog.DialogFolderSelect
 import org.techtown.gabojago.menu.record.look.RecordLookFragment
 
 
-class RecordFragment : Fragment() {
+class RecordFragment : Fragment(){
 
     lateinit var binding: FragmentRecordBinding
     lateinit var binding2: ItemRecordFoldernameBinding
+
 
     var records= ArrayList<SingleRecord>()
 
@@ -272,6 +273,7 @@ class RecordFragment : Fragment() {
             add = !add
         }
     }
+
 
 }
 

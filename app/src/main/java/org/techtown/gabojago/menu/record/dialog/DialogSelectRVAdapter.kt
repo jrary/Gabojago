@@ -48,7 +48,7 @@ class DialogSelectRVAdapter(private val recordList: ArrayList<SingleRecord>): Re
     inner class ViewHolder(val binding: ItemRecordResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(record: SingleRecord) {
-            binding.itemRecordRectangleIv.setImageResource(R.drawable.rectangle_orange)
+            binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.rectangle_orange)
             binding.itemRecordPecilIv.visibility = View.GONE
             binding.itemRecordResultTv.text = record.resultType
             binding.itemRecordCircleIv.setImageResource(record.coverImg!!)
