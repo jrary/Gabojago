@@ -70,10 +70,6 @@ class ColorResultActivity : AppCompatActivity(), RandomView, RecordCountView {
             finish()
         }
 
-        binding.colorResultQuitBtn.setOnClickListener {
-            finish()
-        }
-
         binding.colorResultSaveBtn.setOnClickListener {
             val recordService = RecordService()
             recordService.setRecordCountView(this)
