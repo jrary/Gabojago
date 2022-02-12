@@ -49,13 +49,8 @@ class RecordFragment : Fragment(), RecordCountView {
         val recordService = RecordService()
         recordService.setRecordCountView(this@RecordFragment)
 
-        val now: Long = System.currentTimeMillis()
-        val date = Date(now)
-        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
-        val stringDate = dateFormat.format(date)
-
         val userJwt = getJwt(requireContext(), "userJwt")
-        recordService.recordCount(userJwt,stringDate)
+        recordService.recordCount(userJwt)
 
 
         binding.recordFolderresultRecyclerview.layoutManager =
@@ -286,6 +281,10 @@ class RecordFragment : Fragment(), RecordCountView {
 
             add = !add
         }
+    }
+
+    override fun onRecordCountLoading() {
+        binding.recordCountTv.text = "0"
     }
 
     override fun onRecordCountSuccess(result: Int) {

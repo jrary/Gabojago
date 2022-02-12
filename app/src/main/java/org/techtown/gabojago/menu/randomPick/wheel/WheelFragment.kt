@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,9 +24,11 @@ import org.techtown.gabojago.menu.randomPick.home.HomeFragment
 import org.techtown.gabojago.menu.randomPick.home.HomeMenuFragment
 import org.techtown.gabojago.menu.randomPick.home.RandomService
 import org.techtown.gabojago.menu.randomPick.home.RandomView
+import org.techtown.gabojago.menu.record.RecordService
+import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
 import java.util.*
 
-class WheelFragment : Fragment(), RandomView {
+class WheelFragment : Fragment(), RandomView, RecordCountView {
     lateinit var binding: FragmentWheelBinding
     var optionList = ArrayList<String>()
     var res: Int = -1
@@ -81,6 +84,7 @@ class WheelFragment : Fragment(), RandomView {
             getWheelOptionArray.launch(intent)
             activity?.overridePendingTransition(R.anim.anim_up, R.anim.anim_none)
         }
+
         binding.wheelBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, HomeMenuFragment().apply {
@@ -90,6 +94,7 @@ class WheelFragment : Fragment(), RandomView {
                 .addToBackStack(null)
                 .commitAllowingStateLoss()
         }
+
         binding.wheelGoBtn.setOnClickListener {
             val animationStart = AnimationUtils.loadAnimation(activity, R.anim.anim_wheel_scale)
             binding.wheelMainView.startAnimation(animationStart)
@@ -105,6 +110,7 @@ class WheelFragment : Fragment(), RandomView {
                 binding.wheelResultTv.visibility = View.VISIBLE
             }, 3000)
         }
+
         binding.wheelRetryBtn.setOnClickListener {
             binding.wheelSaveBtn.setOnClickListener {
                 saveWheel()
@@ -129,9 +135,22 @@ class WheelFragment : Fragment(), RandomView {
     }
 
     private fun saveWheel(){
-        if(res == -1){
+        val recordService = RecordService()
+        recordService.setRecordCountView(this@WheelFragment)
+
+        val userJwt = getJwt(requireContext(), "userJwt")
+        recordService.recordCount(userJwt)
+    }
+
+    private fun saveWithValidation(count: Int) {
+        if (res == -1) {
             Toast.makeText(
-                context, "No value", Toast.LENGTH_SHORT
+                activity, "다시 실행 후 저장해 주세요.", Toast.LENGTH_SHORT
+            ).show()
+        }
+        else if(count >= 30){
+            Toast.makeText(
+                activity, "오늘은 더 이상 저장할 수 없어!", Toast.LENGTH_SHORT
             ).show()
         }
         else{
@@ -271,6 +290,33 @@ class WheelFragment : Fragment(), RandomView {
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
+        binding.wheelLoadingTv.visibility = View.GONE
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onRecordCountLoading() {
+        binding.wheelLoadingTv.visibility = View.VISIBLE
+        for(i in 0..5){
+            Handler().postDelayed({
+                binding.wheelLoadingTv.text = "결과 저장 중."
+            }, (500 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.wheelLoadingTv.text = "결과 저장 중.."
+            }, (1000 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.wheelLoadingTv.text = "결과 저장 중..."
+            }, (1500 + 1500 * i).toLong())
+        }
+    }
+
+    override fun onRecordCountSuccess(result: Int) {
+        binding.wheelLoadingTv.visibility = View.GONE
+        saveWithValidation(result)
+    }
+
+    override fun onRecordCountFailure(code: Int, message: String) {
         binding.wheelLoadingTv.visibility = View.GONE
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT

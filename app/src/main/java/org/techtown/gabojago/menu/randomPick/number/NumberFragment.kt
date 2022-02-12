@@ -27,10 +27,12 @@ import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.randomPick.home.HomeMenuFragment
 import org.techtown.gabojago.menu.randomPick.home.RandomService
 import org.techtown.gabojago.menu.randomPick.home.RandomView
+import org.techtown.gabojago.menu.record.RecordService
+import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
 import java.util.*
 import androidx.core.view.updateLayoutParams as updateLayoutParams1
 
-class NumberFragment : Fragment(), RandomView {
+class NumberFragment : Fragment(), RandomView, RecordCountView {
     lateinit var binding: FragmentNumberBinding
     var startNum: Int = 0
     var endNum: Int = 0
@@ -295,9 +297,22 @@ class NumberFragment : Fragment(), RandomView {
     }
 
     private fun saveNumbers(){
+        val recordService = RecordService()
+        recordService.setRecordCountView(this@NumberFragment)
+
+        val userJwt = getJwt(requireContext(), "userJwt")
+        recordService.recordCount(userJwt)
+    }
+
+    private fun saveWithValidation(count: Int) {
         if(resArray.isEmpty()){
             Toast.makeText(
-                context, "No value", Toast.LENGTH_SHORT
+                context, "다시 실행 후 저장해 주세요.", Toast.LENGTH_SHORT
+            ).show()
+        }
+        else if(count >= 30){
+            Toast.makeText(
+                activity, "오늘은 더 이상 저장할 수 없어!", Toast.LENGTH_SHORT
             ).show()
         }
         else{
@@ -316,6 +331,18 @@ class NumberFragment : Fragment(), RandomView {
             val userJwt = getJwt(requireContext(), "userJwt")
             randomService.storeResult(userJwt, numberResString, "D")
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val animationOpen = AnimationUtils.loadAnimation(activity, R.anim.anim_open_scale)
+        binding.numberMainIv.startAnimation(animationOpen)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val animationClose = AnimationUtils.loadAnimation(activity, R.anim.anim_close_scale)
+        binding.numberMainIv.startAnimation(animationClose)
     }
 
     override fun onRandomLoading() {
@@ -352,15 +379,30 @@ class NumberFragment : Fragment(), RandomView {
         ).show()
     }
 
-    override fun onPause() {
-        super.onPause()
-        val animationOpen = AnimationUtils.loadAnimation(activity, R.anim.anim_open_scale)
-        binding.numberMainIv.startAnimation(animationOpen)
+    override fun onRecordCountLoading() {
+        binding.numberLoadingTv.visibility = View.VISIBLE
+        for(i in 0..5){
+            Handler().postDelayed({
+                binding.numberLoadingTv.text = "결과 저장 중."
+            }, (500 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.numberLoadingTv.text = "결과 저장 중.."
+            }, (1000 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.numberLoadingTv.text = "결과 저장 중..."
+            }, (1500 + 1500 * i).toLong())
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
-        val animationClose = AnimationUtils.loadAnimation(activity, R.anim.anim_close_scale)
-        binding.numberMainIv.startAnimation(animationClose)
+    override fun onRecordCountSuccess(result: Int) {
+        binding.numberLoadingTv.visibility = View.GONE
+        saveWithValidation(result)
+    }
+
+    override fun onRecordCountFailure(code: Int, message: String) {
+        binding.numberLoadingTv.visibility = View.GONE
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
     }
 }

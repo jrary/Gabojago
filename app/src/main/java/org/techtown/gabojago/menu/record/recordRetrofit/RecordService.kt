@@ -6,6 +6,8 @@ import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class RecordService {
@@ -91,10 +93,18 @@ class RecordService {
 //    }
 //}
 
-    fun recordCount(userJwt: String,date:String) {
+    fun recordCount(userJwt: String) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
-        recordService.getDateCount(userJwt, date).enqueue(object :
+        recordCountView.onRecordCountLoading()
+
+        val now: Long = System.currentTimeMillis()
+        val date = Date(now)
+        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
+        val stringDate = dateFormat.format(date)
+
+        recordService.getDateCount(userJwt, stringDate).enqueue(object :
             Callback<RecordCountResponse> {
+
             override fun onResponse( call: Call<RecordCountResponse>,
                 response: Response<RecordCountResponse>
             ) {
