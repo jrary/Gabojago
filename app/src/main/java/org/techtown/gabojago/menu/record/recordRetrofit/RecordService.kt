@@ -13,10 +13,10 @@ class RecordService {
     fun setRecordCountView(recordCountView: RecordCountView){
         this.recordCountView = recordCountView
     }
-//    private lateinit var randomResultView: RandomResultView
-//    private lateinit var recordFolderMakeView: RecordFolderMakeView
+//    private lateinit var singleResultListView: SingleResultListView
 //
-//    fun setRandomResultView(randomResultView: RandomResultView) {
+//
+//    fun setsingleResultListView(singleResultListView: SingleResultListView) {
 //        this.randomResultView = randomResultView
 //    }
 //

@@ -59,18 +59,24 @@ class CalendarAdapter(private val viewDate: String,private val randomresultdateL
                 }
                 Log.e("randomresult2", (randomresultdateList.size).toString())
 
-                if ((position - daynum + 1) == randomresultdateList[position - daynum -1]) {
+
+
+                if ((position - daynum + 2) == randomresultdateList[position - daynum+2]) {
                     binding.itemGridviewRecordIv.visibility = View.VISIBLE
                     Log.e("randomresult2", (position - daynum + 1).toString())
-                    Log.e("randomresult2", (randomresultdateList[position - daynum + 1]).toString())
+                    Log.e("randomresult2",
+                        (randomresultdateList[position - daynum + 1]).toString())
                 }
             }
         }
-
     }
 
 
     override fun getItemCount(): Int = setEmptyDate(viewDate)
+
+    fun addAll(randomresultdateList:ArrayList<Int>){
+
+    }
 
 
     private fun setEmptyDate(eventDate: String): Int {

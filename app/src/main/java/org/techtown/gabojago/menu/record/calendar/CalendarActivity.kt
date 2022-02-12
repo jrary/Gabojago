@@ -28,15 +28,16 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
         setContentView(binding.root)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
+        for (i in 0 until 31) {
+            randomresultdateList.add(-1)
+        }
+
         init()
         setMonth()
         monthClick()
 
         val gridLayoutManager = GridLayoutManager(this, 7)
         binding.calendarGridview.layoutManager = gridLayoutManager
-
-        val calendarAdapter = CalendarAdapter(viewDate,randomresultdateList)
-        binding.calendarGridview.adapter = calendarAdapter
 
         binding.calendarGridview.addItemDecoration(HorizontalItemDecorator(28))
 
@@ -124,11 +125,6 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
         return dateArray
     }
 
-//    private fun setCreatDate(creatDate: String): Array<String> {
-//        return creatDate.split("-", "T").toTypedArray()
-//        Log.e("쪼개기", creatDate.split("-", "T").toTypedArray().toString())
-//    }
-
     override fun onNicknameAdventureSuccess(userNicknameAdventure: NicknameAdventureResult) {
         binding.calendarNameTv.text = userNicknameAdventure.userNicknameAdventure
     }
@@ -147,11 +143,12 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
         binding.calendarTotalNumberTv.text = (adventureTime.monthlyAdventureTimes).toString()
 
         for (i in 0 until adventureTime.randomresultdateList.size) {
-            randomresultdateList.add(i,(adventureTime.randomresultdateList[i].day))
+            randomresultdateList.set(adventureTime.randomresultdateList[i].day,(adventureTime.randomresultdateList[i].day))
         }
+        Log.e("day", adventureTime.randomresultdateList.toString())
         val calendarAdapter = CalendarAdapter(viewDate,randomresultdateList)
         binding.calendarGridview.adapter = calendarAdapter
-        Log.e("create", randomresultdateList.toString())
+
     }
 
     override fun onAdventureTimeLoading() {
