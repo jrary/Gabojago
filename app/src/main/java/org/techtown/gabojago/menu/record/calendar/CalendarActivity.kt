@@ -2,7 +2,6 @@
 
 package org.techtown.gabojago.menu.record.calendar
 import HorizontalItemDecorator
-import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -20,7 +19,8 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
     var minus = 0
     var userJoinDate = ""
     var yearMonth = ""
-    var registerDateArray = arrayOf<String>("","","")
+    var registerDateArray = arrayOf<String>("", "", "")
+    val randomresultdateList = ArrayList<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +35,10 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
         val gridLayoutManager = GridLayoutManager(this, 7)
         binding.calendarGridview.layoutManager = gridLayoutManager
 
-        val calendarAdapter = CalendarAdapter(viewDate)
+        val calendarAdapter = CalendarAdapter(viewDate,randomresultdateList)
         binding.calendarGridview.adapter = calendarAdapter
 
-        binding.calendarGridview.addItemDecoration(HorizontalItemDecorator( 28))
+        binding.calendarGridview.addItemDecoration(HorizontalItemDecorator(28))
 
         val userJwt = getJwt(this, "userJwt")
         val dateFormat2 = SimpleDateFormat("yyyyMM", Locale("ko", "KR"))
@@ -47,15 +47,15 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
         calendarService.setNicknameAdventureView(this@CalendarActivity)
         calendarService.setAdventureTimeView(this@CalendarActivity)
         calendarService.getNicknameAdventure(userJwt)
-        calendarService.getAdventureTime(userJwt,yearMonth)
+        calendarService.getAdventureTime(userJwt, yearMonth)
 
     }
 
     private fun init() {
-        binding.calendarDateTv.text= setMonth()
+        binding.calendarDateTv.text = setMonth()
     }
 
-    private fun monthClick() : Long{
+    private fun monthClick(): Long {
         val cal = Calendar.getInstance()
         val dateArray = initDate().split("-").toTypedArray()
         cal.set(dateArray[0].toInt(), dateArray[1].toInt() - 1, 1)
@@ -75,7 +75,7 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
                 Calendar.MONTH) + 1).toString() + "월"
             viewDate = cal.get(Calendar.YEAR)
                 .toString() + "-" + (cal.get(Calendar.MONTH) + 1).toString() + "-" + "01"
-            val calendarAdapter = CalendarAdapter(viewDate)
+            val calendarAdapter = CalendarAdapter(viewDate,randomresultdateList)
             binding.calendarGridview.adapter = calendarAdapter
         }
 
@@ -93,35 +93,41 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
                 .toString() + ", " + (cal.get(Calendar.MONTH) + 1).toString() + "월"
             viewDate = cal.get(Calendar.YEAR)
                 .toString() + "-" + (cal.get(Calendar.MONTH) + 1).toString() + "-" + "01"
-            val calendarAdapter = CalendarAdapter(viewDate)
+            val calendarAdapter = CalendarAdapter(viewDate,randomresultdateList)
             binding.calendarGridview.adapter = calendarAdapter
         }
         return cal.timeInMillis
     }
 
-    private fun setMonth() : String{
+    private fun setMonth(): String {
         val now: Long = System.currentTimeMillis()
         val date = Date(now)
         val dateFormat = SimpleDateFormat("yyyy", Locale("ko", "KR"))
         val dateFormat2 = SimpleDateFormat("MM", Locale("ko", "KR"))
-        val stringDate = dateFormat.format(date)+", "+(dateFormat2.format(date).toInt()).toString()+"월"
+        val stringDate =
+            dateFormat.format(date) + ", " + (dateFormat2.format(date).toInt()).toString() + "월"
         return stringDate
     }
 
-    fun initDate() : String{
+    fun initDate(): String {
         val now: Long = System.currentTimeMillis()
-        Log.e("long타입1",now.toString())
+        Log.e("long타입1", now.toString())
         val date = Date(now)
-        Log.e("long타입2",date.toString())
+        Log.e("long타입2", date.toString())
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale("ko", "KR"))
         val stringDate = dateFormat.format(date)
         return stringDate
     }
 
-    private fun setRegisterDate(registerDate :String) : Array<String> {
+    private fun setRegisterDate(registerDate: String): Array<String> {
         val dateArray = registerDate.split("-").toTypedArray()
         return dateArray
     }
+
+//    private fun setCreatDate(creatDate: String): Array<String> {
+//        return creatDate.split("-", "T").toTypedArray()
+//        Log.e("쪼개기", creatDate.split("-", "T").toTypedArray().toString())
+//    }
 
     override fun onNicknameAdventureSuccess(userNicknameAdventure: NicknameAdventureResult) {
         binding.calendarNameTv.text = userNicknameAdventure.userNicknameAdventure
@@ -134,13 +140,27 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
     }
 
     override fun onAdventureTimeSuccess(adventureTime: AdventureTimeResult) {
+        binding.calendarLoadingPb.visibility = View.GONE
         userJoinDate = adventureTime.userJoinDate
-        Log.e("user",adventureTime.userJoinDate)
+        Log.e("user", adventureTime.userJoinDate)
         registerDateArray = setRegisterDate(userJoinDate)
         binding.calendarTotalNumberTv.text = (adventureTime.monthlyAdventureTimes).toString()
+
+        for (i in 0 until adventureTime.randomresultdateList.size) {
+            randomresultdateList.add(i,(adventureTime.randomresultdateList[i].day))
+        }
+        val calendarAdapter = CalendarAdapter(viewDate,randomresultdateList)
+        binding.calendarGridview.adapter = calendarAdapter
+        Log.e("create", randomresultdateList.toString())
+    }
+
+    override fun onAdventureTimeLoading() {
+        binding.calendarLoadingPb.visibility = View.VISIBLE
     }
 
     override fun onAdventureTimeFailure(code: Int, message: String) {
+        binding.calendarLoadingPb.visibility = View.GONE
+
         Toast.makeText(
             this, message, Toast.LENGTH_SHORT
         ).show()

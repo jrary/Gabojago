@@ -19,13 +19,16 @@ import com.google.gson.Gson
 import org.techtown.gabojago.data.SingleRecord
 import org.techtown.gabojago.menu.record.calendar.CalendarActivity
 import android.view.LayoutInflater
+import android.widget.Toast
 import org.techtown.gabojago.databinding.ItemRecordFoldernameBinding
+import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.dialog.DialogFolderDelete
 import org.techtown.gabojago.menu.record.dialog.DialogFolderSelect
 import org.techtown.gabojago.menu.record.look.RecordLookFragment
+import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
 
 
-class RecordFragment : Fragment(){
+class RecordFragment : Fragment(), RecordCountView {
 
     lateinit var binding: FragmentRecordBinding
     lateinit var binding2: ItemRecordFoldernameBinding
@@ -42,6 +45,17 @@ class RecordFragment : Fragment(){
     ): View? {
         binding = FragmentRecordBinding.inflate(inflater, container, false)
         binding2 = ItemRecordFoldernameBinding.inflate(inflater, container, false)
+
+        val recordService = RecordService()
+        recordService.setRecordCountView(this@RecordFragment)
+
+        val now: Long = System.currentTimeMillis()
+        val date = Date(now)
+        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
+        val stringDate = dateFormat.format(date)
+
+        val userJwt = getJwt(requireContext(), "userJwt")
+        recordService.recordCount(userJwt,stringDate)
 
 
         binding.recordFolderresultRecyclerview.layoutManager =
@@ -272,6 +286,16 @@ class RecordFragment : Fragment(){
 
             add = !add
         }
+    }
+
+    override fun onRecordCountSuccess(result: Int) {
+        binding.recordCountTv.text = result.toString()
+    }
+
+    override fun onRecordCountFailure(code: Int, message: String) {
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
     }
 
 

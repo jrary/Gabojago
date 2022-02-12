@@ -22,7 +22,7 @@ import org.techtown.gabojago.menu.record.RecordService
 import org.techtown.gabojago.menu.record.look.RecordLookFragment
 import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
 
-class HomeFragment : Fragment(), RecordCountView {
+class HomeFragment : Fragment(){
     lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
@@ -47,13 +47,6 @@ class HomeFragment : Fragment(), RecordCountView {
                 .commitAllowingStateLoss()
         }
 
-        binding.homeDice01Iv.setOnClickListener {
-            val recordService = RecordService()
-            recordService.setRecordCountView(this@HomeFragment)
-
-            val userJwt = getJwt(requireContext(), "userJwt")
-            recordService.recordCount(userJwt)
-        }
 
         val rotate = RotateAnimation(0f, 21.92f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
         rotate.fillAfter = true
@@ -70,13 +63,4 @@ class HomeFragment : Fragment(), RecordCountView {
         return binding.root
     }
 
-    override fun onRecordCountSuccess(result: Int) {
-        Log.d("NUMBERNUMBER", result.toString())
-    }
-
-    override fun onRecordCountFailure(code: Int, message: String) {
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
-    }
 }

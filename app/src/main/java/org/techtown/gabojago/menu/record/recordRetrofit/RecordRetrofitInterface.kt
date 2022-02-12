@@ -7,11 +7,11 @@ import retrofit2.http.Header
 import retrofit2.http.Path
 
 interface RecordRetrofitInterface {
-//    @GET("/app/randomresultList/:{date}")
-//    fun getRandomResultList(
-//        @Header("x-access-token") xAccessToken: String,
-//        @Path("date") date: Int
-//    ): Call<RecordListResponse>
+    @GET("/app/recordingList/each/{date}")
+    fun getSingleResultList(
+        @Header("x-access-token") xAccessToken: String,
+        @Path("date") date: Int
+    ): Call<SingleResultListResponse>
 //
 //    @GET("/app/folder/new")
 //    fun putFolderMakeIdx(

@@ -91,9 +91,9 @@ class RecordService {
 //    }
 //}
 
-    fun recordCount(userJwt: String) {
+    fun recordCount(userJwt: String,date:String) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
-        recordService.getDateCount(userJwt, "20220211").enqueue(object :
+        recordService.getDateCount(userJwt, date).enqueue(object :
             Callback<RecordCountResponse> {
             override fun onResponse( call: Call<RecordCountResponse>,
                 response: Response<RecordCountResponse>

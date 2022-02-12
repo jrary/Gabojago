@@ -1,6 +1,8 @@
 package org.techtown.gabojago.menu.record.calendar
 
 import com.google.gson.annotations.SerializedName
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 data class NicknameAdventureResult(
     @SerializedName("userNickname_in_calendar") val userNicknameAdventure: String
@@ -14,7 +16,7 @@ data class AdventureTimeResult(
 )
 
 data class CreateAt(
-    @SerializedName("createAt") val createAt: String
+    @SerializedName("day") val day: Int
 )
 
 data class NicknameAdventureResponse(
