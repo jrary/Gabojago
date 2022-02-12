@@ -1,5 +1,7 @@
 package org.techtown.gabojago.menu.manage
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -43,6 +45,11 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView {
                 binding.manageNicknameView.visibility = View.GONE
                 manageService.modifyNickname(userJwt, modifyNickname)
             }
+        }
+
+        binding.manageChatTv.setOnClickListener {
+            val feedback = Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/bMn73YNkNLKqvWHq9"))
+            startActivity(feedback)
         }
 
         return binding.root
