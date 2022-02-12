@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,9 +24,12 @@ import org.techtown.gabojago.menu.randomPick.home.HomeMenuFragment
 import org.techtown.gabojago.menu.randomPick.home.RandomService
 import org.techtown.gabojago.menu.randomPick.home.RandomView
 import org.techtown.gabojago.menu.record.RecordFragment
+import org.techtown.gabojago.menu.record.RecordService
+import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
+import java.text.SimpleDateFormat
 import java.util.*
 
-class ClockFragment : Fragment(), RandomView {
+class ClockFragment : Fragment(), RandomView, RecordCountView {
 
     lateinit var binding: FragmentClockBinding
     var startNum: Int = 12
@@ -150,11 +154,25 @@ class ClockFragment : Fragment(), RandomView {
     }
 
     private fun saveClock(){
+        val recordService = RecordService()
+        recordService.setRecordCountView(this@ClockFragment)
+
+        val userJwt = getJwt(requireContext(), "userJwt")
+        recordService.recordCount(userJwt)
+    }
+
+    private fun saveWithValidation(count: Int) {
         if (getResClock == -1) {
             Toast.makeText(
-                activity, "No value", Toast.LENGTH_SHORT
+                activity, "다시 실행 후 저장해 주세요.", Toast.LENGTH_SHORT
             ).show()
-        } else {
+        }
+        else if(count >= 30){
+            Toast.makeText(
+                activity, "오늘은 더 이상 저장할 수 없어!", Toast.LENGTH_SHORT
+            ).show()
+        }
+        else {
             val randomService = RandomService()
             randomService.setRandomView(this@ClockFragment)
 
@@ -350,6 +368,33 @@ class ClockFragment : Fragment(), RandomView {
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
+        binding.clockLoadingTv.visibility = View.GONE
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onRecordCountLoading() {
+        binding.clockLoadingTv.visibility = View.VISIBLE
+        for(i in 0..5){
+            Handler().postDelayed({
+                binding.clockLoadingTv.text = "결과 저장 중."
+            }, (500 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.clockLoadingTv.text = "결과 저장 중.."
+            }, (1000 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.clockLoadingTv.text = "결과 저장 중..."
+            }, (1500 + 1500 * i).toLong())
+        }
+    }
+
+    override fun onRecordCountSuccess(result: Int) {
+        binding.clockLoadingTv.visibility = View.GONE
+        saveWithValidation(result)
+    }
+
+    override fun onRecordCountFailure(code: Int, message: String) {
         binding.clockLoadingTv.visibility = View.GONE
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT

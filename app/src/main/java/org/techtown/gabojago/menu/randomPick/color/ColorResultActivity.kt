@@ -2,6 +2,7 @@ package org.techtown.gabojago.menu.randomPick.color
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
@@ -12,9 +13,11 @@ import org.techtown.gabojago.databinding.ActivityColorResultBinding
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.randomPick.home.RandomService
 import org.techtown.gabojago.menu.randomPick.home.RandomView
+import org.techtown.gabojago.menu.record.RecordService
+import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
 import java.util.*
 
-class ColorResultActivity : AppCompatActivity(), RandomView {
+class ColorResultActivity : AppCompatActivity(), RandomView, RecordCountView {
 
     lateinit var binding: ActivityColorResultBinding
     var randRes: Int = -1
@@ -67,23 +70,32 @@ class ColorResultActivity : AppCompatActivity(), RandomView {
             finish()
         }
 
-        binding.colorResultQuitBtn.setOnClickListener {
-            finish()
-        }
-
         binding.colorResultSaveBtn.setOnClickListener {
-            if(randRes == -1){
-                Toast.makeText(
-                    this, "No value", Toast.LENGTH_SHORT
-                ).show()
-            }
-            else{
-                val randomService = RandomService()
-                randomService.setRandomView(this)
+            val recordService = RecordService()
+            recordService.setRecordCountView(this)
 
-                val userJwt = getJwt(this, "userJwt")
-                randomService.storeResult(userJwt, randomColor[randRes], "C")
-            }
+            val userJwt = getJwt(this, "userJwt")
+            recordService.recordCount(userJwt)
+        }
+    }
+
+    private fun saveWithValidation(count: Int) {
+        if (randRes == -1) {
+            Toast.makeText(
+                this, "다시 실행 후 저장해 주세요.", Toast.LENGTH_SHORT
+            ).show()
+        }
+        else if(count >= 30){
+            Toast.makeText(
+                this, "오늘은 더 이상 저장할 수 없어!", Toast.LENGTH_SHORT
+            ).show()
+        }
+        else {
+            val randomService = RandomService()
+            randomService.setRandomView(this)
+
+            val userJwt = getJwt(this, "userJwt")
+            randomService.storeResult(userJwt, randomColor[randRes], "C")
         }
     }
 
@@ -121,6 +133,33 @@ class ColorResultActivity : AppCompatActivity(), RandomView {
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
+        binding.colorLoadingTv.visibility = View.GONE
+        Toast.makeText(
+            this, message, Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onRecordCountLoading() {
+        binding.colorLoadingTv.visibility = View.VISIBLE
+        for(i in 0..5){
+            Handler().postDelayed({
+                binding.colorLoadingTv.text = "결과 저장 중."
+            }, (500 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.colorLoadingTv.text = "결과 저장 중.."
+            }, (1000 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.colorLoadingTv.text = "결과 저장 중..."
+            }, (1500 + 1500 * i).toLong())
+        }
+    }
+
+    override fun onRecordCountSuccess(result: Int) {
+        binding.colorLoadingTv.visibility = View.GONE
+        saveWithValidation(result)
+    }
+
+    override fun onRecordCountFailure(code: Int, message: String) {
         binding.colorLoadingTv.visibility = View.GONE
         Toast.makeText(
             this, message, Toast.LENGTH_SHORT
