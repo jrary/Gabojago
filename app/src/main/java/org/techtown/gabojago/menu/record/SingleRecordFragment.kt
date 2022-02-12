@@ -10,7 +10,6 @@ import org.techtown.gabojago.databinding.FragmentSinglerecordBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
-import org.techtown.gabojago.data.SingleRecord
 
 
 class SingleRecordFragment(recordIdx:Int) : Fragment() {

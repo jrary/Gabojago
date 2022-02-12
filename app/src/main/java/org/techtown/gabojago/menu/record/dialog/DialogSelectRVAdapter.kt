@@ -5,27 +5,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.R
-import org.techtown.gabojago.data.SingleRecord
 import org.techtown.gabojago.databinding.ItemRecordResultBinding
+import org.techtown.gabojago.menu.record.recordRetrofit.SingleResultListResult
 
-class DialogSelectRVAdapter(private val recordList: ArrayList<SingleRecord>): RecyclerView.Adapter<DialogSelectRVAdapter.ViewHolder>() {
+val isSelectList = ArrayList<Boolean>()
 
-    //클릭 인터페이스
-    interface MyItemClickListener {
-    }
+class DialogSelectRVAdapter(private val recordList: ArrayList<SingleResultListResult>): RecyclerView.Adapter<DialogSelectRVAdapter.ViewHolder>() {
 
-    private lateinit var mItemClickListener: MyItemClickListener
-
-
-
-    fun setMyItemClickListener(itemClickListener: MyItemClickListener) {
-        mItemClickListener = itemClickListener
-    }
 
     //뷰홀더 생성->호출되는 함수->아이템 뷰 객체를 만들어서 뷰홀더에 던져줌
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemRecordResultBinding =
             ItemRecordResultBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        for (i in 0 until 31) {
+            isSelectList.add(false)
+        }
 
         return ViewHolder(binding)
     }
@@ -34,11 +29,11 @@ class DialogSelectRVAdapter(private val recordList: ArrayList<SingleRecord>): Re
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(recordList[position])
         holder.itemView.setOnClickListener {
-            if(!recordList[position].isSelected!!) {
-                recordList[position].isSelected= true
+            if(!isSelectList[position]) {
+                isSelectList[position]= true
                 holder.binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.single_select_rectangle)
             }else{
-                recordList[position].isSelected= false
+                isSelectList[position]= false
                 holder.binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.rectangle_orange)
             }
         }
@@ -47,12 +42,23 @@ class DialogSelectRVAdapter(private val recordList: ArrayList<SingleRecord>): Re
     //뷰홀더
     inner class ViewHolder(val binding: ItemRecordResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(record: SingleRecord) {
+        fun bind(recordList:SingleResultListResult) {
             binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.rectangle_orange)
             binding.itemRecordPecilIv.visibility = View.GONE
-            binding.itemRecordResultTv.text = record.resultType
-            binding.itemRecordCircleIv.setImageResource(record.coverImg!!)
-            binding.itemRecordTitleIv.setImageResource(record.typeImg!!)
+            binding.itemRecordResultTv.text = recordList.randomResultListResult.randomResultContent
+            if(recordList.randomResultListResult.randomResultType=="A"){
+                binding.itemRecordTitleIv.setImageResource(R.drawable.dolimpan)
+                binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_dolimpan_orange)
+            }else if(recordList.randomResultListResult.randomResultType=="B"){
+                binding.itemRecordTitleIv.setImageResource(R.drawable.nsibanghiang)
+                binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_nsibang_orange)
+            }else if(recordList.randomResultListResult.randomResultType=="C"){
+                binding.itemRecordTitleIv.setImageResource(R.drawable.colorbox)
+                binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_japangi_orange)
+            }else if(recordList.randomResultListResult.randomResultType=="D"){
+                binding.itemRecordTitleIv.setImageResource(R.drawable.binglebingle)
+                binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_random_orange)
+            }
         }
 
     }

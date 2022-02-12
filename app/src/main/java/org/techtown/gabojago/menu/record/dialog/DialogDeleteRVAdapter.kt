@@ -9,7 +9,7 @@ import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ItemRecordFoldernameBinding
 
 
-class DialogDeleteRVAdapter() : RecyclerView.Adapter<DialogDeleteRVAdapter.ViewHolder>() {
+class DialogDeleteRVAdapter : RecyclerView.Adapter<DialogDeleteRVAdapter.ViewHolder>() {
 
     //클릭 인터페이스
     interface MyItemClickListener {
