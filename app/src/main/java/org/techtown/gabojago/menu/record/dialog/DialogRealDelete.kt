@@ -67,9 +67,7 @@ class DialogRealDelete(private val recordList: ArrayList<SingleResultListResult>
 
 
 
-            (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, RecordFragment())
-                .commitAllowingStateLoss()
+
 
 
         }
@@ -84,6 +82,9 @@ class DialogRealDelete(private val recordList: ArrayList<SingleResultListResult>
 
 
     override fun onFolderDeleteSuccess() {
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, RecordFragment())
+            .commitAllowingStateLoss()
         Log.e("성공","성공")
         dismiss()
     }

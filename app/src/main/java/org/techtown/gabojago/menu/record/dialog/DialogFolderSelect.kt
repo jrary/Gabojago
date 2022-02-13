@@ -58,13 +58,6 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
             recordService.putFolderMakeIdx(userJwt,folderMake)
 
 
-            (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, RecordFragment())
-                .commitAllowingStateLoss()
-
-            dismiss()
-
-
         }
 
 
@@ -72,6 +65,11 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
     }
 
     override fun onRecordFolderMakeSuccess() {
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, RecordFragment())
+            .commitAllowingStateLoss()
+
+        dismiss()
         Log.e("폴더생성","성공")
     }
 
