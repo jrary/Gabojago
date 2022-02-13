@@ -129,7 +129,7 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
                 }, 300)
                 Handler().postDelayed({
                     resAnimation(resTextArr)
-                }, (1000 + 3000 * resArray.size).toLong())
+                }, (1000 + 2250 * resArray.size).toLong())
             }
         }
 
@@ -187,22 +187,21 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
         for(i in 0..resArray.size - 1){
             Handler().postDelayed({
                 spinDrawBoxAnimation()
-            }, 3000 * i.toLong())
+            }, 2250 * i.toLong())
             Handler().postDelayed({
                 binding.numberDropBallIv.visibility = View.VISIBLE
                 binding.numberDropBallIv.startAnimation(animAlphaStart)
-            }, 1400 + 3000 * i.toLong())
+            }, 650 + 2250 * i.toLong())
             Handler().postDelayed({
                 binding.numberDropBallIv.startAnimation(dropBall) //400ms
-            }, 2200 + 3000 * i.toLong())
+            }, 1450 + 2250 * i.toLong())
             Handler().postDelayed({
                 binding.numberDropBallIv.visibility = View.GONE
                 binding.numberDropBallIv.startAnimation(resetBall)
                 ballArr[i].visibility = View.VISIBLE
                 ballArr[i].startAnimation(animAlphaStart) //500ms
-            }, 2500 + 3000 * i.toLong())
+            }, 1750 + 2250 * i.toLong())
         }
-
     }
 
     private fun spinDrawBoxAnimation(){
@@ -226,7 +225,7 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
         for(i in 0..14){
             Handler().postDelayed({
                 binding.numberAnimationBallIv.setImageResource(numberBallsArr[i])
-            }, 200 * i.toLong())
+            }, 150 * i.toLong())
         }
     }
 
@@ -346,22 +345,22 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
     }
 
     override fun onRandomLoading() {
-        binding.numberLoadingTv.visibility = View.VISIBLE
+        binding.numberLoadingView.visibility = View.VISIBLE
         for(i in 0..5){
             Handler().postDelayed({
-                binding.numberLoadingTv.text = "결과 저장 중."
+                binding.numberLoadingIv.setImageResource(R.drawable.loading_02)
             }, (500 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.numberLoadingTv.text = "결과 저장 중.."
+                binding.numberLoadingIv.setImageResource(R.drawable.loading_03)
             }, (1000 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.numberLoadingTv.text = "결과 저장 중..."
+                binding.numberLoadingIv.setImageResource(R.drawable.loading_01)
             }, (1500 + 1500 * i).toLong())
         }
     }
 
     override fun onRandomResultSuccess() {
-        binding.numberLoadingTv.visibility = View.GONE
+        binding.numberLoadingView.visibility = View.GONE
         Toast.makeText(
             context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
         ).show()
@@ -373,34 +372,34 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
-        binding.numberLoadingTv.visibility = View.GONE
+        binding.numberLoadingView.visibility = View.GONE
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT
         ).show()
     }
 
     override fun onRecordCountLoading() {
-        binding.numberLoadingTv.visibility = View.VISIBLE
+        binding.numberLoadingView.visibility = View.VISIBLE
         for(i in 0..5){
             Handler().postDelayed({
-                binding.numberLoadingTv.text = "결과 저장 중."
+                binding.numberLoadingIv.setImageResource(R.drawable.loading_02)
             }, (500 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.numberLoadingTv.text = "결과 저장 중.."
+                binding.numberLoadingIv.setImageResource(R.drawable.loading_03)
             }, (1000 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.numberLoadingTv.text = "결과 저장 중..."
+                binding.numberLoadingIv.setImageResource(R.drawable.loading_01)
             }, (1500 + 1500 * i).toLong())
         }
     }
 
     override fun onRecordCountSuccess(result: Int) {
-        binding.numberLoadingTv.visibility = View.GONE
+        binding.numberLoadingView.visibility = View.GONE
         saveWithValidation(result)
     }
 
     override fun onRecordCountFailure(code: Int, message: String) {
-        binding.numberLoadingTv.visibility = View.GONE
+        binding.numberLoadingView.visibility = View.GONE
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT
         ).show()

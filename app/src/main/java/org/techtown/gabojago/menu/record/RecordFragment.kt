@@ -24,7 +24,6 @@ import org.techtown.gabojago.menu.record.dialog.DialogFolderDelete
 import org.techtown.gabojago.menu.record.dialog.DialogFolderSelect
 import org.techtown.gabojago.menu.record.look.RecordLookFragment
 import org.techtown.gabojago.menu.record.recordRetrofit.*
-import kotlin.collections.ArrayList
 
 
 class RecordFragment : Fragment(), RecordCountView, SingleResultListView, FolderResultListView {

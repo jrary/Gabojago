@@ -105,22 +105,22 @@ class ColorResultActivity : AppCompatActivity(), RandomView, RecordCountView {
     }
 
     override fun onRandomLoading() {
-        binding.colorLoadingTv.visibility = View.VISIBLE
+        binding.colorLoadingView.visibility = View.VISIBLE
         for(i in 0..5){
             Handler().postDelayed({
-                binding.colorLoadingTv.text = "결과 저장 중."
+                binding.colorLoadingIv.setImageResource(R.drawable.loading_02)
             }, (500 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.colorLoadingTv.text = "결과 저장 중.."
+                binding.colorLoadingIv.setImageResource(R.drawable.loading_03)
             }, (1000 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.colorLoadingTv.text = "결과 저장 중..."
+                binding.colorLoadingIv.setImageResource(R.drawable.loading_01)
             }, (1500 + 1500 * i).toLong())
         }
     }
 
     override fun onRandomResultSuccess() {
-        binding.colorLoadingTv.visibility = View.GONE
+        binding.colorLoadingView.visibility = View.GONE
         Toast.makeText(
             this, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
         ).show()
@@ -133,34 +133,34 @@ class ColorResultActivity : AppCompatActivity(), RandomView, RecordCountView {
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
-        binding.colorLoadingTv.visibility = View.GONE
+        binding.colorLoadingView.visibility = View.GONE
         Toast.makeText(
             this, message, Toast.LENGTH_SHORT
         ).show()
     }
 
     override fun onRecordCountLoading() {
-        binding.colorLoadingTv.visibility = View.VISIBLE
+        binding.colorLoadingView.visibility = View.VISIBLE
         for(i in 0..5){
             Handler().postDelayed({
-                binding.colorLoadingTv.text = "결과 저장 중."
+                binding.colorLoadingIv.setImageResource(R.drawable.loading_02)
             }, (500 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.colorLoadingTv.text = "결과 저장 중.."
+                binding.colorLoadingIv.setImageResource(R.drawable.loading_03)
             }, (1000 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.colorLoadingTv.text = "결과 저장 중..."
+                binding.colorLoadingIv.setImageResource(R.drawable.loading_01)
             }, (1500 + 1500 * i).toLong())
         }
     }
 
     override fun onRecordCountSuccess(result: Int) {
-        binding.colorLoadingTv.visibility = View.GONE
+        binding.colorLoadingView.visibility = View.GONE
         saveWithValidation(result)
     }
 
     override fun onRecordCountFailure(code: Int, message: String) {
-        binding.colorLoadingTv.visibility = View.GONE
+        binding.colorLoadingView.visibility = View.GONE
         Toast.makeText(
             this, message, Toast.LENGTH_SHORT
         ).show()
