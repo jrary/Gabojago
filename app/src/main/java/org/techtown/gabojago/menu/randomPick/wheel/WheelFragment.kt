@@ -263,22 +263,22 @@ class WheelFragment : Fragment(), RandomView, RecordCountView {
     }
 
     override fun onRandomLoading() {
-        binding.wheelLoadingTv.visibility = View.VISIBLE
+        binding.wheelLoadingView.visibility = View.VISIBLE
         for(i in 0..5){
             Handler().postDelayed({
-                binding.wheelLoadingTv.text = "결과 저장 중."
+                binding.wheelLoadingIv.setImageResource(R.drawable.loading_02)
             }, (500 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.wheelLoadingTv.text = "결과 저장 중.."
+                binding.wheelLoadingIv.setImageResource(R.drawable.loading_03)
             }, (1000 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.wheelLoadingTv.text = "결과 저장 중..."
+                binding.wheelLoadingIv.setImageResource(R.drawable.loading_01)
             }, (1500 + 1500 * i).toLong())
         }
     }
 
     override fun onRandomResultSuccess() {
-        binding.wheelLoadingTv.visibility = View.GONE
+        binding.wheelLoadingView.visibility = View.GONE
         Toast.makeText(
             context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
         ).show()
@@ -290,34 +290,34 @@ class WheelFragment : Fragment(), RandomView, RecordCountView {
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
-        binding.wheelLoadingTv.visibility = View.GONE
+        binding.wheelLoadingView.visibility = View.GONE
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT
         ).show()
     }
 
     override fun onRecordCountLoading() {
-        binding.wheelLoadingTv.visibility = View.VISIBLE
+        binding.wheelLoadingView.visibility = View.VISIBLE
         for(i in 0..5){
             Handler().postDelayed({
-                binding.wheelLoadingTv.text = "결과 저장 중."
+                binding.wheelLoadingIv.setImageResource(R.drawable.loading_02)
             }, (500 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.wheelLoadingTv.text = "결과 저장 중.."
+                binding.wheelLoadingIv.setImageResource(R.drawable.loading_03)
             }, (1000 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.wheelLoadingTv.text = "결과 저장 중..."
+                binding.wheelLoadingIv.setImageResource(R.drawable.loading_01)
             }, (1500 + 1500 * i).toLong())
         }
     }
 
     override fun onRecordCountSuccess(result: Int) {
-        binding.wheelLoadingTv.visibility = View.GONE
+        binding.wheelLoadingView.visibility = View.GONE
         saveWithValidation(result)
     }
 
     override fun onRecordCountFailure(code: Int, message: String) {
-        binding.wheelLoadingTv.visibility = View.GONE
+        binding.wheelLoadingView.visibility = View.GONE
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT
         ).show()

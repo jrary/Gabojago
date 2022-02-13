@@ -341,22 +341,22 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
     }
 
     override fun onRandomLoading() {
-        binding.clockLoadingTv.visibility = View.VISIBLE
+        binding.clockLoadingView.visibility = View.VISIBLE
         for(i in 0..5){
             Handler().postDelayed({
-                binding.clockLoadingTv.text = "결과 저장 중."
+                binding.clockLoadingIv.setImageResource(R.drawable.loading_02)
             }, (500 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.clockLoadingTv.text = "결과 저장 중.."
+                binding.clockLoadingIv.setImageResource(R.drawable.loading_03)
             }, (1000 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.clockLoadingTv.text = "결과 저장 중..."
+                binding.clockLoadingIv.setImageResource(R.drawable.loading_01)
             }, (1500 + 1500 * i).toLong())
         }
     }
 
     override fun onRandomResultSuccess() {
-        binding.clockLoadingTv.visibility = View.GONE
+        binding.clockLoadingView.visibility = View.GONE
         Toast.makeText(
             context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
         ).show()
@@ -368,34 +368,34 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
-        binding.clockLoadingTv.visibility = View.GONE
+        binding.clockLoadingView.visibility = View.GONE
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT
         ).show()
     }
 
     override fun onRecordCountLoading() {
-        binding.clockLoadingTv.visibility = View.VISIBLE
+        binding.clockLoadingView.visibility = View.VISIBLE
         for(i in 0..5){
             Handler().postDelayed({
-                binding.clockLoadingTv.text = "결과 저장 중."
+                binding.clockLoadingIv.setImageResource(R.drawable.loading_02)
             }, (500 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.clockLoadingTv.text = "결과 저장 중.."
+                binding.clockLoadingIv.setImageResource(R.drawable.loading_03)
             }, (1000 + 1500 * i).toLong())
             Handler().postDelayed({
-                binding.clockLoadingTv.text = "결과 저장 중..."
+                binding.clockLoadingIv.setImageResource(R.drawable.loading_01)
             }, (1500 + 1500 * i).toLong())
         }
     }
 
     override fun onRecordCountSuccess(result: Int) {
-        binding.clockLoadingTv.visibility = View.GONE
+        binding.clockLoadingView.visibility = View.GONE
         saveWithValidation(result)
     }
 
     override fun onRecordCountFailure(code: Int, message: String) {
-        binding.clockLoadingTv.visibility = View.GONE
+        binding.clockLoadingView.visibility = View.GONE
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT
         ).show()
