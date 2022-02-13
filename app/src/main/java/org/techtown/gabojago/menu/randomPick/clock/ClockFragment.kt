@@ -23,9 +23,8 @@ import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.randomPick.home.HomeMenuFragment
 import org.techtown.gabojago.menu.randomPick.home.RandomService
 import org.techtown.gabojago.menu.randomPick.home.RandomView
-import org.techtown.gabojago.menu.record.RecordFragment
-import org.techtown.gabojago.menu.record.RecordService
 import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
+import org.techtown.gabojago.menu.record.recordRetrofit.RecordService
 import java.text.SimpleDateFormat
 import java.util.*
 
