@@ -20,6 +20,7 @@ class ManageService {
     }
 
     fun getNickname(userJwt: String) {
+        nicknameView.onNicknameLoading()
         val manageService = getRetrofit().create(ManageRetrofitInterface::class.java)
         manageService.getNickname(userJwt).enqueue(object : Callback<NicknameResponse> {
             override fun onResponse(call: Call<NicknameResponse>, response: Response<NicknameResponse>) {
@@ -41,6 +42,7 @@ class ManageService {
     }
 
     fun modifyNickname(userJwt: String, newNickname: String) {
+        newNicknameView.onModifyNicknameLoading()
         val manageService = getRetrofit().create(ManageRetrofitInterface::class.java)
 
         manageService.modifyNickname(userJwt, NewNickName(newNickname)).enqueue(object : Callback<NewNicknameResponse> {
