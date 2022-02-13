@@ -8,9 +8,9 @@ import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ItemRecordResultBinding
 import org.techtown.gabojago.menu.record.recordRetrofit.SingleResultListResult
 
-val isSelectList = ArrayList<Boolean>()
+val isSingleSelectList = ArrayList<Boolean>()
 
-class DialogSelectRVAdapter(private val recordList: ArrayList<SingleResultListResult>): RecyclerView.Adapter<DialogSelectRVAdapter.ViewHolder>() {
+class DialogDeleteSingleRVAdapter(private val recordList: ArrayList<SingleResultListResult>): RecyclerView.Adapter<DialogDeleteSingleRVAdapter.ViewHolder>() {
 
 
     //뷰홀더 생성->호출되는 함수->아이템 뷰 객체를 만들어서 뷰홀더에 던져줌
@@ -19,7 +19,7 @@ class DialogSelectRVAdapter(private val recordList: ArrayList<SingleResultListRe
             ItemRecordResultBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         for (i in 0 until recordList.size) {
-            isSelectList.add(false)
+            isSingleSelectList.add(false)
         }
 
         return ViewHolder(binding)
@@ -29,11 +29,11 @@ class DialogSelectRVAdapter(private val recordList: ArrayList<SingleResultListRe
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(recordList[position])
         holder.itemView.setOnClickListener {
-            if(!isSelectList[position]) {
-                isSelectList[position]= true
+            if(!isSingleSelectList[position]) {
+                isSingleSelectList[position]= true
                 holder.binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.single_select_rectangle)
             }else{
-                isSelectList[position]= false
+                isSingleSelectList[position]= false
                 holder.binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.rectangle_orange)
             }
         }

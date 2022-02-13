@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ItemRecordFolderBinding
+import org.techtown.gabojago.menu.record.recordRetrofit.InFolderListResult
 
-class DialogDeleteResultRVAdapter: RecyclerView.Adapter<DialogDeleteResultRVAdapter.ViewHolder>() {
+class DialogDeleteResultRVAdapter(private val hasRecording:Boolean ,private val resultList: ArrayList<InFolderListResult>): RecyclerView.Adapter<DialogDeleteResultRVAdapter.ViewHolder>() {
 
     //클릭 인터페이스
     interface MyItemClickListener {
@@ -29,23 +30,55 @@ class DialogDeleteResultRVAdapter: RecyclerView.Adapter<DialogDeleteResultRVAdap
 
     //뷰홀더에 데이터를 바인딩해줘야 할 때마다 호출되는 함수 => 엄청나게 많이 호출
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind()
-        holder.itemView.setOnClickListener {
-            mItemClickListener.onItemClick()
+        if(resultList[position]!=null) {
+            holder.bind(resultList[position])
+            holder.itemView.setOnClickListener {
+                mItemClickListener.onItemClick()
+            }
         }
     }
 
     //뷰홀더
     inner class ViewHolder(val binding: ItemRecordFolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
-            binding.itemFolderrecordLineIv.setImageResource(R.drawable.line_18)
+        fun bind(result:InFolderListResult) {
+            binding.itemFolderrecordResultTv.text = result.resultContent
+            if(hasRecording){
+                binding.itemFolderrecordLineIv.setBackgroundResource(R.drawable.line_18)
+                if(result.resultType=="A"){
+                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.dolimpan)
+                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_dolimpan_orange)
+                }else if(result.resultType=="B"){
+                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.nsibanghiang)
+                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_nsibang_orange)
+                }else if(result.resultType=="C"){
+                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.colorbox)
+                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_japangi_orange)
+                }else if(result.resultType=="D"){
+                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.binglebingle)
+                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_random_orange)
+                }
+
+            }else{
+                binding.itemFolderrecordLineIv.setBackgroundResource(R.drawable.line_gray)
+                if(result.resultType=="A"){
+                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.dolimpan)
+                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_dolimpan_gray)
+                }else if(result.resultType=="B"){
+                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.nsibanghiang)
+                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_nsibang)
+                }else if(result.resultType=="C"){
+                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.colorbox)
+                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_japangi)
+                }else if(result.resultType=="D"){
+                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.binglebingle)
+                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_random_gray)
+                }
+            }
         }
 
     }
 
-    override fun getItemCount(): Int {
-        return 3
-    }
+    override fun getItemCount(): Int = resultList.size
 
 }

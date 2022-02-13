@@ -123,9 +123,9 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
 
     }
 
-    private fun changeFolderRecordFragment(folderIdx:Int) {
+    private fun changeFolderRecordFragment(folderIdx:Int, resultList:ArrayList<InFolderListResult>) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, FolderRecordFragment(folderIdx).apply {
+            .replace(R.id.main_frm, FolderRecordFragment(folderIdx,resultList).apply {
                 arguments = Bundle().apply {
                 }
             })
@@ -134,9 +134,9 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
 
     }
 
-    private fun changeRecordFragment(){
+    private fun changeRecordFragment(folderIdx: Int){
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, RecordLookFragment().apply {
+            .replace(R.id.main_frm, RecordLookFragment(folderIdx).apply {
                 arguments = Bundle().apply {
                 }
             })
@@ -245,7 +245,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
                 changeSingleRecordFragment(recordIdx)
             }
             override fun onItemView() {
-                changeRecordFragment()
+                changeRecordFragment(1)
             }
         })
 
@@ -265,18 +265,18 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         binding.recordFolderresultRecyclerview.adapter = recordFolderResultNameRVAdapter
 
         binding.recordTrashIv.setOnClickListener{
-            DialogFolderDelete(records).show((context as MainActivity).supportFragmentManager,"dialog")
+            DialogFolderDelete(records,folders).show((context as MainActivity).supportFragmentManager,"dialog")
 
         }
 
         recordFolderResultNameRVAdapter.setMyItemClickListener(object :
             RecordFolderResultNameRVAdapter.MyItemClickListener {
-            override fun onItemClickPencil(folderIdx:Int) {
-                changeFolderRecordFragment(folderIdx)
+            override fun onItemClickPencil(folderIdx:Int,resultList:ArrayList<InFolderListResult>) {
+                changeFolderRecordFragment(folderIdx,resultList)
             }
 
-            override fun onItemView() {
-                changeRecordFragment()
+            override fun onItemView(folderIdx:Int) {
+                changeRecordFragment(folderIdx)
             }
         })
     }
@@ -286,6 +286,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
             activity, message, Toast.LENGTH_SHORT
         ).show()
     }
+
 
 
 }

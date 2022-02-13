@@ -16,6 +16,7 @@ import org.techtown.gabojago.databinding.ActivityCalendarBinding.inflate
 import org.techtown.gabojago.databinding.ItemRecordFoldernameBinding
 import org.techtown.gabojago.databinding.PopupMenuBinding
 import org.techtown.gabojago.menu.record.recordRetrofit.FolderResultList
+import org.techtown.gabojago.menu.record.recordRetrofit.InFolderListResult
 import org.techtown.gabojago.menu.record.recordRetrofit.SingleResultListResult
 
 
@@ -23,8 +24,8 @@ class RecordFolderResultNameRVAdapter(private val folderList: ArrayList<FolderRe
 
     //클릭 인터페이스
     interface MyItemClickListener {
-        fun onItemClickPencil(folderIdx:Int)
-        fun onItemView()
+        fun onItemClickPencil(folderIdx:Int,resultList:ArrayList<InFolderListResult>)
+        fun onItemView(folderIdx:Int)
     }
 
 
@@ -47,10 +48,10 @@ class RecordFolderResultNameRVAdapter(private val folderList: ArrayList<FolderRe
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(folderList[position])
         holder.itemView.setOnClickListener {
-            mItemClickListener.onItemView()
+            mItemClickListener.onItemView(folderList[position].folderIdx)
         }
         holder.binding.folderRecordPecilIv.setOnClickListener {
-            mItemClickListener.onItemClickPencil(position)
+            mItemClickListener.onItemClickPencil(folderList[position].folderIdx,folderList[position].randomResultListResult)
         }
         holder.binding.folderRecordFolderIv.setOnClickListener {
             val inflater = LayoutInflater.from(holder.binding.folderRecordFolderIv.context)
@@ -83,7 +84,7 @@ class RecordFolderResultNameRVAdapter(private val folderList: ArrayList<FolderRe
                 binding.folderRecordPecilIv.setImageResource(R.drawable.memo_pencil_orange)
                 binding.folderRecordTitleTv.setTextColor(Color.parseColor("#fc8f77"))
                 if(folderList.folderTitle!=null){
-                    binding.folderRecordTitleTv.text = folderList.folderTitle
+                    binding.folderRecordTitleTv.setText(folderList.folderTitle)
                 }
 
             }else{
