@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import okhttp3.OkHttpClient
+import java.util.concurrent.TimeUnit
+
 
 fun setJwt(context: Context, name: String, jwt: String) {
     val spf = context.getSharedPreferences(name, AppCompatActivity.MODE_PRIVATE)
@@ -18,10 +21,16 @@ fun getJwt(context: Context, name: String): String{
 
     return spf.getString("jwt", "")!!
 }
+
+val client: OkHttpClient = OkHttpClient.Builder()
+    .readTimeout(30000, TimeUnit.MILLISECONDS)
+    .connectTimeout(30000, TimeUnit.MILLISECONDS)
+    .build()
+
 fun getRetrofit(): Retrofit {
     val retrofit = Retrofit.Builder()
         .baseUrl("https://dev.gabojago.shop")
-        .addConverterFactory(ScalarsConverterFactory.create())
+        .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

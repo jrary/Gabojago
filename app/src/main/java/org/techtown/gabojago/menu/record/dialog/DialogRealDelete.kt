@@ -52,17 +52,23 @@ class DialogRealDelete(private val recordList: ArrayList<SingleResultListResult>
 
         binding.dialogYesBtn.setOnClickListener {
             val userJwt = getJwt(requireContext(), "userJwt")
-            for (i in 0 until isFolderSelectList.size-1) {
-                if (isFolderSelectList[i]) {
-                    folderDelete.add(folderList[i].folderIdx)
+
+            for (i in 0 until (isFolderSelectList.size-1)) {
+                if(isFolderSelectList[i]!=null) {
+                    if (isFolderSelectList[i]) {
+                        folderDelete.add(folderList[i].folderIdx)
+                    }
                 }
             }
 
-            for (i in 0 until isSingleSelectList.size) {
-                if (isSingleSelectList[i]) {
-                    folderDelete.add(recordList[i].randomResultListResult.randomResultIdx)
+            for (i in 0 until (isSingleSelectList.size-1)) {
+                if(isSingleSelectList[i]!=null) {
+                    if (isSingleSelectList[i]) {
+                        resultDelete.add(recordList[i].randomResultListResult.randomResultIdx)
+                    }
                 }
             }
+            Log.e("폴더삭제",resultDelete.toString())
             recordService.putIdx(userJwt,resultDelete,folderDelete)
 
 
