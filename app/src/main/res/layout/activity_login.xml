@@ -6,7 +6,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         android:background="#FF654E"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,7 @@
         app:layout_constraintBottom_toTopOf="@id/login_info_tv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintVertical_bias="0.2"
         />
 
     <CheckBox
@@ -94,7 +94,7 @@
         android:id="@+id/login_info_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ddddd"
+        android:text="&#169; Gabojago"
         android:textSize="10sp"
         android:textColor="#000000"
         android:fontFamily="@font/apple_sd_gothic_neo_r"
