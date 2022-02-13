@@ -3,10 +3,11 @@ package org.techtown.gabojago.menu.record
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.techtown.gabojago.data.SingleRecord
+import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ItemRecordResultBinding
+import org.techtown.gabojago.menu.record.recordRetrofit.SingleResultListResult
 
-class RecordResultRVAdapter(private val recordList: ArrayList<SingleRecord>): RecyclerView.Adapter<RecordResultRVAdapter.ViewHolder>() {
+class RecordResultRVAdapter(private val recordList: ArrayList<SingleResultListResult>): RecyclerView.Adapter<RecordResultRVAdapter.ViewHolder>() {
 
     //클릭 인터페이스
     interface MyItemClickListener {
@@ -42,10 +43,44 @@ class RecordResultRVAdapter(private val recordList: ArrayList<SingleRecord>): Re
     //뷰홀더
     inner class ViewHolder(val binding: ItemRecordResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(record: SingleRecord) {
-            binding.itemRecordResultTv.text = record.resultType
-            binding.itemRecordCircleIv.setImageResource(record.coverImg!!)
-            binding.itemRecordTitleIv.setImageResource(record.typeImg!!)
+        fun bind(recordList:SingleResultListResult) {
+            binding.itemRecordResultTv.text = recordList.randomResultListResult.randomResultContent
+            binding.itemRecordClockTv.text = recordList.randomResultListResult.createAt
+            if(recordList.hasRecording){
+                binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.rectangle_orange)
+                binding.itemRecordPecilIv.setImageResource(R.drawable.memo_pencil_orange)
+                if(recordList.randomResultListResult.randomResultType=="A"){
+                    binding.itemRecordTitleIv.setImageResource(R.drawable.dolimpan)
+                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_dolimpan_orange)
+                }else if(recordList.randomResultListResult.randomResultType=="B"){
+                    binding.itemRecordTitleIv.setImageResource(R.drawable.nsibanghiang)
+                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_nsibang_orange)
+                }else if(recordList.randomResultListResult.randomResultType=="C"){
+                    binding.itemRecordTitleIv.setImageResource(R.drawable.colorbox)
+                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_japangi_orange)
+                }else if(recordList.randomResultListResult.randomResultType=="D"){
+                    binding.itemRecordTitleIv.setImageResource(R.drawable.binglebingle)
+                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_random_orange)
+                }
+
+            }else{
+                binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.rectangle_gray)
+                binding.itemRecordPecilIv.setImageResource(R.drawable.memo_pencil_bluegray)
+                if(recordList.randomResultListResult.randomResultType=="A"){
+                    binding.itemRecordTitleIv.setImageResource(R.drawable.dolimpan)
+                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_dolimpan_gray)
+                }else if(recordList.randomResultListResult.randomResultType=="B"){
+                    binding.itemRecordTitleIv.setImageResource(R.drawable.nsibanghiang)
+                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_nsibang)
+                }else if(recordList.randomResultListResult.randomResultType=="C"){
+                    binding.itemRecordTitleIv.setImageResource(R.drawable.colorbox)
+                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_japangi)
+                }else if(recordList.randomResultListResult.randomResultType=="D"){
+                    binding.itemRecordTitleIv.setImageResource(R.drawable.binglebingle)
+                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_random_gray)
+                }
+            }
+
         }
 
     }

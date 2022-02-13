@@ -1,24 +1,13 @@
-package org.techtown.gabojago.menu.record
+package org.techtown.gabojago.menu.record.recordRetrofit
 import com.google.gson.annotations.SerializedName
 
-//data class RecordResultList(
-//    @SerializedName("randomresultList") val randomresultList: ArrayList<RecordResult>
-//)
-//
-//data class RecordResult(
-//    @SerializedName("randomResultIdx") val randomResultIdx: Int,
-//    @SerializedName("randomResultContent") val randomResultContent: String,
-//    @SerializedName("folderIdx") val folderIdx: Int,
-//    @SerializedName("randomResultType") val randomResultType: String,
-//    @SerializedName("creatAt") val creatAt: String,
-//    @SerializedName("updateAt") val updateAt: String
-//)
-//
-//data class RecordFolderMakeResponse(
-//    @SerializedName("isSuccess") val isSuccess: Boolean,
-//    @SerializedName("code") val code: Int,
-//    @SerializedName("message") val message: String
-//)
+
+
+data class RecordFolderMakeResponse(
+    @SerializedName("isSuccess") val isSuccess: Boolean,
+    @SerializedName("code") val code: Int,
+    @SerializedName("message") val message: String
+)
 
 
 data class RandomResultListResult(
@@ -30,14 +19,35 @@ data class RandomResultListResult(
 
 data class SingleResultListResult(
     @SerializedName("hasRecording") val hasRecording: Boolean,
-    @SerializedName("randomResultListResult") val randomResultListResult: ArrayList<RandomResultListResult>,
+    @SerializedName("randomResultListResult") val randomResultListResult: RandomResultListResult,
 )
 
 data class SingleResultListResponse(
     @SerializedName("isSuccess") val isSuccess: Boolean,
     @SerializedName("code") val code: Int,
     @SerializedName("message") val message: String,
-    @SerializedName("result") val result: SingleResultListResult
+    @SerializedName("result") val result: ArrayList<SingleResultListResult>
+)
+
+data class InFolderListResult(
+    @SerializedName("randomResultIdx") val resultIdx: Int,
+    @SerializedName("randomResultType") val resultType: String,
+    @SerializedName("randomResultContent") val resultContent: String,
+    @SerializedName("createAt") val createAt: String
+)
+
+data class FolderResultList(
+    @SerializedName("folderIdx") val folderIdx: Int,
+    @SerializedName("hasRecording") val hasRecording: Boolean,
+    @SerializedName("folderTitle") val folderTitle: String,
+    @SerializedName("folderListResult") val randomResultListResult: ArrayList<InFolderListResult>,
+)
+
+data class FolderResultListResponse(
+    @SerializedName("isSuccess") val isSuccess: Boolean,
+    @SerializedName("code") val code: Int,
+    @SerializedName("message") val message: String,
+    @SerializedName("result") val result: ArrayList<FolderResultList>
 )
 
 data class RecordCountResponse(
@@ -45,4 +55,8 @@ data class RecordCountResponse(
     @SerializedName("code") val code: Int,
     @SerializedName("message") val message: String,
     @SerializedName("result") val result: Int
+)
+
+data class randomResultRequest(
+    @SerializedName("randomResultIdx") val randResultIdx:List<Int>
 )

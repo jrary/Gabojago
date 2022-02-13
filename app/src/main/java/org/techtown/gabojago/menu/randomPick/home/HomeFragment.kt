@@ -11,16 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentHomeBinding
-import org.techtown.gabojago.main.getJwt
-import org.techtown.gabojago.menu.record.FolderRecordFragment
-import org.techtown.gabojago.menu.record.RecordService
-import org.techtown.gabojago.menu.record.look.RecordLookFragment
-import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
+
 
 class HomeFragment : Fragment(){
     lateinit var binding: FragmentHomeBinding

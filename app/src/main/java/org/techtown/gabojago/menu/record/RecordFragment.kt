@@ -15,8 +15,6 @@ import android.graphics.Point
 import android.util.TypedValue
 import android.view.*
 import android.view.animation.OvershootInterpolator
-import com.google.gson.Gson
-import org.techtown.gabojago.data.SingleRecord
 import org.techtown.gabojago.menu.record.calendar.CalendarActivity
 import android.view.LayoutInflater
 import android.widget.Toast
@@ -25,17 +23,17 @@ import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.dialog.DialogFolderDelete
 import org.techtown.gabojago.menu.record.dialog.DialogFolderSelect
 import org.techtown.gabojago.menu.record.look.RecordLookFragment
-import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
+import org.techtown.gabojago.menu.record.recordRetrofit.*
+import kotlin.collections.ArrayList
 
 
-class RecordFragment : Fragment(), RecordCountView {
+class RecordFragment : Fragment(), RecordCountView, SingleResultListView, FolderResultListView {
 
     lateinit var binding: FragmentRecordBinding
     lateinit var binding2: ItemRecordFoldernameBinding
 
-
-    var records= ArrayList<SingleRecord>()
-
+    var records = ArrayList<SingleResultListResult>()
+    var folders = ArrayList<FolderResultList>()
     var add: Boolean = true
 
     override fun onCreateView(
@@ -48,9 +46,21 @@ class RecordFragment : Fragment(), RecordCountView {
 
         val recordService = RecordService()
         recordService.setRecordCountView(this@RecordFragment)
+        recordService.setSingleResultListView(this@RecordFragment)
+        recordService.setFolderResultListView(this@RecordFragment)
 
         val userJwt = getJwt(requireContext(), "userJwt")
+
+        val now: Long = System.currentTimeMillis()
+        val date = Date(now)
+        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
+        val stringDate = dateFormat.format(date)
+
+        recordService.getSingleResultList(userJwt,stringDate)
+        recordService.getFolderResultList(userJwt,stringDate)
+
         recordService.recordCount(userJwt)
+
 
 
         binding.recordFolderresultRecyclerview.layoutManager =
@@ -65,41 +75,14 @@ class RecordFragment : Fragment(), RecordCountView {
         val recordWeekRVAdapter = RecordWeekRVAdapter()
         binding.recordWeekRecyclerview.adapter = recordWeekRVAdapter
 
-        val recordResultRVAdapter = RecordResultRVAdapter(records)
-        binding.recordResultRecyclerview.adapter = recordResultRVAdapter
 
-
-        val recordFolderResultNameRVAdapter = RecordFolderResultNameRVAdapter()
-        binding.recordFolderresultRecyclerview.adapter = recordFolderResultNameRVAdapter
 
         val width  = getScreenSize(this)
         binding.recordWeekRecyclerview.addItemDecoration(HorizontalItemDecorator(width/42))
 
-        recordResultRVAdapter.setMyItemClickListener(object :
-            RecordResultRVAdapter.MyItemClickListener {
-            override fun onItemClick(recordIdx :Int) {
-                changeSingleRecordFragment(recordIdx)
-            }
-            override fun onItemView() {
-                changeRecordFragment()
-            }
-        })
-
-        recordFolderResultNameRVAdapter.setMyItemClickListener(object :
-            RecordFolderResultNameRVAdapter.MyItemClickListener {
-            override fun onItemClickPencil(folderIdx:Int) {
-                changeFolderRecordFragment(folderIdx)
-            }
-
-            override fun onItemView() {
-                changeRecordFragment()
-            }
-        })
-
 
         clickevent()
         init()
-        initData(records)
 
         return binding.root
     }
@@ -123,64 +106,11 @@ class RecordFragment : Fragment(), RecordCountView {
             popupMenu()
         }
 
-        binding.recordFolderplusIv.setOnClickListener{
-            DialogFolderSelect(records).show((context as MainActivity).supportFragmentManager,"dialog")
-            val gson = Gson()
-            val recordJson = gson.toJson(records)
-            arguments?.putString("recordList", recordJson)
-        }
-
-        binding.recordTrashIv.setOnClickListener{
-            DialogFolderDelete(records).show((context as MainActivity).supportFragmentManager,"dialog")
-            val gson = Gson()
-            val recordJson = gson.toJson(records)
-            arguments?.putString("recordList", recordJson)
-        }
-
     }
 
     private fun init() {
         binding.recordDateTv.setText(setdate())
         binding.recordMonthTv.setText(setMonth())
-    }
-
-    private fun initData(records : ArrayList<SingleRecord>){
-        records.add(
-            SingleRecord(
-                0,
-                "제목없음",
-                "버스",
-                R.drawable.resultimage_dolimpan_gray,
-                false,
-                R.drawable.dolimpan
-            ))
-        records.add(
-            SingleRecord(
-                1,
-                "제목없음",
-                "4,7",
-                R.drawable.resultimage_random_gray,
-                false,
-                R.drawable.binglebingle
-            ))
-        records.add(
-            SingleRecord(
-                2,
-                "제목없음",
-                "9시 방향",
-                R.drawable.resultimage_nsibang,
-                false,
-                R.drawable.nsibanghiang
-            ))
-        records.add(
-            SingleRecord(
-                3,
-                "제목없음",
-                "9시 방향",
-                R.drawable.resultimage_japangi,
-                false,
-                R.drawable.nsibanghiang
-            ))
     }
 
     private fun changeSingleRecordFragment(recordIdx: Int) {
@@ -292,6 +222,67 @@ class RecordFragment : Fragment(), RecordCountView {
     }
 
     override fun onRecordCountFailure(code: Int, message: String) {
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onSingleResultListSuccess(result: ArrayList<SingleResultListResult>) {
+
+        records = result
+        val recordResultRVAdapter = RecordResultRVAdapter(records)
+        binding.recordResultRecyclerview.adapter = recordResultRVAdapter
+
+
+        binding.recordFolderplusIv.setOnClickListener{
+            DialogFolderSelect(records).show((context as MainActivity).supportFragmentManager,"dialog")
+        }
+
+
+
+        recordResultRVAdapter.setMyItemClickListener(object :
+            RecordResultRVAdapter.MyItemClickListener {
+            override fun onItemClick(recordIdx :Int) {
+                changeSingleRecordFragment(recordIdx)
+            }
+            override fun onItemView() {
+                changeRecordFragment()
+            }
+        })
+
+
+    }
+
+    override fun onSingleResultListFailure(code: Int, message: String) {
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onFolderResultListSuccess(result: ArrayList<FolderResultList>) {
+        folders = result
+
+        val recordFolderResultNameRVAdapter = RecordFolderResultNameRVAdapter(folders)
+        binding.recordFolderresultRecyclerview.adapter = recordFolderResultNameRVAdapter
+
+        binding.recordTrashIv.setOnClickListener{
+            DialogFolderDelete(records).show((context as MainActivity).supportFragmentManager,"dialog")
+
+        }
+
+        recordFolderResultNameRVAdapter.setMyItemClickListener(object :
+            RecordFolderResultNameRVAdapter.MyItemClickListener {
+            override fun onItemClickPencil(folderIdx:Int) {
+                changeFolderRecordFragment(folderIdx)
+            }
+
+            override fun onItemView() {
+                changeRecordFragment()
+            }
+        })
+    }
+
+    override fun onFolderResultListFailure(code: Int, message: String) {
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT
         ).show()

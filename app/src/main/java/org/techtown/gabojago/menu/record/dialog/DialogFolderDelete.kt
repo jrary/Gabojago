@@ -7,10 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import org.techtown.gabojago.data.SingleRecord
-import org.techtown.gabojago.databinding.DialogFolderdeleteBinding
 
-class DialogFolderDelete(private val recordList: ArrayList<SingleRecord>) : DialogFragment() {
+import org.techtown.gabojago.databinding.DialogFolderdeleteBinding
+import org.techtown.gabojago.menu.record.recordRetrofit.SingleResultListResult
+
+class DialogFolderDelete(private val recordList: ArrayList<SingleResultListResult>) : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -20,8 +20,8 @@ class FolderRecordFragment(folderIdx:Int) : Fragment() {
     ): View? {
         binding = FragmentFolderrecordBinding.inflate(inflater, container, false)
 
-        val recordFolderResultRVAdapter = RecordFolderResultRVAdapter()
-        binding.recordResultRecyclerview.adapter = recordFolderResultRVAdapter
+//        val recordFolderResultRVAdapter = RecordFolderResultRVAdapter()
+//        binding.recordResultRecyclerview.adapter = recordFolderResultRVAdapter
 
         clickevent()
         init()

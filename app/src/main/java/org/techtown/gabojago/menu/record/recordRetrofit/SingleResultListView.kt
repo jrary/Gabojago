@@ -1,6 +1,6 @@
 package org.techtown.gabojago.menu.record.recordRetrofit
 
 interface SingleResultListView {
-    fun onSingleResultList(result: Int)
-    fun onSingleResultList(code: Int, message: String)
+    fun onSingleResultListSuccess(result: ArrayList<SingleResultListResult>)
+    fun onSingleResultListFailure(code: Int, message: String)
 }
