@@ -35,7 +35,6 @@
             android:layout_width="192dp"
             android:layout_height="29dp"
             android:fontFamily="@font/apple_sd_gothic_neo_sb"
-            android:textStyle="bold"
             android:layout_marginBottom="15dp"
             android:textSize="20sp"
             android:textColor="#000000"
