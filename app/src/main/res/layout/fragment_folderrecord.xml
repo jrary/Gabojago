@@ -135,6 +135,7 @@
                 android:foregroundGravity="left"
                 app:layout_constraintStart_toStartOf="parent"
                 android:progressBackgroundTint="#EBEBEB"
+                android:secondaryProgressTint="#ff6745"
                 android:progressTint="#FF6745"
                 app:layout_constraintTop_toBottomOf="@id/folder_record_score_tv"
                 app:layout_constraintBottom_toTopOf="@id/folder_record_picture_tv" />
@@ -270,6 +271,7 @@
         app:layout_constraintTop_toBottomOf="@id/folder_record_scrollview" />
 
     <TextView
+        android:id="@+id/folder_record_complete_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"

@@ -29,6 +29,7 @@ class RecordFolderResultRVAdapter(private val hasRecording:Boolean ,private val 
         fun bind(result:InFolderListResult) {
 
             binding.itemFolderrecordResultTv.text = result.resultContent
+            binding.itemFolderrecordClockTv.text = result.createAt
             if(hasRecording){
                 binding.itemFolderrecordLineIv.setBackgroundResource(R.drawable.line_18)
                 if(result.resultType=="A"){

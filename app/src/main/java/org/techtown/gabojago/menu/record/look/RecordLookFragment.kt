@@ -121,15 +121,12 @@ class RecordLookFragment(private val folderIdx:Int): Fragment() , FolderLookView
 
         var imageList = ArrayList<Int>()
 
-        imageList.add(R.drawable.record_look_example_img)
-        imageList.add(R.drawable.record_look_example_img)
-        imageList.add(R.drawable.record_look_example_img)
-        imageList.add(R.drawable.record_look_example_img)
-        imageList.add(R.drawable.record_look_example_img)
-        imageList.add(R.drawable.record_look_example_img)
-        imageList.add(R.drawable.record_look_example_img)
-        imageList.add(R.drawable.record_look_example_img)
-        imageList.add(R.drawable.record_look_example_img)
+        imageList.add(R.drawable.lookbase1)
+        imageList.add(R.drawable.lookbase2)
+        imageList.add(R.drawable.lookbase3)
+        imageList.add(R.drawable.lookbase4)
+        imageList.add(R.drawable.lookbase5)
+        imageList.add(R.drawable.lookbase6)
 
         return imageList
     }

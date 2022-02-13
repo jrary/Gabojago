@@ -43,7 +43,23 @@ class FolderRecordFragment(private val folderIdx :Int, private val resultList:Ar
             ))
 
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .detach(this).attach(this).commit()
+                .replace(R.id.main_frm, RecordFragment().apply {
+                    arguments = Bundle().apply {
+                    }
+                })
+                .addToBackStack(null)
+                .commitAllowingStateLoss()
+
+        }
+        binding.folderRecordCompleteTv.setOnClickListener {
+            val recordService = RecordService()
+            recordService.setFolderRecordingView(this@FolderRecordFragment)
+            val userJwt = getJwt(requireContext(), "userJwt")
+            recordService.putFolderRecord(userJwt, folderIdx, FolderRecordingRequest(
+                binding.folderRecordStarscore.rating.toDouble(),
+                binding.folderRecordWriteEt.text.toString(),
+                binding.folderRecordTitleTv.text.toString()
+            ))
 
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, RecordFragment().apply {
