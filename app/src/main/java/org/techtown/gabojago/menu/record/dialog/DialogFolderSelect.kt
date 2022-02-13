@@ -49,7 +49,7 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
 
         binding.dialogNextBtn.setOnClickListener{
             val userJwt = getJwt(requireContext(), "userJwt")
-            for (i in 0 until isSelectList.size) {
+            for (i in 0 until isSelectList.size-1) {
                 if (isSelectList[i]) {
                     folderMake.add(recordList[i].randomResultListResult.randomResultIdx)
                 }
@@ -57,12 +57,6 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
             Log.e("선택",folderMake.toString())
             recordService.putFolderMakeIdx(userJwt,folderMake)
 
-
-            for (i in 0 until isSelectList.size) {
-                if (isSelectList[i]) {
-                    folderMake.clear()
-                }
-            }
 
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, RecordFragment())
@@ -75,10 +69,6 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
 
 
         return binding.root
-    }
-    fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager) {
-        var ft: FragmentTransaction = fragmentManager.beginTransaction()
-        ft.detach(fragment).attach(fragment).commit()
     }
 
     override fun onRecordFolderMakeSuccess() {

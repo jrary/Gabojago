@@ -325,19 +325,15 @@ class RecordService {
                     when (resp.code) {
                         6012 -> folderDeleteView.onFolderDeleteFailure(resp.code,
                             resp.message)
-                        6000 -> folderDeleteView.onFolderDeleteFailure(resp.code,
-                            resp.message)
                         2013 -> folderDeleteView.onFolderDeleteFailure(resp.code,
                             resp.message)
+                        6011 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                            resp.message)
+                        6015 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                            resp.message)
+                        7003 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                            resp.message)
                         7006 -> folderDeleteView.onFolderDeleteFailure(resp.code,
-                            resp.message)
-                        7004 -> folderDeleteView.onFolderDeleteFailure(resp.code,
-                            resp.message)
-                        6013 -> folderDeleteView.onFolderDeleteFailure(resp.code,
-                            resp.message)
-                        6021 -> folderDeleteView.onFolderDeleteFailure(resp.code,
-                            resp.message)
-                        6001 -> folderDeleteView.onFolderDeleteFailure(resp.code,
                             resp.message)
                         4000 -> folderDeleteView.onFolderDeleteFailure(resp.code,
                             resp.message)

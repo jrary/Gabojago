@@ -52,7 +52,7 @@ class DialogRealDelete(private val recordList: ArrayList<SingleResultListResult>
 
         binding.dialogYesBtn.setOnClickListener {
             val userJwt = getJwt(requireContext(), "userJwt")
-            for (i in 0 until isFolderSelectList.size) {
+            for (i in 0 until isFolderSelectList.size-1) {
                 if (isFolderSelectList[i]) {
                     folderDelete.add(folderList[i].folderIdx)
                 }
@@ -71,34 +71,12 @@ class DialogRealDelete(private val recordList: ArrayList<SingleResultListResult>
                 .replace(R.id.main_frm, RecordFragment())
                 .commitAllowingStateLoss()
 
-            for (i in 0 until isFolderSelectList.size) {
-                if (isFolderSelectList[i]) {
-                    folderDelete.clear()
-                }
-            }
-            for (i in 0 until isFolderSelectList.size) {
-                if (isSingleSelectList[i]) {
-                    resultDelete.clear()
-                }
-            }
-
-            dismiss()
 
         }
 
         binding.dialogNoBtn.setOnClickListener {
 
 
-            for (i in 0 until isFolderSelectList.size) {
-                if (isFolderSelectList[i]) {
-                    folderDelete.clear()
-                }
-            }
-            for (i in 0 until isFolderSelectList.size) {
-                if (isSingleSelectList[i]) {
-                    resultDelete.clear()
-                }
-            }
             dismiss()
         }
         return binding.root
@@ -106,11 +84,15 @@ class DialogRealDelete(private val recordList: ArrayList<SingleResultListResult>
 
 
     override fun onFolderDeleteSuccess() {
+        Log.e("성공","성공")
+        dismiss()
     }
 
     override fun onFolderDeleteFailure(code: Int, message: String) {
-        TODO("Not yet implemented")
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
     }
-
-
 }
+
+

@@ -9,17 +9,6 @@ import org.techtown.gabojago.menu.record.recordRetrofit.InFolderListResult
 
 class DialogDeleteResultRVAdapter(private val hasRecording:Boolean ,private val resultList: ArrayList<InFolderListResult>): RecyclerView.Adapter<DialogDeleteResultRVAdapter.ViewHolder>() {
 
-    //클릭 인터페이스
-    interface MyItemClickListener {
-        fun onItemClick()
-    }
-
-    private lateinit var mItemClickListener: MyItemClickListener
-
-    fun setMyItemClickListener(itemClickListener: MyItemClickListener) {
-        mItemClickListener = itemClickListener
-    }
-
     //뷰홀더 생성->호출되는 함수->아이템 뷰 객체를 만들어서 뷰홀더에 던져줌
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemRecordFolderBinding =
@@ -32,9 +21,6 @@ class DialogDeleteResultRVAdapter(private val hasRecording:Boolean ,private val 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if(resultList[position]!=null) {
             holder.bind(resultList[position])
-            holder.itemView.setOnClickListener {
-                mItemClickListener.onItemClick()
-            }
         }
     }
 
