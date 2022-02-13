@@ -1,18 +1,25 @@
 package org.techtown.gabojago.menu.record.look
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentRecordLookBinding
+import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.RecordFragment
+import org.techtown.gabojago.menu.record.recordRetrofit.FolderLookResult
+import org.techtown.gabojago.menu.record.recordRetrofit.FolderLookView
+import org.techtown.gabojago.menu.record.recordRetrofit.FolderRecordResultList
+import org.techtown.gabojago.menu.record.recordRetrofit.RecordService
 import java.util.*
 
-class RecordLookFragment: Fragment() {
+class RecordLookFragment(private val folderIdx:Int): Fragment() , FolderLookView {
     lateinit var binding: FragmentRecordLookBinding
     private val MIN_SCALE = 0.95f
     private val MIN_ALPHA = 0.5f
@@ -25,6 +32,12 @@ class RecordLookFragment: Fragment() {
     ): View? {
         binding = FragmentRecordLookBinding.inflate(inflater, container, false)
 
+        val recordService = RecordService()
+        recordService.setFolderLookView(this@RecordLookFragment)
+        val userJwt = getJwt(requireContext(), "userJwt")
+
+        recordService.getFolderLook(userJwt, folderIdx)
+
         //Set Viewpager and Indicator
         var imageArr = getImageList()
         binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageArr)
@@ -32,13 +45,7 @@ class RecordLookFragment: Fragment() {
         binding.recordLookPictureVp.setPageTransformer(ZoomOutPageTransformer())
         binding.recordLookCircleIndicator.setViewPager2(binding.recordLookPictureVp)
 
-        //Set Rating star
-        setStarState(2.5)
 
-        //Set RecyclerView
-        val resultList = getRandomResultList()
-        val recordLookRVAdapter = RecordLookRVAdapter(resultList)
-        binding.recordResultRecyclerview.adapter = recordLookRVAdapter
 
         //Open RecyclerView Event
         binding.recordLookView.setOnClickListener {
@@ -127,21 +134,7 @@ class RecordLookFragment: Fragment() {
         return imageList
     }
 
-    //Function to store the Random value in the RecyclerView
-    private fun getRandomResultList(): ArrayList<RecordLook> {
-        var resultList = ArrayList<RecordLook>()
 
-        resultList.add(RecordLook("12:34", "돌려돌려 돌림판", "횡단보도"))
-        resultList.add(RecordLook("12:34", "N시 방향", "9시 방향"))
-        resultList.add(RecordLook("12:34", "색깔 뽑기", "검은색 계열"))
-        resultList.add(RecordLook("12:34", "숫자 뽑기", "2,1,10,7"))
-        resultList.add(RecordLook("12:34", "돌려돌려 돌림판", "버스"))
-        resultList.add(RecordLook("12:34", "N시 방향", "2시 방향"))
-        resultList.add(RecordLook("12:34", "색깔 뽑기", "노란색 계열"))
-        resultList.add(RecordLook("12:34", "숫자 뽑기", "8,17,3,2,9,15"))
-
-        return resultList
-    }
 
     //Function to set the star rate
     private fun setStarState(star: Double) {
@@ -162,4 +155,23 @@ class RecordLookFragment: Fragment() {
             starArr[i].visibility = View.VISIBLE
         }
     }
+
+    override fun onFolderLookSuccess(result: FolderLookResult) {
+        binding.recordLookNameTv.text = result.folderContentResult.recordingTitle
+        setStarState(result.folderContentResult.recordingStar)
+        binding.recordLookContentsTv.text = result.folderContentResult.recordingContent
+
+        //Set RecyclerView
+        Log.e("폴더조회",result.folderResultList.toString())
+        val recordLookRVAdapter = RecordLookRVAdapter(result.folderResultList)
+        binding.recordResultRecyclerview.adapter = recordLookRVAdapter
+
+    }
+
+    override fun onFolderLookFailure(code: Int, message: String) {
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
+    }
+
 }

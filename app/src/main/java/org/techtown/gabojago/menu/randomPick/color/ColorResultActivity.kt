@@ -13,7 +13,7 @@ import org.techtown.gabojago.databinding.ActivityColorResultBinding
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.randomPick.home.RandomService
 import org.techtown.gabojago.menu.randomPick.home.RandomView
-import org.techtown.gabojago.menu.record.RecordService
+import org.techtown.gabojago.menu.record.recordRetrofit.RecordService
 import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
 import java.util.*
 
@@ -72,7 +72,7 @@ class ColorResultActivity : AppCompatActivity(), RandomView, RecordCountView {
 
         binding.colorResultSaveBtn.setOnClickListener {
             val recordService = RecordService()
-            recordService.setRecordCountView(this)
+            recordService.setRecordCountView(this@ColorResultActivity)
 
             val userJwt = getJwt(this, "userJwt")
             recordService.recordCount(userJwt)

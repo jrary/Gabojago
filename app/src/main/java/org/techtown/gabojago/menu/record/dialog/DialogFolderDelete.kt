@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 
 import org.techtown.gabojago.databinding.DialogFolderdeleteBinding
+import org.techtown.gabojago.main.MainActivity
+import org.techtown.gabojago.menu.record.recordRetrofit.FolderResultList
 import org.techtown.gabojago.menu.record.recordRetrofit.SingleResultListResult
 
-class DialogFolderDelete(private val recordList: ArrayList<SingleResultListResult>) : DialogFragment() {
+class DialogFolderDelete(private val recordList: ArrayList<SingleResultListResult>,private val folderList:ArrayList<FolderResultList>) : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +21,8 @@ class DialogFolderDelete(private val recordList: ArrayList<SingleResultListResul
         isCancelable = true
     }
     private lateinit var binding: DialogFolderdeleteBinding
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,11 +32,16 @@ class DialogFolderDelete(private val recordList: ArrayList<SingleResultListResul
         binding = DialogFolderdeleteBinding.inflate(inflater, container, false)
         dialog?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val dialogDeleteRVAdapter = DialogDeleteRVAdapter()
+        val dialogDeleteRVAdapter = DialogDeleteRVAdapter(folderList)
         binding.dialogFolderdeleteRecyclerview.adapter = dialogDeleteRVAdapter
 
-        val dialogSelectRVAdapter = DialogSelectRVAdapter(recordList)
-        binding.dialogDeleteRecyclerview.adapter = dialogSelectRVAdapter
+        val dialogSingleDeleteRVAdapter = DialogDeleteSingleRVAdapter(recordList)
+        binding.dialogDeleteRecyclerview.adapter = dialogSingleDeleteRVAdapter
+
+        binding.dialogDeleteBtn.setOnClickListener{
+            DialogRealDelete(recordList,folderList).show((context as MainActivity).supportFragmentManager,"dialog")
+            dismiss()
+        }
 
 
         return binding.root

@@ -74,13 +74,13 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <EditText
-                    android:id="@+id/foler_record_title_tv"
+                    android:id="@+id/folder_record_title_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="23sp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/apple_sd_gothic_neo_sb"
-                    android:text="크로플 맛집 찾음"
+                    android:text="제목을 입력해줘!"
                     android:background="@color/transparent"
                     android:textColor="#FFA38E"
                     android:textSize="14sp"
@@ -101,7 +101,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/foler_record_title_tv"
+                    app:layout_constraintTop_toBottomOf="@id/folder_record_title_tv"
                     tools:listitem="@layout/item_record_folder" />
 
 
@@ -128,14 +128,14 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="-28dp"
                 android:numStars="5"
-                android:rating="3"
+                android:rating="2.5"
                 android:stepSize="0.5"
                 android:scaleX="0.5"
                 android:scaleY="0.5"
                 android:foregroundGravity="left"
                 app:layout_constraintStart_toStartOf="parent"
-                android:progressBackgroundTint="#bfbfbf"
-                android:progressTint="#000000"
+                android:progressBackgroundTint="#EBEBEB"
+                android:progressTint="#FF6745"
                 app:layout_constraintTop_toBottomOf="@id/folder_record_score_tv"
                 app:layout_constraintBottom_toTopOf="@id/folder_record_picture_tv" />
 

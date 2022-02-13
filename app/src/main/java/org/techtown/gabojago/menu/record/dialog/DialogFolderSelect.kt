@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.DialogFolderselectBinding
 import org.techtown.gabojago.main.MainActivity
@@ -54,19 +57,28 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
             Log.e("선택",folderMake.toString())
             recordService.putFolderMakeIdx(userJwt,folderMake)
 
-            dismiss()
+
+            for (i in 0 until isSelectList.size) {
+                if (isSelectList[i]) {
+                    folderMake.clear()
+                }
+            }
 
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, RecordFragment().apply {
-                    arguments = Bundle().apply {
-                    }
-                })
-                .addToBackStack(null)
+                .replace(R.id.main_frm, RecordFragment())
                 .commitAllowingStateLoss()
+
+            dismiss()
+
+
         }
 
 
         return binding.root
+    }
+    fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager) {
+        var ft: FragmentTransaction = fragmentManager.beginTransaction()
+        ft.detach(fragment).attach(fragment).commit()
     }
 
     override fun onRecordFolderMakeSuccess() {
