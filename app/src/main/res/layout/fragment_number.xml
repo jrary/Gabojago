@@ -56,7 +56,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-
         >
         
         <androidx.appcompat.widget.AppCompatImageView
@@ -134,14 +133,14 @@
             />
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/number_animation_ball_iv"
-            android:layout_width="220dp"
-            android:layout_height="220dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:src="@drawable/number_balls_01"
             app:layout_constraintStart_toStartOf="@id/number_animation_main_iv"
             app:layout_constraintEnd_toEndOf="@id/number_animation_main_iv"
             app:layout_constraintTop_toTopOf="@id/number_animation_main_iv"
             app:layout_constraintBottom_toBottomOf="@id/number_animation_main_iv"
-            app:layout_constraintVertical_bias="0.18"
+            app:layout_constraintVertical_bias="0.05"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
