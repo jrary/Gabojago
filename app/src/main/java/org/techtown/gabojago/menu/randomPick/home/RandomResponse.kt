@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class RandomResultRequest(
     @SerializedName("randomResultContent") val randomResultContent: String,
-    @SerializedName("randomResultType") val randomResultType: String
+    @SerializedName("randomResultType") val randomResultType: Int
 )
 
 data class RandomResultResponse(

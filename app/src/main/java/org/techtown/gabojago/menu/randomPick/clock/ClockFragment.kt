@@ -175,7 +175,7 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
             randomService.setRandomView(this@ClockFragment)
 
             val userJwt = getJwt(requireContext(), "userJwt")
-            randomService.storeResult(userJwt, getResClock.toString() + "시 방향", "B")
+            randomService.storeResult(userJwt, getResClock.toString() + "시 방향", 2)
         }
     }
 

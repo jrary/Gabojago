@@ -328,7 +328,7 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
             Log.d("NUMBERRESULT", numberResString)
 
             val userJwt = getJwt(requireContext(), "userJwt")
-            randomService.storeResult(userJwt, numberResString, "D")
+            randomService.storeResult(userJwt, numberResString, 4)
         }
     }
 

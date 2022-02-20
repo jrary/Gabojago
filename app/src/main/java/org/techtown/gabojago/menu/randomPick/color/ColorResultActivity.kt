@@ -95,7 +95,7 @@ class ColorResultActivity : AppCompatActivity(), RandomView, RecordCountView {
             randomService.setRandomView(this)
 
             val userJwt = getJwt(this, "userJwt")
-            randomService.storeResult(userJwt, randomColor[randRes], "C")
+            randomService.storeResult(userJwt, randomColor[randRes], 3)
         }
     }
 

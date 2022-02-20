@@ -158,7 +158,7 @@ class WheelFragment : Fragment(), RandomView, RecordCountView {
             randomService.setRandomView(this@WheelFragment)
 
             val userJwt = getJwt(requireContext(), "userJwt")
-            randomService.storeResult(userJwt, optionList[res], "A")
+            randomService.storeResult(userJwt, optionList[res], 1)
         }
     }
 

@@ -15,7 +15,7 @@ class RandomService {
         this.randomView = randomView
     }
 
-    fun storeResult(userJwt: String, result: String, type: String) {
+    fun storeResult(userJwt: String, result: String, type: Int) {
         val randomService = getRetrofit().create(RandomRetrofitInterface::class.java)
 
         randomView.onRandomLoading()
