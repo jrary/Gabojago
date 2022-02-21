@@ -24,16 +24,19 @@ class RecordLookRVAdapter(private val pickedList: ArrayList<FolderRecordResultLi
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pickedItem: FolderRecordResultList) {
             binding.resultPickTimeTv.text = pickedItem.creatAt
-            binding.resultPickTypeTv.text = pickedItem.randomResultType
             binding.resultPickContentsTv.text = pickedItem.randomResultContent
-            if(pickedItem.randomResultType == "A"){
-                binding.resultPickTypeTv.text = "돌려돌려 돌림판"
-            }else if(pickedItem.randomResultType == "B"){
-                binding.resultPickTypeTv.text = "N시 방향"
-            }else if(pickedItem.randomResultType == "C"){
-                binding.resultPickTypeTv.text = "컬러박스 뽑기"
-            }else if(pickedItem.randomResultType == "D"){
-                binding.resultPickTypeTv.text = "빙글빙글 숫자 뽑기"
+            when (pickedItem.randomResultType) {
+                0 -> {
+                    binding.resultPickTypeTv.text = ""
+                }1 -> {
+                    binding.resultPickTypeTv.text = "돌려돌려 돌림판"
+                }2 -> {
+                    binding.resultPickTypeTv.text = "N시 방향"
+                }3 -> {
+                    binding.resultPickTypeTv.text = "컬러박스 뽑기"
+                }4 -> {
+                    binding.resultPickTypeTv.text = "빙글빙글 숫자 뽑기"
+                }
             }
         }
     }

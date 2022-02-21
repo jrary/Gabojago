@@ -53,6 +53,19 @@ class RecordService {
         this.folderDeleteView = folderDeleteView
     }
 
+    private lateinit var folderUpdateView: FolderUpdateView
+
+    fun setFolderUpdateView(folderUpdateView: FolderUpdateView) {
+        this.folderUpdateView = folderUpdateView
+    }
+
+    private lateinit var folderBreakView: FolderBreakView
+
+    fun setFolderBreakView(folderBreakView: FolderBreakView) {
+        this.folderBreakView = folderBreakView
+    }
+
+    //개별메인
     fun getSingleResultList(userJwt: String, date: String) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
         recordService.getSingleResultList(userJwt, date).enqueue(object :
@@ -69,13 +82,17 @@ class RecordService {
                     singleResultListView.onSingleResultListSuccess(resp.result!!)
                 } else {
                     when (resp.code) {
-                        6012 -> singleResultListView.onSingleResultListFailure(resp.code,
+                        2001 -> singleResultListView.onSingleResultListFailure(resp.code,
                             "회원 정보가 잘못되었습니다.")
-                        5008 -> singleResultListView.onSingleResultListFailure(resp.code,
+                        2034 -> singleResultListView.onSingleResultListFailure(resp.code,
                             resp.message)
-                        2013 -> singleResultListView.onSingleResultListFailure(resp.code,
+                        2002 -> singleResultListView.onSingleResultListFailure(resp.code,
                             resp.message)
-                        5002 -> singleResultListView.onSingleResultListFailure(resp.code,
+                        3034 -> singleResultListView.onSingleResultListFailure(resp.code,
+                            resp.message)
+                        2000 -> singleResultListView.onSingleResultListFailure(resp.code,
+                            resp.message)
+                        3000 -> singleResultListView.onSingleResultListFailure(resp.code,
                             resp.message)
                     }
                 }
@@ -87,7 +104,7 @@ class RecordService {
             }
         })
     }
-
+    //폴더생성
     fun putFolderMakeIdx(userJwt: String, randomResultIdx: List<Int>) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
         recordService.putFolderMakeIdx(userJwt, randomResultRequest(randomResultIdx))
@@ -105,17 +122,21 @@ class RecordService {
                         recordFolderMakeView.onRecordFolderMakeSuccess()
                     } else {
                         when (resp.code) {
-                            2013 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                            2002 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
                                 "회원 정보가 잘못되었습니다.")
-                            7000 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                            2010 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
                                 resp.message)
-                            7003 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                            3007 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
                                 resp.message)
-                            7001 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                            3016 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
                                 resp.message)
                             4000 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
                                 resp.message)
-                            6012 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                            2001 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                                resp.message)
+                            2000 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                                resp.message)
+                            3000 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
                                 resp.message)
                         }
                     }
@@ -127,7 +148,7 @@ class RecordService {
                 }
             })
     }
-
+    //뽑기개수
     fun recordCount(userJwt: String) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
         recordCountView.onRecordCountLoading()
@@ -152,12 +173,12 @@ class RecordService {
                     recordCountView.onRecordCountSuccess(resp.result)
                 } else {
                     when (resp.code) {
-                        2012 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                        2001 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
                         2000 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
                         3000 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
-                        5007 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
-                        2013 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
-                        5016 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                        2033 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                        2002 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                        3033 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
                     }
                 }
             }
@@ -168,7 +189,7 @@ class RecordService {
             }
         })
     }
-
+    //폴더메인
     fun getFolderResultList(userJwt: String, date: String) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
         recordService.getFolderResultList(userJwt, date).enqueue(object :
@@ -185,25 +206,29 @@ class RecordService {
                     folderResultListView.onFolderResultListSuccess(resp.result)
                 } else {
                     when (resp.code) {
-                        6012 -> folderResultListView.onFolderResultListFailure(resp.code,
+                        2001 -> folderResultListView.onFolderResultListFailure(resp.code,
                             resp.message)
-                        5008 -> folderResultListView.onFolderResultListFailure(resp.code,
+                        2034 -> folderResultListView.onFolderResultListFailure(resp.code,
                             resp.message)
-                        2013 -> folderResultListView.onFolderResultListFailure(resp.code,
+                        2002 -> folderResultListView.onFolderResultListFailure(resp.code,
                             resp.message)
-                        5017 -> folderResultListView.onFolderResultListFailure(resp.code,
+                        3034 -> folderResultListView.onFolderResultListFailure(resp.code,
+                            resp.message)
+                        2000 -> folderResultListView.onFolderResultListFailure(resp.code,
+                            resp.message)
+                        3000 -> folderResultListView.onFolderResultListFailure(resp.code,
                             resp.message)
                     }
                 }
             }
 
             override fun onFailure(call: Call<FolderResultListResponse>, t: Throwable) {
-                recordCountView.onRecordCountFailure(400, t.toString())
+                folderResultListView.onFolderResultListFailure(400, t.toString())
                 Log.d("CALENDARGETADV", t.toString())
             }
         })
     }
-
+    //폴더기록
     fun putFolderRecord(userJwt: String, folderIdx: Int, folderRecording: FolderRecordingRequest) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
         recordService.putFolderRecord(userJwt, folderIdx, folderRecording)
@@ -221,33 +246,35 @@ class RecordService {
                         folderRecordingView.onFolderRecordingSuccess()
                     } else {
                         when (resp.code) {
-                            2012 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                            2001 -> folderRecordingView.onFolderRecordingFailure(resp.code,
                                 "회원 정보가 잘못되었습니다.")
-                            2013 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                            2002 -> folderRecordingView.onFolderRecordingFailure(resp.code,
                                 resp.message)
                             2000 -> folderRecordingView.onFolderRecordingFailure(resp.code,
                                 resp.message)
                             3000 -> folderRecordingView.onFolderRecordingFailure(resp.code,
                                 resp.message)
-                            6000 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                            2031 -> folderRecordingView.onFolderRecordingFailure(resp.code,
                                 resp.message)
-                            5005 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                            2039 -> folderRecordingView.onFolderRecordingFailure(resp.code,
                                 resp.message)
-                            5006 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                            2040 -> folderRecordingView.onFolderRecordingFailure(resp.code,
                                 resp.message)
-                            6006 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                            2041 -> folderRecordingView.onFolderRecordingFailure(resp.code,
                                 resp.message)
-                            5009 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                            3042 -> folderRecordingView.onFolderRecordingFailure(resp.code,
                                 resp.message)
-                            7006 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                            3017 -> folderRecordingView.onFolderRecordingFailure(resp.code,
                                 resp.message)
-                            5011 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                            3006 -> folderRecordingView.onFolderRecordingFailure(resp.code,
                                 resp.message)
-                            6016 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                            2035 -> folderRecordingView.onFolderRecordingFailure(resp.code,
                                 resp.message)
-                            6017 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                            2036 -> folderRecordingView.onFolderRecordingFailure(resp.code,
                                 resp.message)
-                            6005 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                            2038 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                resp.message)
+                            2037 -> folderRecordingView.onFolderRecordingFailure(resp.code,
                                 resp.message)
                             4000 -> folderRecordingView.onFolderRecordingFailure(resp.code,
                                 resp.message)
@@ -256,12 +283,13 @@ class RecordService {
                 }
 
                 override fun onFailure(call: Call<FolderRecordResponse>, t: Throwable) {
-                    recordCountView.onRecordCountFailure(400, t.toString())
+                    folderRecordingView.onFolderRecordingFailure(400, t.toString())
                     Log.d("CALENDARGETADV", t.toString())
                 }
             })
     }
 
+    //폴더조회
     fun getFolderLook(userJwt: String, folderIdx: Int) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
         recordService.getFolderLook(userJwt, folderIdx).enqueue(object :
@@ -278,21 +306,21 @@ class RecordService {
                     folderLookView.onFolderLookSuccess(resp.result)
                 } else {
                     when (resp.code) {
-                        6012 -> folderLookView.onFolderLookFailure(resp.code,
+                        2001 -> folderLookView.onFolderLookFailure(resp.code,
                             resp.message)
-                        6000 -> folderLookView.onFolderLookFailure(resp.code,
+                        2031 -> folderLookView.onFolderLookFailure(resp.code,
                             resp.message)
-                        2013 -> folderLookView.onFolderLookFailure(resp.code,
+                        2002 -> folderLookView.onFolderLookFailure(resp.code,
                             resp.message)
-                        7006 -> folderLookView.onFolderLookFailure(resp.code,
+                        3017 -> folderLookView.onFolderLookFailure(resp.code,
                             resp.message)
-                        7004 -> folderLookView.onFolderLookFailure(resp.code,
+                        3006 -> folderLookView.onFolderLookFailure(resp.code,
                             resp.message)
-                        6013 -> folderLookView.onFolderLookFailure(resp.code,
+                        3038 -> folderLookView.onFolderLookFailure(resp.code,
                             resp.message)
-                        6021 -> folderLookView.onFolderLookFailure(resp.code,
+                        3040 -> folderLookView.onFolderLookFailure(resp.code,
                             resp.message)
-                        6001 -> folderLookView.onFolderLookFailure(resp.code,
+                        3035 -> folderLookView.onFolderLookFailure(resp.code,
                             resp.message)
                         4000 -> folderLookView.onFolderLookFailure(resp.code,
                             resp.message)
@@ -306,7 +334,7 @@ class RecordService {
             }
         })
     }
-
+    //삭제
     fun putIdx(userJwt: String, resultIdx:List<Int>, folderIdx: List<Int>) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
         recordService.putIdx(userJwt, FolderDeleteRequest(resultIdx,folderIdx)).enqueue(object :
@@ -323,17 +351,19 @@ class RecordService {
                     folderDeleteView.onFolderDeleteSuccess()
                 } else {
                     when (resp.code) {
-                        6012 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                        2001 -> folderDeleteView.onFolderDeleteFailure(resp.code,
                             resp.message)
-                        2013 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                        2002 -> folderDeleteView.onFolderDeleteFailure(resp.code,
                             resp.message)
-                        6011 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                        2009 -> folderDeleteView.onFolderDeleteFailure(resp.code,
                             resp.message)
-                        6015 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                        3018 -> folderDeleteView.onFolderDeleteFailure(resp.code,
                             resp.message)
-                        7003 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                        3007 -> folderDeleteView.onFolderDeleteFailure(resp.code,
                             resp.message)
-                        7006 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                        3017 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                            resp.message)
+                        3006 -> folderDeleteView.onFolderDeleteFailure(resp.code,
                             resp.message)
                         4000 -> folderDeleteView.onFolderDeleteFailure(resp.code,
                             resp.message)
@@ -344,6 +374,93 @@ class RecordService {
             override fun onFailure(call: Call<FolderDeleteResponse>, t: Throwable) {
                 folderDeleteView.onFolderDeleteFailure(400, t.toString())
                 Log.d("CALENDARGETADV", t.toString())
+            }
+        })
+    }
+    //목록수정
+    fun putUpdateFolderIdx(userJwt: String,folderIdx: Int, plus_randomResultIdx:List<Int>, minus_randomResultIdx: List<Int>) {
+        val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
+        recordService.putUpdateFolderIdx(userJwt, FolderUpdateRequest(folderIdx,plus_randomResultIdx,minus_randomResultIdx)).enqueue(object :
+            Callback<FolderUpdateResponse> {
+            override fun onResponse(
+                call: Call<FolderUpdateResponse>,
+                response: Response<FolderUpdateResponse>
+            ) {
+                Log.d("FOLDERUPDATE/Response", response.toString())
+                val resp = response.body()!!
+                Log.d("FOLDERUPDATE/Code", resp.code.toString())
+
+                if (resp.isSuccess) {
+                    folderUpdateView.onFolderUpdateSuccess()
+                } else {
+                    when (resp.code) {
+                        6012 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                            resp.message)
+                        7005 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                            resp.message)
+                        7007 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                            resp.message)
+                        2013 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                            resp.message)
+                        7006 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                            resp.message)
+                        7003 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                            resp.message)
+                        7008 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                            resp.message)
+                        7004 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                            resp.message)
+                        4000 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                            resp.message)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<FolderUpdateResponse>, t: Throwable) {
+                folderUpdateView.onFolderUpdateFailure(400, t.toString())
+            }
+        })
+    }
+    //폴더해체
+    fun putBreakFolderIdx(userJwt: String, folderIdx: Int) {
+        val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
+        recordService.putBreakFolderIdx(userJwt, folderIdx).enqueue(object :
+            Callback<FolderBreakResponse> {
+            override fun onResponse(
+                call: Call<FolderBreakResponse>,
+                response: Response<FolderBreakResponse>
+            ) {
+                Log.d("FOLDERBREAK/Response", response.toString())
+                val resp = response.body()!!
+                Log.d("FOLDERBREAK/Code", resp.code.toString())
+
+                if (resp.isSuccess) {
+                    folderBreakView.onFolderBreakSuccess()
+                } else {
+                    when (resp.code) {
+                        2001-> folderBreakView.onFolderBreakFailure(resp.code,
+                            "회원 정보가 잘못되었습니다.")
+                        2002 -> folderBreakView.onFolderBreakFailure(resp.code,
+                            resp.message)
+                        2009 -> folderBreakView.onFolderBreakFailure(resp.code,
+                            resp.message)
+                        3018 -> folderBreakView.onFolderBreakFailure(resp.code,
+                            resp.message)
+                        3007 -> folderBreakView.onFolderBreakFailure(resp.code,
+                            resp.message)
+                        3017 -> folderBreakView.onFolderBreakFailure(resp.code,
+                            resp.message)
+                        3006 -> folderBreakView.onFolderBreakFailure(resp.code,
+                            resp.message)
+                        4000 -> folderBreakView.onFolderBreakFailure(resp.code,
+                            resp.message)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<FolderBreakResponse>, t: Throwable) {
+                folderBreakView.onFolderBreakFailure(400, t.toString())
+                Log.d("CHECK", t.toString())
             }
         })
     }

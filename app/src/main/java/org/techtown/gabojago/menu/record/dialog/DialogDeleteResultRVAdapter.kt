@@ -31,34 +31,38 @@ class DialogDeleteResultRVAdapter(private val hasRecording:Boolean ,private val 
             binding.itemFolderrecordResultTv.text = result.resultContent
             if(hasRecording){
                 binding.itemFolderrecordLineIv.setBackgroundResource(R.drawable.line_18)
-                if(result.resultType=="A"){
-                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.dolimpan)
-                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_dolimpan_orange)
-                }else if(result.resultType=="B"){
-                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.nsibanghiang)
-                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_nsibang_orange)
-                }else if(result.resultType=="C"){
-                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.colorbox)
-                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_japangi_orange)
-                }else if(result.resultType=="D"){
-                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.binglebingle)
-                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_random_orange)
+                when (result.resultType) {
+                    1 -> {
+                        binding.itemFolderrecordTitleIv.setImageResource(R.drawable.dolimpan)
+                        binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_dolimpan_orange)
+                    }2 -> {
+                        binding.itemFolderrecordTitleIv.setImageResource(R.drawable.nsibanghiang)
+                        binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_nsibang_orange)
+                    }3 -> {
+                        binding.itemFolderrecordTitleIv.setImageResource(R.drawable.colorbox)
+                        binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_japangi_orange)
+                    }4 -> {
+                        binding.itemFolderrecordTitleIv.setImageResource(R.drawable.binglebingle)
+                        binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_random_orange)
+                    }
                 }
 
-            }else{
+            } else {
                 binding.itemFolderrecordLineIv.setBackgroundResource(R.drawable.line_gray)
-                if(result.resultType=="A"){
-                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.dolimpan)
-                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_dolimpan_gray)
-                }else if(result.resultType=="B"){
-                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.nsibanghiang)
-                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_nsibang)
-                }else if(result.resultType=="C"){
-                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.colorbox)
-                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_japangi)
-                }else if(result.resultType=="D"){
-                    binding.itemFolderrecordTitleIv.setImageResource(R.drawable.binglebingle)
-                    binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_random_gray)
+                when (result.resultType) {
+                    1 -> {
+                        binding.itemFolderrecordTitleIv.setImageResource(R.drawable.dolimpan)
+                        binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_dolimpan_gray)
+                    }2 -> {
+                        binding.itemFolderrecordTitleIv.setImageResource(R.drawable.nsibanghiang)
+                        binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_nsibang)
+                    }3 -> {
+                        binding.itemFolderrecordTitleIv.setImageResource(R.drawable.colorbox)
+                        binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_japangi)
+                    }4 -> {
+                        binding.itemFolderrecordTitleIv.setImageResource(R.drawable.binglebingle)
+                        binding.itemFolderrecordCircleIv.setImageResource(R.drawable.resultimage_random_gray)
+                    }
                 }
             }
         }

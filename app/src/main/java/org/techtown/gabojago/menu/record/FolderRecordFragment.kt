@@ -20,6 +20,7 @@ import org.techtown.gabojago.menu.record.recordRetrofit.RecordService
 
 class FolderRecordFragment(private val folderIdx :Int, private val resultList:ArrayList<InFolderListResult>) : Fragment(), FolderRecordingView {
     lateinit var binding: FragmentFolderrecordBinding
+    val url= mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +40,8 @@ class FolderRecordFragment(private val folderIdx :Int, private val resultList:Ar
             recordService.putFolderRecord(userJwt, folderIdx, FolderRecordingRequest(
                 binding.folderRecordStarscore.rating.toDouble(),
                 binding.folderRecordWriteEt.text.toString(),
-                binding.folderRecordTitleTv.text.toString()
+                binding.folderRecordTitleTv.text.toString(),
+                url
             ))
 
             (context as MainActivity).supportFragmentManager.beginTransaction()
@@ -58,7 +60,7 @@ class FolderRecordFragment(private val folderIdx :Int, private val resultList:Ar
             recordService.putFolderRecord(userJwt, folderIdx, FolderRecordingRequest(
                 binding.folderRecordStarscore.rating.toDouble(),
                 binding.folderRecordWriteEt.text.toString(),
-                binding.folderRecordTitleTv.text.toString()
+                binding.folderRecordTitleTv.text.toString(),url
             ))
 
             (context as MainActivity).supportFragmentManager.beginTransaction()

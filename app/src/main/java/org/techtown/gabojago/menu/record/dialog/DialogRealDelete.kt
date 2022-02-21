@@ -70,17 +70,9 @@ class DialogRealDelete(private val recordList: ArrayList<SingleResultListResult>
             }
             Log.e("폴더삭제",resultDelete.toString())
             recordService.putIdx(userJwt,resultDelete,folderDelete)
-
-
-
-
-
-
         }
 
         binding.dialogNoBtn.setOnClickListener {
-
-
             dismiss()
         }
         return binding.root
@@ -99,6 +91,7 @@ class DialogRealDelete(private val recordList: ArrayList<SingleResultListResult>
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT
         ).show()
+        dismiss()
     }
 }
 

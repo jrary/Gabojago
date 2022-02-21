@@ -1,23 +1,20 @@
 package org.techtown.gabojago.menu.record
 
-import android.content.Context
 import android.graphics.Color
-import android.location.Location
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.NonDisposableHandle.parent
-import org.techtown.gabojago.R
-import org.techtown.gabojago.databinding.ActivityCalendarBinding.inflate
 import org.techtown.gabojago.databinding.ItemRecordFoldernameBinding
 import org.techtown.gabojago.databinding.PopupMenuBinding
 import org.techtown.gabojago.menu.record.recordRetrofit.FolderResultList
 import org.techtown.gabojago.menu.record.recordRetrofit.InFolderListResult
-import org.techtown.gabojago.menu.record.recordRetrofit.SingleResultListResult
+
+
+import android.widget.TextView
+import org.techtown.gabojago.R
 
 
 class RecordFolderResultNameRVAdapter(private val folderList: ArrayList<FolderResultList>): RecyclerView.Adapter<RecordFolderResultNameRVAdapter.ViewHolder>(){
@@ -26,6 +23,8 @@ class RecordFolderResultNameRVAdapter(private val folderList: ArrayList<FolderRe
     interface MyItemClickListener {
         fun onItemClickPencil(folderIdx:Int,resultList:ArrayList<InFolderListResult>)
         fun onItemView(folderIdx:Int)
+        fun onModifyClick(folder : FolderResultList)
+        fun onBreakUpClick(folderIdx:Int)
     }
 
 
@@ -39,6 +38,7 @@ class RecordFolderResultNameRVAdapter(private val folderList: ArrayList<FolderRe
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemRecordFoldernameBinding =
             ItemRecordFoldernameBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         Log.e("폴더",folderList.toString())
 
         return ViewHolder(binding)
@@ -55,15 +55,30 @@ class RecordFolderResultNameRVAdapter(private val folderList: ArrayList<FolderRe
         }
         holder.binding.folderRecordFolderIv.setOnClickListener {
             val inflater = LayoutInflater.from(holder.binding.folderRecordFolderIv.context)
-            val popup = PopupWindow(inflater.inflate(R.layout.popup_menu, null, false),
+            val popupView = inflater.inflate(R.layout.popup_menu, null, false)
+            val popup = PopupWindow(popupView,
                 310,
                 240,
                 true)
             val location=IntArray(2)
             holder.binding.folderRecordFolderIv.getLocationOnScreen(location)
 
-
             popup.showAtLocation(holder.binding.folderRecordFolderIv, Gravity.NO_GRAVITY, location[0]-120, location[1]+100)
+            popup.isTouchable = true
+
+            val modify = popupView.findViewById(R.id.popup_modify_tv) as TextView
+            modify.setOnClickListener {
+                Log.e("popup", folderList[position].toString())
+                mItemClickListener.onModifyClick(folderList[position])
+                popup.dismiss()
+            }
+
+            val breakup = popupView.findViewById(R.id.popup_folderdelete_tv) as TextView
+            breakup.setOnClickListener {
+                Log.e("popup", folderList[position].toString())
+                mItemClickListener.onBreakUpClick(folderList[position].folderIdx)
+                popup.dismiss()
+            }
         }
     }
 

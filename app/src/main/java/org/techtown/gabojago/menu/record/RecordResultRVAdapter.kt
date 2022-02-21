@@ -43,46 +43,48 @@ class RecordResultRVAdapter(private val recordList: ArrayList<SingleResultListRe
     //뷰홀더
     inner class ViewHolder(val binding: ItemRecordResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(recordList:SingleResultListResult) {
+        fun bind(recordList: SingleResultListResult) {
             binding.itemRecordResultTv.text = recordList.randomResultListResult.randomResultContent
             binding.itemRecordClockTv.text = recordList.randomResultListResult.createAt
-            if(recordList.hasRecording){
+            if (recordList.hasRecording) {
                 binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.rectangle_orange)
                 binding.itemRecordPecilIv.setImageResource(R.drawable.memo_pencil_orange)
-                if(recordList.randomResultListResult.randomResultType=="A"){
-                    binding.itemRecordTitleIv.setImageResource(R.drawable.dolimpan)
-                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_dolimpan_orange)
-                }else if(recordList.randomResultListResult.randomResultType=="B"){
-                    binding.itemRecordTitleIv.setImageResource(R.drawable.nsibanghiang)
-                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_nsibang_orange)
-                }else if(recordList.randomResultListResult.randomResultType=="C"){
-                    binding.itemRecordTitleIv.setImageResource(R.drawable.colorbox)
-                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_japangi_orange)
-                }else if(recordList.randomResultListResult.randomResultType=="D"){
-                    binding.itemRecordTitleIv.setImageResource(R.drawable.binglebingle)
-                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_random_orange)
+                when (recordList.randomResultListResult.randomResultType) {
+                    1 -> {
+                        binding.itemRecordTitleIv.setImageResource(R.drawable.dolimpan)
+                        binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_dolimpan_orange)
+                    }2 -> {
+                        binding.itemRecordTitleIv.setImageResource(R.drawable.nsibanghiang)
+                        binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_nsibang_orange)
+                    }3 -> {
+                        binding.itemRecordTitleIv.setImageResource(R.drawable.colorbox)
+                        binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_japangi_orange)
+                    }4 -> {
+                        binding.itemRecordTitleIv.setImageResource(R.drawable.binglebingle)
+                        binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_random_orange)
+                    }
                 }
 
-            }else{
+            } else {
                 binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.rectangle_gray)
                 binding.itemRecordPecilIv.setImageResource(R.drawable.memo_pencil_bluegray)
-                if(recordList.randomResultListResult.randomResultType=="A"){
-                    binding.itemRecordTitleIv.setImageResource(R.drawable.dolimpan)
-                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_dolimpan_gray)
-                }else if(recordList.randomResultListResult.randomResultType=="B"){
-                    binding.itemRecordTitleIv.setImageResource(R.drawable.nsibanghiang)
-                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_nsibang)
-                }else if(recordList.randomResultListResult.randomResultType=="C"){
-                    binding.itemRecordTitleIv.setImageResource(R.drawable.colorbox)
-                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_japangi)
-                }else if(recordList.randomResultListResult.randomResultType=="D"){
-                    binding.itemRecordTitleIv.setImageResource(R.drawable.binglebingle)
-                    binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_random_gray)
+                when (recordList.randomResultListResult.randomResultType) {
+                    1 -> {
+                        binding.itemRecordTitleIv.setImageResource(R.drawable.dolimpan)
+                        binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_dolimpan_gray)
+                    }2 -> {
+                        binding.itemRecordTitleIv.setImageResource(R.drawable.nsibanghiang)
+                        binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_nsibang)
+                    }3 -> {
+                        binding.itemRecordTitleIv.setImageResource(R.drawable.colorbox)
+                        binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_japangi)
+                    }4 -> {
+                        binding.itemRecordTitleIv.setImageResource(R.drawable.binglebingle)
+                        binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_random_gray)
+                    }
                 }
             }
-
         }
-
     }
 
     override fun getItemCount(): Int =recordList.size
