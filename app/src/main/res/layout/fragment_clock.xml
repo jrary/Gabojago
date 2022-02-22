@@ -392,7 +392,7 @@
             android:id="@+id/clock_save_btn"
             android:layout_width="140dp"
             android:layout_height="40dp"
-            android:background="@drawable/rectangle_5"
+            android:background="@drawable/rectangle_6"
             android:fontFamily="@font/apple_sd_gothic_neo_sb"
             android:textStyle="normal"
             android:textSize="18sp"

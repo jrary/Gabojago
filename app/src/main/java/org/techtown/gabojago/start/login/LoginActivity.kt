@@ -7,6 +7,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.nhn.android.naverlogin.OAuthLogin
@@ -30,9 +31,9 @@ class LoginActivity :AppCompatActivity(), LoginView {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
         Handler().postDelayed({
-            binding.loginBackgroundIv.visibility = View.VISIBLE
+            binding.loginBackgroundView.visibility = View.VISIBLE
             val animDrop = AnimationUtils.loadAnimation(this, R.anim.anim_login_down)
-            binding.loginBackgroundIv.startAnimation(animDrop)
+            binding.loginBackgroundView.startAnimation(animDrop)
         }, 500)
 
         mContext = this
@@ -40,6 +41,7 @@ class LoginActivity :AppCompatActivity(), LoginView {
         mOAuthLoginInstance = OAuthLogin.getInstance()
         mOAuthLoginInstance.init(mContext, "6dp8qdfztnBLiguo_gLx", "77OipGRnx9", "Gabojago")
         binding.loginNaverBtn.setOAuthLoginHandler(mOAuthLoginHandler)
+
 
     }
 
