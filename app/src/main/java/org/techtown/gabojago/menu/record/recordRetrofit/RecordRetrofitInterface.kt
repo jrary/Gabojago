@@ -54,5 +54,18 @@ interface RecordRetrofitInterface {
         @Body folderDelete : FolderDeleteRequest
     ): Call<FolderDeleteResponse>
 
+    //폴더목록수정
+    @PATCH("/app/folder/update")
+    fun putUpdateFolderIdx(
+        @Header("x-access-token") xAccessToken: String,
+        @Body folderUpdate : FolderUpdateRequest
+    ): Call<FolderUpdateResponse>
+
+    @DELETE("/app/folder/delete/{folderIdx}")
+    fun putBreakFolderIdx(
+        @Header("x-access-token") xAccessToken: String,
+        @Path("folderIdx") folderIdx: Int
+    ): Call<FolderBreakResponse>
+
 
 }

@@ -72,7 +72,7 @@
                 android:id="@+id/record_look_name_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="구구당"
+                android:text="제목이 비어있어!"
                 android:textSize="22sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/apple_sd_gothic_neo_sb"
@@ -254,7 +254,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/record_look_contents_tv"
                 android:layout_width="315dp"
-                android:layout_height="114dp"
+                android:layout_height="140dp"
                 android:text="Contents"
                 android:textSize="13sp"
                 android:textColor="@color/black"

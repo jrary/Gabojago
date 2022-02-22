@@ -12,7 +12,7 @@ data class RecordFolderMakeResponse(
 //개별기록결과-리스트
 data class RandomResultListResult(
     @SerializedName("randomResultIdx") val randomResultIdx: Int,
-    @SerializedName("randomResultType") val randomResultType: String,
+    @SerializedName("randomResultType") val randomResultType: Int,
     @SerializedName("randomResultContent") val randomResultContent: String,
     @SerializedName("createAt") val createAt: String
 )
@@ -34,7 +34,7 @@ data class SingleResultListResponse(
 //폴더기록 리스트
 data class InFolderListResult(
     @SerializedName("randomResultIdx") val resultIdx: Int,
-    @SerializedName("randomResultType") val resultType: String,
+    @SerializedName("randomResultType") val resultType: Int,
     @SerializedName("randomResultContent") val resultContent: String,
     @SerializedName("createAt") val createAt: String
 )
@@ -71,7 +71,8 @@ data class randomResultRequest(
 data class FolderRecordingRequest(
     @SerializedName("recordingStar") val recordingStar:Double,
     @SerializedName("recordingContent") val recordingContent:String,
-    @SerializedName("recordingTitle") val recordingTitle:String
+    @SerializedName("recordingTitle") val recordingTitle:String,
+    @SerializedName("recordingImgUrl") val recordingImgUrl:List<String>
 )
 
 //폴더기록하기 리스폰
@@ -103,7 +104,7 @@ data class FolderContentResult(
 data class FolderRecordResultList(
     @SerializedName("createAt") val creatAt: String,
     @SerializedName("randomResultContent") val randomResultContent: String,
-    @SerializedName("randomResultType") val randomResultType: String
+    @SerializedName("randomResultType") val randomResultType: Int
 )
 
 data class FolderDeleteResponse(
@@ -115,5 +116,23 @@ data class FolderDeleteResponse(
 data class FolderDeleteRequest(
     @SerializedName("randomResultList") val randomResultList: List<Int>,
     @SerializedName("folderList") val folderList: List<Int>
+)
+
+data class FolderUpdateResponse(
+    @SerializedName("isSuccess") val isSuccess: Boolean,
+    @SerializedName("code") val code: Int,
+    @SerializedName("message") val message: String
+)
+
+data class FolderUpdateRequest(
+    @SerializedName("folderIdx") val folderIdx: Int,
+    @SerializedName("plus_randomResultIdx") val plus_randomResultIdx: List<Int>,
+    @SerializedName("minus_randomResultIdx") val minus_randomResultIdx: List<Int>
+)
+
+data class FolderBreakResponse(
+    @SerializedName("isSuccess") val isSuccess: Boolean,
+    @SerializedName("code") val code: Int,
+    @SerializedName("message") val message: String
 )
 

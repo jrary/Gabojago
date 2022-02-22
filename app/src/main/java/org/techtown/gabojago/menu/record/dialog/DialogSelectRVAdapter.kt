@@ -46,21 +46,21 @@ class DialogSelectRVAdapter(private val recordList: ArrayList<SingleResultListRe
             binding.itemRecordRectangleIv.setBackgroundResource(R.drawable.rectangle_orange)
             binding.itemRecordPecilIv.visibility = View.GONE
             binding.itemRecordResultTv.text = recordList.randomResultListResult.randomResultContent
-            if(recordList.randomResultListResult.randomResultType=="A"){
+            when(recordList.randomResultListResult.randomResultType){
+                1->{
                 binding.itemRecordTitleIv.setImageResource(R.drawable.dolimpan)
-                binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_dolimpan_orange)
-            }else if(recordList.randomResultListResult.randomResultType=="B"){
+                binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_dolimpan_orange)}
+                2->{
                 binding.itemRecordTitleIv.setImageResource(R.drawable.nsibanghiang)
-                binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_nsibang_orange)
-            }else if(recordList.randomResultListResult.randomResultType=="C"){
+                binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_nsibang_orange)}
+                3->{
                 binding.itemRecordTitleIv.setImageResource(R.drawable.colorbox)
-                binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_japangi_orange)
-            }else if(recordList.randomResultListResult.randomResultType=="D"){
+                binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_japangi_orange)}
+                4->{
                 binding.itemRecordTitleIv.setImageResource(R.drawable.binglebingle)
-                binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_random_orange)
+                binding.itemRecordCircleIv.setImageResource(R.drawable.resultimage_random_orange)}
             }
         }
-
     }
 
     override fun getItemCount(): Int =recordList.size

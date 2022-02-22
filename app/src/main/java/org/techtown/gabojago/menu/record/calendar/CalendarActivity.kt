@@ -15,12 +15,16 @@ import java.util.*
 
 class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTimeView {
     lateinit var binding: ActivityCalendarBinding
-    var viewDate = ""
-    var minus = 0
-    var userJoinDate = ""
-    var yearMonth = ""
-    var registerDateArray = arrayOf<String>("", "", "")
-    val randomresultdateList = ArrayList<Int>()
+    //보여줄 년, 월
+    private var viewDate = ""
+    //받아온 유저가입날짜
+    private var userJoinDate = ""
+    //서버로 보내는 보여줄 년, 월
+    private var yearMonth = ""
+    //유저가입날짜 배열
+    private var registerDateArray = arrayOf<String>("", "", "")
+    //모험한 날짜 배열
+    private val randomresultdateList = ArrayList<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +32,7 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
         setContentView(binding.root)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
+        //모험날짜배열 초기화
         for (i in 0 until 31) {
             randomresultdateList.add(-1)
         }
@@ -36,20 +41,25 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
         setMonth()
         monthClick()
 
+        //달력 레이아웃 매니저
         val gridLayoutManager = GridLayoutManager(this, 7)
         binding.calendarGridview.layoutManager = gridLayoutManager
 
         binding.calendarGridview.addItemDecoration(HorizontalItemDecorator(28))
 
         val userJwt = getJwt(this, "userJwt")
+
         val dateFormat2 = SimpleDateFormat("yyyyMM", Locale("ko", "KR"))
+
         yearMonth = dateFormat2.format(monthClick())
+
         val calendarService = CalendarService()
+
         calendarService.setNicknameAdventureView(this@CalendarActivity)
         calendarService.setAdventureTimeView(this@CalendarActivity)
+
         calendarService.getNicknameAdventure(userJwt)
         calendarService.getAdventureTime(userJwt, yearMonth)
-
     }
 
     private fun init() {
@@ -72,8 +82,7 @@ class CalendarActivity :AppCompatActivity(), NicknameAdventureView, AdventureTim
             } else {
                 cal.add(Calendar.MONTH, +1)
             }
-            binding.calendarDateTv.text = cal.get(Calendar.YEAR).toString() + ", " + (cal.get(
-                Calendar.MONTH) + 1).toString() + "월"
+            binding.calendarDateTv.text = cal.get(Calendar.YEAR).toString() + ", " + (cal.get(Calendar.MONTH) + 1).toString() + "월"
             viewDate = cal.get(Calendar.YEAR)
                 .toString() + "-" + (cal.get(Calendar.MONTH) + 1).toString() + "-" + "01"
             val calendarAdapter = CalendarAdapter(viewDate,randomresultdateList)

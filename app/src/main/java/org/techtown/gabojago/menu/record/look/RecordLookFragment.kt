@@ -13,10 +13,7 @@ import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentRecordLookBinding
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.RecordFragment
-import org.techtown.gabojago.menu.record.recordRetrofit.FolderLookResult
-import org.techtown.gabojago.menu.record.recordRetrofit.FolderLookView
-import org.techtown.gabojago.menu.record.recordRetrofit.FolderRecordResultList
-import org.techtown.gabojago.menu.record.recordRetrofit.RecordService
+import org.techtown.gabojago.menu.record.recordRetrofit.*
 import java.util.*
 
 class RecordLookFragment(private val folderIdx:Int): Fragment() , FolderLookView {
@@ -154,21 +151,38 @@ class RecordLookFragment(private val folderIdx:Int): Fragment() , FolderLookView
     }
 
     override fun onFolderLookSuccess(result: FolderLookResult) {
-        binding.recordLookNameTv.text = result.folderContentResult.recordingTitle
-        setStarState(result.folderContentResult.recordingStar)
-        binding.recordLookContentsTv.text = result.folderContentResult.recordingContent
+        try {
+            binding.recordLookNameTv.text = result.folderContentResult.recordingTitle
+            setStarState(result.folderContentResult.recordingStar)
+            binding.recordLookContentsTv.text = result.folderContentResult.recordingContent
+            val recordLookRVAdapter = RecordLookRVAdapter(result.folderResultList)
+            binding.recordResultRecyclerview.adapter = recordLookRVAdapter
+        } catch (e: NullPointerException) {
+            binding.recordLookNameTv.text = "제목이 비어있어!"
+            setStarState(3.5)
+            binding.recordLookContentsTv.text = "내용이 비어있어!"
+            val emptyResult = ArrayList<FolderRecordResultList>()
+            emptyResult.add(FolderRecordResultList("", "", 0))
 
-        //Set RecyclerView
-        Log.e("폴더조회",result.folderResultList.toString())
-        val recordLookRVAdapter = RecordLookRVAdapter(result.folderResultList)
-        binding.recordResultRecyclerview.adapter = recordLookRVAdapter
-
+            val recordLookRVAdapter = RecordLookRVAdapter(emptyResult)
+            binding.recordResultRecyclerview.adapter = recordLookRVAdapter
+        }
     }
 
     override fun onFolderLookFailure(code: Int, message: String) {
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT
         ).show()
+
+        binding.recordLookNameTv.text = "제목이 비어있어!"
+        setStarState(3.5)
+        binding.recordLookContentsTv.text = "내용이 비어있어!"
+
+        val emptyResult = ArrayList<FolderRecordResultList>()
+        emptyResult.add(FolderRecordResultList("", "", 0))
+
+        val recordLookRVAdapter = RecordLookRVAdapter(emptyResult)
+        binding.recordResultRecyclerview.adapter = recordLookRVAdapter
     }
 
 }

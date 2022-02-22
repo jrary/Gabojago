@@ -50,8 +50,10 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
         binding.dialogNextBtn.setOnClickListener{
             val userJwt = getJwt(requireContext(), "userJwt")
             for (i in 0 until isSelectList.size-1) {
-                if (isSelectList[i]) {
-                    folderMake.add(recordList[i].randomResultListResult.randomResultIdx)
+                if(isSelectList[i]!=null) {
+                    if (isSelectList[i]) {
+                        folderMake.add(recordList[i].randomResultListResult.randomResultIdx)
+                    }
                 }
             }
             Log.e("선택",folderMake.toString())
@@ -77,5 +79,6 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT
         ).show()
+        dismiss()
     }
 }
