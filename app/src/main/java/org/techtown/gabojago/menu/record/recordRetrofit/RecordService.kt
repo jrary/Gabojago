@@ -162,6 +162,8 @@ class RecordService {
                                 resp.message)
                             3000 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
                                 resp.message)
+                            2013 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                                resp.message)
                         }
                     }
                 }
@@ -613,21 +615,31 @@ class RecordService {
                     folderModifyView.onFolderModifySuccess()
                 } else {
                     when (resp.code) {
-                        6012 -> folderModifyView.onFolderModifyFailure(resp.code,
+                        2001 -> folderModifyView.onFolderModifyFailure(resp.code,
                             resp.message)
-                        7005 -> folderModifyView.onFolderModifyFailure(resp.code,
+                        2031 -> folderModifyView.onFolderModifyFailure(resp.code,
                             resp.message)
-                        7007 -> folderModifyView.onFolderModifyFailure(resp.code,
+                        2039 -> folderModifyView.onFolderModifyFailure(resp.code,
                             resp.message)
-                        2013 -> folderModifyView.onFolderModifyFailure(resp.code,
+                        2035 -> folderModifyView.onFolderModifyFailure(resp.code,
                             resp.message)
-                        7006 -> folderModifyView.onFolderModifyFailure(resp.code,
+                        2040 -> folderModifyView.onFolderModifyFailure(resp.code,
                             resp.message)
-                        7003 -> folderModifyView.onFolderModifyFailure(resp.code,
+                        2038 -> folderModifyView.onFolderModifyFailure(resp.code,
                             resp.message)
-                        7008 -> folderModifyView.onFolderModifyFailure(resp.code,
+                        2041 -> folderModifyView.onFolderModifyFailure(resp.code,
                             resp.message)
-                        7004 -> folderModifyView.onFolderModifyFailure(resp.code,
+                        2036 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        2002 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        3017 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        3006 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        3036 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        2037 -> folderModifyView.onFolderModifyFailure(resp.code,
                             resp.message)
                         4000 -> folderModifyView.onFolderModifyFailure(resp.code,
                             resp.message)
@@ -657,21 +669,31 @@ class RecordService {
                     singleModifyView.onSingleModifySuccess()
                 } else {
                     when (resp.code) {
-                        6012 -> singleModifyView.onSingleModifyFailure(resp.code,
+                        2001 -> singleModifyView.onSingleModifyFailure(resp.code,
                             resp.message)
-                        7005 -> singleModifyView.onSingleModifyFailure(resp.code,
+                        2032 -> singleModifyView.onSingleModifyFailure(resp.code,
                             resp.message)
-                        7007 -> singleModifyView.onSingleModifyFailure(resp.code,
+                        2039 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        2035 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        2040 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        2038 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        2041 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        2036 -> singleModifyView.onSingleModifyFailure(resp.code,
                             resp.message)
                         2013 -> singleModifyView.onSingleModifyFailure(resp.code,
                             resp.message)
-                        7006 -> singleModifyView.onSingleModifyFailure(resp.code,
+                        3018 -> singleModifyView.onSingleModifyFailure(resp.code,
                             resp.message)
-                        7003 -> singleModifyView.onSingleModifyFailure(resp.code,
+                        3007 -> singleModifyView.onSingleModifyFailure(resp.code,
                             resp.message)
-                        7008 -> singleModifyView.onSingleModifyFailure(resp.code,
+                        3037 -> singleModifyView.onSingleModifyFailure(resp.code,
                             resp.message)
-                        7004 -> singleModifyView.onSingleModifyFailure(resp.code,
+                        2037 -> singleModifyView.onSingleModifyFailure(resp.code,
                             resp.message)
                         4000 -> singleModifyView.onSingleModifyFailure(resp.code,
                             resp.message)

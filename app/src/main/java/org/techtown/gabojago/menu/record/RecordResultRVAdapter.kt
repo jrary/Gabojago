@@ -12,7 +12,7 @@ class RecordResultRVAdapter(private val recordList: ArrayList<SingleResultListRe
 
     //클릭 인터페이스
     interface MyItemClickListener {
-        fun onItemClick(recordIdx:Int,result:RandomResultListResult)
+        fun onItemClick(hasRecording:Boolean,recordIdx:Int,result:RandomResultListResult)
         fun onItemView(randomResultIdx:Int)
     }
 
@@ -37,7 +37,7 @@ class RecordResultRVAdapter(private val recordList: ArrayList<SingleResultListRe
             mItemClickListener.onItemView(recordList[position].randomResultListResult.randomResultIdx)
         }
         holder.binding.itemRecordPecilIv.setOnClickListener {
-            mItemClickListener.onItemClick(recordList[position].randomResultListResult.randomResultIdx,recordList[position].randomResultListResult)
+            mItemClickListener.onItemClick(recordList[position].hasRecording,recordList[position].randomResultListResult.randomResultIdx,recordList[position].randomResultListResult)
         }
     }
 

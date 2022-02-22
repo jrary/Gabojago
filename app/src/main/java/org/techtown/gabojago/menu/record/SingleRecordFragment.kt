@@ -1,6 +1,8 @@
 package org.techtown.gabojago.menu.record
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +20,7 @@ import org.techtown.gabojago.menu.record.recordRetrofit.*
 import java.util.ArrayList
 
 
-class SingleRecordFragment(private  val recordIdx:Int,private val result:RandomResultListResult) : Fragment() ,SingleRecordingView, SingleLookView, SingleModifyView{
+class SingleRecordFragment(private  val hasRecording:Boolean,private  val recordIdx:Int,private val result:RandomResultListResult) : Fragment() ,SingleRecordingView, SingleLookView, SingleModifyView{
     lateinit var binding: FragmentSinglerecordBinding
     val url= mutableListOf<String>()
 
@@ -39,6 +41,24 @@ class SingleRecordFragment(private  val recordIdx:Int,private val result:RandomR
         val recordPictureRVAdapter = RecordPictureRVAdapter()
         binding.singleRecordPictureRecyclerview.adapter = recordPictureRVAdapter
 
+        binding.singleRecordWriteEt.addTextChangedListener(object: TextWatcher {
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                binding.singleRecordCharactersnumTv.text = "0 / 1000"
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                var userinput = binding.singleRecordWriteEt.text.toString()
+                binding.singleRecordCharactersnumTv.text = userinput.length.toString() + " / 1000"
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                var userinput = binding.singleRecordWriteEt.text.toString()
+                binding.singleRecordCharactersnumTv.text = userinput.length.toString() + " / 1000"
+            }
+
+        })
+
         binding.singleRecordResultTv.text = result.randomResultContent
         when (result.randomResultType) {
             1 -> {
@@ -56,6 +76,91 @@ class SingleRecordFragment(private  val recordIdx:Int,private val result:RandomR
             }
         }
 
+        if(!hasRecording){
+            binding.singleRecordCompleteView.setOnClickListener {
+                val recordService = RecordService()
+                recordService.setSingleRecordingView(this@SingleRecordFragment)
+                val userJwt = getJwt(requireContext(), "userJwt")
+                recordService.putSingleRecord(userJwt, recordIdx, SingleRecordingRequest(
+                    binding.singleRecordStarscore.rating.toDouble(),
+                    binding.singleRecordWriteEt.text.toString(),
+                    binding.singleRecordTitleEt.text.toString(),
+                    url
+                ))
+
+
+                (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, RecordFragment().apply {
+                        arguments = Bundle().apply {
+                        }
+                    })
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss()
+
+            }
+
+            binding.singleRecordCompleteTv.setOnClickListener {
+                val recordService = RecordService()
+                recordService.setSingleRecordingView(this@SingleRecordFragment)
+                val userJwt = getJwt(requireContext(), "userJwt")
+                recordService.putSingleRecord(userJwt, recordIdx, SingleRecordingRequest(
+                    binding.singleRecordStarscore.rating.toDouble(),
+                    binding.singleRecordWriteEt.text.toString(),
+                    binding.singleRecordTitleEt.text.toString(),
+                    url
+                ))
+
+                (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, RecordFragment().apply {
+                        arguments = Bundle().apply {
+                        }
+                    })
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss()
+
+            }
+
+        }else{
+            binding.singleRecordCompleteView.setOnClickListener {
+                val recordService = RecordService()
+                recordService.setSingleModifyView(this@SingleRecordFragment)
+                val userJwt = getJwt(requireContext(), "userJwt")
+                recordService.putSingleModify(userJwt, SingleModifyRequest(
+                    binding.singleRecordStarscore.rating.toDouble(),
+                    binding.singleRecordWriteEt.text.toString(),
+                    binding.singleRecordTitleEt.text.toString(),
+                ),recordIdx)
+
+                (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, RecordFragment().apply {
+                        arguments = Bundle().apply {
+                        }
+                    })
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss()
+
+            }
+
+            binding.singleRecordCompleteTv.setOnClickListener {
+                val recordService = RecordService()
+                recordService.setSingleModifyView(this@SingleRecordFragment)
+                val userJwt = getJwt(requireContext(), "userJwt")
+                recordService.putSingleModify(userJwt, SingleModifyRequest(
+                    binding.singleRecordStarscore.rating.toDouble(),
+                    binding.singleRecordWriteEt.text.toString(),
+                    binding.singleRecordTitleEt.text.toString(),
+                ),recordIdx)
+
+                (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, RecordFragment().apply {
+                        arguments = Bundle().apply {
+                        }
+                    })
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss()
+
+            }
+        }
 
 
         clickevent()
@@ -109,87 +214,11 @@ class SingleRecordFragment(private  val recordIdx:Int,private val result:RandomR
             binding.singleRecordStarscore.rating = result.eachContentResult.recordingStar.toFloat()
             binding.singleRecordWriteEt.setText(result.eachContentResult.recordingContent)
 
-            binding.singleRecordCompleteView.setOnClickListener {
-                val recordService = RecordService()
-                recordService.setSingleModifyView(this@SingleRecordFragment)
-                val userJwt = getJwt(requireContext(), "userJwt")
-                recordService.putSingleModify(userJwt, SingleModifyRequest(
-                    binding.singleRecordStarscore.rating.toDouble(),
-                    binding.singleRecordWriteEt.text.toString(),
-                    binding.singleRecordTitleEt.text.toString(),
-                ),recordIdx)
 
-                (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, RecordFragment().apply {
-                        arguments = Bundle().apply {
-                        }
-                    })
-                    .addToBackStack(null)
-                    .commitAllowingStateLoss()
-            }
-
-            binding.singleRecordCompleteTv.setOnClickListener {
-                val recordService = RecordService()
-                recordService.setSingleModifyView(this@SingleRecordFragment)
-                val userJwt = getJwt(requireContext(), "userJwt")
-                recordService.putSingleModify(userJwt, SingleModifyRequest(
-                    binding.singleRecordStarscore.rating.toDouble(),
-                    binding.singleRecordWriteEt.text.toString(),
-                    binding.singleRecordTitleEt.text.toString(),
-                ),recordIdx)
-
-                (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, RecordFragment().apply {
-                        arguments = Bundle().apply {
-                        }
-                    })
-                    .addToBackStack(null)
-                    .commitAllowingStateLoss()
-            }
         } catch (e: NullPointerException) {
             binding.singleRecordTitleEt.setText("제목을 입력해줘!")
             binding.singleRecordStarscore.rating = 3.5F
             binding.singleRecordWriteEt.setText("내용을 입력해줘!")
-
-            binding.singleRecordCompleteView.setOnClickListener {
-                val recordService = RecordService()
-                recordService.setSingleRecordingView(this@SingleRecordFragment)
-                val userJwt = getJwt(requireContext(), "userJwt")
-                recordService.putSingleRecord(userJwt, recordIdx, SingleRecordingRequest(
-                    binding.singleRecordStarscore.rating.toDouble(),
-                    binding.singleRecordWriteEt.text.toString(),
-                    binding.singleRecordTitleEt.text.toString(),
-                    url
-                ))
-
-                (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, RecordFragment().apply {
-                        arguments = Bundle().apply {
-                        }
-                    })
-                    .addToBackStack(null)
-                    .commitAllowingStateLoss()
-            }
-
-            binding.singleRecordCompleteTv.setOnClickListener {
-                val recordService = RecordService()
-                recordService.setSingleRecordingView(this@SingleRecordFragment)
-                val userJwt = getJwt(requireContext(), "userJwt")
-                recordService.putSingleRecord(userJwt, recordIdx, SingleRecordingRequest(
-                    binding.singleRecordStarscore.rating.toDouble(),
-                    binding.singleRecordWriteEt.text.toString(),
-                    binding.singleRecordTitleEt.text.toString(),
-                    url
-                ))
-
-                (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, RecordFragment().apply {
-                        arguments = Bundle().apply {
-                        }
-                    })
-                    .addToBackStack(null)
-                    .commitAllowingStateLoss()
-            }
 
         }
     }

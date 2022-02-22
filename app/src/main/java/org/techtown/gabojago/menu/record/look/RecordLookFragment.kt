@@ -147,7 +147,7 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
             binding.recordLookStar05RightIv
         )
 
-        for(i in 0 until (star*2).toInt() - 1){
+        for(i in 0 until (star*2).toInt()){
             starArr[i].visibility = View.VISIBLE
         }
     }
@@ -156,6 +156,7 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
         try {
             binding.recordLookNameTv.text = result.folderContentResult.recordingTitle
             setStarState(result.folderContentResult.recordingStar)
+            Log.e("별점",result.folderContentResult.recordingStar.toString())
             binding.recordLookContentsTv.text = result.folderContentResult.recordingContent
             val recordLookRVAdapter = RecordLookRVAdapter(result.folderResultList)
             binding.recordResultRecyclerview.adapter = recordLookRVAdapter
@@ -175,7 +176,7 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
         Log.e("폴더조회",message)
 
         binding.recordLookNameTv.text = "제목이 비어있어!"
-        setStarState(3.5)
+        setStarState(2.5)
         binding.recordLookContentsTv.text = "내용이 비어있어!"
 
         val emptyResult = ArrayList<FolderRecordResultList>()
@@ -198,7 +199,7 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
             binding.recordResultRecyclerview.adapter = recordLookRVAdapter
         } catch (e: NullPointerException) {
             binding.recordLookNameTv.text = "제목이 비어있어!"
-            setStarState(3.5)
+            setStarState(2.5)
             binding.recordLookContentsTv.text = "내용이 비어있어!"
             val emptyResult = ArrayList<FolderRecordResultList>()
             emptyResult.add(FolderRecordResultList("", "", 0))
@@ -212,7 +213,7 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
         Log.e("개별조회",message)
 
         binding.recordLookNameTv.text = "제목이 비어있어!"
-        setStarState(3.5)
+        setStarState(2.5)
         binding.recordLookContentsTv.text = "내용이 비어있어!"
 
         val emptyResult = ArrayList<FolderRecordResultList>()

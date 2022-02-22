@@ -20,7 +20,7 @@ class RecordFolderResultNameRVAdapter(private val folderList: ArrayList<FolderRe
 
     //클릭 인터페이스
     interface MyItemClickListener {
-        fun onItemClickPencil(folderIdx:Int,resultList:ArrayList<InFolderListResult>)
+        fun onItemClickPencil(hasRecording: Boolean, folderIdx:Int,resultList:ArrayList<InFolderListResult>)
         fun onItemView(folderIdx:Int)
         fun onModifyClick(folder : FolderResultList)
         fun onBreakUpClick(folderIdx:Int)
@@ -50,7 +50,7 @@ class RecordFolderResultNameRVAdapter(private val folderList: ArrayList<FolderRe
             mItemClickListener.onItemView(folderList[position].folderIdx)
         }
         holder.binding.folderRecordPecilIv.setOnClickListener {
-            mItemClickListener.onItemClickPencil(folderList[position].folderIdx,folderList[position].randomResultListResult)
+            mItemClickListener.onItemClickPencil(folderList[position].hasRecording,folderList[position].folderIdx,folderList[position].randomResultListResult)
         }
         holder.binding.folderRecordFolderIv.setOnClickListener {
             val inflater = LayoutInflater.from(holder.binding.folderRecordFolderIv.context)
