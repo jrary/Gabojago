@@ -118,9 +118,9 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         binding.recordMonthTv.setText(setMonth())
     }
 
-    private fun changeSingleRecordFragment(recordIdx: Int) {
+    private fun changeSingleRecordFragment(recordIdx: Int,result:RandomResultListResult) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, SingleRecordFragment(recordIdx).apply {
+            .replace(R.id.main_frm, SingleRecordFragment(recordIdx,result).apply {
                 arguments = Bundle().apply {
                 }
             })
@@ -251,11 +251,11 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
 
         recordResultRVAdapter.setMyItemClickListener(object :
             RecordResultRVAdapter.MyItemClickListener {
-            override fun onItemClick(recordIdx :Int) {
-                changeSingleRecordFragment(recordIdx)
+            override fun onItemClick(recordIdx :Int,result:RandomResultListResult) {
+                changeSingleRecordFragment(recordIdx,result)
             }
-            override fun onItemView() {
-                changeRecordFragment(1)
+            override fun onItemView(randomResultIdx:Int) {
+                changeRecordFragment(randomResultIdx)
             }
         })
 

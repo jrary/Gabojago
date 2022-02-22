@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.PopupWindow
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.databinding.ItemRecordFoldernameBinding
-import org.techtown.gabojago.databinding.PopupMenuBinding
 import org.techtown.gabojago.menu.record.recordRetrofit.FolderResultList
 import org.techtown.gabojago.menu.record.recordRetrofit.InFolderListResult
 
