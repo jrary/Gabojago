@@ -33,12 +33,12 @@
         <TextView
             android:layout_width="192dp"
             android:layout_height="29dp"
-            android:fontFamily="@font/nanum_square_round_otf_extrabold"
+            android:fontFamily="@font/apple_sd_gothic_neo_sb"
             android:gravity="center_horizontal"
             android:text="기록하자"
             android:textColor="#000000"
             android:textSize="20sp"
-            android:textStyle="normal"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/single_record_backarrow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -182,6 +182,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:progressBackgroundTint="#EBEBEB"
                 android:progressTint="#ff6745"
+                android:secondaryProgressTint="#ff6745"
                 app:layout_constraintTop_toBottomOf="@id/single_record_score_tv"
                 app:layout_constraintBottom_toTopOf="@id/single_record_picture_tv" />
 
@@ -319,6 +320,7 @@
         app:layout_constraintTop_toBottomOf="@id/single_record_scrollview" />
 
     <TextView
+        android:id="@+id/single_record_complete_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"

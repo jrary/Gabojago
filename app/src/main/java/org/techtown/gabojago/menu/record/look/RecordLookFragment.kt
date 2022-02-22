@@ -16,7 +16,7 @@ import org.techtown.gabojago.menu.record.RecordFragment
 import org.techtown.gabojago.menu.record.recordRetrofit.*
 import java.util.*
 
-class RecordLookFragment(private val folderIdx:Int): Fragment() , FolderLookView {
+class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , SingleLookView {
     lateinit var binding: FragmentRecordLookBinding
     private val MIN_SCALE = 0.95f
     private val MIN_ALPHA = 0.5f
@@ -31,9 +31,11 @@ class RecordLookFragment(private val folderIdx:Int): Fragment() , FolderLookView
 
         val recordService = RecordService()
         recordService.setFolderLookView(this@RecordLookFragment)
+        recordService.setSingleLookView(this@RecordLookFragment)
         val userJwt = getJwt(requireContext(), "userJwt")
 
-        recordService.getFolderLook(userJwt, folderIdx)
+        recordService.getFolderLook(userJwt, Idx)
+        recordService.getSingleLook(userJwt, Idx)
 
         //Set Viewpager and Indicator
         var imageArr = getImageList()
@@ -145,7 +147,7 @@ class RecordLookFragment(private val folderIdx:Int): Fragment() , FolderLookView
             binding.recordLookStar05RightIv
         )
 
-        for(i in 0..(star*2).toInt() - 1){
+        for(i in 0 until (star*2).toInt() - 1){
             starArr[i].visibility = View.VISIBLE
         }
     }
@@ -159,7 +161,7 @@ class RecordLookFragment(private val folderIdx:Int): Fragment() , FolderLookView
             binding.recordResultRecyclerview.adapter = recordLookRVAdapter
         } catch (e: NullPointerException) {
             binding.recordLookNameTv.text = "제목이 비어있어!"
-            setStarState(3.5)
+            setStarState(2.5)
             binding.recordLookContentsTv.text = "내용이 비어있어!"
             val emptyResult = ArrayList<FolderRecordResultList>()
             emptyResult.add(FolderRecordResultList("", "", 0))
@@ -170,9 +172,44 @@ class RecordLookFragment(private val folderIdx:Int): Fragment() , FolderLookView
     }
 
     override fun onFolderLookFailure(code: Int, message: String) {
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        Log.e("폴더조회",message)
+
+        binding.recordLookNameTv.text = "제목이 비어있어!"
+        setStarState(3.5)
+        binding.recordLookContentsTv.text = "내용이 비어있어!"
+
+        val emptyResult = ArrayList<FolderRecordResultList>()
+        emptyResult.add(FolderRecordResultList("", "", 0))
+
+        val recordLookRVAdapter = RecordLookRVAdapter(emptyResult)
+        binding.recordResultRecyclerview.adapter = recordLookRVAdapter
+    }
+
+    override fun onSingleLookSuccess(result: SingleLookResult) {
+        try {
+            binding.recordLookNameTv.text = result.eachContentResult.recordingTitle
+            setStarState(result.eachContentResult.recordingStar)
+            binding.recordLookContentsTv.text = result.eachContentResult.recordingContent
+
+            val singleResult = ArrayList<FolderRecordResultList>()
+            singleResult.add(FolderRecordResultList(result.eachRandomResult.creatAt, result.eachRandomResult.randomResultContent, result.eachRandomResult.randomResultType))
+
+            val recordLookRVAdapter = RecordLookRVAdapter(singleResult)
+            binding.recordResultRecyclerview.adapter = recordLookRVAdapter
+        } catch (e: NullPointerException) {
+            binding.recordLookNameTv.text = "제목이 비어있어!"
+            setStarState(3.5)
+            binding.recordLookContentsTv.text = "내용이 비어있어!"
+            val emptyResult = ArrayList<FolderRecordResultList>()
+            emptyResult.add(FolderRecordResultList("", "", 0))
+
+            val recordLookRVAdapter = RecordLookRVAdapter(emptyResult)
+            binding.recordResultRecyclerview.adapter = recordLookRVAdapter
+        }
+    }
+
+    override fun onSingleLookFailure(code: Int, message: String) {
+        Log.e("개별조회",message)
 
         binding.recordLookNameTv.text = "제목이 비어있어!"
         setStarState(3.5)
