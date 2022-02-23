@@ -4,13 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.NumberPicker
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivitySelectBinding
 
 class ClockSelectActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySelectBinding
     var res: Int = 1
+    var resCode: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,15 +25,17 @@ class ClockSelectActivity : AppCompatActivity() {
         )
 
         initNumberPicker()
+        setPosition()
         binding.selectNumberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
             res = newVal
         }
 
         binding.selectCompBtn.setOnClickListener{
-            val intent = Intent()
+            var intent = Intent()
             intent.putExtra("clock", res)
-            setResult(RESULT_OK, intent)
+            setResult(resCode, intent)
             finish()
+            overridePendingTransition(R.anim.anim_down, R.anim.anim_none)
         }
     }
 
@@ -43,5 +48,22 @@ class ClockSelectActivity : AppCompatActivity() {
         binding.selectNumberPicker.wrapSelectorWheel = false
         binding.selectNumberPicker.displayedValues = data1
         binding.selectNumberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+    }
+
+    private fun setPosition(){
+        if(intent.hasExtra("position")){
+            var position = intent.getIntExtra("position", -1)
+            if(position == 0){
+                resCode = 100
+            }
+            else if(position == 1){
+                resCode = 101
+            }
+        }
+        else{
+            Toast.makeText(
+                this, "Error", Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }

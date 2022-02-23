@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityClockOptionBinding
@@ -23,13 +24,31 @@ class ClockOptionActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
+        var getClockNumber = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == 100 || result.resultCode == 101) {
+                if(result.resultCode == 100){
+                    startNum = result.data?.getIntExtra("clock", 12)!!
+                    binding.clockStartTv.text = startNum.toString()
+                }
+                else if(result.resultCode == 101){
+                    endNum = result.data?.getIntExtra("clock", 12)!!
+                    binding.clockEndTv.text = endNum.toString()
+                }
+            }
+        }
+
         setStoredClock()
 
         binding.clockStartTv.setOnClickListener {
-            startActivityForResult(Intent(this, ClockSelectActivity::class.java), 100)
+            val intent = Intent(this, ClockSelectActivity::class.java)
+            intent.putExtra("position", 0)
+            getClockNumber.launch(intent)
         }
         binding.clockEndTv.setOnClickListener {
-            startActivityForResult(Intent(this, ClockSelectActivity::class.java), 101)
+            val intent = Intent(this, ClockSelectActivity::class.java)
+            intent.putExtra("position", 1)
+            getClockNumber.launch(intent)
         }
         binding.clockCompBtn.setOnClickListener {
             if(startNum == endNum){
