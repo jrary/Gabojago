@@ -17,6 +17,7 @@ class DialogDeleteRVAdapter(private val folderList: ArrayList<FolderResultList>)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemRecordFoldernameBinding =
             ItemRecordFoldernameBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        isFolderSelectList.clear()
         for (i in 0 until 31) {
             isFolderSelectList.add(false)
         }

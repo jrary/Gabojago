@@ -56,8 +56,15 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
                     }
                 }
             }
+            if(folderMake.size==1){
+                folderMake.removeAt(0)
+                Toast.makeText(
+                    activity, "2개이상 선택해줘!", Toast.LENGTH_SHORT
+                ).show()
+            }else{
+                recordService.putFolderMakeIdx(userJwt,folderMake)
+            }
             Log.e("선택",folderMake.toString())
-            recordService.putFolderMakeIdx(userJwt,folderMake)
 
 
         }
@@ -76,9 +83,7 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
     }
 
     override fun onRecordFolderMakeFailure(code: Int, message: String) {
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        Log.e("폴더생성실패",message)
         dismiss()
     }
 }

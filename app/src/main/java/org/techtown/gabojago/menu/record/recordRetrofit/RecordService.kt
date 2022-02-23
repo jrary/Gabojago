@@ -41,10 +41,22 @@ class RecordService {
         this.folderRecordingView = folderRecordingView
     }
 
+    private lateinit var singleRecordingView: SingleRecordingView
+
+    fun setSingleRecordingView(singleRecordingView: SingleRecordingView) {
+        this.singleRecordingView = singleRecordingView
+    }
+
     private lateinit var folderLookView: FolderLookView
 
     fun setFolderLookView(folderLookView: FolderLookView) {
         this.folderLookView = folderLookView
+    }
+
+    private lateinit var singleLookView: SingleLookView
+
+    fun setSingleLookView(singleLookView: SingleLookView) {
+        this.singleLookView = singleLookView
     }
 
     private lateinit var folderDeleteView: FolderDeleteView
@@ -63,6 +75,18 @@ class RecordService {
 
     fun setFolderBreakView(folderBreakView: FolderBreakView) {
         this.folderBreakView = folderBreakView
+    }
+
+    private lateinit var folderModifyView: FolderModifyView
+
+    fun setFolderModifyView(folderModifyView: FolderModifyView) {
+        this.folderModifyView = folderModifyView
+    }
+
+    private lateinit var singleModifyView: SingleModifyView
+
+    fun setSingleModifyView(singleModifyView: SingleModifyView) {
+        this.singleModifyView = singleModifyView
     }
 
     //개별메인
@@ -137,6 +161,8 @@ class RecordService {
                             2000 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
                                 resp.message)
                             3000 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                                resp.message)
+                            2013 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
                                 resp.message)
                         }
                     }
@@ -228,7 +254,7 @@ class RecordService {
             }
         })
     }
-    //폴더기록
+    //폴더기록하기
     fun putFolderRecord(userJwt: String, folderIdx: Int, folderRecording: FolderRecordingRequest) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
         recordService.putFolderRecord(userJwt, folderIdx, folderRecording)
@@ -288,6 +314,66 @@ class RecordService {
                 }
             })
     }
+    //개별기록하기
+    fun putSingleRecord(userJwt: String, randomResultIdx: Int, singlerRecording: SingleRecordingRequest) {
+        val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
+        recordService.putSingleRecord(userJwt, randomResultIdx, singlerRecording)
+            .enqueue(object :
+                Callback<SingleRecordResponse> {
+                override fun onResponse(
+                    call: Call<SingleRecordResponse>,
+                    response: Response<SingleRecordResponse>
+                ) {
+                    Log.d("S_RECORDING/Response", response.toString())
+                    val resp = response.body()!!
+                    Log.d("S_RECORDING/Code", resp.code.toString())
+
+                    if (resp.isSuccess) {
+                        singleRecordingView.onSingleRecordingSuccess()
+                    } else {
+                        when (resp.code) {
+                            2001 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                "회원 정보가 잘못되었습니다.")
+                            2002 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                resp.message)
+                            2000 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                resp.message)
+                            3000 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                resp.message)
+                            2032 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                resp.message)
+                            2039 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                resp.message)
+                            2040 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                resp.message)
+                            2041 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                resp.message)
+                            3043 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                resp.message)
+                            3018 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                resp.message)
+                            3007 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                resp.message)
+                            2035 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                resp.message)
+                            2036 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                resp.message)
+                            2038 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                resp.message)
+                            2037 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                resp.message)
+                            4000 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                resp.message)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<SingleRecordResponse>, t: Throwable) {
+                    singleRecordingView.onSingleRecordingFailure(400, t.toString())
+                    Log.d("CHECK", t.toString())
+                }
+            })
+    }
 
     //폴더조회
     fun getFolderLook(userJwt: String, folderIdx: Int) {
@@ -334,6 +420,53 @@ class RecordService {
             }
         })
     }
+
+    //개별조회
+    fun getSingleLook(userJwt: String, randomResultIdx: Int) {
+        val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
+        recordService.getSingleLook(userJwt, randomResultIdx).enqueue(object :
+            Callback<SingleLookResponse> {
+            override fun onResponse(
+                call: Call<SingleLookResponse>,
+                response: Response<SingleLookResponse>
+            ) {
+                Log.d("SINGLERESULT/Response", response.toString())
+                val resp = response.body()!!
+                Log.d("SINGLERESULT/Code", resp.code.toString())
+
+                if (resp.isSuccess) {
+                    singleLookView.onSingleLookSuccess(resp.result)
+                } else {
+                    when (resp.code) {
+                        2001 -> singleLookView.onSingleLookFailure(resp.code,
+                            resp.message)
+                        2031 -> singleLookView.onSingleLookFailure(resp.code,
+                            resp.message)
+                        2002 -> singleLookView.onSingleLookFailure(resp.code,
+                            resp.message)
+                        3017 -> singleLookView.onSingleLookFailure(resp.code,
+                            resp.message)
+                        3006 -> singleLookView.onSingleLookFailure(resp.code,
+                            resp.message)
+                        3038 -> singleLookView.onSingleLookFailure(resp.code,
+                            resp.message)
+                        3040 -> singleLookView.onSingleLookFailure(resp.code,
+                            resp.message)
+                        3035 -> singleLookView.onSingleLookFailure(resp.code,
+                            resp.message)
+                        4000 -> singleLookView.onSingleLookFailure(resp.code,
+                            resp.message)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<SingleLookResponse>, t: Throwable) {
+                singleLookView.onSingleLookFailure(400, t.toString())
+                Log.d("CHECK", t.toString())
+            }
+        })
+    }
+
     //삭제
     fun putIdx(userJwt: String, resultIdx:List<Int>, folderIdx: List<Int>) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
@@ -461,6 +594,114 @@ class RecordService {
             override fun onFailure(call: Call<FolderBreakResponse>, t: Throwable) {
                 folderBreakView.onFolderBreakFailure(400, t.toString())
                 Log.d("CHECK", t.toString())
+            }
+        })
+    }
+
+    //폴더기록수정
+    fun putFolderModify(userJwt: String,folderModify : FolderModifyRequest, folderIdx: Int) {
+        val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
+        recordService.putFolderModify(userJwt, folderModify,folderIdx).enqueue(object :
+            Callback<FolderModifyResponse> {
+            override fun onResponse(
+                call: Call<FolderModifyResponse>,
+                response: Response<FolderModifyResponse>
+            ) {
+                Log.d("FOLDERMODIFY/Response", response.toString())
+                val resp = response.body()!!
+                Log.d("FOLDERMODIFY/Code", resp.code.toString())
+
+                if (resp.isSuccess) {
+                    folderModifyView.onFolderModifySuccess()
+                } else {
+                    when (resp.code) {
+                        2001 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        2031 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        2039 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        2035 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        2040 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        2038 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        2041 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        2036 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        2002 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        3017 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        3006 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        3036 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        2037 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                        4000 -> folderModifyView.onFolderModifyFailure(resp.code,
+                            resp.message)
+                    }
+                }
+            }
+            override fun onFailure(call: Call<FolderModifyResponse>, t: Throwable) {
+                folderModifyView.onFolderModifyFailure(400, t.toString())
+            }
+        })
+    }
+
+    //개별기록수정
+    fun putSingleModify(userJwt: String,singleModify : SingleModifyRequest, singleIdx: Int) {
+        val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
+        recordService.putSingleModify(userJwt, singleModify,singleIdx).enqueue(object :
+            Callback<SingleModifyResponse> {
+            override fun onResponse(
+                call: Call<SingleModifyResponse>,
+                response: Response<SingleModifyResponse>
+            ) {
+                Log.d("SINGLEMODIFY/Response", response.toString())
+                val resp = response.body()!!
+                Log.d("SINGLEMODIFY/Code", resp.code.toString())
+
+                if (resp.isSuccess) {
+                    singleModifyView.onSingleModifySuccess()
+                } else {
+                    when (resp.code) {
+                        2001 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        2032 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        2039 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        2035 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        2040 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        2038 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        2041 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        2036 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        2013 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        3018 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        3007 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        3037 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        2037 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                        4000 -> singleModifyView.onSingleModifyFailure(resp.code,
+                            resp.message)
+                    }
+                }
+            }
+            override fun onFailure(call: Call<SingleModifyResponse>, t: Throwable) {
+                singleModifyView.onSingleModifyFailure(400, t.toString())
             }
         })
     }

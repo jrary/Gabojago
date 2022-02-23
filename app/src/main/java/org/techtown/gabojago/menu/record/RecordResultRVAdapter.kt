@@ -5,14 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ItemRecordResultBinding
+import org.techtown.gabojago.menu.record.recordRetrofit.RandomResultListResult
 import org.techtown.gabojago.menu.record.recordRetrofit.SingleResultListResult
 
 class RecordResultRVAdapter(private val recordList: ArrayList<SingleResultListResult>): RecyclerView.Adapter<RecordResultRVAdapter.ViewHolder>() {
 
     //클릭 인터페이스
     interface MyItemClickListener {
-        fun onItemClick(recordIdx:Int)
-        fun onItemView()
+        fun onItemClick(hasRecording:Boolean,recordIdx:Int,result:RandomResultListResult)
+        fun onItemView(randomResultIdx:Int)
     }
 
     private lateinit var mItemClickListener: MyItemClickListener
@@ -33,10 +34,10 @@ class RecordResultRVAdapter(private val recordList: ArrayList<SingleResultListRe
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(recordList[position])
         holder.itemView.setOnClickListener{
-            mItemClickListener.onItemView()
+            mItemClickListener.onItemView(recordList[position].randomResultListResult.randomResultIdx)
         }
         holder.binding.itemRecordPecilIv.setOnClickListener {
-            mItemClickListener.onItemClick(position)
+            mItemClickListener.onItemClick(recordList[position].hasRecording,recordList[position].randomResultListResult.randomResultIdx,recordList[position].randomResultListResult)
         }
     }
 

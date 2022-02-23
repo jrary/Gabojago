@@ -70,8 +70,10 @@ class DialogFolderModify(private val folder : FolderResultList) : DialogFragment
         dialogModifyMinusRVAdpater.setMyItemClickListener(object :
             DialogModifyMinusRVAdapter.MyItemClickListener {
             override fun onItemClick(position:Int) {
-                plus.add(position,minus[position])
-                minus.removeAt(position)
+                if(minus[position]!=null) {
+                    plus.add(minus[position])
+                    minus.removeAt(position)
+                }
                 dialogModifyPlusRVAdpater.notifyDataSetChanged()
                 dialogModifyMinusRVAdpater.notifyDataSetChanged()
             }
@@ -80,8 +82,10 @@ class DialogFolderModify(private val folder : FolderResultList) : DialogFragment
         dialogModifyPlusRVAdpater.setMyItemClickListener(object :
             DialogModifyPlusRVAdapter.MyItemClickListener {
             override fun onItemClick(position:Int) {
-                minus.add(plus[position])
-                plus.removeAt(position)
+                if(plus[position]!=null) {
+                    minus.add(plus[position])
+                    plus.removeAt(position)
+                }
                 dialogModifyMinusRVAdpater.notifyDataSetChanged()
                 dialogModifyPlusRVAdpater.notifyDataSetChanged()
             }
