@@ -1,4 +1,4 @@
-package org.techtown.gabojago.start
+package org.techtown.gabojago.start.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
