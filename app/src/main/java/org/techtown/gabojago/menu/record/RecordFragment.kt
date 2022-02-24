@@ -25,13 +25,14 @@ import org.techtown.gabojago.menu.record.calendar.CalendarActivity
 import org.techtown.gabojago.menu.record.dialog.DialogFolderDelete
 import org.techtown.gabojago.menu.record.dialog.DialogFolderModify
 import org.techtown.gabojago.menu.record.dialog.DialogFolderSelect
+import org.techtown.gabojago.menu.record.dialog.DialogRealBreakup
 import org.techtown.gabojago.menu.record.look.RecordLookFragment
 import org.techtown.gabojago.menu.record.recordRetrofit.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class RecordFragment : Fragment(), RecordCountView, SingleResultListView, FolderResultListView ,FolderBreakView{
+class RecordFragment : Fragment(), RecordCountView, SingleResultListView, FolderResultListView{
 
     lateinit var binding: FragmentRecordBinding
     lateinit var binding2: ItemRecordFoldernameBinding
@@ -110,7 +111,6 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
             binding.recordBlurView.visibility = View.GONE
             popupMenu()
         }
-
     }
 
     private fun init() {
@@ -153,7 +153,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
     private fun setdate(): String {
         val now: Long = System.currentTimeMillis()
         val date = Date(now)
-        val dateFormat = SimpleDateFormat("yyyy년MM월dd일", Locale("ko", "KR"))
+        val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일", Locale("ko", "KR"))
         val stringDate = dateFormat.format(date)
 
         return stringDate
@@ -238,6 +238,13 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         val recordResultRVAdapter = RecordResultRVAdapter(records)
         binding.recordResultRecyclerview.adapter = recordResultRVAdapter
 
+        if(recordResultRVAdapter.itemCount==0){
+            binding.recordDivisionView.visibility = View.GONE
+        }
+        if(recordResultRVAdapter.itemCount>0){
+            binding.recordNotifyTv.visibility = View.VISIBLE
+        }
+
 
         binding.recordFolderplusIv.setOnClickListener{
             DialogFolderSelect(records).show((context as MainActivity).supportFragmentManager,"dialog")
@@ -260,6 +267,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
 
     override fun onSingleResultListFailure(code: Int, message: String) {
         Log.e("기록하자개별메인api",message)
+        binding.recordDivisionView.visibility = View.GONE
     }
 
     override fun onFolderResultListSuccess(result: ArrayList<FolderResultList>) {
@@ -267,6 +275,14 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
 
         val recordFolderResultNameRVAdapter = RecordFolderResultNameRVAdapter(folders)
         binding.recordFolderresultRecyclerview.adapter = recordFolderResultNameRVAdapter
+
+        if(recordFolderResultNameRVAdapter.itemCount==0){
+            binding.recordDivisionView.visibility = View.GONE
+        }
+
+        if(recordFolderResultNameRVAdapter.itemCount>0){
+            binding.recordNotifyTv.visibility = View.VISIBLE
+        }
 
         binding.recordTrashIv.setOnClickListener{
             DialogFolderDelete(records,folders).show((context as MainActivity).supportFragmentManager,"dialog")
@@ -288,17 +304,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
 
             override fun onBreakUpClick(folderIdx: Int) {
 
-                recordService.setFolderBreakView(this@RecordFragment)
-                val userJwt = getJwt(requireContext(), "userJwt")
-                recordService.putBreakFolderIdx(userJwt,folderIdx)
-
-                val now: Long = System.currentTimeMillis()
-                val date = Date(now)
-                val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
-                val stringDate = dateFormat.format(date)
-
-                recordService.getSingleResultList(userJwt,stringDate)
-                recordService.getFolderResultList(userJwt,stringDate)
+                DialogRealBreakup(folderIdx).show((context as MainActivity).supportFragmentManager,"dialog")
 
             }
         })
@@ -306,31 +312,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
 
     override fun onFolderResultListFailure(code: Int, message: String) {
         Log.e("기록하자폴더메인api",message)
-    }
-
-    override fun onFolderBreakSuccess() {
-        recordService.setSingleResultListView(this@RecordFragment)
-        recordService.setFolderResultListView(this@RecordFragment)
-
-        val userJwt = getJwt(requireContext(), "userJwt")
-
-        val now: Long = System.currentTimeMillis()
-        val date = Date(now)
-        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
-        val stringDate = dateFormat.format(date)
-
-        (context as MainActivity).supportFragmentManager.beginTransaction()
-            .detach(this).attach(this)
-            .commit()
-
-        recordService.getSingleResultList(userJwt,stringDate)
-        recordService.getFolderResultList(userJwt,stringDate)
-    }
-
-    override fun onFolderBreakFailure(code: Int, message: String) {
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        binding.recordDivisionView.visibility = View.GONE
     }
 }
 

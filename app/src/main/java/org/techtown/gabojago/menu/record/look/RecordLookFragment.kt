@@ -120,13 +120,11 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
 
         var imageList = ArrayList<Int>()
 
-        imageList.add(R.drawable.lookbase1)
-        imageList.add(R.drawable.lookbase2)
-        imageList.add(R.drawable.lookbase3)
-        imageList.add(R.drawable.lookbase4)
-        imageList.add(R.drawable.lookbase5)
-        imageList.add(R.drawable.lookbase6)
+        imageList.add(R.drawable.image_background)
 
+        if(imageList.size==1){
+            binding.recordLookCircleIndicator.visibility = View.GONE
+        }
         return imageList
     }
 

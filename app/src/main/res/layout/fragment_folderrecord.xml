@@ -235,6 +235,8 @@
                 android:background="@drawable/rectangle_32"
                 android:fontFamily="@font/apple_sd_gothic_neo_sb"
                 android:gravity="clip_vertical"
+                android:scrollbars="vertical"
+                android:scrollbarSize="2dp"
                 android:hint="기록해봐!"
                 android:textColorHint="#D5D5D5"
                 android:padding="12dp"

@@ -96,7 +96,7 @@ class RecordFolderResultNameRVAdapter(private val folderList: ArrayList<FolderRe
                 binding.folderRecordResultLayout.setBackgroundResource(R.drawable.folderresultbox_orange)
                 binding.folderRecordFolderIv.setImageResource(R.drawable.folder_orange)
                 binding.folderRecordPecilIv.setImageResource(R.drawable.memo_pencil_orange)
-                binding.folderRecordTitleTv.setTextColor(Color.parseColor("#fc8f77"))
+                binding.folderRecordTitleTv.setTextColor(Color.parseColor("#ff6745"))
                 if(folderList.folderTitle!=null){
                     binding.folderRecordTitleTv.setText(folderList.folderTitle)
                 }

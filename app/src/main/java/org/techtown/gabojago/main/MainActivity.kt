@@ -25,8 +25,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initNavigation() {
+
         supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment())
             .commitAllowingStateLoss()
+        binding.mainBnv.selectedItemId = R.id.homeFragment
 
         binding.mainBnv.setOnItemSelectedListener {
             when (it.itemId) {
@@ -40,13 +42,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.recordFragment -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, RecordFragment())
-                        .commitAllowingStateLoss()
-                    return@setOnItemSelectedListener true
-                }
-
-                R.id.goagainFragment -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, GoagainFragment())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
