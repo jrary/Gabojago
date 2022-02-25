@@ -38,6 +38,10 @@ class DialogFolderDelete(private val recordList: ArrayList<SingleResultListResul
         val dialogSingleDeleteRVAdapter = DialogDeleteSingleRVAdapter(recordList)
         binding.dialogDeleteRecyclerview.adapter = dialogSingleDeleteRVAdapter
 
+        if(dialogDeleteRVAdapter.itemCount>0&& dialogSingleDeleteRVAdapter.itemCount>0){
+            binding.dialogDivisionView.visibility = View.VISIBLE
+        }
+
         binding.dialogDeleteBtn.setOnClickListener{
             DialogRealDelete(recordList,folderList).show((context as MainActivity).supportFragmentManager,"dialog")
             dismiss()

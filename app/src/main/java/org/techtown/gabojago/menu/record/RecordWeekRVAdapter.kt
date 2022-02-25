@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.databinding.ItemRecordWeekBinding
+import org.techtown.gabojago.menu.record.recordRetrofit.RandomResultListResult
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -13,6 +14,17 @@ class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(
 
     private val dates = ArrayList<String>()
     private val dayofweek = arrayListOf("일","월","화","수","목","금","토")
+    private val alldays = ArrayList<String>()
+
+    interface MyItemClickListener {
+        fun onItemClick(day:String)
+    }
+
+    private lateinit var mItemClickListener: RecordWeekRVAdapter.MyItemClickListener
+
+    fun setMyItemClickListener(itemClickListener: RecordWeekRVAdapter.MyItemClickListener) {
+        mItemClickListener = itemClickListener
+    }
 
     //뷰홀더 생성->호출되는 함수->아이템 뷰 객체를 만들어서 뷰홀더에 던져줌
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,6 +36,9 @@ class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(
     //뷰홀더에 데이터를 바인딩해줘야 할 때마다 호출되는 함수 => 엄청나게 많이 호출
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(position)
+        holder.itemView.setOnClickListener{
+            mItemClickListener.onItemClick(alldays[position])
+        }
     }
 
     //뷰홀더
@@ -66,10 +81,12 @@ class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(
         // 해당 주차의 첫째날을 지정한다
         cal.add(Calendar.DAY_OF_MONTH, -dayOfWeek)
         val sf = SimpleDateFormat("dd")
+        val sf2 = SimpleDateFormat("yyMMdd")
 
         for(index in 0 until 7) {
             cal.add(Calendar.DAY_OF_MONTH, 1)
             dates.add(sf.format(cal.time))
+            alldays.add(sf2.format(cal.time))
         }
         return today
     }

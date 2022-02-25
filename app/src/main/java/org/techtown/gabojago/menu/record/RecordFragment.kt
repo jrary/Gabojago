@@ -81,6 +81,14 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         val recordWeekRVAdapter = RecordWeekRVAdapter()
         binding.recordWeekRecyclerview.adapter = recordWeekRVAdapter
 
+        recordWeekRVAdapter.setMyItemClickListener(object :
+            RecordWeekRVAdapter.MyItemClickListener {
+            override fun onItemClick(day: String) {
+                recordService.getSingleResultList(userJwt,day)
+                recordService.getFolderResultList(userJwt,day)
+            }
+        })
+
 
 
         val width  = getScreenSize(this)
@@ -243,6 +251,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         }
         if(recordResultRVAdapter.itemCount>0){
             binding.recordNotifyTv.visibility = View.VISIBLE
+            binding.recordEmptyTv.visibility = View.GONE
         }
 
 
@@ -282,6 +291,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
 
         if(recordFolderResultNameRVAdapter.itemCount>0){
             binding.recordNotifyTv.visibility = View.VISIBLE
+            binding.recordEmptyTv.visibility = View.GONE
         }
 
         binding.recordTrashIv.setOnClickListener{
