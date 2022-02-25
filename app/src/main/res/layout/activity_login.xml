@@ -7,7 +7,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="#FF654E"
+        android:background="@color/ic_go_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
+        android:visibility="invisible"
         >
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/login_background_logo_iv"
@@ -69,6 +69,7 @@
         android:id="@+id/login_naver_btn"
         android:layout_width="290dp"
         android:layout_height="57.6dp"
+        android:src="@drawable/login_naver_btn"
         app:layout_constraintTop_toBottomOf="@id/login_title_02_tv"
         app:layout_constraintBottom_toTopOf="@id/login_info_tv"
         app:layout_constraintStart_toStartOf="parent"

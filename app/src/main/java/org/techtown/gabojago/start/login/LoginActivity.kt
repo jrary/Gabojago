@@ -16,6 +16,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 import org.techtown.gabojago.*
 import org.techtown.gabojago.databinding.ActivityLoginBinding
 import org.techtown.gabojago.main.MainActivity
+import org.techtown.gabojago.main.getBooleanJwt
+import org.techtown.gabojago.main.setBooleanJwt
 import org.techtown.gabojago.main.setJwt
 
 class LoginActivity :AppCompatActivity(), LoginView {
@@ -23,6 +25,7 @@ class LoginActivity :AppCompatActivity(), LoginView {
     lateinit var binding: ActivityLoginBinding
     lateinit var mOAuthLoginInstance: OAuthLogin
     lateinit var mContext: Context
+    var remainLogin: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,15 +37,17 @@ class LoginActivity :AppCompatActivity(), LoginView {
             binding.loginBackgroundView.visibility = View.VISIBLE
             val animDrop = AnimationUtils.loadAnimation(this, R.anim.anim_login_down)
             binding.loginBackgroundView.startAnimation(animDrop)
-        }, 500)
+        }, 100)
+
+        binding.loginCb.setOnCheckedChangeListener { button, isChecked ->
+            remainLogin = isChecked
+        }
 
         mContext = this
 
         mOAuthLoginInstance = OAuthLogin.getInstance()
         mOAuthLoginInstance.init(mContext, "6dp8qdfztnBLiguo_gLx", "77OipGRnx9", "Gabojago")
         binding.loginNaverBtn.setOAuthLoginHandler(mOAuthLoginHandler)
-
-
     }
 
     private val mOAuthLoginHandler: OAuthLoginHandler = object: OAuthLoginHandler(){
@@ -73,6 +78,7 @@ class LoginActivity :AppCompatActivity(), LoginView {
 
     override fun onLoginSuccess(userJwt: String) {
         setJwt(this, "userJwt", userJwt)
+        setBooleanJwt(this, "remainLogin", remainLogin)
         Log.d("USERJWT", userJwt)
         var intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)

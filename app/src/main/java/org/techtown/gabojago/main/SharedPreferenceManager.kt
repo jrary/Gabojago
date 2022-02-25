@@ -16,10 +16,23 @@ fun setJwt(context: Context, name: String, jwt: String) {
     editor.apply()
 }
 
+fun setBooleanJwt(context: Context, name: String, jwt: Boolean) {
+    val spf = context.getSharedPreferences(name, AppCompatActivity.MODE_PRIVATE)
+    val editor = spf.edit()
+    editor.putBoolean("jwt", jwt)
+    editor.apply()
+}
+
 fun getJwt(context: Context, name: String): String{
     val spf = context.getSharedPreferences(name, AppCompatActivity.MODE_PRIVATE)
 
     return spf.getString("jwt", "")!!
+}
+
+fun getBooleanJwt(context: Context, name: String): Boolean{
+    val spf = context.getSharedPreferences(name, AppCompatActivity.MODE_PRIVATE)
+
+    return spf.getBoolean("jwt", false)!!
 }
 
 val client: OkHttpClient = OkHttpClient.Builder()
