@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="192dp"
             android:layout_height="29dp"
-            android:fontFamily="@font/apple_sd_gothic_neo_sb"
+            android:fontFamily="@font/nanum_square_round_extrabold"
             android:layout_marginBottom="15dp"
             android:textSize="20sp"
             android:textColor="#000000"
