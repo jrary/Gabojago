@@ -13,8 +13,10 @@ import androidx.fragment.app.Fragment
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentManageBinding
 import org.techtown.gabojago.main.getJwt
+import org.techtown.gabojago.main.setJwt
+import org.techtown.gabojago.start.splash.SplashActivity
 
-class ManageFragment : Fragment(), NicknameView, NewNicknameView {
+class ManageFragment : Fragment(), NicknameView, NewNicknameView, LogoutView, WithdrawalView {
     lateinit var binding: FragmentManageBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,12 +25,15 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView {
     ): View? {
         binding = FragmentManageBinding.inflate(layoutInflater)
 
+        val userJwt = getJwt(requireContext(), "userJwt")
+        Log.d("USERJWT", userJwt)
+
         val manageService = ManageService()
         manageService.setNicknameView(this@ManageFragment)
         manageService.setNewNicknameView(this@ManageFragment)
+        manageService.setLogoutView(this@ManageFragment)
+        manageService.setWithdrawalView(this@ManageFragment)
 
-        val userJwt = getJwt(requireContext(), "userJwt")
-        Log.d("USERJWT", userJwt)
         manageService.getNickname(userJwt)
 
         binding.manageNicknameModifyBtn.setOnClickListener {
@@ -52,6 +57,14 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView {
         binding.manageChatTv.setOnClickListener {
             val feedback = Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/bMn73YNkNLKqvWHq9"))
             startActivity(feedback)
+        }
+
+        binding.manageLogoutBtn.setOnClickListener {
+            manageService.logout(userJwt)
+        }
+
+        binding.manageExitTv.setOnClickListener {
+            manageService.withdrawal(userJwt)
         }
 
         return binding.root
@@ -105,6 +118,68 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView {
     }
 
     override fun onModifyNicknameFailure(code: Int, message: String) {
+        binding.manageLoadingView.visibility = View.GONE
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onLogoutLoading() {
+        binding.manageLoadingView.visibility = View.VISIBLE
+        for(i in 0..5){
+            Handler().postDelayed({
+                binding.manageLoadingIv.setImageResource(R.drawable.loading_02)
+            }, (500 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.manageLoadingIv.setImageResource(R.drawable.loading_03)
+            }, (1000 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.manageLoadingIv.setImageResource(R.drawable.loading_01)
+            }, (1500 + 1500 * i).toLong())
+        }
+    }
+
+    override fun onLogoutSuccess() {
+        binding.manageLoadingView.visibility = View.GONE
+        setJwt(requireContext(), "userJwt", "")
+        Toast.makeText(
+            activity, "로그아웃 되었습니다.", Toast.LENGTH_SHORT
+        ).show()
+        startActivity(Intent(requireContext(), SplashActivity::class.java))
+    }
+
+    override fun onLogoutFailure(code: Int, message: String) {
+        binding.manageLoadingView.visibility = View.GONE
+        Toast.makeText(
+            activity, message, Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onWithdrawalLoading() {
+        binding.manageLoadingView.visibility = View.VISIBLE
+        for(i in 0..5){
+            Handler().postDelayed({
+                binding.manageLoadingIv.setImageResource(R.drawable.loading_02)
+            }, (500 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.manageLoadingIv.setImageResource(R.drawable.loading_03)
+            }, (1000 + 1500 * i).toLong())
+            Handler().postDelayed({
+                binding.manageLoadingIv.setImageResource(R.drawable.loading_01)
+            }, (1500 + 1500 * i).toLong())
+        }
+    }
+
+    override fun onWithdrawalSuccess() {
+        binding.manageLoadingView.visibility = View.GONE
+        setJwt(requireContext(), "userJwt", "")
+        Toast.makeText(
+            activity, "회원 탈퇴가 완료되었습니다.", Toast.LENGTH_SHORT
+        ).show()
+        startActivity(Intent(requireContext(), SplashActivity::class.java))
+    }
+
+    override fun onWithdrawalFailure(code: Int, message: String) {
         binding.manageLoadingView.visibility = View.GONE
         Toast.makeText(
             activity, message, Toast.LENGTH_SHORT

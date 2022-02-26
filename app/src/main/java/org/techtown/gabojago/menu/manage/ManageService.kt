@@ -10,13 +10,20 @@ class ManageService {
 
     private lateinit var nicknameView: NicknameView
     private lateinit var newNicknameView: NewNicknameView
-
+    private lateinit var logoutView: LogoutView
+    private lateinit var withdrawalView: WithdrawalView
 
     fun setNicknameView(nicknameView: NicknameView){
         this.nicknameView = nicknameView
     }
     fun setNewNicknameView(newNicknameView: NewNicknameView){
         this.newNicknameView = newNicknameView
+    }
+    fun setLogoutView(logoutView: LogoutView){
+        this.logoutView = logoutView
+    }
+    fun setWithdrawalView(withdrawalView: WithdrawalView){
+        this.withdrawalView = withdrawalView
     }
 
     fun getNickname(userJwt: String) {
@@ -26,7 +33,6 @@ class ManageService {
             override fun onResponse(call: Call<NicknameResponse>, response: Response<NicknameResponse>) {
                 Log.d("NICKNAMEACT/Response", response.toString())
                 val resp = response.body()!!
-                Log.d("NICKNAMEACT/Code", resp.code.toString())
 
                 if(resp.isSuccess){
                         nicknameView.onNicknameSuccess(resp.result.userNickname)
@@ -45,11 +51,10 @@ class ManageService {
         newNicknameView.onModifyNicknameLoading()
         val manageService = getRetrofit().create(ManageRetrofitInterface::class.java)
 
-        manageService.modifyNickname(userJwt, NewNickName(newNickname)).enqueue(object : Callback<NewNicknameResponse> {
-            override fun onResponse(call: Call<NewNicknameResponse>, response: Response<NewNicknameResponse>) {
+        manageService.modifyNickname(userJwt, NewNickName(newNickname)).enqueue(object : Callback<CheckUserResponse> {
+            override fun onResponse(call: Call<CheckUserResponse>, response: Response<CheckUserResponse>) {
                 Log.d("MODIFYACT/Response", response.toString())
                 val resp = response.body()!!
-                Log.d("MODIFYACT/Code", resp.code.toString())
 
                 if (resp.isSuccess) {
                         newNicknameView.onModifyNicknameSuccess(newNickname)
@@ -58,8 +63,52 @@ class ManageService {
                         newNicknameView.onModifyNicknameFailure(resp.code, resp.message)
                 }
             }
-            override fun onFailure(call: Call<NewNicknameResponse>, t: Throwable) {
+            override fun onFailure(call: Call<CheckUserResponse>, t: Throwable) {
                 newNicknameView.onModifyNicknameFailure(400, t.message!!)
+            }
+        })
+    }
+
+    fun logout(userJwt: String) {
+        logoutView.onLogoutLoading()
+        val manageService = getRetrofit().create(ManageRetrofitInterface::class.java)
+
+        manageService.logout(userJwt).enqueue(object : Callback<CheckUserResponse> {
+            override fun onResponse(call: Call<CheckUserResponse>, response: Response<CheckUserResponse>) {
+                Log.d("LOGOUTACT/Response", response.toString())
+                val resp = response.body()!!
+
+                if (resp.isSuccess) {
+                    logoutView.onLogoutSuccess()
+                }
+                else {
+                    logoutView.onLogoutFailure(resp.code, resp.message)
+                }
+            }
+            override fun onFailure(call: Call<CheckUserResponse>, t: Throwable) {
+                logoutView.onLogoutFailure(400, t.message!!)
+            }
+        })
+    }
+
+    fun withdrawal(userJwt: String) {
+        newNicknameView.onModifyNicknameLoading()
+        val manageService = getRetrofit().create(ManageRetrofitInterface::class.java)
+
+        manageService.withdrawal(userJwt).enqueue(object : Callback<CheckUserResponse> {
+            override fun onResponse(call: Call<CheckUserResponse>, response: Response<CheckUserResponse>) {
+                Log.d("WITHDRAWALACT/Response", response.toString())
+                val resp = response.body()!!
+
+                if (resp.isSuccess) {
+                    withdrawalView.onWithdrawalSuccess()
+                }
+                else {
+                    withdrawalView.onWithdrawalFailure(resp.code, resp.message)
+                }
+            }
+            override fun onFailure(call: Call<CheckUserResponse>, t: Throwable) {
+                withdrawalView.onWithdrawalFailure(400, t.message!!)
             }
         })
     }
