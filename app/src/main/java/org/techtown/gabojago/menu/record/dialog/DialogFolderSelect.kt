@@ -9,15 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.DialogFolderselectBinding
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.RecordFragment
-import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
 import org.techtown.gabojago.menu.record.recordRetrofit.RecordFolderMakeView
 import org.techtown.gabojago.menu.record.recordRetrofit.RecordService
 import org.techtown.gabojago.menu.record.recordRetrofit.SingleResultListResult

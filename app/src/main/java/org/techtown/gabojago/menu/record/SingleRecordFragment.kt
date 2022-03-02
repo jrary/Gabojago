@@ -15,9 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.main.getJwt
-import org.techtown.gabojago.menu.record.look.RecordLookRVAdapter
 import org.techtown.gabojago.menu.record.recordRetrofit.*
-import java.util.ArrayList
 
 
 class SingleRecordFragment(private  val hasRecording:Boolean,private  val recordIdx:Int,private val result:RandomResultListResult) : Fragment() ,SingleRecordingView, SingleLookView, SingleModifyView{

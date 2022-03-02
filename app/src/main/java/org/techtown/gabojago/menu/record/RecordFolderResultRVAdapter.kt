@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ItemRecordFolderBinding
-import org.techtown.gabojago.menu.record.recordRetrofit.FolderResultList
 import org.techtown.gabojago.menu.record.recordRetrofit.InFolderListResult
 //폴더 내부기록 리사이클러뷰 어댑터 클래스
 class RecordFolderResultRVAdapter(private val hasRecording:Boolean ,private val resultList: ArrayList<InFolderListResult>): RecyclerView.Adapter<RecordFolderResultRVAdapter.ViewHolder>(){

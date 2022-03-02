@@ -10,9 +10,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.gson.annotations.SerializedName
-import kotlinx.android.synthetic.main.fragment_folderrecord.*
-import kotlinx.android.synthetic.main.fragment_singlerecord.*
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentFolderrecordBinding

@@ -18,41 +18,46 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity android:name=".start.login.LoginActivity"
+            android:exported="true"
             android:screenOrientation="portrait"/>
         <activity android:name=".main.MainActivity"
+            android:exported="true"
             android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".menu.record.calendar.CalendarActivity"
             android:screenOrientation="portrait"/>
 
         <!--randomPick Options-->
-        <activity android:name=".menu.randomPick.wheel.WheelOptionActivity"
+        <activity android:name="org.techtown.gabojago.menu.home.randomPick.wheel.WheelOptionActivity"
+            android:exported="true"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
-        <activity android:name=".menu.randomPick.clock.ClockOptionActivity"
+        <activity android:name="org.techtown.gabojago.menu.home.randomPick.clock.ClockOptionActivity"
+            android:exported="true"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             android:screenOrientation="portrait"/>
-        <activity android:name=".menu.randomPick.clock.ClockSelectActivity"
+        <activity android:name="org.techtown.gabojago.menu.home.randomPick.clock.ClockSelectActivity"
+            android:exported="true"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             android:screenOrientation="portrait"/>
-        <activity android:name=".menu.randomPick.number.NumberOptionActivity"
+        <activity android:name="org.techtown.gabojago.menu.home.randomPick.number.NumberOptionActivity"
+            android:exported="true"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             android:screenOrientation="portrait"/>
-        <activity android:name=".menu.randomPick.number.NumberSelectActivity"
+        <activity android:name="org.techtown.gabojago.menu.home.randomPick.number.NumberSelectActivity"
+            android:exported="true"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             android:screenOrientation="portrait"/>
-        <activity android:name=".menu.randomPick.number.NumberSelectNumActivity"
+        <activity android:name="org.techtown.gabojago.menu.home.randomPick.number.NumberSelectNumActivity"
+            android:exported="true"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             android:screenOrientation="portrait"/>
-        <activity android:name=".menu.randomPick.color.ColorResultActivity"
+        <activity android:name="org.techtown.gabojago.menu.home.randomPick.color.ColorResultActivity"
+            android:exported="true"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar.Dim"
             android:screenOrientation="portrait"/>
     </application>
