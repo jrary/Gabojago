@@ -13,5 +13,15 @@ interface ManageRetrofitInterface {
     fun modifyNickname(
         @Header("x-access-token") xAccessToken: String,
         @Body newNickname: NewNickName,
-    ): Call<NewNicknameResponse>
+    ): Call<CheckUserResponse>
+
+    @GET("/app/user/logout")
+    fun logout(
+        @Header("x-access-token") xAccessToken: String
+    ): Call<CheckUserResponse>
+
+    @POST("/app/user/withdrawal")
+    fun withdrawal(
+        @Header("x-access-token") xAccessToken: String
+    ): Call<CheckUserResponse>
 }
