@@ -100,5 +100,19 @@ interface RecordRetrofitInterface {
         @Path("randomResultIdx") randomResultIdx: Int
     ): Call<SingleModifyResponse>
 
+    //기록하기프래그먼트 내 기록삭제(폴더)
+    @PATCH("/app/recording/folderrecorddeletion/{folderIdx}")
+    fun putFolderDelete(
+        @Header("x-access-token") xAccessToken: String,
+        @Path("folderIdx") folderIdx: Int
+    ): Call<FolderrecordingDeleteResponse>
+
+    //기록하기프래그먼트 내 기록삭제(개별)
+    @PATCH("/app/recording/eachrecorddeletion/{randomResultIdx}")
+    fun putSingleDelete(
+        @Header("x-access-token") xAccessToken: String,
+        @Path("randomResultIdx") randomResultIdx: Int
+    ): Call<SinglerecordingDeleteResponse>
+
 
 }

@@ -111,20 +111,11 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
 
     private fun init() {
         binding.calendarDateTv.text = setMonth()
-        hideBottomNavigation(true)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        hideBottomNavigation(false)
-    }
-
-    fun hideBottomNavigation(bool: Boolean) {
-        val bottomNavigation: BottomNavigationView = requireActivity().findViewById(R.id.main_bnv)
-        if (bool == true)
-            bottomNavigation.visibility = View.GONE
-        else
-            bottomNavigation.visibility = View.VISIBLE
+        binding.recordLookBackBtn.setOnClickListener{
+            activity?.supportFragmentManager!!.beginTransaction()
+                .replace(R.id.main_frm, RecordFragment())
+                .commit()
+        }
     }
 
     private fun setMonth(): String {

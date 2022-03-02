@@ -7,9 +7,11 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/dialog_modify_cancle_iv"
         android:layout_width="50dp"
         android:layout_height="35dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:src="@drawable/dialog_cancle"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/folderresultbox_orange"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -61,9 +64,10 @@
                     android:id="@+id/folder_modify_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="2dp"
                     android:layout_marginTop="15dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="3dp"
                     android:orientation="vertical"
                     android:overScrollMode="never"
                     android:scrollbars="none"
@@ -73,12 +77,37 @@
                     app:layout_constraintTop_toBottomOf="@id/folder_modify_title_tv"
                     tools:listitem="@layout/item_folderresult_modifyversion" />
 
+                <View
+                    android:id="@+id/folder_modify_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintTop_toBottomOf="@+id/folder_modify_recyclerview"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <View
+                android:id="@+id/dialog_division_view"
+                android:layout_width="330dp"
+                android:layout_height="1.3dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="#939393"
+                app:layout_constraintTop_toBottomOf="@id/folder_modify_layout"
+                app:layout_constraintBottom_toTopOf="@id/dialog_modify_recyclerview2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="gone"
+                 />
+
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/dialog_modify_recyclerview"
+                android:id="@+id/dialog_modify_recyclerview2"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

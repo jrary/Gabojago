@@ -155,6 +155,21 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
             binding.recordBlurView.visibility = View.GONE
             popupMenu()
         }
+        binding.recordTodayIv.setOnClickListener{
+            binding.recordDivisionView.visibility = View.VISIBLE
+            binding.recordEmptyTv.visibility= View.VISIBLE
+            binding.recordNotifyTv.visibility = View.GONE
+            val now: Long = System.currentTimeMillis()
+            val date = Date(now)
+            val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
+            val stringDate = dateFormat.format(date)
+            val userJwt = getJwt(requireContext(), "userJwt")
+            val recordWeekRVAdapter = RecordWeekRVAdapter(stringDate)
+            binding.recordWeekRecyclerview.adapter = recordWeekRVAdapter
+
+            recordService.getSingleResultList(userJwt,stringDate)
+            recordService.getFolderResultList(userJwt,stringDate)
+        }
     }
 
     private fun init() {
@@ -278,8 +293,21 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         ).show()
     }
 
-    override fun onSingleResultListSuccess(result: ArrayList<SingleResultListResult>) {
-        records = result
+    override fun onSingleResultListSuccess(result: SingleResult) {
+        val now: Long = System.currentTimeMillis()
+        val date = Date(now)
+        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
+        val stringDate = dateFormat.format(date)
+        Log.e("날짜",result.date)
+        Log.e("날짜2",stringDate)
+
+        if(result.date.toInt()!=stringDate.toInt()){
+            binding.recordTodayIv.visibility = View.VISIBLE
+        }else{
+            binding.recordTodayIv.visibility = View.GONE
+        }
+
+        records = result.recordingList_each
         val recordResultRVAdapter = RecordResultRVAdapter(records)
         binding.recordResultRecyclerview.adapter = recordResultRVAdapter
 
@@ -290,6 +318,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
             binding.recordNotifyTv.visibility = View.VISIBLE
             binding.recordEmptyTv.visibility = View.GONE
         }
+
 
 
         binding.recordFolderplusIv.setOnClickListener{
@@ -312,15 +341,27 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
     }
 
     override fun onSingleResultListFailure(code: Int, message: String) {
+
         val empty = ArrayList<SingleResultListResult>()
         val recordResultRVAdapter = RecordResultRVAdapter(empty)
         binding.recordResultRecyclerview.adapter = recordResultRVAdapter
         Log.e("기록하자개별메인api",message)
         binding.recordDivisionView.visibility = View.GONE
+        binding.recordTodayIv.visibility = View.GONE
     }
 
-    override fun onFolderResultListSuccess(result: ArrayList<FolderResultList>) {
-        folders = result
+    override fun onFolderResultListSuccess(result: FolderResult) {
+        val now: Long = System.currentTimeMillis()
+        val date = Date(now)
+        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
+        val stringDate = dateFormat.format(date)
+        if(result.date.toInt()!=stringDate.toInt()){
+            binding.recordTodayIv.visibility = View.VISIBLE
+        }else{
+            binding.recordTodayIv.visibility = View.GONE
+        }
+
+        folders = result.recordingList_folder
         val recordFolderResultNameRVAdapter = RecordFolderResultNameRVAdapter(folders)
         binding.recordFolderresultRecyclerview.adapter = recordFolderResultNameRVAdapter
 
@@ -348,7 +389,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
             }
 
             override fun onModifyClick(folder: FolderResultList) {
-                DialogFolderModify(folder).show((context as MainActivity).supportFragmentManager,"dialog")
+                DialogFolderModify(folder,records).show((context as MainActivity).supportFragmentManager,"dialog")
             }
 
             override fun onBreakUpClick(folderIdx: Int) {
@@ -363,6 +404,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         binding.recordFolderresultRecyclerview.adapter = recordFolderResultNameRVAdapter
         Log.e("기록하자폴더메인api",message)
         binding.recordDivisionView.visibility = View.GONE
+        binding.recordTodayIv.visibility = View.GONE
     }
 }
 

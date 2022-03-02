@@ -15,6 +15,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.main.getJwt
+import org.techtown.gabojago.menu.record.dialog.DialogRealDelete
+import org.techtown.gabojago.menu.record.dialog.DialogRealRecordDelete
 import org.techtown.gabojago.menu.record.look.RecordLookRVAdapter
 import org.techtown.gabojago.menu.record.recordRetrofit.*
 import java.util.ArrayList
@@ -37,6 +39,10 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
         val userJwt = getJwt(requireContext(), "userJwt")
 
         recordService.getSingleLook(userJwt, recordIdx)
+
+        binding.singleRecordTrash.setOnClickListener {
+            DialogRealRecordDelete(recordIdx).show((context as MainActivity).supportFragmentManager,"dialog")
+        }
 
         val recordPictureRVAdapter = RecordPictureRVAdapter()
         binding.singleRecordPictureRecyclerview.adapter = recordPictureRVAdapter

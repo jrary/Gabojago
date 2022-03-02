@@ -96,7 +96,7 @@ class RecordWeekRVAdapter(private val viewDate:String): RecyclerView.Adapter<Rec
         // 해당 주차의 첫째날을 지정한다
         cal.add(Calendar.DAY_OF_MONTH, -dayOfWeek)
         val sf = SimpleDateFormat("dd")
-        val sf2 = SimpleDateFormat("yyMMdd")
+        val sf2 = SimpleDateFormat("yyyyMMdd")
 
         for(index in 0 until 7) {
             cal.add(Calendar.DAY_OF_MONTH, 1)

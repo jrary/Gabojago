@@ -70,7 +70,7 @@
         <entry key="app/src/main/res/drawable/box.xml" value="0.196" />
         <entry key="app/src/main/res/drawable/folderresultbox.xml" value="0.196" />
         <entry key="app/src/main/res/drawable/look_box.xml" value="0.196" />
-        <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.36231884057971014" />
+        <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.36231884057971014" />
         <entry key="app/src/main/res/layout/dialog_folderdelete.xml" value="0.335" />
         <entry key="app/src/main/res/layout/dialog_foldermodify.xml" value="0.35324074074074074" />
@@ -80,14 +80,15 @@
         <entry key="app/src/main/res/layout/fragment_goagain.xml" value="0.333786231884058" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.333786231884058" />
         <entry key="app/src/main/res/layout/fragment_look_vp.xml" value="0.36231884057971014" />
-        <entry key="app/src/main/res/layout/fragment_record.xml" value="0.333786231884058" />
+        <entry key="app/src/main/res/layout/fragment_record.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_record_look.xml" value="0.36231884057971014" />
         <entry key="app/src/main/res/layout/fragment_singlerecord.xml" value="0.333786231884058" />
-        <entry key="app/src/main/res/layout/item_folderresult_modifyversion.xml" value="0.36231884057971014" />
+        <entry key="app/src/main/res/layout/item_folderresult_modifyversion.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_look_pick.xml" value="0.36231884057971014" />
         <entry key="app/src/main/res/layout/item_record_folder.xml" value="0.36231884057971014" />
         <entry key="app/src/main/res/layout/item_record_result.xml" value="0.36231884057971014" />
         <entry key="app/src/main/res/layout/item_record_week.xml" value="0.36231884057971014" />
+        <entry key="app/src/main/res/layout/item_recordresult_modifyversion.xml" value="0.2980072463768116" />
         <entry key="app/src/main/res/layout/toast_board_white.xml" value="0.35324074074074074" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.39739583333333334" />
       </map>

@@ -23,12 +23,17 @@ data class SingleResultListResult(
     @SerializedName("randomResultListResult") val randomResultListResult: RandomResultListResult,
 )
 
+data class SingleResult(
+    @SerializedName("date") val date: String,
+    @SerializedName("recordingList_each") val recordingList_each:ArrayList<SingleResultListResult>
+)
+
 //개별기록 리스폰
 data class SingleResultListResponse(
     @SerializedName("isSuccess") val isSuccess: Boolean,
     @SerializedName("code") val code: Int,
     @SerializedName("message") val message: String,
-    @SerializedName("result") val result: ArrayList<SingleResultListResult>
+    @SerializedName("result") val result: SingleResult
 )
 
 //폴더기록 리스트
@@ -47,12 +52,17 @@ data class FolderResultList(
     @SerializedName("folderListResult") val randomResultListResult: ArrayList<InFolderListResult>,
 )
 
+data class FolderResult(
+    @SerializedName("date") val date: String,
+    @SerializedName("recordingList_folder") val recordingList_folder: ArrayList<FolderResultList>
+)
+
 //폴더기록 리스폰
 data class FolderResultListResponse(
     @SerializedName("isSuccess") val isSuccess: Boolean,
     @SerializedName("code") val code: Int,
     @SerializedName("message") val message: String,
-    @SerializedName("result") val result: ArrayList<FolderResultList>
+    @SerializedName("result") val result: FolderResult
 )
 
 //기록개수 리스폰
@@ -217,6 +227,19 @@ data class SingleModifyRequest(
 
 //개별 기록수정 리스폰
 data class SingleModifyResponse(
+    @SerializedName("isSuccess") val isSuccess: Boolean,
+    @SerializedName("code") val code: Int,
+    @SerializedName("message") val message: String
+)
+
+
+data class FolderrecordingDeleteResponse(
+    @SerializedName("isSuccess") val isSuccess: Boolean,
+    @SerializedName("code") val code: Int,
+    @SerializedName("message") val message: String
+)
+
+data class SinglerecordingDeleteResponse(
     @SerializedName("isSuccess") val isSuccess: Boolean,
     @SerializedName("code") val code: Int,
     @SerializedName("message") val message: String

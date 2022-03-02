@@ -47,6 +47,10 @@ class DialogFolderDelete(private val recordList: ArrayList<SingleResultListResul
             dismiss()
         }
 
+        binding.dialogDeleteCancleIv.setOnClickListener{
+            dismiss()
+        }
+
 
         return binding.root
     }

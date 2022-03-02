@@ -15,17 +15,12 @@ import org.techtown.gabojago.databinding.DialogFoldermodifyBinding
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.RecordFragment
-import org.techtown.gabojago.menu.record.recordRetrofit.FolderResultList
-import org.techtown.gabojago.menu.record.recordRetrofit.FolderUpdateView
-import org.techtown.gabojago.menu.record.recordRetrofit.InFolderListResult
-import org.techtown.gabojago.menu.record.recordRetrofit.RecordService
+import org.techtown.gabojago.menu.record.recordRetrofit.*
 import java.util.ArrayList
 
 
 
-class DialogFolderModify(private val folder : FolderResultList) : DialogFragment() ,FolderUpdateView{
-    val minus = ArrayList<InFolderListResult>()
-    val plus = ArrayList<InFolderListResult>()
+class DialogFolderModify(private val folder : FolderResultList,private val records:ArrayList<SingleResultListResult>) : DialogFragment() ,FolderUpdateView{
 
     val plusUpdate= mutableListOf<Int>()
     val minusUpdate= mutableListOf<Int>()
@@ -34,14 +29,10 @@ class DialogFolderModify(private val folder : FolderResultList) : DialogFragment
         super.onCreate(savedInstanceState)
         //false로 설정해 주면 화면밖 혹은 뒤로가기 버튼시 다이얼로그라 dismiss 되지 않음
         isCancelable = true
-        minus.clear()
-        for (i in 0 until folder.randomResultListResult.size) {
-            minus.add(i,folder.randomResultListResult[i])
-        }
+        plusUpdate.clear()
+        minusUpdate.clear()
     }
     private lateinit var binding: DialogFoldermodifyBinding
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,6 +41,7 @@ class DialogFolderModify(private val folder : FolderResultList) : DialogFragment
     ): View? {
         binding = DialogFoldermodifyBinding.inflate(inflater, container, false)
         dialog?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        binding.folderModifyLayout.setBackgroundResource(R.drawable.folderresultbox_selectorange)
 
         val recordService = RecordService()
         recordService.setFolderUpdateView(this@DialogFolderModify)
@@ -59,51 +51,52 @@ class DialogFolderModify(private val folder : FolderResultList) : DialogFragment
         }else{
             binding.folderModifyTitleTv.text = "제목을 입력해줘!"
         }
-        val dialogModifyMinusRVAdpater = DialogModifyFolderRVAdapter(minus)
-        binding.folderModifyRecyclerview.adapter = dialogModifyMinusRVAdpater
+        val dialogModifyFolderRVAdpater = DialogModifyFolderRVAdapter(folder.randomResultListResult)
+        binding.folderModifyRecyclerview.adapter = dialogModifyFolderRVAdpater
 
-        val dialogModifyPlusRVAdpater = DialogModifySingleRVAdapter(plus)
-        binding.dialogModifyRecyclerview.adapter = dialogModifyPlusRVAdpater
+        val dialogModifySingleRVAdpater = DialogModifySingleRVAdapter(records)
+        binding.dialogModifyRecyclerview2.adapter = dialogModifySingleRVAdpater
 
-        dialogModifyMinusRVAdpater.setMyItemClickListener(object :
-            DialogModifyFolderRVAdapter.MyItemClickListener {
-            override fun onItemClick(position:Int) {
-                if(minus[position]!=null) {
-                    plus.add(minus[position])
-                    minus.removeAt(position)
-                }
-                dialogModifyPlusRVAdpater.notifyDataSetChanged()
-                dialogModifyMinusRVAdpater.notifyDataSetChanged()
-            }
-        })
-
-        dialogModifyPlusRVAdpater.setMyItemClickListener(object :
-            DialogModifySingleRVAdapter.MyItemClickListener {
-            override fun onItemClick(position:Int) {
-                if(plus[position]!=null) {
-                    minus.add(plus[position])
-                    plus.removeAt(position)
-                }
-                dialogModifyMinusRVAdpater.notifyDataSetChanged()
-                dialogModifyPlusRVAdpater.notifyDataSetChanged()
-            }
-        })
+        if(dialogModifyFolderRVAdpater.itemCount>0&& dialogModifySingleRVAdpater.itemCount>0){
+            binding.dialogDivisionView.visibility = View.VISIBLE
+        }
 
         binding.dialogCompleteBtn.setOnClickListener{
             val userJwt = getJwt(requireContext(), "userJwt")
 
             for (i in 0 until (minus.size)) {
                 if(minus[i]!=null) {
-                    plusUpdate.add(minus[i].resultIdx)
+                    if (minus[i]) {
+                        if (!folder.randomResultListResult.isEmpty()) {
+                            minusUpdate.add(folder.randomResultListResult[i].resultIdx)
+                        }
+                    }
                 }
             }
 
             for (i in 0 until (plus.size)) {
                 if(plus[i]!=null) {
-                    minusUpdate.add(plus[i].resultIdx)
+                    if (plus[i]) {
+                        if (!folder.randomResultListResult.isEmpty()&&records[i].randomResultListResult.randomResultIdx!=null) {
+                            plusUpdate.add(records[i].randomResultListResult.randomResultIdx)
+                        }
+                    }
                 }
             }
-            recordService.putUpdateFolderIdx(userJwt,folder.folderIdx,plusUpdate,minusUpdate)
+            Log.e("폴더수정",minusUpdate.toString())
+
+            if ((folder.randomResultListResult.size - minusUpdate.size) + plusUpdate.size <= 1) {
+                minusUpdate.clear()
+                plusUpdate.clear()
+                Toast.makeText(
+                    activity, "폴더 내 항목은 2개이상이어야해!", Toast.LENGTH_SHORT
+                ).show()
+            }else {
+                recordService.putUpdateFolderIdx(userJwt, folder.folderIdx, plusUpdate, minusUpdate)
+            }
+        }
+        binding.dialogModifyCancleIv.setOnClickListener{
+            dismiss()
         }
 
 

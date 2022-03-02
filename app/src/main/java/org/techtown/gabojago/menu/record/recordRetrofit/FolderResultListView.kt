@@ -1,6 +1,6 @@
 package org.techtown.gabojago.menu.record.recordRetrofit
 
 interface FolderResultListView {
-    fun onFolderResultListSuccess(result: ArrayList<FolderResultList>)
+    fun onFolderResultListSuccess(result: FolderResult)
     fun onFolderResultListFailure(code: Int, message: String)
 }
