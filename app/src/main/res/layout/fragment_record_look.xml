@@ -15,16 +15,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         >
-        <TextView
+        <ImageView
             android:id="@+id/record_look_back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="12dp"
+            android:layout_height="18dp"
             android:layout_marginStart="20dp"
-            android:fontFamily="@font/apple_sd_gothic_neo_r"
-            android:text="&lt;"
-            android:textColor="#595959"
-            android:textSize="32.2sp"
-            android:textStyle="normal"
+            android:src="@drawable/backarrow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/record_look_title_view"/>
@@ -260,9 +256,10 @@
                 android:textSize="13sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/apple_sd_gothic_neo_r"
+                android:lineSpacingExtra="10dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:padding="10dp"
                 android:background="@drawable/look_box"
                 app:layout_constraintStart_toStartOf="parent"
@@ -275,8 +272,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginStart="15dp"
-                app:layout_constraintStart_toStartOf="@id/record_look_contents_tv"
+                android:layout_marginStart="45dp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/record_look_contents_tv"
                 >
                 <ImageButton

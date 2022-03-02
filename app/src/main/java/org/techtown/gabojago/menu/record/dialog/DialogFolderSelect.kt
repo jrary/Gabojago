@@ -59,7 +59,7 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
             if(folderMake.size==1){
                 folderMake.removeAt(0)
                 Toast.makeText(
-                    activity, "2개이상 선택해줘!", Toast.LENGTH_SHORT
+                    activity, "폴더 내 항목은 2개이상이어야해!", Toast.LENGTH_SHORT
                 ).show()
             }else{
                 recordService.putFolderMakeIdx(userJwt,folderMake)

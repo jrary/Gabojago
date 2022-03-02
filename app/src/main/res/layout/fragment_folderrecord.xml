@@ -17,25 +17,32 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <TextView
+        <ImageView
             android:id="@+id/folder_record_backarrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="12dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="55dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="44dp"
-            android:fontFamily="@font/apple_sd_gothic_neo_r"
-            android:text="&lt;"
-            android:textColor="#b0b0b0"
-            android:textSize="32.2sp"
-            android:textStyle="normal"
+            android:src="@drawable/backarrow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/folder_record_trash"
+            android:layout_width="17dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginEnd="20dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/recordingtrash"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/folder_record_backarrow" />
 
         <TextView
             android:layout_width="192dp"
             android:layout_height="29dp"
             android:fontFamily="@font/nanum_square_round_extrabold"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:text="기록하자"
             android:textColor="#000000"
             android:textSize="20sp"
@@ -119,7 +126,6 @@
                 android:text="오늘의 랜덤은 몇 점?"
                 android:textColor="#000000"
                 android:textSize="12sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/folder_record_result_layout" />
 
@@ -152,7 +158,6 @@
                 android:text="사진 첨부할래?"
                 android:textColor="#000000"
                 android:textSize="12sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/folder_record_score_tv"
                 app:layout_constraintTop_toBottomOf="@id/folder_record_starscore" />
 
@@ -220,7 +225,6 @@
                 android:text="너의 발자취를 기록해봐."
                 android:textColor="#000000"
                 android:textSize="12sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/folder_record_picture_tv"
                 app:layout_constraintTop_toBottomOf="@id/folder_record_horizontalscroll" />
 
@@ -232,8 +236,9 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/rectangle_32"
-                android:fontFamily="@font/apple_sd_gothic_neo_sb"
+                android:background="@drawable/recordingback"
+                android:fontFamily="@font/apple_sd_gothic_neo_r"
+                android:lineSpacingExtra="10dp"
                 android:gravity="clip_vertical"
                 android:scrollbars="vertical"
                 android:scrollbarSize="2dp"
@@ -249,28 +254,27 @@
             <TextView
                 android:id="@+id/folder_record_charactersnum_tv"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="13dp"
-                android:layout_marginBottom="13dp"
-                android:fontFamily="@font/apple_sd_gothic_neo_sb"
+                android:layout_height="20dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/apple_sd_gothic_neo_r"
                 android:gravity="center_horizontal"
                 android:text="0/1000"
-                android:textColor="#a6000000"
+                android:textColor="#939393"
                 android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/folder_record_write_et"
+                app:layout_constraintTop_toBottomOf="@id/folder_record_write_et"
                 app:layout_constraintEnd_toEndOf="@id/folder_record_write_et" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <View
+    <ImageView
         android:id="@+id/folder_record_complete_view"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="#23354F"
+        android:layout_height="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/recordingcomplete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/folder_record_scrollview" />
 
@@ -280,10 +284,11 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
         android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:letterSpacing="0.05"
         android:text="완료"
         android:textColor="#ffffff"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="@id/folder_record_complete_view"
         app:layout_constraintEnd_toEndOf="@id/folder_record_complete_view"
         app:layout_constraintStart_toStartOf="@id/folder_record_complete_view"

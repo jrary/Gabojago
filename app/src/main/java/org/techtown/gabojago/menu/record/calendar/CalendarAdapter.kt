@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.NonDisposableHandle.parent
 import org.techtown.gabojago.databinding.ItemCalendarGridviewBinding
 import org.techtown.gabojago.main.getJwt
+import org.techtown.gabojago.menu.record.RecordResultRVAdapter
+import org.techtown.gabojago.menu.record.recordRetrofit.RandomResultListResult
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -20,7 +23,18 @@ import java.util.*
 
 class CalendarAdapter(private val viewDate: String,private val randomresultdateList :ArrayList<Int>) : RecyclerView.Adapter <CalendarAdapter.ViewHolder>() {
 
+    interface MyItemClickListener {
+        fun onItemClick(date:String)
+    }
+
+    private lateinit var mItemClickListener: MyItemClickListener
+
+    fun setMyItemClickListener(itemClickListener: MyItemClickListener) {
+        mItemClickListener = itemClickListener
+    }
+
     private val days = ArrayList<String>()
+    private var specialDate = ""
     var daynum = 0
     var month = ""
     var year = ""
@@ -42,6 +56,12 @@ class CalendarAdapter(private val viewDate: String,private val randomresultdateL
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(position)
 
+        holder.binding.itemGridviewTv.setOnClickListener{
+            val df = DecimalFormat("00")
+            var date = df.format(days[position].toInt())
+            mItemClickListener.onItemClick(specialDate+date)
+
+        }
     }
 
     //뷰홀더
@@ -59,8 +79,6 @@ class CalendarAdapter(private val viewDate: String,private val randomresultdateL
                 }
                 Log.e("randomresult2", (randomresultdateList.size).toString())
 
-
-
                 if ((position - daynum + 2) == randomresultdateList[position - daynum+2]) {
                     binding.itemGridviewRecordIv.visibility = View.VISIBLE
                     Log.e("randomresult2", (position - daynum + 1).toString())
@@ -74,15 +92,10 @@ class CalendarAdapter(private val viewDate: String,private val randomresultdateL
 
     override fun getItemCount(): Int = setEmptyDate(viewDate)
 
-    fun addAll(randomresultdateList:ArrayList<Int>){
-
-    }
-
-
     private fun setEmptyDate(eventDate: String): Int {
-        val dateArray = eventDate.split("-").toTypedArray()
         val cal = Calendar.getInstance()
-        cal.set(dateArray[0].toInt(), dateArray[1].toInt() - 1, 1)
+        cal.set(eventDate.substring(0,4).toInt(), eventDate.substring(4,6).toInt() - 1, 1)
+        specialDate = eventDate.substring(0,6)
         val dayNum: Int = cal.get(Calendar.DAY_OF_WEEK)
         //1일 - 요일 매칭 시키기 위해 공백 add
         for (i in 1 until dayNum) {

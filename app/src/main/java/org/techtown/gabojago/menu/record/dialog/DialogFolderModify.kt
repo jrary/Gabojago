@@ -3,7 +3,6 @@ package org.techtown.gabojago.menu.record.dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.provider.SyncStateContract.Helpers.update
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,6 @@ import org.techtown.gabojago.databinding.DialogFoldermodifyBinding
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.RecordFragment
-import org.techtown.gabojago.menu.record.RecordResultRVAdapter
 import org.techtown.gabojago.menu.record.recordRetrofit.FolderResultList
 import org.techtown.gabojago.menu.record.recordRetrofit.FolderUpdateView
 import org.techtown.gabojago.menu.record.recordRetrofit.InFolderListResult
@@ -61,14 +59,14 @@ class DialogFolderModify(private val folder : FolderResultList) : DialogFragment
         }else{
             binding.folderModifyTitleTv.text = "제목을 입력해줘!"
         }
-        val dialogModifyMinusRVAdpater = DialogModifyMinusRVAdapter(minus)
+        val dialogModifyMinusRVAdpater = DialogModifyFolderRVAdapter(minus)
         binding.folderModifyRecyclerview.adapter = dialogModifyMinusRVAdpater
 
-        val dialogModifyPlusRVAdpater = DialogModifyPlusRVAdapter(plus)
+        val dialogModifyPlusRVAdpater = DialogModifySingleRVAdapter(plus)
         binding.dialogModifyRecyclerview.adapter = dialogModifyPlusRVAdpater
 
         dialogModifyMinusRVAdpater.setMyItemClickListener(object :
-            DialogModifyMinusRVAdapter.MyItemClickListener {
+            DialogModifyFolderRVAdapter.MyItemClickListener {
             override fun onItemClick(position:Int) {
                 if(minus[position]!=null) {
                     plus.add(minus[position])
@@ -80,7 +78,7 @@ class DialogFolderModify(private val folder : FolderResultList) : DialogFragment
         })
 
         dialogModifyPlusRVAdpater.setMyItemClickListener(object :
-            DialogModifyPlusRVAdapter.MyItemClickListener {
+            DialogModifySingleRVAdapter.MyItemClickListener {
             override fun onItemClick(position:Int) {
                 if(plus[position]!=null) {
                     minus.add(plus[position])

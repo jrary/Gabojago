@@ -9,7 +9,7 @@ import org.techtown.gabojago.databinding.ItemRecordresultModifyversionBinding
 import org.techtown.gabojago.menu.record.recordRetrofit.InFolderListResult
 
 
-class DialogModifyPlusRVAdapter(private val resultList: ArrayList<InFolderListResult>): RecyclerView.Adapter<DialogModifyPlusRVAdapter.ViewHolder>() {
+class DialogModifySingleRVAdapter(private val resultList: ArrayList<InFolderListResult>): RecyclerView.Adapter<DialogModifySingleRVAdapter.ViewHolder>() {
 
 
     interface MyItemClickListener {

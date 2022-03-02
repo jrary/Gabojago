@@ -7,7 +7,7 @@ import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ItemFolderresultModifyversionBinding
 import org.techtown.gabojago.menu.record.recordRetrofit.InFolderListResult
 
-class DialogModifyMinusRVAdapter(private val resultList: ArrayList<InFolderListResult>): RecyclerView.Adapter<DialogModifyMinusRVAdapter.ViewHolder>() {
+class DialogModifyFolderRVAdapter(private val resultList: ArrayList<InFolderListResult>): RecyclerView.Adapter<DialogModifyFolderRVAdapter.ViewHolder>() {
 
     interface MyItemClickListener {
         fun onItemClick(position:Int)

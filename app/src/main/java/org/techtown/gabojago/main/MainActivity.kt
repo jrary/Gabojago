@@ -2,6 +2,7 @@ package org.techtown.gabojago.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import org.techtown.gabojago.R
 import org.techtown.gabojago.menu.record.RecordFragment
@@ -23,10 +24,15 @@ class MainActivity : AppCompatActivity() {
 
         initNavigation()
     }
+    fun changeFragment(){
+        supportFragmentManager.beginTransaction().replace(R.id.main_frm,RecordFragment())
+            .commitAllowingStateLoss()
+        Log.e("프래그먼트변경","성공")
+    }
 
     private fun initNavigation() {
 
-        supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment())
+        supportFragmentManager.beginTransaction().replace(R.id.main_frm,HomeFragment())
             .commitAllowingStateLoss()
         binding.mainBnv.selectedItemId = R.id.homeFragment
 

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentRecordLookBinding
@@ -15,7 +16,7 @@ import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.RecordFragment
 import org.techtown.gabojago.menu.record.recordRetrofit.*
 import java.util.*
-
+//기록조회 프래그먼트
 class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , SingleLookView {
     lateinit var binding: FragmentRecordLookBinding
     private val MIN_SCALE = 0.95f
@@ -29,6 +30,7 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
     ): View? {
         binding = FragmentRecordLookBinding.inflate(inflater, container, false)
 
+        init()
         val recordService = RecordService()
         recordService.setFolderLookView(this@RecordLookFragment)
         recordService.setSingleLookView(this@RecordLookFragment)
@@ -37,21 +39,12 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
         recordService.getFolderLook(userJwt, Idx)
         recordService.getSingleLook(userJwt, Idx)
 
-        //Set Viewpager and Indicator
-        var imageArr = getImageList()
-        binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageArr)
-        binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        binding.recordLookPictureVp.setPageTransformer(ZoomOutPageTransformer())
-        binding.recordLookCircleIndicator.setViewPager2(binding.recordLookPictureVp)
-
-
-
-        //Open RecyclerView Event
+        //기록리스트 여는 클릭이벤트
         binding.recordLookView.setOnClickListener {
             randomIsOpened(isOpened)
         }
 
-        //Go to the Previous page
+        //이전페이지로
         binding.recordLookBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, RecordFragment().apply {
@@ -63,8 +56,24 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
         }
         return binding.root
     }
+    private fun init() {
+        hideBottomNavigation(true)
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        hideBottomNavigation(false)
+    }
 
-    //Animation on the ViewPager
+    //하단 네비게이션바 없애는 함수
+    fun hideBottomNavigation(bool: Boolean) {
+        val bottomNavigation: BottomNavigationView = requireActivity().findViewById(R.id.main_bnv)
+        if (bool == true)
+            bottomNavigation.visibility = View.GONE
+        else
+            bottomNavigation.visibility = View.VISIBLE
+    }
+
+    //뷰페이저 애니메이션
     inner class ZoomOutPageTransformer : ViewPager2.PageTransformer {
         override fun transformPage(view: View, position: Float) {
             view.apply {
@@ -103,7 +112,7 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
         }
     }
 
-    //Set the state of RecyclerView
+    //기록리스트 열린 여부 판단 함수
     private fun randomIsOpened(toOpen: Boolean) {
         if (toOpen) {
             binding.recordLookArrowBtn.setImageResource(R.drawable.result_look_arrow_clicked)
@@ -115,22 +124,7 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
         isOpened = !isOpened
     }
 
-    //Function to store the Image in the ViewPager
-    private fun getImageList(): ArrayList<Int> {
-
-        var imageList = ArrayList<Int>()
-
-        imageList.add(R.drawable.image_background)
-
-        if(imageList.size==1){
-            binding.recordLookCircleIndicator.visibility = View.GONE
-        }
-        return imageList
-    }
-
-
-
-    //Function to set the star rate
+    //별점 세팅함수
     private fun setStarState(star: Double) {
         var starArr = arrayOf(
             binding.recordLookStar01LeftIv,
@@ -150,8 +144,30 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
         }
     }
 
+    //폴더조회성공
     override fun onFolderLookSuccess(result: FolderLookResult) {
+        var imageList = ArrayList<Int>()
         try {
+            //기록내용이 존재하는지 여부 체크
+            if(!result.contentCheck){
+                binding.recordLookContentsTv.visibility = View.GONE
+            }else{
+                binding.recordLookContentsTv.visibility = View.VISIBLE
+            }
+            //이미지리스트 존재하는지 여부 체크
+            if(!result.imageListCheck){
+                binding.recordLookCircleIndicator.visibility = View.GONE
+                imageList.add(R.drawable.image_background)
+            }else{
+                binding.recordLookCircleIndicator.visibility = View.VISIBLE
+            }
+            //이미지 뷰페이저및 어댑터
+            binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageList)
+            binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            binding.recordLookPictureVp.setPageTransformer(ZoomOutPageTransformer())
+            binding.recordLookCircleIndicator.setViewPager2(binding.recordLookPictureVp)
+
+            //기록제목, 내용, 별점, 기록리스트 세팅
             binding.recordLookNameTv.text = result.folderContentResult.recordingTitle
             setStarState(result.folderContentResult.recordingStar)
             Log.e("별점",result.folderContentResult.recordingStar.toString())
@@ -159,17 +175,20 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
             val recordLookRVAdapter = RecordLookRVAdapter(result.folderResultList)
             binding.recordResultRecyclerview.adapter = recordLookRVAdapter
         } catch (e: NullPointerException) {
+            //null값으로 들어왔을 때 오류방지
             binding.recordLookNameTv.text = "제목이 비어있어!"
             setStarState(2.5)
             binding.recordLookContentsTv.text = "내용이 비어있어!"
+            //기록리스트에 빈 배열 넣어놓기
             val emptyResult = ArrayList<FolderRecordResultList>()
             emptyResult.add(FolderRecordResultList("", "", 0))
-
+            //이미지리스트에 빈 배열 넣어놓기
             val recordLookRVAdapter = RecordLookRVAdapter(emptyResult)
             binding.recordResultRecyclerview.adapter = recordLookRVAdapter
         }
     }
 
+    //폴더기록조회실패
     override fun onFolderLookFailure(code: Int, message: String) {
         Log.e("폴더조회",message)
 
@@ -185,7 +204,25 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
     }
 
     override fun onSingleLookSuccess(result: SingleLookResult) {
+        var imageList = ArrayList<Int>()
         try {
+            if(!result.contentCheck){
+                binding.recordLookContentsTv.visibility = View.GONE
+            }else{
+                binding.recordLookContentsTv.visibility = View.VISIBLE
+            }
+            if(!result.imageListCheck){
+                binding.recordLookCircleIndicator.visibility = View.GONE
+                imageList.add(R.drawable.image_background)
+            }else{
+                binding.recordLookCircleIndicator.visibility = View.VISIBLE
+            }
+            //이미지 뷰페이저및 어댑터
+            binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageList)
+            binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            binding.recordLookPictureVp.setPageTransformer(ZoomOutPageTransformer())
+            binding.recordLookCircleIndicator.setViewPager2(binding.recordLookPictureVp)
+
             binding.recordLookNameTv.text = result.eachContentResult.recordingTitle
             setStarState(result.eachContentResult.recordingStar)
             binding.recordLookContentsTv.text = result.eachContentResult.recordingContent

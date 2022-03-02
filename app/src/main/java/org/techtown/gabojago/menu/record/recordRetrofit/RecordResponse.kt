@@ -115,13 +115,20 @@ data class SingleLookResponse(
 
 //개별기록조회
 data class SingleLookResult(
+    @SerializedName("contentCheck") val contentCheck: Boolean,
     @SerializedName("eachContentResult") val eachContentResult: SingleContentResult,
+    @SerializedName("folderContentResult") val folderContentResult: FolderContentResult,
+    @SerializedName("imgListCheck") val imageListCheck: Boolean,
+    @SerializedName("eachImgListResult") val eachImgListResult: ArrayList<String>,
     @SerializedName("eachRandomResult") val eachRandomResult: SingleRecordResult
 )
 
 //폴더기록조회
 data class FolderLookResult(
+    @SerializedName("contentCheck") val contentCheck: Boolean,
     @SerializedName("folderContentResult") val folderContentResult: FolderContentResult,
+    @SerializedName("imgListCheck") val imageListCheck: Boolean,
+    @SerializedName("folderImgListResult") val folderImgListResult: ArrayList<String>,
     @SerializedName("folderRandomResult") val folderResultList: ArrayList<FolderRecordResultList>
 )
 

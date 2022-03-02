@@ -10,11 +10,12 @@ import org.techtown.gabojago.menu.record.recordRetrofit.RandomResultListResult
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(){
+class RecordWeekRVAdapter(private val viewDate:String): RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(){
 
     private val dates = ArrayList<String>()
     private val dayofweek = arrayListOf("일","월","화","수","목","금","토")
     private val alldays = ArrayList<String>()
+    private val click = arrayListOf(false,false,false,false,false,false,false)
 
     interface MyItemClickListener {
         fun onItemClick(day:String)
@@ -26,10 +27,16 @@ class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(
         mItemClickListener = itemClickListener
     }
 
+
     //뷰홀더 생성->호출되는 함수->아이템 뷰 객체를 만들어서 뷰홀더에 던져줌
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemRecordWeekBinding = ItemRecordWeekBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
+        val today = week(viewDate)
+        for(i in 0 until 7){
+            if(today==i) {
+                click[i]=true
+            }
+        }
         return ViewHolder(binding)
     }
 
@@ -38,18 +45,26 @@ class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(
         holder.bind(position)
         holder.itemView.setOnClickListener{
             mItemClickListener.onItemClick(alldays[position])
+            for(i in 0 until 7){
+                if(i!=position) {
+                    notifyItemChanged(i){
+                        holder.binding.itemWeekToday.visibility = View.GONE
+                    }
+                }
+            }
+            holder.binding.itemWeekToday.visibility = View.VISIBLE
         }
     }
 
     //뷰홀더
     inner class ViewHolder(val binding: ItemRecordWeekBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
-            val today = week(setDate())
-            if(today == position){
+            if(click[position]){
                 binding.itemWeekToday.visibility = View.VISIBLE
             }else {
                 binding.itemWeekToday.visibility = View.GONE
             }
+            click[position]=false
             binding.itemDateTv.text = dates[position]
             binding.itemWeekTv.text = dayofweek[position]
             when(position){
@@ -58,8 +73,6 @@ class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(
                 else->binding.itemWeekTv.setTextColor(Color.parseColor("#929292"))
             }
             binding.itemWeekTv.text = dayofweek[position]
-
-
         }
 
     }
@@ -68,11 +81,13 @@ class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(
         return 7
     }
 
-    /** * 특정 날짜의 같은 한 주간의 날짜 범위 * @param eventDate ex) 2020-10-10 * */
+    /** * 특정 날짜의 같은 한 주간의 날짜 범위 * @param eventDate ex) 20201010 * */
     fun week(eventDate: String) : Int {
-        val dateArray = eventDate.split("-").toTypedArray()
+        val year = eventDate.substring(0,4)
+        val month = eventDate.substring(4,6)
+        val day = eventDate.substring(6)
         val cal = Calendar.getInstance()
-        cal [dateArray[0].toInt(), dateArray[1].toInt() - 1] = dateArray[2].toInt()
+        cal [year.toInt(), month.toInt() - 1] = day.toInt()
         // 일주일의 첫날을 일요일로 지정한다
         cal.firstDayOfWeek = Calendar.SUNDAY
         // 시작일과 특정날짜의 차이를 구한다
@@ -89,15 +104,6 @@ class RecordWeekRVAdapter: RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(
             alldays.add(sf2.format(cal.time))
         }
         return today
-    }
-
-    fun setDate() : String{
-        val now: Long = System.currentTimeMillis()
-        val date = Date(now)
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale("ko", "KR"))
-        val stringDate = dateFormat.format(date)
-
-        return stringDate
     }
 
 }
