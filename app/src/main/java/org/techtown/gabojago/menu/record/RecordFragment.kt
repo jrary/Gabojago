@@ -2,7 +2,6 @@ package org.techtown.gabojago.menu.record
 
 import HorizontalItemDecorator
 import android.animation.ObjectAnimator
-import android.content.Context
 import android.graphics.Point
 import android.os.Bundle
 import android.util.Log

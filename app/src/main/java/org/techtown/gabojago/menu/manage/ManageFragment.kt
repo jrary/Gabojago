@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentManageBinding
+import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.main.setJwt
 import org.techtown.gabojago.start.splash.SplashActivity
@@ -142,9 +143,9 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView, LogoutView, Wi
     override fun onLogoutSuccess() {
         binding.manageLoadingView.visibility = View.GONE
         setJwt(requireContext(), "userJwt", "")
-        Toast.makeText(
-            activity, "로그아웃 되었습니다.", Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), "로그아웃 되었습니다."
+        )?.show()
         startActivity(Intent(requireContext(), SplashActivity::class.java))
     }
 

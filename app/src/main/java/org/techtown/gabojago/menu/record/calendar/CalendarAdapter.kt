@@ -1,24 +1,13 @@
 package org.techtown.gabojago.menu.record.calendar
 
-import android.content.ContentValues.TAG
-import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.NonDisposableHandle.parent
 import org.techtown.gabojago.databinding.ItemCalendarGridviewBinding
-import org.techtown.gabojago.main.getJwt
-import org.techtown.gabojago.menu.record.RecordResultRVAdapter
-import org.techtown.gabojago.menu.record.recordRetrofit.RandomResultListResult
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeFormatter.ofPattern
 import java.util.*
 
 class CalendarAdapter(private val viewDate: String,private val randomresultdateList :ArrayList<Int>) : RecyclerView.Adapter <CalendarAdapter.ViewHolder>() {

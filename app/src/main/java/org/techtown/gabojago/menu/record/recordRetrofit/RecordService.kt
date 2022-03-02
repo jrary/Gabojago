@@ -2,7 +2,6 @@ package org.techtown.gabojago.menu.record.recordRetrofit
 
 import android.util.Log
 import org.techtown.gabojago.main.getRetrofit
-import org.techtown.gabojago.menu.record.RecordFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

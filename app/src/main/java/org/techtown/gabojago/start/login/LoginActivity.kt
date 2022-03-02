@@ -99,6 +99,7 @@ class LoginActivity :AppCompatActivity(), LoginView {
                 Log.d("LOGINERROR", message)
             }
             else -> {
+
                 Toast.makeText(
                     baseContext, message, Toast.LENGTH_SHORT
                 ).show()

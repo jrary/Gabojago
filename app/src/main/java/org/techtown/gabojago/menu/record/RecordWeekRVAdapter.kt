@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.databinding.ItemRecordWeekBinding
-import org.techtown.gabojago.menu.record.recordRetrofit.RandomResultListResult
 import java.text.SimpleDateFormat
 import java.util.*
 
