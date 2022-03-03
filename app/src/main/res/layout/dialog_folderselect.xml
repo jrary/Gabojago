@@ -8,9 +8,11 @@
     android:backgroundTint="#00000000">
 
     <ImageView
+        android:id="@+id/dialog_select_cancle_iv"
         android:layout_width="50dp"
         android:layout_height="35dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="10dp"
         android:src="@drawable/dialog_cancle"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

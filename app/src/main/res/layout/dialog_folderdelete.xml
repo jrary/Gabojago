@@ -8,9 +8,11 @@
 
 
     <ImageView
+        android:id="@+id/dialog_delete_cancle_iv"
         android:layout_width="50dp"
         android:layout_height="35dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:src="@drawable/dialog_cancle"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +60,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="#D5D5D5"
+                android:background="#939393"
                 app:layout_constraintBottom_toTopOf="@id/dialog_delete_recyclerview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

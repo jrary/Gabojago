@@ -14,6 +14,8 @@ import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentFolderrecordBinding
 import org.techtown.gabojago.main.getJwt
+import org.techtown.gabojago.menu.record.dialog.DialogRealFolderrecordDelete
+import org.techtown.gabojago.menu.record.dialog.DialogRealRecordDelete
 import org.techtown.gabojago.menu.record.recordRetrofit.*
 
 //폴더 기록하기(기록 및 수정) 프래그먼트
@@ -33,6 +35,11 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
         val userJwt = getJwt(requireContext(), "userJwt")
         //조회 api
         recordService.getFolderLook(userJwt, folderIdx)
+
+        binding.folderRecordTrash.setOnClickListener{
+            DialogRealFolderrecordDelete(folderIdx).show((context as MainActivity).supportFragmentManager,"dialog")
+        }
+
         //폴더 내 항목 리사이클러뷰
         val recordFolderResultRVAdapter = RecordFolderResultRVAdapter(true, resultList)
         binding.recordResultRecyclerview.adapter = recordFolderResultRVAdapter

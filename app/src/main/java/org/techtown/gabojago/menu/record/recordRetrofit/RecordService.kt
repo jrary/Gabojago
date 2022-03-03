@@ -88,6 +88,18 @@ class RecordService {
         this.singleModifyView = singleModifyView
     }
 
+    private lateinit var singlerecordingDeleteView: SinglerecordingDeleteView
+
+    fun setSinglerecordingDeleteView(singlerecordingDeleteView: SinglerecordingDeleteView) {
+        this.singlerecordingDeleteView = singlerecordingDeleteView
+    }
+
+    private lateinit var folderrecordingDeleteView: FolderrecordingDeleteView
+
+    fun setFolderrecordingDeleteView(folderrecordingDeleteView: FolderrecordingDeleteView) {
+        this.folderrecordingDeleteView = folderrecordingDeleteView
+    }
+
     //개별메인
     fun getSingleResultList(userJwt: String, date: String) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
@@ -526,21 +538,23 @@ class RecordService {
                     folderUpdateView.onFolderUpdateSuccess()
                 } else {
                     when (resp.code) {
-                        6012 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                        2001 -> folderUpdateView.onFolderUpdateFailure(resp.code,
                             resp.message)
-                        7005 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                        2012 -> folderUpdateView.onFolderUpdateFailure(resp.code,
                             resp.message)
-                        7007 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                        2011 -> folderUpdateView.onFolderUpdateFailure(resp.code,
                             resp.message)
                         2013 -> folderUpdateView.onFolderUpdateFailure(resp.code,
                             resp.message)
-                        7006 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                        2002 -> folderUpdateView.onFolderUpdateFailure(resp.code,
                             resp.message)
-                        7003 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                        3017 -> folderUpdateView.onFolderUpdateFailure(resp.code,
                             resp.message)
-                        7008 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                        3006 -> folderUpdateView.onFolderUpdateFailure(resp.code,
                             resp.message)
-                        7004 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                        3018 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                            resp.message)
+                        3007 -> folderUpdateView.onFolderUpdateFailure(resp.code,
                             resp.message)
                         4000 -> folderUpdateView.onFolderUpdateFailure(resp.code,
                             resp.message)
@@ -704,4 +718,85 @@ class RecordService {
             }
         })
     }
+
+    fun putFolderDelete(userJwt: String, folderIdx: Int) {
+        val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
+        recordService.putFolderDelete(userJwt, folderIdx).enqueue(object :
+            Callback<FolderrecordingDeleteResponse> {
+            override fun onResponse(
+                call: Call<FolderrecordingDeleteResponse>,
+                response: Response<FolderrecordingDeleteResponse>
+            ) {
+                Log.d("FOLDERDelete/Response", response.toString())
+                val resp = response.body()!!
+                Log.d("FOLDERDelete/Code", resp.code.toString())
+
+                if (resp.isSuccess) {
+                    folderrecordingDeleteView.onFolderrecordingDeleteSuccess()
+                } else {
+                    when (resp.code) {
+                        2001 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
+                            "회원 정보가 잘못되었습니다.")
+                        2031 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
+                            resp.message)
+                        2002 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
+                            resp.message)
+
+                        3017 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
+                            resp.message)
+                        3006 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
+                            resp.message)
+                        3036 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
+                            "삭제할 기록이 존재하지 않아!")
+                        4000 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
+                            resp.message)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<FolderrecordingDeleteResponse>, t: Throwable) {
+                folderrecordingDeleteView.onFolderrecordingDeleteFailure(400, t.toString())
+            }
+        })
+    }
+
+            fun putSingleDelete(userJwt: String, singleIdx: Int) {
+                val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
+                recordService.putSingleDelete(userJwt, singleIdx).enqueue(object :
+                    Callback<SinglerecordingDeleteResponse> {
+                    override fun onResponse(
+                        call: Call<SinglerecordingDeleteResponse>,
+                        response: Response<SinglerecordingDeleteResponse>
+                    ) {
+                        Log.d("SINGLEDELETE/Response", response.toString())
+                        val resp = response.body()!!
+                        Log.d("SINGLEDELETE/Code", resp.code.toString())
+
+                        if (resp.isSuccess) {
+                            singlerecordingDeleteView.onSinglerecordingDeleteSuccess()
+                        } else {
+                            when (resp.code) {
+                                2001 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(resp.code,
+                                    "회원 정보가 잘못되었습니다.")
+                                2032 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(resp.code,
+                                    resp.message)
+                                2013 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(resp.code,
+                                    resp.message)
+                                3018 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(resp.code,
+                                    resp.message)
+                                3037 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(resp.code,
+                                    "삭제할 기록이 존재하지 않아!")
+                                3007 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(resp.code,
+                                    resp.message)
+                                4000 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(resp.code,
+                                    resp.message)
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<SinglerecordingDeleteResponse>, t: Throwable) {
+                        singlerecordingDeleteView.onSinglerecordingDeleteFailure(400, t.toString())
+                    }
+                })
+            }
 }

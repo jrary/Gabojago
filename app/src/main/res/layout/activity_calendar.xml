@@ -7,12 +7,12 @@
 
     <ImageView
         android:id="@+id/record_look_back_btn"
-        android:layout_width="12dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="20dp"
+        android:layout_width="40dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/backarrow"
-        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/calendar_close"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
@@ -110,10 +110,12 @@
         android:layout_height="360dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/calendar_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calendar_total_number_tv"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="50dp"
         />
     
