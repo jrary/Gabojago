@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.nhn.android.naverlogin.OAuthLogin
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentManageBinding
 import org.techtown.gabojago.main.MyToast
@@ -19,12 +20,16 @@ import org.techtown.gabojago.start.splash.SplashActivity
 
 class ManageFragment : Fragment(), NicknameView, NewNicknameView, LogoutView, WithdrawalView {
     lateinit var binding: FragmentManageBinding
+    private lateinit var oAuthLogin: OAuthLogin
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentManageBinding.inflate(layoutInflater)
+
+        oAuthLogin = OAuthLogin.getInstance()
+        oAuthLogin.init(requireContext(),"6dp8qdfztnBLiguo_gLx", "77OipGRnx9", "Gabojago")
 
         val userJwt = getJwt(requireContext(), "userJwt")
         Log.d("USERJWT", userJwt)
@@ -141,6 +146,7 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView, LogoutView, Wi
     }
 
     override fun onLogoutSuccess() {
+        oAuthLogin.logout(requireContext())
         binding.manageLoadingView.visibility = View.GONE
         setJwt(requireContext(), "userJwt", "")
         MyToast.createToast(
@@ -157,6 +163,7 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView, LogoutView, Wi
     }
 
     override fun onWithdrawalLoading() {
+
         binding.manageLoadingView.visibility = View.VISIBLE
         for(i in 0..5){
             Handler().postDelayed({
