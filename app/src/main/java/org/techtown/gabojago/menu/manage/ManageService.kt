@@ -92,7 +92,7 @@ class ManageService {
     }
 
     fun withdrawal(userJwt: String) {
-        newNicknameView.onModifyNicknameLoading()
+        withdrawalView.onWithdrawalLoading()
         val manageService = getRetrofit().create(ManageRetrofitInterface::class.java)
 
         manageService.withdrawal(userJwt).enqueue(object : Callback<CheckUserResponse> {

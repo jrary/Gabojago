@@ -20,7 +20,7 @@ interface ManageRetrofitInterface {
         @Header("x-access-token") xAccessToken: String
     ): Call<CheckUserResponse>
 
-    @POST("/app/user/withdrawal")
+    @POST("/app/withdrawal")
     fun withdrawal(
         @Header("x-access-token") xAccessToken: String
     ): Call<CheckUserResponse>
