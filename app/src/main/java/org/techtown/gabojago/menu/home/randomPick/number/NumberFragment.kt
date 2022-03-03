@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentNumberBinding
 import org.techtown.gabojago.main.MainActivity
+import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.home.HomeMenuFragment
 import org.techtown.gabojago.menu.home.RandomService
@@ -108,9 +109,9 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
 
         binding.numberGoBtn.setOnClickListener {
             if(resArray[0] == -1){
-                Toast.makeText(
-                    context, "옵션을 설정한 후 실행해 주세요", Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    requireContext(), "옵션을 설정한 후 실행해 주세요"
+                )?.show()
             }
             else{
                 Handler().postDelayed({
@@ -301,14 +302,14 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
 
     private fun saveWithValidation(count: Int) {
         if(resArray.isEmpty()){
-            Toast.makeText(
-                context, "다시 실행 후 저장해 주세요.", Toast.LENGTH_SHORT
-            ).show()
+            MyToast.createToast(
+                requireContext(), "다시 실행 후 저장해 주세요."
+            )?.show()
         }
         else if(count >= 30){
-            Toast.makeText(
-                activity, "오늘은 더 이상 저장할 수 없어!", Toast.LENGTH_SHORT
-            ).show()
+            MyToast.createToast(
+                requireContext(), "오늘은 더 이상 저장할 수 없어!"
+            )?.show()
         }
         else{
             val randomService = RandomService()
@@ -357,21 +358,21 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
 
     override fun onRandomResultSuccess() {
         binding.numberLoadingView.visibility = View.GONE
-        Toast.makeText(
-            context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), "뽑기 결과가 저장됐어!"
+        )?.show()
         binding.numberSaveBtn.setOnClickListener {
-            Toast.makeText(
-                context, "이미 결과가 저장되었습니다.", Toast.LENGTH_SHORT
-            ).show()
+            MyToast.createToast(
+                requireContext(), "이미 결과가 저장되었습니다."
+            )?.show()
         }
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
         binding.numberLoadingView.visibility = View.GONE
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 
     override fun onRecordCountLoading() {
@@ -396,8 +397,8 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
 
     override fun onRecordCountFailure(code: Int, message: String) {
         binding.numberLoadingView.visibility = View.GONE
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 }

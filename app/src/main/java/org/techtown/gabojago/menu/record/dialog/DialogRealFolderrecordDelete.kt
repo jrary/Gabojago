@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.DialogRealdeleteBinding
 import org.techtown.gabojago.main.MainActivity
+import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.RecordFragment
 import org.techtown.gabojago.menu.record.recordRetrofit.*
@@ -63,9 +64,9 @@ class DialogRealFolderrecordDelete(private val folderIdx:Int) : DialogFragment()
     }
 
     override fun onFolderrecordingDeleteFailure(code: Int, message: String) {
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 }
 

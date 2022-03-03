@@ -50,9 +50,9 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView, LogoutView, Wi
         binding.manageNicknameCompBtn.setOnClickListener {
             val modifyNickname = binding.manageNicknameEt.text.toString()
             if(modifyNickname.length >= 25){
-                Toast.makeText(
-                    activity, "닉네임을 25자 이하로 설정해 주세요", Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    requireContext(), "닉네임을 25자 이하로 설정해 주세요"
+                )?.show()
             }
             else{
                 binding.manageNicknameView.visibility = View.GONE
@@ -98,9 +98,9 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView, LogoutView, Wi
 
     override fun onNicknameFailure(code: Int, message: String) {
         binding.manageLoadingView.visibility = View.GONE
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 
     override fun onModifyNicknameLoading() {
@@ -125,9 +125,9 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView, LogoutView, Wi
 
     override fun onModifyNicknameFailure(code: Int, message: String) {
         binding.manageLoadingView.visibility = View.GONE
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 
     override fun onLogoutLoading() {
@@ -157,9 +157,9 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView, LogoutView, Wi
 
     override fun onLogoutFailure(code: Int, message: String) {
         binding.manageLoadingView.visibility = View.GONE
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 
     override fun onWithdrawalLoading() {
@@ -181,16 +181,16 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView, LogoutView, Wi
     override fun onWithdrawalSuccess() {
         binding.manageLoadingView.visibility = View.GONE
         setJwt(requireContext(), "userJwt", "")
-        Toast.makeText(
-            activity, "회원 탈퇴가 완료되었습니다.", Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), "회원 탈퇴가 완료되었습니다."
+        )?.show()
         startActivity(Intent(requireContext(), SplashActivity::class.java))
     }
 
     override fun onWithdrawalFailure(code: Int, message: String) {
         binding.manageLoadingView.visibility = View.GONE
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 }

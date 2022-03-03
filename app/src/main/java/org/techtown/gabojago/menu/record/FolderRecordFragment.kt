@@ -13,6 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentFolderrecordBinding
+import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.dialog.DialogRealFolderrecordDelete
 import org.techtown.gabojago.menu.record.dialog.DialogRealRecordDelete
@@ -193,9 +194,9 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
 
     //폴더기록하기 실패
     override fun onFolderRecordingFailure(code: Int, message: String) {
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 
     //폴더기록조회 성공
@@ -215,9 +216,9 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
 
     //폴더기록조회 실패
     override fun onFolderLookFailure(code: Int, message: String) {
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 
     //폴더기록수정 성공
@@ -227,9 +228,9 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
 
     //폴더기록수정 실패
     override fun onFolderModifyFailure(code: Int, message: String) {
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 
 }

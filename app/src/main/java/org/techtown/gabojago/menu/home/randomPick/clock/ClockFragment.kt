@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentClockBinding
+import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.home.HomeMenuFragment
 import org.techtown.gabojago.menu.home.RandomService
@@ -101,9 +102,9 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
         }
         binding.clockGoBtn.setOnClickListener {
             if(startNum == endNum){
-                Toast.makeText(
-                    context, "옵션을 설정한 후에 실행해 주세요", Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    requireContext(), "옵션을 설정한 후에 실행해 주세요"
+                )?.show()
             }
             else{
                 moveClock()
@@ -160,14 +161,14 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
 
     private fun saveWithValidation(count: Int) {
         if (getResClock == -1) {
-            Toast.makeText(
-                activity, "다시 실행 후 저장해 주세요.", Toast.LENGTH_SHORT
-            ).show()
+            MyToast.createToast(
+                requireContext(), "다시 실행 후 저장해 주세요."
+            )?.show()
         }
         else if(count >= 30){
-            Toast.makeText(
-                activity, "오늘은 더 이상 저장할 수 없어!", Toast.LENGTH_SHORT
-            ).show()
+            MyToast.createToast(
+                requireContext(), "오늘은 더 이상 저장할 수 없어!"
+            )?.show()
         }
         else {
             val randomService = RandomService()
@@ -354,21 +355,21 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
 
     override fun onRandomResultSuccess() {
         binding.clockLoadingView.visibility = View.GONE
-        Toast.makeText(
-            context, "뽑기 결과가 저장됐어!", Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), "뽑기 결과가 저장됐어!"
+        )?.show()
         binding.clockSaveBtn.setOnClickListener {
-            Toast.makeText(
-                context, "이미 결과가 저장되었습니다.", Toast.LENGTH_SHORT
-            ).show()
+            MyToast.createToast(
+                requireContext(), "이미 결과가 저장되었습니다."
+            )?.show()
         }
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
         binding.clockLoadingView.visibility = View.GONE
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 
     override fun onRecordCountLoading() {
@@ -393,8 +394,8 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
 
     override fun onRecordCountFailure(code: Int, message: String) {
         binding.clockLoadingView.visibility = View.GONE
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 }

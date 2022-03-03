@@ -14,6 +14,7 @@ import org.techtown.gabojago.databinding.FragmentSinglerecordBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
+import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.dialog.DialogRealRecordDelete
 import org.techtown.gabojago.menu.record.recordRetrofit.*
@@ -206,9 +207,9 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
     }
 
     override fun onSingleRecordingFailure(code: Int, message: String) {
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 
     override fun onSingleLookSuccess(result: SingleLookResult) {
@@ -227,9 +228,9 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
     }
 
     override fun onSingleLookFailure(code: Int, message: String) {
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 
     override fun onSingleModifySuccess() {
@@ -237,9 +238,9 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
     }
 
     override fun onSingleModifyFailure(code: Int, message: String) {
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 
 }

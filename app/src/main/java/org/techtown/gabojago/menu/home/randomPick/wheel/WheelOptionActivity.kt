@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityWheelOptionBinding
+import org.techtown.gabojago.main.MyToast
 import java.util.ArrayList
 
 class WheelOptionActivity : AppCompatActivity() {
@@ -29,9 +30,9 @@ class WheelOptionActivity : AppCompatActivity() {
             optionList = intent.getStringArrayListExtra("wheel")!!
         }
         else{
-            Toast.makeText(
-                this, "못받았는데요", Toast.LENGTH_SHORT
-            ).show()
+            MyToast.createToast(
+                this, "못받았는데요"
+            )?.show()
         }
 
         //Setting RecyclerView
@@ -66,8 +67,8 @@ class WheelOptionActivity : AppCompatActivity() {
         }
     }
     fun showToastMsg(){
-        Toast.makeText(
-            this, "2개이하로줄일수없다는멘트", Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            this, "2개이하로줄일수없다는멘트"
+        )?.show()
     }
 }

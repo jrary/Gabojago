@@ -16,6 +16,7 @@ import com.nhn.android.naverlogin.OAuthLoginHandler
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivitySplashBinding
 import org.techtown.gabojago.main.MainActivity
+import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getBooleanJwt
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.manage.ManageService
@@ -81,15 +82,15 @@ class SplashActivity : AppCompatActivity(), RemainLoginView {
     override fun onRemainLoginFailure(code: Int, message: String) {
         when(code){
             2000, 3000 -> {
-                Toast.makeText(
-                    baseContext, "로그인 시스템에 문제가 발생하였습니다.", Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    baseContext, "로그인 시스템에 문제가 발생하였습니다."
+                )?.show()
                 Log.d("LOGINERROR", message)
             }
             else -> {
-                Toast.makeText(
-                    baseContext, message, Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    baseContext, message
+                )?.show()
             }
         }
     }

@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityClockOptionBinding
+import org.techtown.gabojago.main.MyToast
 
 class ClockOptionActivity : AppCompatActivity() {
 
@@ -52,9 +53,9 @@ class ClockOptionActivity : AppCompatActivity() {
         }
         binding.clockCompBtn.setOnClickListener {
             if(startNum == endNum){
-                Toast.makeText(
-                    this, "방향을 다시 설정해 주세요", Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    this, "방향을 다시 설정해 주세요"
+                )?.show()
             }
             else{
                 var intent = Intent()

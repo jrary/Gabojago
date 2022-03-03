@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivitySelectBinding
+import org.techtown.gabojago.main.MyToast
 
 class ClockSelectActivity : AppCompatActivity() {
 
@@ -61,9 +62,9 @@ class ClockSelectActivity : AppCompatActivity() {
             }
         }
         else{
-            Toast.makeText(
-                this, "Error", Toast.LENGTH_SHORT
-            ).show()
+            MyToast.createToast(
+                this, "Error"
+            )?.show()
         }
     }
 }

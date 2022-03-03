@@ -18,6 +18,7 @@ import org.techtown.gabojago.databinding.FragmentRecordBinding
 import org.techtown.gabojago.databinding.ItemRecordFoldernameBinding
 import org.techtown.gabojago.databinding.ItemRecordWeekBinding
 import org.techtown.gabojago.main.MainActivity
+import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.calendar.CalendarActivity
 import org.techtown.gabojago.menu.record.dialog.DialogFolderDelete
@@ -287,9 +288,9 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
     }
 
     override fun onRecordCountFailure(code: Int, message: String) {
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 
     override fun onSingleResultListSuccess(result: SingleResult) {

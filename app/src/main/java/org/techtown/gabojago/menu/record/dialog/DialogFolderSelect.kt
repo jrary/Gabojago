@@ -12,6 +12,7 @@ import androidx.fragment.app.DialogFragment
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.DialogFolderselectBinding
 import org.techtown.gabojago.main.MainActivity
+import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.RecordFragment
 import org.techtown.gabojago.menu.record.recordRetrofit.RecordFolderMakeView
@@ -54,9 +55,9 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
             }
             if(folderMake.size==1){
                 folderMake.removeAt(0)
-                Toast.makeText(
-                    activity, "폴더 내 항목은 2개이상이어야해!", Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    requireContext(), "폴더 내 항목은 2개 이상이어야 해!"
+                )?.show()
             }else{
                 recordService.putFolderMakeIdx(userJwt,folderMake)
             }

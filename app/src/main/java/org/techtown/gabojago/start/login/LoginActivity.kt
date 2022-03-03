@@ -15,10 +15,7 @@ import com.nhn.android.naverlogin.OAuthLoginHandler
 import kotlinx.android.synthetic.main.activity_login.*
 import org.techtown.gabojago.*
 import org.techtown.gabojago.databinding.ActivityLoginBinding
-import org.techtown.gabojago.main.MainActivity
-import org.techtown.gabojago.main.getBooleanJwt
-import org.techtown.gabojago.main.setBooleanJwt
-import org.techtown.gabojago.main.setJwt
+import org.techtown.gabojago.main.*
 
 class LoginActivity :AppCompatActivity(), LoginView {
 
@@ -68,10 +65,10 @@ class LoginActivity :AppCompatActivity(), LoginView {
             } else {
                 val errorCode: String = mOAuthLoginInstance.getLastErrorCode(mContext).code
                 val errorDesc = mOAuthLoginInstance.getLastErrorDesc(mContext)
-                Toast.makeText(
+                MyToast.createToast(
                     baseContext, "errorCode:" + errorCode
-                            + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT
-                ).show()
+                            + ", errorDesc:" + errorDesc
+                )?.show()
             }
         }
     }
@@ -88,21 +85,21 @@ class LoginActivity :AppCompatActivity(), LoginView {
     override fun onLoginFailure(code: Int, message: String) {
         when(code){
             400, 5014 -> {
-                Toast.makeText(
-                    baseContext, message, Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    baseContext, message
+                )?.show()
             }
             5013, 5015 -> {
-                Toast.makeText(
-                    baseContext, "로그인 시스템에 문제가 발생하였습니다.", Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    baseContext, "로그인 시스템에 문제가 발생하였습니다."
+                )?.show()
                 Log.d("LOGINERROR", message)
             }
             else -> {
 
-                Toast.makeText(
-                    baseContext, message, Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    baseContext, message
+                )?.show()
             }
         }
     }

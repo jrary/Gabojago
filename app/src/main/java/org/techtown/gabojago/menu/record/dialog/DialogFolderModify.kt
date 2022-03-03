@@ -13,6 +13,7 @@ import org.techtown.gabojago.R
 
 import org.techtown.gabojago.databinding.DialogFoldermodifyBinding
 import org.techtown.gabojago.main.MainActivity
+import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.RecordFragment
 import org.techtown.gabojago.menu.record.recordRetrofit.*
@@ -88,9 +89,9 @@ class DialogFolderModify(private val folder : FolderResultList,private val recor
             if ((folder.randomResultListResult.size - minusUpdate.size) + plusUpdate.size <= 1) {
                 minusUpdate.clear()
                 plusUpdate.clear()
-                Toast.makeText(
-                    activity, "폴더 내 항목은 2개이상이어야해!", Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    requireContext(), "폴더 내 항목은 2개 이상이어야 해!"
+                )?.show()
             }else {
                 recordService.putUpdateFolderIdx(userJwt, folder.folderIdx, plusUpdate, minusUpdate)
             }
@@ -113,9 +114,9 @@ class DialogFolderModify(private val folder : FolderResultList,private val recor
     }
 
     override fun onFolderUpdateFailure(code: Int, message: String) {
-        Toast.makeText(
-            activity, message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
         dismiss()
     }
 }

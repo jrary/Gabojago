@@ -17,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityCalendarBinding
 import org.techtown.gabojago.main.MainActivity
+import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.RecordFragment
 import java.text.SimpleDateFormat
@@ -71,9 +72,9 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
             if (cal.get(Calendar.YEAR) > initDate().substring(0,4).toInt() || (cal.get(Calendar.YEAR) == initDate().substring(0,4).toInt() && cal.get(
                     Calendar.MONTH)+1 >= initDate().substring(4,6).toInt())
             ) {
-                Toast.makeText(
-                    requireContext(), "기록이 없는 달이야!", Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    requireContext(), "기록이 없는 달이야!"
+                )?.show()
             } else {
                 cal.add(Calendar.MONTH, +1)
                 binding.calendarDateTv.text = cal.get(Calendar.YEAR).toString() + ", " + (cal.get(Calendar.MONTH) + 1).toString() + "월"
@@ -89,9 +90,9 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
             if ((cal.get(Calendar.YEAR) > registerDateArray[0].toInt() && cal.get(Calendar.MONTH) == 11) || (cal.get(
                     Calendar.YEAR) == registerDateArray[0].toInt() && cal.get(Calendar.MONTH) + 1 <= registerDateArray[1].toInt())
             ) {
-                Toast.makeText(
-                    requireContext(), "기록이 없는 달이야!", Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    requireContext(), "기록이 없는 달이야!"
+                )?.show()
             } else {
                 cal.add(Calendar.MONTH, -1)
                 Log.e("이전달",(cal.get(Calendar.MONTH) + 1).toString())
@@ -147,9 +148,9 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
     }
 
     override fun onNicknameAdventureFailure(code: Int, message: String) {
-        Toast.makeText(
-            requireContext(), message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 
     override fun onAdventureTimeSuccess(adventureTime: AdventureTimeResult) {
@@ -192,8 +193,8 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
     override fun onAdventureTimeFailure(code: Int, message: String) {
         binding.calendarLoadingPb.visibility = View.GONE
 
-        Toast.makeText(
-            requireContext(), message, Toast.LENGTH_SHORT
-        ).show()
+        MyToast.createToast(
+            requireContext(), message
+        )?.show()
     }
 }

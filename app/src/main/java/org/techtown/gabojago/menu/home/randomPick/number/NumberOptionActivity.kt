@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityNumberOptionBinding
+import org.techtown.gabojago.main.MyToast
 
 class NumberOptionActivity : AppCompatActivity() {
 
@@ -47,19 +48,19 @@ class NumberOptionActivity : AppCompatActivity() {
 
         binding.numberCompBtn.setOnClickListener {
             if(startNum > endNum){
-                Toast.makeText(
-                    this, "숫자 범위를 다시 설정해 주세요", Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    this, "숫자 범위를 다시 설정해 주세요"
+                )?.show()
             }
             else if(((endNum - startNum) < (num - 1)) && !isOverlap){
-                Toast.makeText(
-                    this, "숫자의 범위보다 뽑을 숫자의 개수가 더 많습니다", Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    this, "숫자의 범위보다 뽑을 숫자의 개수가 더 많습니다"
+                )?.show()
             }
             else if(num == 0){
-                Toast.makeText(
-                    this, "0개의 숫자는 뽑을 수 없습니다", Toast.LENGTH_SHORT
-                ).show()
+                MyToast.createToast(
+                    this, "0개의 숫자는 뽑을 수 없습니다"
+                )?.show()
             }
             else{
                 var intent = Intent()
