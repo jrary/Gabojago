@@ -11,15 +11,10 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import kotlinx.android.synthetic.main.dialog_folderdelete.*
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.DialogRealdeleteBinding
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.main.getJwt
-import org.techtown.gabojago.menu.randomPick.home.HomeFragment
 import org.techtown.gabojago.menu.record.RecordFragment
 import org.techtown.gabojago.menu.record.recordRetrofit.*
 

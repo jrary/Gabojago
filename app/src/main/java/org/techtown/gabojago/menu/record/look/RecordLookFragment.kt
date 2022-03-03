@@ -174,32 +174,53 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
             val recordLookRVAdapter = RecordLookRVAdapter(result.folderResultList)
             binding.recordResultRecyclerview.adapter = recordLookRVAdapter
         } catch (e: NullPointerException) {
+            var imageList = ArrayList<Int>()
+            imageList.add(R.drawable.image_background)
             //null값으로 들어왔을 때 오류방지
             binding.recordLookNameTv.text = "제목이 비어있어!"
             setStarState(2.5)
-            binding.recordLookContentsTv.text = "내용이 비어있어!"
+            binding.recordLookContentsTv.visibility = View.GONE
             //기록리스트에 빈 배열 넣어놓기
             val emptyResult = ArrayList<FolderRecordResultList>()
             emptyResult.add(FolderRecordResultList("", "", 0))
             //이미지리스트에 빈 배열 넣어놓기
             val recordLookRVAdapter = RecordLookRVAdapter(emptyResult)
             binding.recordResultRecyclerview.adapter = recordLookRVAdapter
+            binding.recordLookCircleIndicator.visibility = View.GONE
+
+            binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageList)
+            binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            binding.recordLookPictureVp.setPageTransformer(ZoomOutPageTransformer())
+            binding.recordLookCircleIndicator.setViewPager2(binding.recordLookPictureVp)
+
+
         }
     }
 
     //폴더기록조회실패
     override fun onFolderLookFailure(code: Int, message: String) {
+        var imageList = ArrayList<Int>()
+        imageList.add(R.drawable.image_background)
         Log.e("폴더조회",message)
 
         binding.recordLookNameTv.text = "제목이 비어있어!"
         setStarState(2.5)
-        binding.recordLookContentsTv.text = "내용이 비어있어!"
+        binding.recordLookContentsTv.visibility = View.GONE
 
         val emptyResult = ArrayList<FolderRecordResultList>()
         emptyResult.add(FolderRecordResultList("", "", 0))
 
         val recordLookRVAdapter = RecordLookRVAdapter(emptyResult)
         binding.recordResultRecyclerview.adapter = recordLookRVAdapter
+        binding.recordLookCircleIndicator.visibility = View.GONE
+
+        binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageList)
+        binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.recordLookPictureVp.setPageTransformer(ZoomOutPageTransformer())
+        binding.recordLookCircleIndicator.setViewPager2(binding.recordLookPictureVp)
+
+
+
     }
 
     override fun onSingleLookSuccess(result: SingleLookResult) {
@@ -232,6 +253,7 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
             val recordLookRVAdapter = RecordLookRVAdapter(singleResult)
             binding.recordResultRecyclerview.adapter = recordLookRVAdapter
         } catch (e: NullPointerException) {
+            var imageList = ArrayList<Int>()
             binding.recordLookNameTv.text = "제목이 비어있어!"
             setStarState(2.5)
             binding.recordLookContentsTv.text = "내용이 비어있어!"
@@ -240,21 +262,41 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
 
             val recordLookRVAdapter = RecordLookRVAdapter(emptyResult)
             binding.recordResultRecyclerview.adapter = recordLookRVAdapter
+            binding.recordLookCircleIndicator.visibility = View.GONE
+            imageList.add(R.drawable.image_background)
+
+            binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageList)
+            binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            binding.recordLookPictureVp.setPageTransformer(ZoomOutPageTransformer())
+            binding.recordLookCircleIndicator.setViewPager2(binding.recordLookPictureVp)
+
+
         }
     }
 
     override fun onSingleLookFailure(code: Int, message: String) {
+        var imageList = ArrayList<Int>()
+        imageList.add(R.drawable.image_background)
         Log.e("개별조회",message)
 
         binding.recordLookNameTv.text = "제목이 비어있어!"
         setStarState(2.5)
-        binding.recordLookContentsTv.text = "내용이 비어있어!"
+        binding.recordLookContentsTv.visibility = View.GONE
 
         val emptyResult = ArrayList<FolderRecordResultList>()
         emptyResult.add(FolderRecordResultList("", "", 0))
 
         val recordLookRVAdapter = RecordLookRVAdapter(emptyResult)
         binding.recordResultRecyclerview.adapter = recordLookRVAdapter
+
+        binding.recordLookCircleIndicator.visibility = View.GONE
+
+        binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageList)
+        binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.recordLookPictureVp.setPageTransformer(ZoomOutPageTransformer())
+        binding.recordLookCircleIndicator.setViewPager2(binding.recordLookPictureVp)
+
+
     }
 
 }
