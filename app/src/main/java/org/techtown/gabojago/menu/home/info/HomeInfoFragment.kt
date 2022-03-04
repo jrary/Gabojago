@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentHomeInfoBinding
-import org.techtown.gabojago.menu.home.HomeFragment
+import org.techtown.gabojago.menu.home.contents.HomeFragment
 
 class HomeInfoFragment : Fragment() {
     lateinit var binding: FragmentHomeInfoBinding

@@ -7,13 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
-import org.techtown.gabojago.databinding.FragmentHomeInfoBinding
 import org.techtown.gabojago.databinding.FragmentInfoColorBinding
-import org.techtown.gabojago.menu.home.HomeFragment
-import org.techtown.gabojago.menu.home.randomPick.clock.ClockFragment
-import org.techtown.gabojago.menu.home.randomPick.color.ColorFragment
-import org.techtown.gabojago.menu.home.randomPick.number.NumberFragment
-import org.techtown.gabojago.menu.home.randomPick.wheel.WheelFragment
 
 class InfoColorFragment : Fragment() {
     lateinit var binding: FragmentInfoColorBinding

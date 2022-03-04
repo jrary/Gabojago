@@ -8,7 +8,7 @@ import org.techtown.gabojago.R
 import org.techtown.gabojago.menu.record.RecordFragment
 import org.techtown.gabojago.databinding.ActivityMainBinding
 import org.techtown.gabojago.menu.manage.ManageFragment
-import org.techtown.gabojago.menu.home.HomeFragment
+import org.techtown.gabojago.menu.home.contents.HomeFragment
 
 
 
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initNavigation() {
 
-        supportFragmentManager.beginTransaction().replace(R.id.main_frm,HomeFragment())
+        supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment())
             .commitAllowingStateLoss()
         binding.mainBnv.selectedItemId = R.id.homeFragment
 

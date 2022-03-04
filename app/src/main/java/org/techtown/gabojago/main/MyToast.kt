@@ -19,7 +19,7 @@ object MyToast {
         binding.toastBoardTv.text = message
 
         return Toast(context).apply {
-            setGravity(Gravity.BOTTOM or Gravity.CENTER, 0, 50.toPx())
+            setGravity(Gravity.BOTTOM or Gravity.CENTER, 0, 70.toPx())
             duration = Toast.LENGTH_SHORT
             view = binding.root
         }
