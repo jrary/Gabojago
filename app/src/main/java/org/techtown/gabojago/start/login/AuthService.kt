@@ -1,6 +1,7 @@
 package org.techtown.gabojago.start.login
 
 import android.util.Log
+import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getRetrofit
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,15 +45,20 @@ class AuthService {
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         authService.remainLogin(loginToken).enqueue(object : Callback<AuthRemainResponse> {
             override fun onResponse(call: Call<AuthRemainResponse>, response: Response<AuthRemainResponse>) {
-                Log.d("RELOGINACT/Response", response.toString())
-                val resp = response.body()!!
-                Log.d("RELOGINACT/Code", resp.code.toString())
-
-                if(resp.isSuccess){
-                    remainLoginView.onRemainLoginSuccess(resp.result)
+                if(response.body() == null){
+                    remainLoginView.onRemainLoginFailure(0, "네트워크 연결에 실패하였습니다.")
                 }
                 else{
-                    remainLoginView.onRemainLoginFailure(resp.code, resp.message)
+                    Log.d("RELOGINACT/Response", response.toString())
+                    val resp = response.body()!!
+                    Log.d("RELOGINACT/Code", resp.code.toString())
+
+                    if(resp.isSuccess){
+                        remainLoginView.onRemainLoginSuccess(resp.result)
+                    }
+                    else{
+                        remainLoginView.onRemainLoginFailure(resp.code, resp.message)
+                    }
                 }
             }
             override fun onFailure(call: Call<AuthRemainResponse>, t: Throwable) {
