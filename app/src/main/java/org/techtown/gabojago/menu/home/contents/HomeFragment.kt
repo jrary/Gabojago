@@ -3,7 +3,6 @@ package org.techtown.gabojago.menu.home.contents
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
-import android.os.Handler
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
@@ -18,9 +17,7 @@ import androidx.fragment.app.Fragment
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentHomeBinding
-import org.techtown.gabojago.menu.home.contents.HomeMenuFragment
 import org.techtown.gabojago.menu.home.info.HomeInfoFragment
-import java.util.concurrent.TimeUnit
 
 
 class HomeFragment : Fragment(){
@@ -86,11 +83,16 @@ class HomeFragment : Fragment(){
         override fun run() {
             try {
                 val startAnimation01 = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_dice_start_01)
+                val endAnimation01 = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_dice_end_01)
+                val startAnimation02 = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_dice_start_02)
+                val endAnimation02 = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_dice_end_02)
                 while (true) {
-                    sleep(1700)
                     binding.homeStartIv.startAnimation(startAnimation01)
+                    binding.homeDice01Iv.startAnimation(startAnimation02)
                     sleep(1700)
-
+                    binding.homeStartIv.startAnimation(endAnimation01)
+                    binding.homeDice01Iv.startAnimation(endAnimation02)
+                    sleep(1700)
                 }
             } catch (e: InterruptedException) {
                 Log.d("SONG", "쓰레드가 죽었습니다. ${e.message}")

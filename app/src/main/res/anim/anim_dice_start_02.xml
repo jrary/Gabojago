@@ -4,16 +4,16 @@
     android:fillAfter="true"
     >
     <rotate
-        android:fromDegrees="21.92"
-        android:toDegrees="17.17"
+        android:fromDegrees="-22.94"
+        android:toDegrees="-38"
         android:pivotX="50%"
         android:pivotY="50%"
         />
     <translate
         android:fromXDelta="0%"
         android:fromYDelta="0%"
-        android:toXDelta="20%"
-        android:toYDelta="-5%"
+        android:toXDelta="-25%"
+        android:toYDelta="10%"
         />
 </set>
 
