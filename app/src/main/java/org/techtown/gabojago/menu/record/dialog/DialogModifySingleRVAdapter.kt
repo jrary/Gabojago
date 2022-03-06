@@ -36,7 +36,7 @@ class DialogModifySingleRVAdapter(private val resultList: ArrayList<SingleResult
                 holder.binding.itemModifyRectangleIv.setBackgroundResource(R.drawable.single_select_rectangle)
             } else {
                 plus[position] = false
-                holder.binding.itemModifyRectangleIv.setBackgroundResource(R.drawable.rectangle_orange_dark)
+                holder.binding.itemModifyRectangleIv.setBackgroundResource(R.drawable.rectangle_orange)
             }
         }
     }

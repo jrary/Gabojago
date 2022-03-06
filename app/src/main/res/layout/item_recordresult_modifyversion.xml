@@ -7,8 +7,8 @@
     <ImageView
         android:id="@+id/item_modify_rectangle_iv"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/rectangle_orange_dark"
+        android:layout_height="65dp"
+        android:background="@drawable/rectangle_orange"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -19,7 +19,6 @@
         android:layout_height="42dp"
         android:src="@drawable/resultimage_dolimpan_orange"
         android:layout_marginStart="17dp"
-        android:layout_marginBottom="8.5dp"
         app:layout_constraintStart_toStartOf="@id/item_modify_rectangle_iv"
         app:layout_constraintTop_toTopOf="@id/item_modify_rectangle_iv"
         app:layout_constraintBottom_toBottomOf="@id/item_modify_rectangle_iv"/>

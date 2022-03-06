@@ -20,9 +20,9 @@ class RecordWeekRVAdapter(private val viewDate:String): RecyclerView.Adapter<Rec
         fun onItemClick(day:String)
     }
 
-    private lateinit var mItemClickListener: RecordWeekRVAdapter.MyItemClickListener
+    private lateinit var mItemClickListener: MyItemClickListener
 
-    fun setMyItemClickListener(itemClickListener: RecordWeekRVAdapter.MyItemClickListener) {
+    fun setMyItemClickListener(itemClickListener: MyItemClickListener) {
         mItemClickListener = itemClickListener
     }
 

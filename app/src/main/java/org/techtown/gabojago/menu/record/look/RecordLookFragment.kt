@@ -34,6 +34,13 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
         recordService.setFolderLookView(this@RecordLookFragment)
         recordService.setSingleLookView(this@RecordLookFragment)
         val userJwt = getJwt(requireContext(), "userJwt")
+        val imageList = ArrayList<Int>()
+        imageList.add(R.drawable.image_background)
+
+        binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageList)
+        binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.recordLookPictureVp.setPageTransformer(ZoomOutPageTransformer())
+        binding.recordLookCircleIndicator.setViewPager2(binding.recordLookPictureVp)
 
         recordService.getFolderLook(userJwt, Idx)
         recordService.getSingleLook(userJwt, Idx)
@@ -174,7 +181,7 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
             val recordLookRVAdapter = RecordLookRVAdapter(result.folderResultList)
             binding.recordResultRecyclerview.adapter = recordLookRVAdapter
         } catch (e: NullPointerException) {
-            var imageList = ArrayList<Int>()
+            val imageList = ArrayList<Int>()
             imageList.add(R.drawable.image_background)
             //null값으로 들어왔을 때 오류방지
             binding.recordLookNameTv.text = "제목이 비어있어!"
@@ -199,20 +206,21 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
 
     //폴더기록조회실패
     override fun onFolderLookFailure(code: Int, message: String) {
-        var imageList = ArrayList<Int>()
+        val imageList = ArrayList<Int>()
         imageList.add(R.drawable.image_background)
         Log.e("폴더조회",message)
 
         binding.recordLookNameTv.text = "제목이 비어있어!"
         setStarState(2.5)
         binding.recordLookContentsTv.visibility = View.GONE
+        binding.recordLookCircleIndicator.visibility = View.GONE
 
         val emptyResult = ArrayList<FolderRecordResultList>()
         emptyResult.add(FolderRecordResultList("", "", 0))
 
         val recordLookRVAdapter = RecordLookRVAdapter(emptyResult)
         binding.recordResultRecyclerview.adapter = recordLookRVAdapter
-        binding.recordLookCircleIndicator.visibility = View.GONE
+
 
         binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageList)
         binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -254,6 +262,7 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
             binding.recordResultRecyclerview.adapter = recordLookRVAdapter
         } catch (e: NullPointerException) {
             var imageList = ArrayList<Int>()
+            imageList.add(R.drawable.image_background)
             binding.recordLookNameTv.text = "제목이 비어있어!"
             setStarState(2.5)
             binding.recordLookContentsTv.text = "내용이 비어있어!"
@@ -263,7 +272,6 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
             val recordLookRVAdapter = RecordLookRVAdapter(emptyResult)
             binding.recordResultRecyclerview.adapter = recordLookRVAdapter
             binding.recordLookCircleIndicator.visibility = View.GONE
-            imageList.add(R.drawable.image_background)
 
             binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageList)
             binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL

@@ -84,6 +84,8 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
                     //날짜별로 메인화면 레트로핏 다시 불러오기
                     recordService.getSingleResultList(userJwt,day)
                     recordService.getFolderResultList(userJwt,day)
+                    binding.recordMonthTv.setText("< "+day.substring(4,6).toInt().toString()+"월")
+                    binding.recordDateTv.setText(day.substring(0,4)+"년 "+day.substring(4,6).toInt().toString()+"월 "+day.substring(6).toInt().toString()+"일")
                 }
             })
 
@@ -111,6 +113,9 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
                     binding.recordNotifyTv.visibility = View.GONE
                     recordService.getSingleResultList(userJwt,day)
                     recordService.getFolderResultList(userJwt,day)
+                    binding.recordMonthTv.setText("< "+day.substring(4,6).toInt().toString()+"월")
+                    binding.recordDateTv.setText(day.substring(0,4)+"년 "+day.substring(4,6).toInt().toString()+"월 "+day.substring(6).toInt().toString()+"일")
+
                 }
             })
         }
@@ -122,7 +127,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         //화면 넓이
         val width  = getScreenSize(this)
-        binding.recordWeekRecyclerview.addItemDecoration(HorizontalItemDecorator(width/42))
+        binding.recordWeekRecyclerview.addItemDecoration(HorizontalItemDecorator(width/56))
         //클릭 이벤트 함수
         clickevent()
 
