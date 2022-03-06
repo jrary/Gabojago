@@ -66,6 +66,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
             binding.recordEmptyTv.visibility = View.VISIBLE
             binding.recordNotifyTv.visibility = View.GONE
             //메인화면 레트로핏 다시 불러오기
+            recordService.recordCount(userJwt,specialDate)
             recordService.getSingleResultList(userJwt, specialDate)
             recordService.getFolderResultList(userJwt, specialDate)
             //주간캘린더 다시 불러오기
@@ -84,6 +85,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
                     //날짜별로 메인화면 레트로핏 다시 불러오기
                     recordService.getSingleResultList(userJwt,day)
                     recordService.getFolderResultList(userJwt,day)
+                    recordService.recordCount(userJwt,day)
                     binding.recordMonthTv.setText("< "+day.substring(4,6).toInt().toString()+"월")
                     binding.recordDateTv.setText(day.substring(0,4)+"년 "+day.substring(4,6).toInt().toString()+"월 "+day.substring(6).toInt().toString()+"일")
                 }
@@ -98,6 +100,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
             val stringDate = dateFormat.format(date)
             recordService.getSingleResultList(userJwt,stringDate)
             recordService.getFolderResultList(userJwt,stringDate)
+            recordService.recordCount(userJwt,stringDate)
 
             binding.recordWeekRecyclerview.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -113,13 +116,13 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
                     binding.recordNotifyTv.visibility = View.GONE
                     recordService.getSingleResultList(userJwt,day)
                     recordService.getFolderResultList(userJwt,day)
+                    recordService.recordCount(userJwt,day)
                     binding.recordMonthTv.setText("< "+day.substring(4,6).toInt().toString()+"월")
                     binding.recordDateTv.setText(day.substring(0,4)+"년 "+day.substring(4,6).toInt().toString()+"월 "+day.substring(6).toInt().toString()+"일")
 
                 }
             })
         }
-        recordService.recordCount(userJwt)
         //메인화면 폴더, 개별 리사이클러뷰 레이아웃 매니저
         binding.recordFolderresultRecyclerview.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

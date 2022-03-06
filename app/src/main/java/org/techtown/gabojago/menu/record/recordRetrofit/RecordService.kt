@@ -186,16 +186,11 @@ class RecordService {
             })
     }
     //뽑기개수
-    fun recordCount(userJwt: String) {
+    fun recordCount(userJwt: String,date:String) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
         recordCountView.onRecordCountLoading()
 
-        val now: Long = System.currentTimeMillis()
-        val date = Date(now)
-        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
-        val stringDate = dateFormat.format(date)
-
-        recordService.recordCount(userJwt, stringDate).enqueue(object :
+        recordService.recordCount(userJwt, date).enqueue(object :
             Callback<RecordCountResponse> {
 
             override fun onResponse(
