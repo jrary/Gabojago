@@ -186,7 +186,7 @@ class RecordService {
             })
     }
     //뽑기개수
-    fun recordCount(userJwt: String,date:String) {
+    fun recordCount(userJwt: String, date:String) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
         recordCountView.onRecordCountLoading()
 

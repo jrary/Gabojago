@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentColorBinding
-import org.techtown.gabojago.menu.home.HomeMenuFragment
+import org.techtown.gabojago.menu.home.contents.HomeMenuFragment
 
 class ColorFragment : Fragment() {
     lateinit var binding: FragmentColorBinding

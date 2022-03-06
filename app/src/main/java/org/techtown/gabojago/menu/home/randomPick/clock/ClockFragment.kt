@@ -20,11 +20,12 @@ import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentClockBinding
 import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
-import org.techtown.gabojago.menu.home.HomeMenuFragment
+import org.techtown.gabojago.menu.home.contents.HomeMenuFragment
 import org.techtown.gabojago.menu.home.RandomService
 import org.techtown.gabojago.menu.home.RandomView
 import org.techtown.gabojago.menu.record.recordRetrofit.RecordService
 import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
+import java.text.SimpleDateFormat
 import java.util.*
 
 class ClockFragment : Fragment(), RandomView, RecordCountView {
@@ -155,8 +156,12 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
         val recordService = RecordService()
         recordService.setRecordCountView(this@ClockFragment)
 
+        val now: Long = System.currentTimeMillis()
+        val date = Date(now)
+        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
+        val stringDate = dateFormat.format(date)
         val userJwt = getJwt(requireContext(), "userJwt")
-        recordService.recordCount(userJwt)
+        recordService.recordCount(userJwt, stringDate)
     }
 
     private fun saveWithValidation(count: Int) {

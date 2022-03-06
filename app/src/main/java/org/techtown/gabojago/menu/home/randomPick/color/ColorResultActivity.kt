@@ -15,6 +15,7 @@ import org.techtown.gabojago.menu.home.RandomService
 import org.techtown.gabojago.menu.home.RandomView
 import org.techtown.gabojago.menu.record.recordRetrofit.RecordService
 import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView
+import java.text.SimpleDateFormat
 import java.util.*
 
 class ColorResultActivity : AppCompatActivity(), RandomView, RecordCountView {
@@ -74,8 +75,12 @@ class ColorResultActivity : AppCompatActivity(), RandomView, RecordCountView {
             val recordService = RecordService()
             recordService.setRecordCountView(this@ColorResultActivity)
 
+            val now: Long = System.currentTimeMillis()
+            val date = Date(now)
+            val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
+            val stringDate = dateFormat.format(date)
             val userJwt = getJwt(this, "userJwt")
-            recordService.recordCount(userJwt)
+            recordService.recordCount(userJwt, stringDate)
         }
     }
 

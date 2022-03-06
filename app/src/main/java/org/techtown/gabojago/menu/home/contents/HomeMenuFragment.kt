@@ -1,4 +1,4 @@
-package org.techtown.gabojago.menu.home
+package org.techtown.gabojago.menu.home.contents
 
 import android.os.Bundle
 import android.view.LayoutInflater
