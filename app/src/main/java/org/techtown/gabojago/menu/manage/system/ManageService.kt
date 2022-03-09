@@ -2,6 +2,8 @@ package org.techtown.gabojago.menu.manage
 
 import android.util.Log
 import org.techtown.gabojago.main.getRetrofit
+import org.techtown.gabojago.menu.manage.auth.LogoutView
+import org.techtown.gabojago.menu.manage.auth.WithdrawalView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -70,7 +72,6 @@ class ManageService {
     }
 
     fun logout(userJwt: String) {
-        logoutView.onLogoutLoading()
         val manageService = getRetrofit().create(ManageRetrofitInterface::class.java)
 
         manageService.logout(userJwt).enqueue(object : Callback<CheckUserResponse> {
@@ -92,7 +93,6 @@ class ManageService {
     }
 
     fun withdrawal(userJwt: String) {
-        withdrawalView.onWithdrawalLoading()
         val manageService = getRetrofit().create(ManageRetrofitInterface::class.java)
 
         manageService.withdrawal(userJwt).enqueue(object : Callback<CheckUserResponse> {
