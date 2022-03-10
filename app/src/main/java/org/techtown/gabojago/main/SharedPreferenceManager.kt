@@ -2,6 +2,7 @@ package org.techtown.gabojago.main
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -50,11 +51,13 @@ fun getRetrofit(): Retrofit {
     return retrofit
 }
 
+var gson = GsonBuilder().setLenient().create()
+
 fun withdrawalRetrofit(): Retrofit {
     val retrofit = Retrofit.Builder()
         .baseUrl("https://nid.naver.com/oauth2.0/")
         .client(client)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 
     return retrofit

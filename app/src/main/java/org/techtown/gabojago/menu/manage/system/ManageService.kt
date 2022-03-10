@@ -135,25 +135,4 @@ class ManageService {
             }
         })
     }
-
-    fun recheck(clientId: String, redirectUri: String) {
-        val naverRecheck = withdrawalRetrofit().create(ManageRetrofitInterface::class.java)
-
-        naverRecheck.recheck("code", clientId, redirectUri, "shine", "reauthenticate", "NAVER").enqueue(object : Callback<NaverRecheckResponse> {
-            override fun onResponse(call: Call<NaverRecheckResponse>, response: Response<NaverRecheckResponse>) {
-                Log.d("RECHECK/Response", response.toString())
-                val resp = response.body()!!
-
-                if (resp.state == "shine") {
-                    Log.d("RECHECK", "success")
-                }
-                else {
-                    Log.d("RECHECK", "fail")
-                }
-            }
-            override fun onFailure(call: Call<NaverRecheckResponse>, t: Throwable) {
-                Log.d("RECHECK/FAILURE", t.message!!)
-            }
-        })
-    }
 }

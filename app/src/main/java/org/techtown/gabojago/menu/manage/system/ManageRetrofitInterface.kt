@@ -34,14 +34,4 @@ interface ManageRetrofitInterface {
         @Query("access_token") access_token: String,
         @Query("service_provider") service_provider: String
     ): Call<NaverWithdrawalResponse>
-
-    @GET("authorize")
-    fun recheck(
-        @Query("response_type") response_type: String,
-        @Query("client_id") client_id: String,
-        @Query("redirect_uri") redirect_uri: String,
-        @Query("state") state: String,
-        @Query("auth_type") auth_type: String,
-        @Query("service_provider") service_provider: String
-    ): Call<NaverRecheckResponse>
 }
