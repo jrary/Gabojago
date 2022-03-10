@@ -19,8 +19,8 @@
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/dialog_modify_nestedscrollview"
-        android:layout_width="350dp"
-        android:layout_height="400dp"
+        android:layout_width="330dp"
+        android:layout_height="350dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:overScrollMode="never"
@@ -35,7 +35,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/folder_modify_layout"
-                android:layout_width="350dp"
+                android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
@@ -80,7 +80,7 @@
                 <View
                     android:id="@+id/folder_modify_view"
                     android:layout_width="match_parent"
-                    android:layout_height="5dp"
+                    android:layout_height="7dp"
                     android:layout_marginBottom="5dp"
                     app:layout_constraintTop_toBottomOf="@+id/folder_modify_recyclerview"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +108,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/dialog_modify_recyclerview2"
-                android:layout_width="350dp"
+                android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="100dp"

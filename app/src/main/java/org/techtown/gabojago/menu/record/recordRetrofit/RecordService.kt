@@ -103,6 +103,7 @@ class RecordService {
     //개별메인
     fun getSingleResultList(userJwt: String, date: String) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
+        singleResultListView.onSingleResultListLoading()
         recordService.getSingleResultList(userJwt, date).enqueue(object :
             Callback<SingleResultListResponse> {
             override fun onResponse(
@@ -224,6 +225,7 @@ class RecordService {
     //폴더메인
     fun getFolderResultList(userJwt: String, date: String) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
+        folderResultListView.onFolderResultListLoading()
         recordService.getFolderResultList(userJwt, date).enqueue(object :
             Callback<FolderResultListResponse> {
             override fun onResponse(

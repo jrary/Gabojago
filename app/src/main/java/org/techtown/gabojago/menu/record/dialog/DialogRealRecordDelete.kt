@@ -8,11 +8,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.DialogRealdeleteBinding
+import org.techtown.gabojago.databinding.FragmentRecordBinding
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
@@ -28,6 +30,16 @@ class DialogRealRecordDelete(private val recordIdx:Int) : DialogFragment() ,Sing
         isCancelable = true
     }
 
+    interface onDismissListener {
+        fun onDismiss(dialogFragment : DialogFragment)
+    }
+
+    private lateinit var mDismissListener: onDismissListener
+
+    fun setOnDismissClickListener(dismissListener: onDismissListener) {
+        mDismissListener = dismissListener
+    }
+
     private lateinit var binding: DialogRealdeleteBinding
 
     override fun onCreateView(
@@ -37,7 +49,6 @@ class DialogRealRecordDelete(private val recordIdx:Int) : DialogFragment() ,Sing
     ): View? {
         binding = DialogRealdeleteBinding.inflate(inflater, container, false)
         dialog?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
         binding.dialogFolderTitleTv.setText("기록을\n정말 삭제할거야?")
 
         val recordService = RecordService()
@@ -49,6 +60,7 @@ class DialogRealRecordDelete(private val recordIdx:Int) : DialogFragment() ,Sing
         }
 
         binding.dialogNoBtn.setOnClickListener {
+            mDismissListener.onDismiss(this)
             dismiss()
         }
         return binding.root
@@ -63,6 +75,7 @@ class DialogRealRecordDelete(private val recordIdx:Int) : DialogFragment() ,Sing
             })
             .addToBackStack(null)
             .commitAllowingStateLoss()
+        mDismissListener.onDismiss(this)
         dismiss()
     }
 

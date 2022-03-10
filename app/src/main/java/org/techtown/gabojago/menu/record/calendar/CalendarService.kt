@@ -40,12 +40,12 @@ class CalendarService {
 
     fun getAdventureTime(userJwt: String, yearMonth: String) {
         val calendarService = getRetrofit().create(CalendarRetrofitInterface::class.java)
+        adventureTimeView.onAdventureTimeLoading()
         calendarService.getAdventureTime(userJwt, yearMonth).enqueue(object : Callback<AdventureTimeResponse> {
             override fun onResponse(call: Call<AdventureTimeResponse>, response: Response<AdventureTimeResponse>) {
                 Log.d("TIME/Response", response.toString())
                 val resp = response.body()!!
                 Log.d("TIME/Code", resp.code.toString())
-
                 if(resp.isSuccess){
                     adventureTimeView.onAdventureTimeSuccess(resp.result!!)
                 }

@@ -2,6 +2,7 @@ package org.techtown.gabojago.menu.record
 
 import HorizontalItemDecorator
 import android.animation.ObjectAnimator
+import android.content.DialogInterface
 import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
@@ -10,9 +11,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
-import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentRecordBinding
 import org.techtown.gabojago.databinding.ItemRecordFoldernameBinding
@@ -29,6 +33,8 @@ import org.techtown.gabojago.menu.record.look.RecordLookFragment
 import org.techtown.gabojago.menu.record.recordRetrofit.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.concurrent.schedule
+
 
 //기록하자 메인화면
 class RecordFragment : Fragment(), RecordCountView, SingleResultListView, FolderResultListView{
@@ -112,14 +118,16 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
                 RecordWeekRVAdapter.MyItemClickListener {
                 override fun onItemClick(day: String) {
                     binding.recordDivisionView.visibility = View.VISIBLE
-                    binding.recordEmptyTv.visibility= View.VISIBLE
+                    binding.recordEmptyTv.visibility = View.VISIBLE
                     binding.recordNotifyTv.visibility = View.GONE
-                    recordService.getSingleResultList(userJwt,day)
-                    recordService.getFolderResultList(userJwt,day)
-                    recordService.recordCount(userJwt,day)
-                    binding.recordMonthTv.setText("< "+day.substring(4,6).toInt().toString()+"월")
-                    binding.recordDateTv.setText(day.substring(0,4)+"년 "+day.substring(4,6).toInt().toString()+"월 "+day.substring(6).toInt().toString()+"일")
-
+                    recordService.getSingleResultList(userJwt, day)
+                    recordService.getFolderResultList(userJwt, day)
+                    recordService.recordCount(userJwt, day)
+                    binding.recordMonthTv.setText("< " + day.substring(4, 6).toInt()
+                        .toString() + "월")
+                    binding.recordDateTv.setText(day.substring(0, 4) + "년 " + day.substring(4,
+                        6).toInt().toString() + "월 " + day.substring(6).toInt()
+                        .toString() + "일")
                 }
             })
         }
@@ -130,7 +138,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         //화면 넓이
         val width  = getScreenSize(this)
-        binding.recordWeekRecyclerview.addItemDecoration(HorizontalItemDecorator(width/56))
+        binding.recordWeekRecyclerview.addItemDecoration(HorizontalItemDecorator(width/75))
         //클릭 이벤트 함수
         clickevent()
 
@@ -182,7 +190,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
 
     private fun init() {
         //시작시 해당월, 날짜 (오늘날짜로 default)
-        binding.recordDateTv.setText(setdate())
+        binding.recordDateTv.setText(setdate().substring(0,4)+"년 "+setdate().substring(4,6).toInt().toString()+"월 "+setdate().substring(6).toInt().toString()+"일")
         binding.recordMonthTv.setText(setMonth())
     }
 
@@ -222,7 +230,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
     private fun setdate(): String {
         val now: Long = System.currentTimeMillis()
         val date = Date(now)
-        val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일", Locale("ko", "KR"))
+        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
         val stringDate = dateFormat.format(date)
 
         return stringDate
@@ -302,6 +310,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
     }
 
     override fun onSingleResultListSuccess(result: SingleResult) {
+        binding.recordLoadingPb.visibility = View.GONE
         val now: Long = System.currentTimeMillis()
         val date = Date(now)
         val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
@@ -348,6 +357,10 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         })
     }
 
+    override fun onSingleResultListLoading() {
+       binding.recordLoadingPb.visibility = View.VISIBLE
+    }
+
     override fun onSingleResultListFailure(code: Int, message: String) {
 
         val empty = ArrayList<SingleResultListResult>()
@@ -359,6 +372,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
     }
 
     override fun onFolderResultListSuccess(result: FolderResult) {
+        binding.recordLoadingPb.visibility = View.GONE
         val now: Long = System.currentTimeMillis()
         val date = Date(now)
         val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
@@ -397,13 +411,33 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
             }
 
             override fun onModifyClick(folder: FolderResultList) {
-                DialogFolderModify(folder,records).show((context as MainActivity).supportFragmentManager,"dialog")
+                val dialogFolderModify = DialogFolderModify(folder,records)
+                dialogFolderModify.show((context as MainActivity).supportFragmentManager,"dialog")
+                binding.recordBlurView.visibility = View.VISIBLE
+                dialogFolderModify.setOnDismissClickListener(object :
+                DialogFolderModify.onDismissListener{
+                    override fun onDismiss(dialogFragment: DialogFragment) {
+                        binding.recordBlurView.visibility = View.GONE
+                    }
+                })
             }
 
             override fun onBreakUpClick(folderIdx: Int) {
-                DialogRealBreakup(folderIdx).show((context as MainActivity).supportFragmentManager,"dialog")
+                val dialogRealBreakup = DialogRealBreakup(folderIdx)
+                dialogRealBreakup.show((context as MainActivity).supportFragmentManager,"dialog")
+                binding.recordBlurView.visibility = View.VISIBLE
+                dialogRealBreakup.setOnDismissClickListener(object :
+                    DialogRealBreakup.onDismissListener{
+                    override fun onDismiss(dialogFragment: DialogFragment) {
+                        binding.recordBlurView.visibility = View.GONE
+                    }
+                })
             }
         })
+    }
+
+    override fun onFolderResultListLoading() {
+        binding.recordLoadingPb.visibility = View.VISIBLE
     }
 
     override fun onFolderResultListFailure(code: Int, message: String) {
