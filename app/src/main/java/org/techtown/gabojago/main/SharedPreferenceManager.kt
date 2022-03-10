@@ -49,3 +49,13 @@ fun getRetrofit(): Retrofit {
 
     return retrofit
 }
+
+fun withdrawalRetrofit(): Retrofit {
+    val retrofit = Retrofit.Builder()
+        .baseUrl("https://nid.naver.com/oauth2.0/")
+        .client(client)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    return retrofit
+}

@@ -2,8 +2,10 @@ package org.techtown.gabojago.menu.manage
 
 import android.util.Log
 import org.techtown.gabojago.main.getRetrofit
+import org.techtown.gabojago.main.withdrawalRetrofit
 import org.techtown.gabojago.menu.manage.auth.LogoutView
 import org.techtown.gabojago.menu.manage.auth.WithdrawalView
+import org.techtown.gabojago.menu.manage.system.ManageRetrofitInterface
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -109,6 +111,48 @@ class ManageService {
             }
             override fun onFailure(call: Call<CheckUserResponse>, t: Throwable) {
                 withdrawalView.onWithdrawalFailure(400, t.message!!)
+            }
+        })
+    }
+
+    fun naverWithdrawal(clientId: String, clientSecret: String, userJwt: String) {
+        val naverWithdrawal = withdrawalRetrofit().create(ManageRetrofitInterface::class.java)
+
+        naverWithdrawal.naverWithdrawal("delete", clientId, clientSecret, userJwt, "NAVER").enqueue(object : Callback<NaverWithdrawalResponse> {
+            override fun onResponse(call: Call<NaverWithdrawalResponse>, response: Response<NaverWithdrawalResponse>) {
+                Log.d("WITHDRAWALACT/Response", response.toString())
+                val resp = response.body()!!
+
+                if (resp.result == "success") {
+                  Log.d("NAVERWITHDRAWAL", "success")
+                }
+                else {
+                    Log.d("NAVERWITHDRAWAL", "fail")
+                }
+            }
+            override fun onFailure(call: Call<NaverWithdrawalResponse>, t: Throwable) {
+                withdrawalView.onWithdrawalFailure(400, t.message!!)
+            }
+        })
+    }
+
+    fun recheck(clientId: String, redirectUri: String) {
+        val naverRecheck = withdrawalRetrofit().create(ManageRetrofitInterface::class.java)
+
+        naverRecheck.recheck("code", clientId, redirectUri, "shine", "reauthenticate", "NAVER").enqueue(object : Callback<NaverRecheckResponse> {
+            override fun onResponse(call: Call<NaverRecheckResponse>, response: Response<NaverRecheckResponse>) {
+                Log.d("RECHECK/Response", response.toString())
+                val resp = response.body()!!
+
+                if (resp.state == "shine") {
+                    Log.d("RECHECK", "success")
+                }
+                else {
+                    Log.d("RECHECK", "fail")
+                }
+            }
+            override fun onFailure(call: Call<NaverRecheckResponse>, t: Throwable) {
+                Log.d("RECHECK/FAILURE", t.message!!)
             }
         })
     }

@@ -55,7 +55,7 @@ class LoginActivity :AppCompatActivity(), LoginView {
                 val expiresAt: Long = mOAuthLoginInstance.getExpiresAt(baseContext)
                 val tokenType: String = mOAuthLoginInstance.getTokenType(baseContext)
 
-      //          Log.d("ACCESSTOKEN", accessToken)
+                Log.d("ACCESSTOKEN", accessToken)
 
                 val authService = AuthService()
                 authService.setLoginView(this@LoginActivity)

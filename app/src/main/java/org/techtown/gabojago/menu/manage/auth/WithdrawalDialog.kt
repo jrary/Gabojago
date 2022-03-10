@@ -41,23 +41,26 @@ class WithdrawalDialog : DialogFragment(), WithdrawalView {
 
         oAuthLogin = OAuthLogin.getInstance()
         oAuthLogin.init(requireContext(),"6dp8qdfztnBLiguo_gLx", "77OipGRnx9", "Gabojago")
+        val userJwt = getJwt(requireContext(), "userJwt")
+        val redirectUri = "https%3A%2F%2Frisingcamp.com%2F"
 
         val manageService = ManageService()
         manageService.setWithdrawalView(this@WithdrawalDialog)
 
         binding.dialogYesBtn.setOnClickListener {
-            val userJwt = getJwt(requireContext(), "userJwt")
+            manageService.naverWithdrawal("6dp8qdfztnBLiguo_gLx", "77OipGRnx9", userJwt)
             manageService.withdrawal(userJwt)
         }
 
         binding.dialogNoBtn.setOnClickListener {
+            manageService.recheck("6dp8qdfztnBLiguo_gLx", redirectUri)
             dismiss()
         }
         return binding.root
     }
 
     override fun onWithdrawalSuccess() {
-       // oAuthLogin.logout(requireContext())
+        oAuthLogin.logout(requireContext())
         setJwt(requireContext(), "userJwt", "")
         MyToast.createToast(
             requireContext(), "회원 탈퇴가 완료되었습니다."
