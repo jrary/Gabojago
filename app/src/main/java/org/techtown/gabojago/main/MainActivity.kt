@@ -7,7 +7,7 @@ import android.view.View
 import org.techtown.gabojago.R
 import org.techtown.gabojago.menu.record.RecordFragment
 import org.techtown.gabojago.databinding.ActivityMainBinding
-import org.techtown.gabojago.menu.manage.ManageFragment
+import org.techtown.gabojago.menu.manage.system.ManageFragment
 import org.techtown.gabojago.menu.home.contents.HomeFragment
 
 

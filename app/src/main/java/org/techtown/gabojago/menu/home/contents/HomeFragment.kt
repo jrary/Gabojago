@@ -19,7 +19,6 @@ import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentHomeBinding
 import org.techtown.gabojago.menu.home.info.HomeInfoFragment
 
-
 class HomeFragment : Fragment(){
     lateinit var binding: FragmentHomeBinding
     private lateinit var loopAnim: LoopAnimation
