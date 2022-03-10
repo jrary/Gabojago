@@ -7,10 +7,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.DialogFolderselectBinding
+import org.techtown.gabojago.databinding.FragmentRecordBinding
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
@@ -28,6 +30,8 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
         isCancelable = true
     }
     private lateinit var binding: DialogFolderselectBinding
+    private lateinit var binding2: FragmentRecordBinding
+
     val folderMake= mutableListOf<Int>()
 
     override fun onCreateView(
@@ -36,7 +40,9 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
         savedInstanceState: Bundle?
     ): View? {
         binding = DialogFolderselectBinding.inflate(inflater, container, false)
+        binding2 = FragmentRecordBinding.inflate(inflater,container,false)
         dialog?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        binding2.recordBlurView.visibility = View.VISIBLE
 
         val recordService = RecordService()
         recordService.setRecordFolderMakeView(this@DialogFolderSelect)
@@ -67,6 +73,7 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
         }
 
         binding.dialogSelectCancleIv.setOnClickListener{
+            binding2.recordBlurView.visibility = View.GONE
             dismiss()
         }
 
@@ -77,13 +84,14 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, RecordFragment())
             .commitAllowingStateLoss()
-
+        binding2.recordBlurView.visibility = View.GONE
         dismiss()
         Log.e("폴더생성","성공")
     }
 
     override fun onRecordFolderMakeFailure(code: Int, message: String) {
         Log.e("폴더생성실패",message)
+        binding2.recordBlurView.visibility = View.GONE
         dismiss()
     }
 }

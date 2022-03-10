@@ -1,6 +1,7 @@
 package org.techtown.gabojago.menu.record
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.techtown.gabojago.databinding.ItemRecordWeekBinding
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.logging.Handler
 
 class RecordWeekRVAdapter(private val viewDate:String): RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(){
 
@@ -43,6 +45,7 @@ class RecordWeekRVAdapter(private val viewDate:String): RecyclerView.Adapter<Rec
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(position)
         holder.itemView.setOnClickListener{
+            Log.e("calendar","error나는 부분")
             mItemClickListener.onItemClick(alldays[position])
             for(i in 0 until 7){
                 if(i!=position) {

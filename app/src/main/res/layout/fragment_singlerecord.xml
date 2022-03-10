@@ -5,15 +5,41 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <com.github.mmin18.widget.RealtimeBlurView
+        android:id="@+id/single_record_blur_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationZ="3dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/single_record_title_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:realtimeBlurRadius="10dp"
+        app:realtimeOverlayColor="#00000000" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/single_record_title_view"
         android:layout_width="match_parent"
         android:layout_height="90dp"
+        android:translationZ="-1dp"
         android:background="#fafafa"
         android:elevation="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <com.github.mmin18.widget.RealtimeBlurView
+            android:id="@+id/single_record_blur_view2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:translationZ="3dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="@+id/single_record_title_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:realtimeBlurRadius="10dp"
+            app:realtimeOverlayColor="#00000000" />
 
 
         <ImageView
@@ -343,6 +369,7 @@
         app:layout_constraintEnd_toEndOf="@id/single_record_complete_view"
         app:layout_constraintTop_toTopOf="@id/single_record_complete_view"
         app:layout_constraintBottom_toBottomOf="@id/single_record_complete_view"/>
+
 
 
 

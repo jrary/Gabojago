@@ -1,4 +1,5 @@
 package org.techtown.gabojago.menu.record.recordRetrofit
+import android.net.Uri
 import com.google.gson.annotations.SerializedName
 
 
@@ -82,8 +83,10 @@ data class FolderRecordingRequest(
     @SerializedName("recordingStar") val recordingStar:Double,
     @SerializedName("recordingContent") val recordingContent:String,
     @SerializedName("recordingTitle") val recordingTitle:String,
-    @SerializedName("recordingImgUrl") val recordingImgUrl:List<String>
+    @SerializedName("recordingImgUrl") val recordingImgUrl:ArrayList<String>
 )
+
+
 
 //개별기록하기
 data class SingleRecordingRequest(
@@ -129,8 +132,11 @@ data class SingleLookResult(
     @SerializedName("eachContentResult") val eachContentResult: SingleContentResult,
     @SerializedName("folderContentResult") val folderContentResult: FolderContentResult,
     @SerializedName("imgListCheck") val imageListCheck: Boolean,
-    @SerializedName("eachImgListResult") val eachImgListResult: ArrayList<String>,
+    @SerializedName("eachImgListResult") val eachImgListResult: ArrayList<SingleRecordingImgUrl>,
     @SerializedName("eachRandomResult") val eachRandomResult: SingleRecordResult
+)
+data class SingleRecordingImgUrl(
+    @SerializedName("recordingImgUrl") val recordingImgUrl:String
 )
 
 //폴더기록조회
@@ -138,8 +144,12 @@ data class FolderLookResult(
     @SerializedName("contentCheck") val contentCheck: Boolean,
     @SerializedName("folderContentResult") val folderContentResult: FolderContentResult,
     @SerializedName("imgListCheck") val imageListCheck: Boolean,
-    @SerializedName("folderImgListResult") val folderImgListResult: ArrayList<String>,
+    @SerializedName("folderImgListResult") val folderImgListResult: ArrayList<FolderRecordingImgUrl>,
     @SerializedName("folderRandomResult") val folderResultList: ArrayList<FolderRecordResultList>
+)
+
+data class FolderRecordingImgUrl(
+    @SerializedName("recordingImgUrl") val recordingImgUrl:String
 )
 
 //폴더 기록조회 별점, 내용, 제목
@@ -208,7 +218,9 @@ data class FolderBreakResponse(
 data class FolderModifyRequest(
     @SerializedName("recordingStar") val recordingStar: Double,
     @SerializedName("recordingContent") val recordingContent: String,
-    @SerializedName("recordingTitle") val recordingTitle: String
+    @SerializedName("recordingTitle") val recordingTitle: String,
+    @SerializedName("recordingImgUrl") val recordingImgUrl: ArrayList<String>
+
 )
 
 //폴더 기록수정 리스폰
@@ -222,7 +234,8 @@ data class FolderModifyResponse(
 data class SingleModifyRequest(
     @SerializedName("recordingStar") val recordingStar: Double,
     @SerializedName("recordingContent") val recordingContent: String,
-    @SerializedName("recordingTitle") val recordingTitle: String
+    @SerializedName("recordingTitle") val recordingTitle: String,
+    @SerializedName("recordingImgUrl") val recordingImgUrl: ArrayList<String>
 )
 
 //개별 기록수정 리스폰

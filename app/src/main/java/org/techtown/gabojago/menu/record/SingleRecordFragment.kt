@@ -1,6 +1,11 @@
 package org.techtown.gabojago.menu.record
 
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -8,41 +13,63 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import org.techtown.gabojago.databinding.FragmentSinglerecordBinding
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.storage.FirebaseStorage
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
+import org.techtown.gabojago.menu.record.dialog.DialogRealFolderrecordDelete
 import org.techtown.gabojago.menu.record.dialog.DialogRealRecordDelete
 import org.techtown.gabojago.menu.record.recordRetrofit.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class SingleRecordFragment(private  val hasRecording:Boolean,private  val recordIdx:Int,private val result:RandomResultListResult) : Fragment() ,SingleRecordingView, SingleLookView, SingleModifyView{
     lateinit var binding: FragmentSinglerecordBinding
-    val url= mutableListOf<String>()
+    val imgFileName = java.util.ArrayList<String>()
+    val uriList = java.util.ArrayList<Uri?>()
+    val urlList = java.util.ArrayList<String>()
+    val imageList = java.util.ArrayList<String>()
+    var fbStorage : FirebaseStorage? = null
+    val recordService = RecordService()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        uriList.clear()
         binding = FragmentSinglerecordBinding.inflate(inflater, container, false)
 
-        val recordService = RecordService()
         recordService.setSingleLookView(this@SingleRecordFragment)
-
         val userJwt = getJwt(requireContext(), "userJwt")
+        fbStorage = FirebaseStorage.getInstance()
 
         recordService.getSingleLook(userJwt, recordIdx)
 
         binding.singleRecordTrash.setOnClickListener {
-            DialogRealRecordDelete(recordIdx).show((context as MainActivity).supportFragmentManager,"dialog")
+            val dialogRealRecordDelete =  DialogRealRecordDelete(recordIdx)
+            dialogRealRecordDelete.show((context as MainActivity).supportFragmentManager,"dialog")
+            binding.singleRecordBlurView.visibility = View.VISIBLE
+            binding.singleRecordBlurView2.visibility = View.VISIBLE
+            dialogRealRecordDelete.setOnDismissClickListener(object :
+                DialogRealRecordDelete.onDismissListener{
+                override fun onDismiss(dialogFragment: DialogFragment) {
+                    binding.singleRecordBlurView.visibility = View.GONE
+                    binding.singleRecordBlurView2.visibility = View.GONE
+                }
+            })
         }
-
-        val recordPictureRVAdapter = RecordPictureRVAdapter()
+        var uriList = ArrayList<Uri?>()
+        val recordPictureRVAdapter = RecordPictureRVAdapter(uriList,imageList)
         binding.singleRecordPictureRecyclerview.adapter = recordPictureRVAdapter
 
         binding.singleRecordWriteEt.addTextChangedListener(object: TextWatcher {
@@ -81,6 +108,11 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
         }
 
         if(!hasRecording){
+            //기록없을때 카메라 버튼 누를시
+            binding.singleRecordPictureIv.setOnClickListener{
+                fromGallery()
+            }
+
             binding.singleRecordCompleteView.setOnClickListener {
                 val recordService = RecordService()
                 recordService.setSingleRecordingView(this@SingleRecordFragment)
@@ -89,7 +121,7 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                     binding.singleRecordStarscore.rating.toDouble(),
                     binding.singleRecordWriteEt.text.toString(),
                     binding.singleRecordTitleEt.text.toString(),
-                    url
+                    urlList
                 ))
 
 
@@ -111,7 +143,7 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                     binding.singleRecordStarscore.rating.toDouble(),
                     binding.singleRecordWriteEt.text.toString(),
                     binding.singleRecordTitleEt.text.toString(),
-                    url
+                    urlList
                 ))
 
                 (context as MainActivity).supportFragmentManager.beginTransaction()
@@ -125,6 +157,13 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
             }
 
         }else{
+            //기록있을때 카메라 버튼 누를시
+            binding.singleRecordPictureIv.setOnClickListener{
+                imageList.clear()
+                funImageDelete()
+                fromGallery()
+            }
+
             binding.singleRecordCompleteView.setOnClickListener {
                 val recordService = RecordService()
                 recordService.setSingleModifyView(this@SingleRecordFragment)
@@ -133,6 +172,7 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                     binding.singleRecordStarscore.rating.toDouble(),
                     binding.singleRecordWriteEt.text.toString(),
                     binding.singleRecordTitleEt.text.toString(),
+                    urlList
                 ),recordIdx)
 
                 (context as MainActivity).supportFragmentManager.beginTransaction()
@@ -153,6 +193,7 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                     binding.singleRecordStarscore.rating.toDouble(),
                     binding.singleRecordWriteEt.text.toString(),
                     binding.singleRecordTitleEt.text.toString(),
+                    urlList
                 ),recordIdx)
 
                 (context as MainActivity).supportFragmentManager.beginTransaction()
@@ -189,6 +230,101 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
         hideBottomNavigation(true)
     }
 
+    private fun fromGallery() {
+        val intent  = Intent(Intent.ACTION_PICK)
+        intent.type = MediaStore.Images.Media.CONTENT_TYPE
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        startActivityForResult(intent,101)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        var timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                101 -> {
+                    if (ContextCompat.checkSelfPermission(requireContext(),
+                            android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                    ) {
+                        if (data == null) {   // 어떤 이미지도 선택하지 않은 경우
+                            Toast.makeText(requireContext(), "이미지를 선택해줘!", Toast.LENGTH_LONG)
+                                .show();
+                        } else {   // 이미지를 하나라도 선택한 경우
+                            if (data.clipData == null) {     // 이미지를 하나만 선택한 경우
+                                Log.e("single choice: ", data?.data.toString())
+                                val imageUri = data?.data
+                                uriList.add(imageUri)
+                                imgFileName.add("IMAGE_" + timeStamp +"0"+ "_.png")
+                                val recordPictureRVAdapter = RecordPictureRVAdapter(uriList,imageList)
+                                binding.singleRecordPictureRecyclerview.adapter =
+                                    recordPictureRVAdapter
+                            } else {      // 이미지를 여러장 선택한 경우
+                                var clipData = data?.clipData
+                                Log.e("clipData", clipData?.itemCount.toString())
+
+                                if (clipData?.itemCount != null && clipData?.itemCount > 10) {   // 선택한 이미지가 11장 이상인 경우
+                                    Toast.makeText(requireContext(),
+                                        "사진은 10장까지 선택 가능해!", Toast.LENGTH_LONG).show()
+                                } else {   // 선택한 이미지가 1장 이상 10장 이하인 경우
+                                    Log.e("1장이상10장이하", "multiple choice")
+                                    for (i in 0 until clipData?.itemCount!!) {
+                                        var imageUri =
+                                            clipData.getItemAt(i).uri // 선택한 이미지들의 uri를 가져온다.
+                                        try {
+                                            uriList.add(imageUri)  //uri를 list에 담는다.
+                                            imgFileName.add("IMAGE_" + timeStamp +i.toString()+ "_.png")
+                                        } catch (e: Exception) {
+                                            Log.e("선택에러", "File select error", e)
+                                        }
+                                    }
+                                    funImageUpload()
+                                    binding.singleRecordPicturenumTv.text = uriList.size.toString()+"/10"
+                                    val recordPictureRVAdapter = RecordPictureRVAdapter(uriList,imageList)
+                                    binding.singleRecordPictureRecyclerview.adapter =
+                                        recordPictureRVAdapter
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun funImageUpload() {
+        for(i in 0 until uriList.size){
+            urlList.add(i,"")
+        }
+        if (uriList.isNotEmpty()) {
+            for(i in 0 until uriList.size) {
+                fbStorage?.reference?.child("images")?.child(imgFileName[i])?.putFile(uriList[i]!!)
+                    ?.addOnSuccessListener {
+                        it.storage.downloadUrl.addOnCompleteListener {
+                            urlList.set(i,it.result.toString())
+                            Log.e("url", urlList.toString())
+                            Toast.makeText(requireContext(), "이미지가 업로드 됐어!", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+            }
+        }
+    }
+
+    private fun funImageDelete() {
+        if (imageList.isNotEmpty()) {
+            for(i in 0 until imageList.size) {
+                if(imageList[i]!=null) {
+                    fbStorage?.getReferenceFromUrl(imageList[i])?.delete()
+                        ?.addOnSuccessListener {
+                            Toast.makeText(requireContext(), "이미지가 삭제 됐어!", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                }
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         hideBottomNavigation(false)
@@ -217,6 +353,16 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
             binding.singleRecordTitleEt.setText(result.eachContentResult.recordingTitle)
             binding.singleRecordStarscore.rating = result.eachContentResult.recordingStar.toFloat()
             binding.singleRecordWriteEt.setText(result.eachContentResult.recordingContent)
+
+            for(i in 0 until result.eachImgListResult.size){
+                imageList.add(i,result.eachImgListResult[i].recordingImgUrl)
+
+            }
+            binding.singleRecordPicturenumTv.text = result.eachImgListResult.size.toString()+"/10"
+
+            val recordPictureRVAdapter = RecordPictureRVAdapter(uriList,imageList)
+            binding.singleRecordPictureRecyclerview.adapter =
+                recordPictureRVAdapter
 
 
         } catch (e: NullPointerException) {

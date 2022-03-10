@@ -1,24 +1,26 @@
 package org.techtown.gabojago.menu.record.dialog
 
+import android.content.Context
+import android.content.Context.WINDOW_SERVICE
 import android.graphics.Color
+import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.view.WindowManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.DialogFragment
 import org.techtown.gabojago.R
-
 import org.techtown.gabojago.databinding.DialogFoldermodifyBinding
+import org.techtown.gabojago.databinding.FragmentRecordBinding
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.RecordFragment
 import org.techtown.gabojago.menu.record.recordRetrofit.*
-import java.util.ArrayList
-
 
 
 class DialogFolderModify(private val folder : FolderResultList,private val records:ArrayList<SingleResultListResult>) : DialogFragment() ,FolderUpdateView{
@@ -26,14 +28,26 @@ class DialogFolderModify(private val folder : FolderResultList,private val recor
     val plusUpdate= mutableListOf<Int>()
     val minusUpdate= mutableListOf<Int>()
 
+    interface onDismissListener {
+        fun onDismiss(dialogFragment : DialogFragment)
+    }
+
+    private lateinit var mDismissListener: onDismissListener
+
+    fun setOnDismissClickListener(dismissListener: onDismissListener) {
+        mDismissListener = dismissListener
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //false로 설정해 주면 화면밖 혹은 뒤로가기 버튼시 다이얼로그라 dismiss 되지 않음
         isCancelable = true
         plusUpdate.clear()
         minusUpdate.clear()
+
     }
     private lateinit var binding: DialogFoldermodifyBinding
+    private lateinit var binding2: FragmentRecordBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,8 +55,10 @@ class DialogFolderModify(private val folder : FolderResultList,private val recor
         savedInstanceState: Bundle?,
     ): View? {
         binding = DialogFoldermodifyBinding.inflate(inflater, container, false)
-        dialog?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         binding.folderModifyLayout.setBackgroundResource(R.drawable.folderresultbox_selectorange)
+
 
         val recordService = RecordService()
         recordService.setFolderUpdateView(this@DialogFolderModify)
@@ -96,7 +112,10 @@ class DialogFolderModify(private val folder : FolderResultList,private val recor
                 recordService.putUpdateFolderIdx(userJwt, folder.folderIdx, plusUpdate, minusUpdate)
             }
         }
+
         binding.dialogModifyCancleIv.setOnClickListener{
+            Log.e("dialog","dismiss")
+            mDismissListener.onDismiss(this)
             dismiss()
         }
 
@@ -104,12 +123,13 @@ class DialogFolderModify(private val folder : FolderResultList,private val recor
         return binding.root
     }
 
-    override fun onFolderUpdateSuccess() {
 
+    override fun onFolderUpdateSuccess() {
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, RecordFragment())
             .commitAllowingStateLoss()
         Log.e("성공","성공")
+        mDismissListener.onDismiss(this)
         dismiss()
     }
 
@@ -117,6 +137,7 @@ class DialogFolderModify(private val folder : FolderResultList,private val recor
         MyToast.createToast(
             requireContext(), message
         )?.show()
+        mDismissListener.onDismiss(this)
         dismiss()
     }
 }

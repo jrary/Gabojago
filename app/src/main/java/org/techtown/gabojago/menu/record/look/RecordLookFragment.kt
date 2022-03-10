@@ -1,10 +1,12 @@
 package org.techtown.gabojago.menu.record.look
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -34,8 +36,9 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
         recordService.setFolderLookView(this@RecordLookFragment)
         recordService.setSingleLookView(this@RecordLookFragment)
         val userJwt = getJwt(requireContext(), "userJwt")
-        val imageList = ArrayList<Int>()
-        imageList.add(R.drawable.image_background)
+        var imageList = ArrayList<String>()
+        val name = "https://firebasestorage.googleapis.com/v0/b/gabojago-54fc6.appspot.com/o/images%2Fimage_background.png?alt=media&token=8d2965c1-5ab3-4d7f-964b-3918a0d01829"
+        imageList.add(name)
 
         binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageList)
         binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -152,7 +155,8 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
 
     //폴더조회성공
     override fun onFolderLookSuccess(result: FolderLookResult) {
-        var imageList = ArrayList<Int>()
+        var imageList = ArrayList<String>()
+
         try {
             //기록내용이 존재하는지 여부 체크
             if(!result.contentCheck){
@@ -163,15 +167,30 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
             //이미지리스트 존재하는지 여부 체크
             if(!result.imageListCheck){
                 binding.recordLookCircleIndicator.visibility = View.GONE
-                imageList.add(R.drawable.image_background)
+                val name = "https://firebasestorage.googleapis.com/v0/b/gabojago-54fc6.appspot.com/o/images%2Fimage_background.png?alt=media&token=8d2965c1-5ab3-4d7f-964b-3918a0d01829"
+                imageList.add(name)
+                //이미지 뷰페이저및 어댑터
+                binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageList)
+                binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+                binding.recordLookPictureVp.setPageTransformer(ZoomOutPageTransformer())
+                binding.recordLookCircleIndicator.setViewPager2(binding.recordLookPictureVp)
             }else{
+                val imageList = ArrayList<String>()
+
+                for(i in 0 until result.folderImgListResult.size){
+                    imageList.add(i,result.folderImgListResult[i].recordingImgUrl)
+                }
+                Log.e("폴더이미지조회",imageList.toString())
+
+                //이미지 뷰페이저및 어댑터
                 binding.recordLookCircleIndicator.visibility = View.VISIBLE
+                binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageList)
+                binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+                binding.recordLookPictureVp.setPageTransformer(ZoomOutPageTransformer())
+                binding.recordLookCircleIndicator.setViewPager2(binding.recordLookPictureVp)
             }
-            //이미지 뷰페이저및 어댑터
-            binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageList)
-            binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-            binding.recordLookPictureVp.setPageTransformer(ZoomOutPageTransformer())
-            binding.recordLookCircleIndicator.setViewPager2(binding.recordLookPictureVp)
+
+
 
             //기록제목, 내용, 별점, 기록리스트 세팅
             binding.recordLookNameTv.text = result.folderContentResult.recordingTitle
@@ -181,8 +200,9 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
             val recordLookRVAdapter = RecordLookRVAdapter(result.folderResultList)
             binding.recordResultRecyclerview.adapter = recordLookRVAdapter
         } catch (e: NullPointerException) {
-            val imageList = ArrayList<Int>()
-            imageList.add(R.drawable.image_background)
+            var imageList = ArrayList<String>()
+            val name = "https://firebasestorage.googleapis.com/v0/b/gabojago-54fc6.appspot.com/o/images%2Fimage_background.png?alt=media&token=8d2965c1-5ab3-4d7f-964b-3918a0d01829"
+            imageList.add(name)
             //null값으로 들어왔을 때 오류방지
             binding.recordLookNameTv.text = "제목이 비어있어!"
             setStarState(2.5)
@@ -206,8 +226,9 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
 
     //폴더기록조회실패
     override fun onFolderLookFailure(code: Int, message: String) {
-        val imageList = ArrayList<Int>()
-        imageList.add(R.drawable.image_background)
+        var imageList = ArrayList<String>()
+        val name = "https://firebasestorage.googleapis.com/v0/b/gabojago-54fc6.appspot.com/o/images%2Fimage_background.png?alt=media&token=8d2965c1-5ab3-4d7f-964b-3918a0d01829"
+        imageList.add(name)
         Log.e("폴더조회",message)
 
         binding.recordLookNameTv.text = "제목이 비어있어!"
@@ -232,7 +253,7 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
     }
 
     override fun onSingleLookSuccess(result: SingleLookResult) {
-        var imageList = ArrayList<Int>()
+        var imageList = ArrayList<String>()
         try {
             if(!result.contentCheck){
                 binding.recordLookContentsTv.visibility = View.GONE
@@ -241,9 +262,14 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
             }
             if(!result.imageListCheck){
                 binding.recordLookCircleIndicator.visibility = View.GONE
-                imageList.add(R.drawable.image_background)
+                val name = "https://firebasestorage.googleapis.com/v0/b/gabojago-54fc6.appspot.com/o/images%2Fimage_background.png?alt=media&token=8d2965c1-5ab3-4d7f-964b-3918a0d01829"
+                imageList.add(name)
             }else{
                 binding.recordLookCircleIndicator.visibility = View.VISIBLE
+
+                for(i in 0 until result.eachImgListResult.size){
+                    imageList.add(i,result.eachImgListResult[i].recordingImgUrl)
+                }
             }
             //이미지 뷰페이저및 어댑터
             binding.recordLookPictureVp.adapter = RecordLookViewpagerAdapter(imageList)
@@ -261,8 +287,9 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
             val recordLookRVAdapter = RecordLookRVAdapter(singleResult)
             binding.recordResultRecyclerview.adapter = recordLookRVAdapter
         } catch (e: NullPointerException) {
-            var imageList = ArrayList<Int>()
-            imageList.add(R.drawable.image_background)
+            val imageList = ArrayList<String>()
+            val name = "https://firebasestorage.googleapis.com/v0/b/gabojago-54fc6.appspot.com/o/images%2Fimage_background.png?alt=media&token=8d2965c1-5ab3-4d7f-964b-3918a0d01829"
+            imageList.add(name)
             binding.recordLookNameTv.text = "제목이 비어있어!"
             setStarState(2.5)
             binding.recordLookContentsTv.text = "내용이 비어있어!"
@@ -283,8 +310,9 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
     }
 
     override fun onSingleLookFailure(code: Int, message: String) {
-        var imageList = ArrayList<Int>()
-        imageList.add(R.drawable.image_background)
+        var imageList = ArrayList<String>()
+        val name = "https://firebasestorage.googleapis.com/v0/b/gabojago-54fc6.appspot.com/o/images%2Fimage_background.png?alt=media&token=8d2965c1-5ab3-4d7f-964b-3918a0d01829"
+        imageList.add(name)
         Log.e("개별조회",message)
 
         binding.recordLookNameTv.text = "제목이 비어있어!"

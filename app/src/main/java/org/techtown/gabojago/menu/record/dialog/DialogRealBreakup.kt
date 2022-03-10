@@ -7,10 +7,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.DialogRealdeleteBinding
+import org.techtown.gabojago.databinding.FragmentRecordBinding
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
@@ -24,6 +26,15 @@ class DialogRealBreakup(private val folderIdx: Int) : DialogFragment() ,FolderBr
         super.onCreate(savedInstanceState)
         //false로 설정해 주면 화면밖 혹은 뒤로가기 버튼시 다이얼로그라 dismiss 되지 않는다.
         isCancelable = true
+    }
+    interface onDismissListener {
+        fun onDismiss(dialogFragment : DialogFragment)
+    }
+
+    private lateinit var mDismissListener: onDismissListener
+
+    fun setOnDismissClickListener(dismissListener: onDismissListener) {
+        mDismissListener = dismissListener
     }
 
     private lateinit var binding: DialogRealdeleteBinding
@@ -46,6 +57,7 @@ class DialogRealBreakup(private val folderIdx: Int) : DialogFragment() ,FolderBr
         }
 
         binding.dialogNoBtn.setOnClickListener {
+            mDismissListener.onDismiss(this)
             dismiss()
         }
         return binding.root
@@ -56,6 +68,7 @@ class DialogRealBreakup(private val folderIdx: Int) : DialogFragment() ,FolderBr
             .replace(R.id.main_frm, RecordFragment())
             .commitAllowingStateLoss()
         Log.e("성공","성공")
+        mDismissListener.onDismiss(this)
         dismiss()
     }
 
@@ -63,6 +76,7 @@ class DialogRealBreakup(private val folderIdx: Int) : DialogFragment() ,FolderBr
         MyToast.createToast(
             requireContext(), message
         )?.show()
+        mDismissListener.onDismiss(this)
         dismiss()
     }
 }
