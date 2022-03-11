@@ -347,7 +347,7 @@
     <ImageView
         android:id="@+id/single_record_complete_view"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="65dp"
         android:scaleType="fitXY"
         android:src="@drawable/recordingcomplete"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -360,7 +360,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/apple_sd_gothic_neo_sb"
         android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"
         android:letterSpacing="0.05"
         android:text="완료"
         android:textColor="#ffffff"
