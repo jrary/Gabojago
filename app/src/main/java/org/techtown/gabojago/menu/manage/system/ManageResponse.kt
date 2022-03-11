@@ -31,10 +31,3 @@ data class NaverWithdrawalResponse(
     @SerializedName("access_token") val access_token: String,
     @SerializedName("result") val result: String
 )
-
-data class NaverRecheckResponse(
-    @SerializedName("code") val code: String,
-    @SerializedName("state") val state: String,
-    @SerializedName("error") val error: String,
-    @SerializedName("error_description") val error_description: String
-)

@@ -56,6 +56,7 @@ class LoginActivity :AppCompatActivity(), LoginView {
                 val tokenType: String = mOAuthLoginInstance.getTokenType(baseContext)
 
                 Log.d("ACCESSTOKEN", accessToken)
+                setJwt(this@LoginActivity, "accessToken", accessToken)
 
                 val authService = AuthService()
                 authService.setLoginView(this@LoginActivity)
