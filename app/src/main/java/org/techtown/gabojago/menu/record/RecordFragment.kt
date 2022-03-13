@@ -70,6 +70,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         val userJwt = getJwt(requireContext(), "userJwt")
         //캘린더 액티비티에서 값이 넘어왔을 경우
         val specialDate = arguments?.getString("changeDate")
+        val pickDate = arguments?.getString("pickDate")
         if (specialDate != null) {
             //날짜, 구분선, 메시지 조정
             binding.recordMonthTv.setText("< "+specialDate.substring(4,6).toInt().toString()+"월")
@@ -77,10 +78,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
             binding.recordDivisionView.visibility = View.VISIBLE
             binding.recordEmptyTv.visibility = View.VISIBLE
             binding.recordNotifyTv.visibility = View.GONE
-            //메인화면 레트로핏 다시 불러오기
-            recordService.recordCount(userJwt,specialDate)
-            recordService.getSingleResultList(userJwt, specialDate)
-            recordService.getFolderResultList(userJwt, specialDate)
+
             //주간캘린더 다시 불러오기
             binding.recordWeekRecyclerview.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -103,16 +101,51 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
                 }
             })
 
-        }else{
+            //메인화면 레트로핏 다시 불러오기
+            recordService.recordCount(userJwt,specialDate)
+            recordService.getSingleResultList(userJwt, specialDate)
+            recordService.getFolderResultList(userJwt, specialDate)
+
+        }else if(pickDate!=null){
+            //날짜, 구분선, 메시지 조정
+            binding.recordMonthTv.setText("< "+pickDate.substring(4,6).toInt().toString()+"월")
+            binding.recordDateTv.setText(pickDate.substring(0,4)+"년 "+pickDate.substring(4,6).toInt().toString()+"월 "+pickDate.substring(6).toInt().toString()+"일")
+            binding.recordDivisionView.visibility = View.VISIBLE
+            binding.recordEmptyTv.visibility = View.VISIBLE
+            binding.recordNotifyTv.visibility = View.GONE
+            //주간캘린더 다시 불러오기
+            binding.recordWeekRecyclerview.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            val recordWeekRVAdapter = RecordWeekRVAdapter(pickDate)
+            binding.recordWeekRecyclerview.adapter = recordWeekRVAdapter
+            //주간캘린더 클릭이벤트
+            recordWeekRVAdapter.setMyItemClickListener(object :
+                RecordWeekRVAdapter.MyItemClickListener {
+                override fun onItemClick(day: String) {
+                    binding.recordDivisionView.visibility = View.VISIBLE
+                    binding.recordEmptyTv.visibility= View.VISIBLE
+                    binding.recordNotifyTv.visibility = View.GONE
+
+                    //날짜별로 메인화면 레트로핏 다시 불러오기
+                    recordService.getSingleResultList(userJwt,day)
+                    recordService.getFolderResultList(userJwt,day)
+                    recordService.recordCount(userJwt,day)
+                    binding.recordMonthTv.setText("< "+day.substring(4,6).toInt().toString()+"월")
+                    binding.recordDateTv.setText(day.substring(0,4)+"년 "+day.substring(4,6).toInt().toString()+"월 "+day.substring(6).toInt().toString()+"일")
+                }
+            })
+
+            //메인화면 레트로핏 다시 불러오기
+            recordService.recordCount(userJwt,pickDate)
+            recordService.getSingleResultList(userJwt, pickDate)
+            recordService.getFolderResultList(userJwt, pickDate)
+        } else{
             //캘린더액티비티에서 값이 넘어오지 않는경우(오늘날짜 default)
             init()
             val now: Long = System.currentTimeMillis()
             val date = Date(now)
             val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
             val stringDate = dateFormat.format(date)
-            recordService.getSingleResultList(userJwt,stringDate)
-            recordService.getFolderResultList(userJwt,stringDate)
-            recordService.recordCount(userJwt,stringDate)
 
             binding.recordWeekRecyclerview.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -136,6 +169,9 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
                         .toString() + "일")
                 }
             })
+            recordService.getSingleResultList(userJwt,stringDate)
+            recordService.getFolderResultList(userJwt,stringDate)
+            recordService.recordCount(userJwt,stringDate)
         }
         //메인화면 폴더, 개별 리사이클러뷰 레이아웃 매니저
         binding.recordFolderresultRecyclerview.layoutManager =
@@ -197,16 +233,16 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
     }
 
     //개별기록 프래그먼트 이동 함수
-    private fun changeSingleRecordFragment(hasRecording:Boolean,recordIdx: Int,result:RandomResultListResult) {
+    private fun changeSingleRecordFragment(hasRecording:Boolean,recordIdx: Int,result:RandomResultListResult,day: String) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, SingleRecordFragment(hasRecording,recordIdx,result))
+            .replace(R.id.main_frm, SingleRecordFragment(hasRecording,recordIdx,result,day))
             .commitAllowingStateLoss()
 
     }
     //폴더기록 프래그먼트 이동 함수
-    private fun changeFolderRecordFragment(hasRecording: Boolean,folderIdx:Int, resultList:ArrayList<InFolderListResult>) {
+    private fun changeFolderRecordFragment(hasRecording: Boolean,folderIdx:Int, resultList:ArrayList<InFolderListResult>,day:String) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, FolderRecordFragment(hasRecording,folderIdx,resultList))
+            .replace(R.id.main_frm, FolderRecordFragment(hasRecording,folderIdx,resultList,day))
             .commitAllowingStateLoss()
 
     }
@@ -358,8 +394,8 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
 
         recordResultRVAdapter.setMyItemClickListener(object :
             RecordResultRVAdapter.MyItemClickListener {
-            override fun onItemClick(hasRecording: Boolean,recordIdx :Int,result:RandomResultListResult) {
-                changeSingleRecordFragment(hasRecording,recordIdx,result)
+            override fun onItemClick(hasRecording: Boolean,recordIdx :Int,resultList:RandomResultListResult) {
+                changeSingleRecordFragment(hasRecording,recordIdx,resultList,result.date)
             }
             override fun onItemView(randomResultIdx:Int) {
                 changeRecordFragment(randomResultIdx)
@@ -415,7 +451,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         recordFolderResultNameRVAdapter.setMyItemClickListener(object :
             RecordFolderResultNameRVAdapter.MyItemClickListener {
             override fun onItemClickPencil(hasRecording: Boolean,folderIdx:Int,resultList:ArrayList<InFolderListResult>) {
-                changeFolderRecordFragment(hasRecording,folderIdx,resultList)
+                changeFolderRecordFragment(hasRecording,folderIdx,resultList,result.date)
             }
 
             override fun onItemView(folderIdx:Int) {

@@ -34,7 +34,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class SingleRecordFragment(private  val hasRecording:Boolean,private  val recordIdx:Int,private val result:RandomResultListResult) : Fragment() ,SingleRecordingView, SingleLookView, SingleModifyView{
+class SingleRecordFragment(private  val hasRecording:Boolean,private  val recordIdx:Int,private val result:RandomResultListResult,private val day:String) : Fragment() ,SingleRecordingView, SingleLookView, SingleModifyView{
     lateinit var binding: FragmentSinglerecordBinding
     private lateinit var callback: OnBackPressedCallback
     val imgFileName = java.util.ArrayList<String>()
@@ -128,8 +128,13 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                 ))
 
 
+                var recordFragment = RecordFragment()
+                var bundle = Bundle()
+                bundle.putString("pickDate", day)
+                Log.e("date",day)
+                recordFragment.arguments = bundle
                 (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, RecordFragment())
+                    .replace(R.id.main_frm, recordFragment)
                     .commitAllowingStateLoss()
 
             }
@@ -145,8 +150,13 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                     urlList
                 ))
 
+                var recordFragment = RecordFragment()
+                var bundle = Bundle()
+                bundle.putString("pickDate", day)
+                Log.e("date",day)
+                recordFragment.arguments = bundle
                 (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, RecordFragment())
+                    .replace(R.id.main_frm, recordFragment)
                     .commitAllowingStateLoss()
 
             }
@@ -170,8 +180,13 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                     urlList
                 ),recordIdx)
 
+                var recordFragment = RecordFragment()
+                var bundle = Bundle()
+                bundle.putString("pickDate", day)
+                Log.e("date",day)
+                recordFragment.arguments = bundle
                 (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, RecordFragment())
+                    .replace(R.id.main_frm, recordFragment)
                     .commitAllowingStateLoss()
 
             }
@@ -187,8 +202,13 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                     urlList
                 ),recordIdx)
 
+                var recordFragment = RecordFragment()
+                var bundle = Bundle()
+                bundle.putString("pickDate", day)
+                Log.e("date",day)
+                recordFragment.arguments = bundle
                 (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, RecordFragment())
+                    .replace(R.id.main_frm, recordFragment)
                     .commitAllowingStateLoss()
 
             }
@@ -203,8 +223,13 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
 
     private fun clickevent(){
         binding.singleRecordBackarrow.setOnClickListener{
+            var recordFragment = RecordFragment()
+            var bundle = Bundle()
+            bundle.putString("pickDate", day)
+            Log.e("date",day)
+            recordFragment.arguments = bundle
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, RecordFragment())
+                .replace(R.id.main_frm, recordFragment)
                 .commitAllowingStateLoss()
             }
     }
@@ -338,8 +363,13 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Log.e("back","backpress")
+                var recordFragment = RecordFragment()
+                var bundle = Bundle()
+                bundle.putString("pickDate", day)
+                Log.e("date",day)
+                recordFragment.arguments = bundle
                 (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, RecordFragment())
+                    .replace(R.id.main_frm, recordFragment)
                     .commitAllowingStateLoss()
             }
         }
@@ -352,10 +382,16 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
     }
 
     override fun onSingleRecordingSuccess() {
+        binding.singleRecordBlurView.visibility = View.GONE
+        binding.singleRecordBlurView2.visibility = View.GONE
+        binding.singleRecordLoadingPb.visibility = View.GONE
         Log.e("개별기록","성공")
     }
 
     override fun onSingleRecordingFailure(code: Int, message: String) {
+        binding.singleRecordBlurView.visibility = View.GONE
+        binding.singleRecordBlurView2.visibility = View.GONE
+        binding.singleRecordLoadingPb.visibility = View.GONE
         MyToast.createToast(
             requireContext(), message, 90, true
         ).show()
@@ -408,10 +444,16 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
     }
 
     override fun onSingleModifySuccess() {
+        binding.singleRecordBlurView.visibility = View.GONE
+        binding.singleRecordBlurView2.visibility = View.GONE
+        binding.singleRecordLoadingPb.visibility = View.GONE
         Log.e("개별기록","성공")
     }
 
     override fun onSingleModifyFailure(code: Int, message: String) {
+        binding.singleRecordBlurView.visibility = View.GONE
+        binding.singleRecordBlurView2.visibility = View.GONE
+        binding.singleRecordLoadingPb.visibility = View.GONE
         MyToast.createToast(
             requireContext(), message, 90, true
         ).show()

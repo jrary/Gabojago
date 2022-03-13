@@ -24,7 +24,7 @@ class RecordFolderResultNameRVAdapter(private val folderList: ArrayList<FolderRe
         fun onItemClickPencil(
             hasRecording: Boolean,
             folderIdx: Int,
-            resultList: ArrayList<InFolderListResult>,
+            resultList: ArrayList<InFolderListResult>
         )
 
         fun onItemView(folderIdx: Int)
