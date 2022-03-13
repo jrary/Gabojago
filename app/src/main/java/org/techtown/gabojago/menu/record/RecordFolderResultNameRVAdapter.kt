@@ -27,7 +27,7 @@ class RecordFolderResultNameRVAdapter(private val folderList: ArrayList<FolderRe
             resultList: ArrayList<InFolderListResult>
         )
 
-        fun onItemView(folderIdx: Int)
+        fun onItemView(hasRecording: Boolean,folderIdx: Int)
         fun onModifyClick(folder: FolderResultList)
         fun onBreakUpClick(folderIdx: Int)
     }
@@ -50,7 +50,7 @@ class RecordFolderResultNameRVAdapter(private val folderList: ArrayList<FolderRe
         holder.bind(folderList[position])
         //아이템 자체 클릭
         holder.itemView.setOnClickListener {
-            mItemClickListener.onItemView(folderList[position].folderIdx)
+            mItemClickListener.onItemView(folderList[position].hasRecording,folderList[position].folderIdx)
         }
         //연필이미지 클릭
         holder.binding.folderRecordPecilIv.setOnClickListener {

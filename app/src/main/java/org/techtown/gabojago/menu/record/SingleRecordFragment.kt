@@ -56,8 +56,6 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
         val userJwt = getJwt(requireContext(), "userJwt")
         fbStorage = FirebaseStorage.getInstance()
 
-        recordService.getSingleLook(userJwt, recordIdx)
-
         binding.singleRecordTrash.setOnClickListener {
             val dialogRealRecordDelete =  DialogRealRecordDelete(recordIdx)
             dialogRealRecordDelete.show((context as MainActivity).supportFragmentManager,"dialog")
@@ -162,6 +160,7 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
             }
 
         }else{
+            recordService.getSingleLook(userJwt, recordIdx)
             //기록있을때 카메라 버튼 누를시
             binding.singleRecordPictureIv.setOnClickListener{
                 imageList.clear()
@@ -235,6 +234,8 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
     }
 
     private fun init() {
+        binding.singleRecordBlurView2.setOnTouchListener(View.OnTouchListener { v, event -> true })
+        binding.singleRecordBlurView.setOnTouchListener(View.OnTouchListener { v, event -> true })
         hideBottomNavigation(true)
     }
 
@@ -318,8 +319,8 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                                 binding.singleRecordBlurView.visibility=View.GONE
                                 binding.singleRecordLoadingPb.visibility=View.GONE
                                 MyToast.createToast(
-                                    requireContext(), "이미지가 업로드 됐어!"
-                                )?.show()
+                                    requireContext(), "이미지가 업로드 됐어!",90,false
+                                ).show()
                             }
                         }
                     }
@@ -404,10 +405,10 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
     }
 
     override fun onSingleLookSuccess(result: SingleLookResult) {
-        binding.singleRecordBlurView.visibility = View.GONE
-        binding.singleRecordBlurView2.visibility = View.GONE
-        binding.singleRecordLoadingPb.visibility = View.GONE
         try {
+            binding.singleRecordBlurView.visibility = View.GONE
+            binding.singleRecordBlurView2.visibility = View.GONE
+            binding.singleRecordLoadingPb.visibility = View.GONE
             binding.singleRecordTitleEt.setText(result.eachContentResult.recordingTitle)
             binding.singleRecordStarscore.rating = result.eachContentResult.recordingStar.toFloat()
             binding.singleRecordWriteEt.setText(result.eachContentResult.recordingContent)

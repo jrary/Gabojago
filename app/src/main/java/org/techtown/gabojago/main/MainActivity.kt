@@ -9,7 +9,8 @@ import org.techtown.gabojago.menu.record.RecordFragment
 import org.techtown.gabojago.databinding.ActivityMainBinding
 import org.techtown.gabojago.menu.manage.system.ManageFragment
 import org.techtown.gabojago.menu.home.contents.HomeFragment
-
+import org.techtown.gabojago.menu.record.RecordWeekRVAdapter
+import org.techtown.gabojago.menu.record.recordRetrofit.RandomResultListResult
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,11 +23,6 @@ class MainActivity : AppCompatActivity() {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
         initNavigation()
-    }
-    fun changeFragment(){
-        supportFragmentManager.beginTransaction().replace(R.id.main_frm,RecordFragment())
-            .commitAllowingStateLoss()
-        Log.e("프래그먼트변경","성공")
     }
 
     private fun initNavigation() {

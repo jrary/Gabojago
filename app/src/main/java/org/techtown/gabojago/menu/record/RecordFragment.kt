@@ -44,7 +44,6 @@ import kotlin.concurrent.schedule
 class RecordFragment : Fragment(), RecordCountView, SingleResultListView, FolderResultListView{
     private lateinit var callback: OnBackPressedCallback
     lateinit var binding: FragmentRecordBinding
-    lateinit var binding4: ActivityMainBinding
     lateinit var binding2: ItemRecordFoldernameBinding
     lateinit var binding3: ItemRecordWeekBinding
 
@@ -61,7 +60,6 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         binding = FragmentRecordBinding.inflate(inflater, container, false)
         binding2 = ItemRecordFoldernameBinding.inflate(inflater, container, false)
         binding3 = ItemRecordWeekBinding.inflate(inflater, container, false)
-        binding4 = ActivityMainBinding.inflate(inflater, container, false)
 
         recordService.setRecordCountView(this@RecordFragment)
         recordService.setSingleResultListView(this@RecordFragment)
@@ -236,6 +234,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
     private fun changeSingleRecordFragment(hasRecording:Boolean,recordIdx: Int,result:RandomResultListResult,day: String) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, SingleRecordFragment(hasRecording,recordIdx,result,day))
+            .addToBackStack(null)
             .commitAllowingStateLoss()
 
     }
@@ -243,13 +242,15 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
     private fun changeFolderRecordFragment(hasRecording: Boolean,folderIdx:Int, resultList:ArrayList<InFolderListResult>,day:String) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, FolderRecordFragment(hasRecording,folderIdx,resultList,day))
+            .addToBackStack(null)
             .commitAllowingStateLoss()
 
     }
     //개별, 폴더 기록조회 프래그먼트 이동 함수
-    private fun changeRecordFragment(folderIdx: Int){
+    private fun changeRecordFragment(hasRecording: Boolean,folderIdx: Int,day : String){
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, RecordLookFragment(folderIdx))
+            .replace(R.id.main_frm, RecordLookFragment(hasRecording,folderIdx,day))
+            .addToBackStack(null)
             .commitAllowingStateLoss()
     }
     //오늘 날짜 설정 함수
@@ -325,9 +326,10 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         super.onAttach(context)
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                val main_context = context as MainActivity
+                main_context.binding.mainBnv.selectedItemId = R.id.homeFragment
                 Log.e("back","backpress")
-                binding4.mainBnv.selectedItemId = R.id.homeFragment
-                (context as MainActivity).supportFragmentManager.beginTransaction()
+                main_context.supportFragmentManager.beginTransaction()
                     .replace(R.id.main_frm, HomeFragment())
                     .commitAllowingStateLoss()
             }
@@ -397,8 +399,8 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
             override fun onItemClick(hasRecording: Boolean,recordIdx :Int,resultList:RandomResultListResult) {
                 changeSingleRecordFragment(hasRecording,recordIdx,resultList,result.date)
             }
-            override fun onItemView(randomResultIdx:Int) {
-                changeRecordFragment(randomResultIdx)
+            override fun onItemView(hasRecording: Boolean,randomResultIdx:Int) {
+                changeRecordFragment(hasRecording,randomResultIdx,result.date)
             }
         })
     }
@@ -454,8 +456,8 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
                 changeFolderRecordFragment(hasRecording,folderIdx,resultList,result.date)
             }
 
-            override fun onItemView(folderIdx:Int) {
-                changeRecordFragment(folderIdx)
+            override fun onItemView(hasRecording: Boolean,folderIdx:Int) {
+                changeRecordFragment(hasRecording,folderIdx,result.date)
             }
 
             override fun onModifyClick(folder: FolderResultList) {

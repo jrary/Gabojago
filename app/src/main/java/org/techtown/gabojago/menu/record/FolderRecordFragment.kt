@@ -58,8 +58,6 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
         fbStorage = FirebaseStorage.getInstance()
 
         recordService.setFolderLookView(this@FolderRecordFragment)
-        //조회 api
-        recordService.getFolderLook(userJwt, folderIdx)
 
         binding.folderRecordTrash.setOnClickListener{
             val dialogRealFolderrecordDelete = DialogRealFolderrecordDelete(folderIdx)
@@ -81,6 +79,9 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
 
         //기록되어있으면 수정하기 api 기록되어있지 않으면 기록하기 api
         if(hasRecording){
+            //조회 api
+            recordService.getFolderLook(userJwt, folderIdx)
+
             //기록있을때 카메라 버튼 누를시
             binding.folderRecordPictureIv.setOnClickListener{
                 imageList.clear()
@@ -233,6 +234,8 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
     }
 
     private fun init() {
+        binding.folderRecordBlurView2.setOnTouchListener(View.OnTouchListener { v, event -> true })
+        binding.folderRecordBlurView.setOnTouchListener(View.OnTouchListener { v, event -> true })
         hideBottomNavigation(true)
     }
 
@@ -308,8 +311,8 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
                                 binding.folderRecordBlurView.visibility=View.GONE
                                 binding.folderRecordLoadingPb.visibility=View.GONE
                                 MyToast.createToast(
-                                    requireContext(), "이미지가 업로드 됐어!"
-                                )?.show()
+                                    requireContext(), "이미지가 업로드 됐어!",90,false
+                                ).show()
                             }
                         }
                     }

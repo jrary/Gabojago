@@ -1,26 +1,27 @@
 package org.techtown.gabojago.menu.record.look
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentRecordLookBinding
+import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.RecordFragment
 import org.techtown.gabojago.menu.record.recordRetrofit.*
 import java.util.*
+
 //기록조회 프래그먼트
-class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , SingleLookView {
+class RecordLookFragment(private val hasRecording: Boolean, private val Idx:Int,private val day:String): Fragment() , FolderLookView , SingleLookView {
     private lateinit var callback: OnBackPressedCallback
     lateinit var binding: FragmentRecordLookBinding
     private val MIN_SCALE = 0.95f
@@ -30,7 +31,7 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentRecordLookBinding.inflate(inflater, container, false)
 
@@ -47,9 +48,10 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
         binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.recordLookPictureVp.setPageTransformer(ZoomOutPageTransformer())
         binding.recordLookCircleIndicator.setViewPager2(binding.recordLookPictureVp)
-
-        recordService.getFolderLook(userJwt, Idx)
-        recordService.getSingleLook(userJwt, Idx)
+        if(hasRecording){
+            recordService.getFolderLook(userJwt, Idx)
+            recordService.getSingleLook(userJwt, Idx)
+        }
 
         //기록리스트 여는 클릭이벤트
         binding.recordLookView.setOnClickListener {
@@ -58,14 +60,22 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
 
         //이전페이지로
         binding.recordLookBackBtn.setOnClickListener {
+            var recordFragment = RecordFragment()
+            var bundle = Bundle()
+            bundle.putString("pickDate", day)
+            Log.e("date",day)
+            recordFragment.arguments = bundle
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, RecordFragment())
+                .replace(R.id.main_frm, recordFragment)
                 .commitAllowingStateLoss()
         }
         return binding.root
     }
     private fun init() {
+        binding.lookRecordBlurView.visibility = View.GONE
+        binding.lookRecordLoadingPb.visibility = View.GONE
         hideBottomNavigation(true)
+        binding.lookRecordBlurView.setOnTouchListener(OnTouchListener { v, event -> true })
     }
     override fun onDestroyView() {
         super.onDestroyView()
@@ -157,8 +167,13 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Log.e("back","backpress")
+                var recordFragment = RecordFragment()
+                var bundle = Bundle()
+                bundle.putString("pickDate", day)
+                Log.e("date",day)
+                recordFragment.arguments = bundle
                 (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, RecordFragment())
+                    .replace(R.id.main_frm, recordFragment)
                     .commitAllowingStateLoss()
             }
         }
@@ -250,6 +265,8 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
 
     //폴더기록조회실패
     override fun onFolderLookFailure(code: Int, message: String) {
+        binding.lookRecordBlurView.visibility = View.GONE
+        binding.lookRecordLoadingPb.visibility = View.GONE
         var imageList = ArrayList<String>()
         val name = "https://firebasestorage.googleapis.com/v0/b/gabojago-54fc6.appspot.com/o/images%2Fimage_background.png?alt=media&token=8d2965c1-5ab3-4d7f-964b-3918a0d01829"
         imageList.add(name)
@@ -341,6 +358,8 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
     }
 
     override fun onSingleLookFailure(code: Int, message: String) {
+        binding.lookRecordBlurView.visibility = View.GONE
+        binding.lookRecordLoadingPb.visibility = View.GONE
         var imageList = ArrayList<String>()
         val name = "https://firebasestorage.googleapis.com/v0/b/gabojago-54fc6.appspot.com/o/images%2Fimage_background.png?alt=media&token=8d2965c1-5ab3-4d7f-964b-3918a0d01829"
         imageList.add(name)
@@ -362,7 +381,6 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
         binding.recordLookPictureVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.recordLookPictureVp.setPageTransformer(ZoomOutPageTransformer())
         binding.recordLookCircleIndicator.setViewPager2(binding.recordLookPictureVp)
-
 
     }
 
