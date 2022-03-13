@@ -33,8 +33,10 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView {
         super.onAttach(context)
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                val mainContext = context as MainActivity
+                mainContext.binding.mainBnv.selectedItemId = R.id.homeFragment
                 Log.e("back","backpress")
-                (context as MainActivity).supportFragmentManager.beginTransaction()
+                mainContext.supportFragmentManager.beginTransaction()
                     .replace(R.id.main_frm, HomeFragment())
                     .commitAllowingStateLoss()
             }
@@ -46,6 +48,8 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView {
         super.onDetach()
         callback.remove()
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

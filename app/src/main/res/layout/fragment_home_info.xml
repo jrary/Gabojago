@@ -9,7 +9,8 @@
     <!--Background-->
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="543dp"
+        android:scaleType="fitXY"
         android:src="@drawable/info_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

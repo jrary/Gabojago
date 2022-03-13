@@ -326,10 +326,10 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         super.onAttach(context)
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val main_context = context as MainActivity
-                main_context.binding.mainBnv.selectedItemId = R.id.homeFragment
+                val mainContext = context as MainActivity
+                mainContext.binding.mainBnv.selectedItemId = R.id.homeFragment
                 Log.e("back","backpress")
-                main_context.supportFragmentManager.beginTransaction()
+                mainContext.supportFragmentManager.beginTransaction()
                     .replace(R.id.main_frm, HomeFragment())
                     .commitAllowingStateLoss()
             }
