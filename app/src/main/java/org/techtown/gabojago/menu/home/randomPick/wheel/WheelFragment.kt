@@ -1,15 +1,18 @@
 package org.techtown.gabojago.menu.home.randomPick.wheel
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.RotateAnimation
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -29,6 +32,7 @@ import java.util.*
 
 class WheelFragment : Fragment(), RandomView, RecordCountView {
     lateinit var binding: FragmentWheelBinding
+    private lateinit var callback: OnBackPressedCallback
     var optionList = ArrayList<String>()
     var res: Int = -1
     private val wheelText = arrayOf(
@@ -38,6 +42,24 @@ class WheelFragment : Fragment(), RandomView, RecordCountView {
         arrayOf(0, 3, 5, 7, 10),
         arrayOf(0, 2, 4, 6, 8, 10)
     )
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.e("back","backpress")
+                (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, HomeMenuFragment())
+                    .commitAllowingStateLoss()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,11 +108,7 @@ class WheelFragment : Fragment(), RandomView, RecordCountView {
 
         binding.wheelBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, HomeMenuFragment().apply {
-                    arguments = Bundle().apply {
-                    }
-                })
-                .addToBackStack(null)
+                .replace(R.id.main_frm, HomeMenuFragment())
                 .commitAllowingStateLoss()
         }
 
@@ -148,13 +166,13 @@ class WheelFragment : Fragment(), RandomView, RecordCountView {
     private fun saveWithValidation(count: Int) {
         if (res == -1) {
             MyToast.createToast(
-                requireContext(), "다시 실행 후 저장해 주세요."
-            )?.show()
+                requireContext(), "다시 실행 후 저장해 주세요.", 90, true
+            ).show()
         }
         else if(count >= 30){
             MyToast.createToast(
-                requireContext(), "오늘은 더 이상 저장할 수 없어!"
-            )?.show()
+                requireContext(), "오늘은 더 이상 저장할 수 없어!", 90, true
+            ).show()
         }
         else{
             val randomService = RandomService()
@@ -283,20 +301,20 @@ class WheelFragment : Fragment(), RandomView, RecordCountView {
     override fun onRandomResultSuccess() {
         binding.wheelLoadingView.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), "뽑기 결과가 저장됐어!"
-        )?.show()
+            requireContext(), "뽑기 결과가 저장됐어!", 90, false
+        ).show()
         binding.wheelSaveBtn.setOnClickListener {
             MyToast.createToast(
-                requireContext(), "이미 결과가 저장되었습니다."
-            )?.show()
+                requireContext(), "이미 결과가 저장되었습니다.", 90, true
+            ).show()
         }
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
         binding.wheelLoadingView.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 
     override fun onRecordCountLoading() {
@@ -322,7 +340,7 @@ class WheelFragment : Fragment(), RandomView, RecordCountView {
     override fun onRecordCountFailure(code: Int, message: String) {
         binding.wheelLoadingView.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 }

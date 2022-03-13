@@ -62,8 +62,8 @@ class DialogFolderSelect(private val recordList: ArrayList<SingleResultListResul
             if(folderMake.size==1){
                 folderMake.removeAt(0)
                 MyToast.createToast(
-                    requireContext(), "폴더 내 항목은 2개 이상이어야 해!"
-                )?.show()
+                    requireContext(), "폴더 내 항목은 2개 이상이어야 해!", 90, true
+                ).show()
             }else{
                 recordService.putFolderMakeIdx(userJwt,folderMake)
             }

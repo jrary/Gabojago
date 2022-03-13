@@ -49,18 +49,18 @@ class NumberOptionActivity : AppCompatActivity() {
         binding.numberCompBtn.setOnClickListener {
             if(startNum > endNum){
                 MyToast.createToast(
-                    this, "숫자 범위를 다시 설정해 주세요"
-                )?.show()
+                    this, "숫자 범위를 다시 설정해 주세요", 90, true
+                ).show()
             }
             else if(((endNum - startNum) < (num - 1)) && !isOverlap){
                 MyToast.createToast(
-                    this, "숫자의 범위보다 뽑을 숫자의 개수가 더 많습니다"
-                )?.show()
+                    this, "숫자의 범위보다 뽑을 숫자의 개수가 더 많습니다", 90, true
+                ).show()
             }
             else if(num == 0){
                 MyToast.createToast(
-                    this, "0개의 숫자는 뽑을 수 없습니다"
-                )?.show()
+                    this, "0개의 숫자는 뽑을 수 없습니다", 90, true
+                ).show()
             }
             else{
                 var intent = Intent()

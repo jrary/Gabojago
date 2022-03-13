@@ -350,8 +350,8 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
 
     override fun onRecordCountFailure(code: Int, message: String) {
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 
     override fun onSingleResultListSuccess(result: SingleResult) {

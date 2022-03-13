@@ -393,8 +393,8 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
         binding.singleRecordBlurView2.visibility = View.GONE
         binding.singleRecordLoadingPb.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 
     override fun onSingleLookLoading() {
@@ -439,8 +439,8 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
         binding.singleRecordBlurView2.visibility = View.GONE
         binding.singleRecordLoadingPb.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 
     override fun onSingleModifySuccess() {
@@ -455,8 +455,8 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
         binding.singleRecordBlurView2.visibility = View.GONE
         binding.singleRecordLoadingPb.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 
 }

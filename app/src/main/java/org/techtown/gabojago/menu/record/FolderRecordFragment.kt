@@ -386,8 +386,8 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
         binding.folderRecordBlurView2.visibility = View.GONE
         binding.folderRecordLoadingPb.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 
     override fun onFolderLookLoading() {
@@ -434,8 +434,8 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
         binding.folderRecordBlurView2.visibility = View.GONE
         binding.folderRecordLoadingPb.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 
     //폴더기록수정 성공
@@ -452,8 +452,8 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
         binding.folderRecordBlurView2.visibility = View.GONE
         binding.folderRecordLoadingPb.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 
 }

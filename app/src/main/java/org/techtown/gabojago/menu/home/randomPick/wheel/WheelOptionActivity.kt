@@ -31,8 +31,8 @@ class WheelOptionActivity : AppCompatActivity() {
         }
         else{
             MyToast.createToast(
-                this, "못받았는데요"
-            )?.show()
+                this, "System error - Wheel", 90, true
+            ).show()
         }
 
         //Setting RecyclerView
@@ -68,7 +68,7 @@ class WheelOptionActivity : AppCompatActivity() {
     }
     fun showToastMsg(){
         MyToast.createToast(
-            this, "2개이하로줄일수없다는멘트"
-        )?.show()
+            this, "옵션을 2개 미만으로 설정할 수 없습니다.", 90, true
+        ).show()
     }
 }

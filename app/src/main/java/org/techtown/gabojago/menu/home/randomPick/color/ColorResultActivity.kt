@@ -91,13 +91,13 @@ class ColorResultActivity : AppCompatActivity(), RandomView, RecordCountView {
     private fun saveWithValidation(count: Int) {
         if (randRes == -1) {
             MyToast.createToast(
-                this, "다시 실행 후 저장해 주세요."
-            )?.show()
+                this, "다시 실행 후 저장해 주세요.", 90, true
+            ).show()
         }
         else if(count >= 30){
             MyToast.createToast(
-                this, "오늘은 더 이상 저장할 수 없어!"
-            )?.show()
+                this, "오늘은 더 이상 저장할 수 없어!", 90, true
+            ).show()
         }
         else {
             val randomService = RandomService()
@@ -131,21 +131,21 @@ class ColorResultActivity : AppCompatActivity(), RandomView, RecordCountView {
     override fun onRandomResultSuccess() {
         binding.colorLoadingView.visibility = View.GONE
         MyToast.createToast(
-            this, "뽑기 결과가 저장됐어!"
-        )?.show()
+            this, "뽑기 결과가 저장됐어!", 90, false
+        ).show()
 
         binding.colorResultSaveBtn.setOnClickListener {
             MyToast.createToast(
-                this, "이미 결과가 저장되었습니다."
-            )?.show()
+                this, "이미 결과가 저장되었습니다.", 90, true
+            ).show()
         }
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
         binding.colorLoadingView.visibility = View.GONE
         MyToast.createToast(
-            this, message
-        )?.show()
+            this, message, 90, true
+        ).show()
     }
 
     override fun onRecordCountLoading() {
@@ -171,7 +171,7 @@ class ColorResultActivity : AppCompatActivity(), RandomView, RecordCountView {
     override fun onRecordCountFailure(code: Int, message: String) {
         binding.colorLoadingView.visibility = View.GONE
         MyToast.createToast(
-            this, message
-        )?.show()
+            this, message, 90, true
+        ).show()
     }
 }

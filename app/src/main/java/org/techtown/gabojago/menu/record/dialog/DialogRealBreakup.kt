@@ -74,8 +74,8 @@ class DialogRealBreakup(private val folderIdx: Int) : DialogFragment() ,FolderBr
 
     override fun onFolderBreakFailure(code: Int, message: String) {
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
         mDismissListener.onDismiss(this)
         dismiss()
     }

@@ -60,15 +60,15 @@ class LogoutDialog : DialogFragment(), LogoutView {
         oAuthLogin.logout(requireContext())
         setJwt(requireContext(), "userJwt", "")
         MyToast.createToast(
-            requireContext(), "로그아웃 되었습니다."
-        )?.show()
+            requireContext(), "로그아웃 되었습니다.", 50, false
+        ).show()
         startActivity(Intent(requireContext(), SplashActivity::class.java))
     }
 
     override fun onLogoutFailure(code: Int, message: String) {
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 
 

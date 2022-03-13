@@ -68,8 +68,8 @@ class LoginActivity :AppCompatActivity(), LoginView {
                 val errorDesc = mOAuthLoginInstance.getLastErrorDesc(mContext)
                 MyToast.createToast(
                     baseContext, "errorCode:" + errorCode
-                            + ", errorDesc:" + errorDesc
-                )?.show()
+                            + ", errorDesc:" + errorDesc, 50, true
+                ).show()
             }
         }
     }
@@ -87,20 +87,20 @@ class LoginActivity :AppCompatActivity(), LoginView {
         when(code){
             400, 5014 -> {
                 MyToast.createToast(
-                    baseContext, message
-                )?.show()
+                    baseContext, message, 90, true
+                ).show()
             }
             5013, 5015 -> {
                 MyToast.createToast(
-                    baseContext, "로그인 시스템에 문제가 발생하였습니다."
-                )?.show()
+                    baseContext, "로그인 시스템에 문제가 발생하였습니다.", 50, true
+                ).show()
                 Log.d("LOGINERROR", message)
             }
             else -> {
 
                 MyToast.createToast(
-                    baseContext, message
-                )?.show()
+                    baseContext, message, 50, true
+                ).show()
             }
         }
     }

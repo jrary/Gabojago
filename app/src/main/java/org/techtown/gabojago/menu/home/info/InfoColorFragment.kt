@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
@@ -11,6 +12,7 @@ import org.techtown.gabojago.databinding.FragmentInfoColorBinding
 
 class InfoColorFragment : Fragment() {
     lateinit var binding: FragmentInfoColorBinding
+    private lateinit var callback: OnBackPressedCallback
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,11 +24,7 @@ class InfoColorFragment : Fragment() {
 
         binding.infoColorBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, HomeInfoFragment().apply {
-                    arguments = Bundle().apply {
-                    }
-                })
-                .addToBackStack(null)
+                .replace(R.id.main_frm, HomeInfoFragment())
                 .commitAllowingStateLoss()
         }
 

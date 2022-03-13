@@ -1,10 +1,12 @@
 package org.techtown.gabojago.menu.home.randomPick.clock
 
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +14,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.RotateAnimation
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import org.techtown.gabojago.main.MainActivity
@@ -30,10 +33,11 @@ import java.util.*
 class ClockFragment : Fragment(), RandomView, RecordCountView {
 
     lateinit var binding: FragmentClockBinding
+    private lateinit var callback: OnBackPressedCallback
     var startNum: Int = 12
     var endNum: Int = 12
     var getResClock: Int = 12
-    var clockAngle = arrayOf(
+    private var clockAngle = arrayOf(
         30f,
         60f,
         90f,
@@ -47,6 +51,24 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
         330f,
         360f
     )
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.e("back","backpress")
+                (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, HomeMenuFragment())
+                    .commitAllowingStateLoss()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,11 +108,7 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
 
         binding.clockBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, HomeMenuFragment().apply {
-                    arguments = Bundle().apply {
-                    }
-                })
-                .addToBackStack(null)
+                .replace(R.id.main_frm, HomeMenuFragment())
                 .commitAllowingStateLoss()
         }
         binding.clockOptionBtn.setOnClickListener {
@@ -103,8 +121,8 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
         binding.clockGoBtn.setOnClickListener {
             if(startNum == endNum){
                 MyToast.createToast(
-                    requireContext(), "옵션을 설정한 후에 실행해 주세요"
-                )?.show()
+                    requireContext(), "옵션을 설정한 후에 실행해 주세요", 90, true
+                ).show()
             }
             else{
                 moveClock()
@@ -166,13 +184,13 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
     private fun saveWithValidation(count: Int) {
         if (getResClock == -1) {
             MyToast.createToast(
-                requireContext(), "다시 실행 후 저장해 주세요."
-            )?.show()
+                requireContext(), "다시 실행 후 저장해 주세요.", 90, true
+            ).show()
         }
         else if(count >= 30){
             MyToast.createToast(
-                requireContext(), "오늘은 더 이상 저장할 수 없어!"
-            )?.show()
+                requireContext(), "오늘은 더 이상 저장할 수 없어!", 90, true
+            ).show()
         }
         else {
             val randomService = RandomService()
@@ -360,20 +378,20 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
     override fun onRandomResultSuccess() {
         binding.clockLoadingView.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), "뽑기 결과가 저장됐어!"
-        )?.show()
+            requireContext(), "뽑기 결과가 저장됐어!", 90, false
+        ).show()
         binding.clockSaveBtn.setOnClickListener {
             MyToast.createToast(
-                requireContext(), "이미 결과가 저장되었습니다."
-            )?.show()
+                requireContext(), "이미 결과가 저장되었습니다.", 90, true
+            ).show()
         }
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
         binding.clockLoadingView.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 
     override fun onRecordCountLoading() {
@@ -399,7 +417,7 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
     override fun onRecordCountFailure(code: Int, message: String) {
         binding.clockLoadingView.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 }

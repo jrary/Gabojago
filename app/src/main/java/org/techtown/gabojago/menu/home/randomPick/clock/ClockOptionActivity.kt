@@ -54,7 +54,7 @@ class ClockOptionActivity : AppCompatActivity() {
         binding.clockCompBtn.setOnClickListener {
             if(startNum == endNum){
                 MyToast.createToast(
-                    this, "방향을 다시 설정해 주세요"
+                    this, "방향을 다시 설정해 주세요", 90, true
                 )?.show()
             }
             else{
