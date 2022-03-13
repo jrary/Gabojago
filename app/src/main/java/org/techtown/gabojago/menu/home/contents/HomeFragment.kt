@@ -37,21 +37,13 @@ class HomeFragment : Fragment(){
 
         binding.homeStartIv.setOnClickListener{
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, HomeMenuFragment().apply {
-                    arguments = Bundle().apply {
-                    }
-                })
-                .addToBackStack(null)
+                .replace(R.id.main_frm, HomeMenuFragment())
                 .commitAllowingStateLoss()
         }
 
         binding.homeDice01Iv.setOnClickListener{
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, HomeInfoFragment().apply {
-                    arguments = Bundle().apply {
-                    }
-                })
-                .addToBackStack(null)
+                .replace(R.id.main_frm, HomeInfoFragment())
                 .commitAllowingStateLoss()
         }
 

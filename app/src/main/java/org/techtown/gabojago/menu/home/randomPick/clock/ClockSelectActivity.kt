@@ -63,8 +63,8 @@ class ClockSelectActivity : AppCompatActivity() {
         }
         else{
             MyToast.createToast(
-                this, "Error"
-            )?.show()
+                this, "Error", 90, true
+            ).show()
         }
     }
 }

@@ -61,15 +61,15 @@ class WithdrawalDialog : DialogFragment(), WithdrawalView {
     override fun onWithdrawalSuccess() {
         setJwt(requireContext(), "userJwt", "")
         MyToast.createToast(
-            requireContext(), "회원 탈퇴가 완료되었습니다."
-        )?.show()
+            requireContext(), "회원 탈퇴가 완료되었습니다.", 50, false
+        ).show()
         startActivity(Intent(requireContext(), SplashActivity::class.java))
     }
 
     override fun onWithdrawalFailure(code: Int, message: String) {
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 }
 

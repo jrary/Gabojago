@@ -76,8 +76,8 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
                     Calendar.MONTH)+1 >= initDate().substring(4,6).toInt())
             ) {
                 MyToast.createToast(
-                    requireContext(), "기록이 없는 달이야!"
-                )?.show()
+                    requireContext(), "기록이 없는 달이야!", 90, false
+                ).show()
             } else {
                 cal.add(Calendar.MONTH, +1)
                 binding.calendarDateTv.text = cal.get(Calendar.YEAR).toString() + ", " + (cal.get(Calendar.MONTH) + 1).toString() + "월"
@@ -94,8 +94,8 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
                     Calendar.YEAR) == registerDateArray[0].toInt() && cal.get(Calendar.MONTH) + 1 <= registerDateArray[1].toInt())
             ) {
                 MyToast.createToast(
-                    requireContext(), "기록이 없는 달이야!"
-                )?.show()
+                    requireContext(), "기록이 없는 달이야!", 90, false
+                ).show()
             } else {
                 cal.add(Calendar.MONTH, -1)
                 Log.e("이전달",(cal.get(Calendar.MONTH) + 1).toString())
@@ -177,8 +177,8 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
 
     override fun onNicknameAdventureFailure(code: Int, message: String) {
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 
     override fun onAdventureTimeSuccess(adventureTime: AdventureTimeResult) {
@@ -225,7 +225,7 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
         binding.canlendarBlurView.visibility = View.GONE
 
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 }

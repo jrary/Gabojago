@@ -106,8 +106,8 @@ class DialogFolderModify(private val folder : FolderResultList,private val recor
                 minusUpdate.clear()
                 plusUpdate.clear()
                 MyToast.createToast(
-                    requireContext(), "폴더 내 항목은 2개 이상이어야 해!"
-                )?.show()
+                    requireContext(), "폴더 내 항목은 2개 이상이어야 해!", 90, true
+                ).show()
             }else {
                 recordService.putUpdateFolderIdx(userJwt, folder.folderIdx, plusUpdate, minusUpdate)
             }
@@ -135,8 +135,8 @@ class DialogFolderModify(private val folder : FolderResultList,private val recor
 
     override fun onFolderUpdateFailure(code: Int, message: String) {
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
         mDismissListener.onDismiss(this)
         dismiss()
     }

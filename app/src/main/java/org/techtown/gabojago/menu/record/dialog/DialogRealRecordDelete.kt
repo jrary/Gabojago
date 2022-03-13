@@ -81,8 +81,8 @@ class DialogRealRecordDelete(private val recordIdx:Int) : DialogFragment() ,Sing
 
     override fun onSinglerecordingDeleteFailure(code: Int, message: String) {
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 }
 

@@ -79,8 +79,8 @@ class DialogRealFolderrecordDelete(private val folderIdx:Int) : DialogFragment()
 
     override fun onFolderrecordingDeleteFailure(code: Int, message: String) {
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 }
 

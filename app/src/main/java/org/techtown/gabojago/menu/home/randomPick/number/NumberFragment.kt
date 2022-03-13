@@ -1,5 +1,6 @@
 package org.techtown.gabojago.menu.home.randomPick.number
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
@@ -31,11 +33,30 @@ import androidx.core.view.updateLayoutParams as updateLayoutParams1
 
 class NumberFragment : Fragment(), RandomView, RecordCountView {
     lateinit var binding: FragmentNumberBinding
+    private lateinit var callback: OnBackPressedCallback
     var startNum: Int = 0
     var endNum: Int = 0
     var num: Int = 0
     var isOverlap: Boolean = false
     private var resArray: Array<Int?> = (arrayOf(-1))
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.e("back","backpress")
+                (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, HomeMenuFragment())
+                    .commitAllowingStateLoss()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -89,11 +110,7 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
 
         binding.numberBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, HomeMenuFragment().apply {
-                    arguments = Bundle().apply {
-                    }
-                })
-                .addToBackStack(null)
+                .replace(R.id.main_frm, HomeMenuFragment())
                 .commitAllowingStateLoss()
         }
 
@@ -110,8 +127,8 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
         binding.numberGoBtn.setOnClickListener {
             if(resArray[0] == -1){
                 MyToast.createToast(
-                    requireContext(), "옵션을 설정한 후 실행해 주세요"
-                )?.show()
+                    requireContext(), "옵션을 설정한 후 실행해 주세요", 90, true
+                ).show()
             }
             else{
                 Handler().postDelayed({
@@ -307,13 +324,13 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
     private fun saveWithValidation(count: Int) {
         if(resArray.isEmpty()){
             MyToast.createToast(
-                requireContext(), "다시 실행 후 저장해 주세요."
-            )?.show()
+                requireContext(), "다시 실행 후 저장해 주세요.", 90, true
+            ).show()
         }
         else if(count >= 30){
             MyToast.createToast(
-                requireContext(), "오늘은 더 이상 저장할 수 없어!"
-            )?.show()
+                requireContext(), "오늘은 더 이상 저장할 수 없어!", 90, true
+            ).show()
         }
         else{
             val randomService = RandomService()
@@ -363,20 +380,20 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
     override fun onRandomResultSuccess() {
         binding.numberLoadingView.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), "뽑기 결과가 저장됐어!"
-        )?.show()
+            requireContext(), "뽑기 결과가 저장됐어!", 90, false
+        ).show()
         binding.numberSaveBtn.setOnClickListener {
             MyToast.createToast(
-                requireContext(), "이미 결과가 저장되었습니다."
-            )?.show()
+                requireContext(), "이미 결과가 저장되었습니다.", 90, true
+            ).show()
         }
     }
 
     override fun onRandomResultFailure(code: Int, message: String) {
         binding.numberLoadingView.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 
     override fun onRecordCountLoading() {
@@ -402,7 +419,7 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
     override fun onRecordCountFailure(code: Int, message: String) {
         binding.numberLoadingView.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 }

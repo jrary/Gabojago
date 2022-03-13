@@ -83,14 +83,14 @@ class SplashActivity : AppCompatActivity(), RemainLoginView {
         when(code){
             2000, 3000 -> {
                 MyToast.createToast(
-                    baseContext, "로그인 시스템에 문제가 발생하였습니다."
-                )?.show()
+                    baseContext, "로그인 시스템에 문제가 발생하였습니다.", 50, true
+                ).show()
                 Log.d("LOGINERROR", message)
             }
             else -> {
                 MyToast.createToast(
-                    baseContext, message
-                )?.show()
+                    baseContext, message, 50, true
+                ).show()
             }
         }
     }

@@ -1,5 +1,6 @@
 package org.techtown.gabojago.menu.manage.system
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.nhn.android.naverlogin.OAuthLogin
 import org.techtown.gabojago.R
@@ -16,6 +18,7 @@ import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.main.setJwt
+import org.techtown.gabojago.menu.home.contents.HomeFragment
 import org.techtown.gabojago.menu.manage.*
 import org.techtown.gabojago.menu.manage.auth.LogoutDialog
 import org.techtown.gabojago.menu.manage.auth.WithdrawalDialog
@@ -23,7 +26,27 @@ import org.techtown.gabojago.start.splash.SplashActivity
 
 class ManageFragment : Fragment(), NicknameView, NewNicknameView {
     lateinit var binding: FragmentManageBinding
+    private lateinit var callback: OnBackPressedCallback
     private lateinit var oAuthLogin: OAuthLogin
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.e("back","backpress")
+                (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, HomeFragment())
+                    .commitAllowingStateLoss()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,8 +75,8 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView {
             val modifyNickname = binding.manageNicknameEt.text.toString()
             if(modifyNickname.length >= 25){
                 MyToast.createToast(
-                    requireContext(), "닉네임을 25자 이하로 설정해 주세요"
-                )?.show()
+                    requireContext(), "닉네임을 25자 이하로 설정해 주세요", 90, true
+                ).show()
             }
             else{
                 binding.manageNicknameView.visibility = View.GONE
@@ -100,8 +123,8 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView {
     override fun onNicknameFailure(code: Int, message: String) {
         binding.manageLoadingView.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 
     override fun onModifyNicknameLoading() {
@@ -127,7 +150,7 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView {
     override fun onModifyNicknameFailure(code: Int, message: String) {
         binding.manageLoadingView.visibility = View.GONE
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
     }
 }

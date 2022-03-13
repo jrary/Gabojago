@@ -94,8 +94,8 @@ class DialogRealDelete(private val recordList: ArrayList<SingleResultListResult>
 
     override fun onFolderDeleteFailure(code: Int, message: String) {
         MyToast.createToast(
-            requireContext(), message
-        )?.show()
+            requireContext(), message, 90, true
+        ).show()
         binding2.recordBlurView.visibility = View.GONE
         dismiss()
     }
