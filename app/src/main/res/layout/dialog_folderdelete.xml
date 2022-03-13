@@ -11,17 +11,16 @@
         android:id="@+id/dialog_delete_cancle_iv"
         android:layout_width="50dp"
         android:layout_height="35dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:src="@drawable/dialog_cancle"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/dialog_nestedscrollview"/>
+        app:layout_constraintEnd_toEndOf="@id/dialog_nestedscrollview"
+        app:layout_constraintBottom_toTopOf="@id/dialog_nestedscrollview"/>
 
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/dialog_nestedscrollview"
-        android:layout_width="350dp"
+        android:layout_width="340dp"
         android:layout_height="400dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
@@ -37,7 +36,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/dialog_folderdelete_recyclerview"
-                android:layout_width="350dp"
+                android:layout_width="340dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
@@ -69,7 +68,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/dialog_delete_recyclerview"
-                android:layout_width="350dp"
+                android:layout_width="340dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="100dp"
                 android:orientation="vertical"

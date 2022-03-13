@@ -1,5 +1,6 @@
 package org.techtown.gabojago.menu.record
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,12 +12,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.logging.Handler
 
-class RecordWeekRVAdapter(private val viewDate:String): RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(){
+class RecordWeekRVAdapter(private val viewDate: String): RecyclerView.Adapter<RecordWeekRVAdapter.ViewHolder>(){
 
     private val dates = ArrayList<String>()
     private val dayofweek = arrayListOf("일","월","화","수","목","금","토")
     private val alldays = ArrayList<String>()
-    private val click = arrayListOf(false,false,false,false,false,false,false)
+    private var oldPosition = -1
+    private var selectedPosition = week(viewDate)
 
     interface MyItemClickListener {
         fun onItemClick(day:String)
@@ -32,41 +34,30 @@ class RecordWeekRVAdapter(private val viewDate:String): RecyclerView.Adapter<Rec
     //뷰홀더 생성->호출되는 함수->아이템 뷰 객체를 만들어서 뷰홀더에 던져줌
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemRecordWeekBinding = ItemRecordWeekBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        val today = week(viewDate)
-        for(i in 0 until 7){
-            if(today==i) {
-                click[i]=true
-            }
-        }
         return ViewHolder(binding)
     }
 
     //뷰홀더에 데이터를 바인딩해줘야 할 때마다 호출되는 함수 => 엄청나게 많이 호출
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         holder.bind(position)
+        if (selectedPosition == position)
+            holder.binding.itemWeekToday.visibility = View.VISIBLE
+        else
+            holder.binding.itemWeekToday.visibility = View.GONE
+
         holder.itemView.setOnClickListener{
             Log.e("calendar","error나는 부분")
             mItemClickListener.onItemClick(alldays[position])
-            for(i in 0 until 7){
-                if(i!=position) {
-                    notifyItemChanged(i){
-                        holder.binding.itemWeekToday.visibility = View.GONE
-                    }
-                }
-            }
-            holder.binding.itemWeekToday.visibility = View.VISIBLE
+            oldPosition = selectedPosition
+            selectedPosition = position
+            notifyItemChanged(oldPosition)
+            notifyItemChanged(selectedPosition)
         }
     }
 
     //뷰홀더
     inner class ViewHolder(val binding: ItemRecordWeekBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
-            if(click[position]){
-                binding.itemWeekToday.visibility = View.VISIBLE
-            }else {
-                binding.itemWeekToday.visibility = View.GONE
-            }
-            click[position]=false
             binding.itemDateTv.text = dates[position]
             binding.itemWeekTv.text = dayofweek[position]
             when(position){

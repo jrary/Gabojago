@@ -386,6 +386,7 @@ class RecordService {
     //폴더조회
     fun getFolderLook(userJwt: String, folderIdx: Int) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
+        folderLookView.onFolderLookLoading()
         recordService.getFolderLook(userJwt, folderIdx).enqueue(object :
             Callback<FolderLookResponse> {
             override fun onResponse(
@@ -432,6 +433,7 @@ class RecordService {
     //개별조회
     fun getSingleLook(userJwt: String, randomResultIdx: Int) {
         val recordService = getRetrofit().create(RecordRetrofitInterface::class.java)
+        singleLookView.onSingleLookLoading()
         recordService.getSingleLook(userJwt, randomResultIdx).enqueue(object :
             Callback<SingleLookResponse> {
             override fun onResponse(

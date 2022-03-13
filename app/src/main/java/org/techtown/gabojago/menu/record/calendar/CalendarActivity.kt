@@ -3,6 +3,7 @@
 package org.techtown.gabojago.menu.record.calendar
 import HorizontalItemDecorator
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -25,6 +27,7 @@ import java.util.*
 
 class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
     lateinit var binding: ActivityCalendarBinding
+    private lateinit var callback: OnBackPressedCallback
     //보여줄 년, 월
     private var viewDate = ""
     //받아온 유저가입날짜
@@ -141,6 +144,24 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
     private fun setRegisterDate(registerDate: String): Array<String> {
         val dateArray = registerDate.split("-").toTypedArray()
         return dateArray
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.e("back","backpress")
+                (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, RecordFragment())
+                    .commitAllowingStateLoss()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
     }
 
     override fun onNicknameAdventureSuccess(userNicknameAdventure: NicknameAdventureResult) {

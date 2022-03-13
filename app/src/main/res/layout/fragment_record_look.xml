@@ -320,4 +320,28 @@
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <com.github.mmin18.widget.RealtimeBlurView
+        android:id="@+id/look_record_blur_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:realtimeBlurRadius="10dp"
+        app:realtimeOverlayColor="#00000000" />
+
+    <ProgressBar
+        android:id="@+id/look_record_loading_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:indeterminateTint="#ff6745"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

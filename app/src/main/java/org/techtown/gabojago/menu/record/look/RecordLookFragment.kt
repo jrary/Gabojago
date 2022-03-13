@@ -1,11 +1,13 @@
 package org.techtown.gabojago.menu.record.look
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -19,6 +21,7 @@ import org.techtown.gabojago.menu.record.recordRetrofit.*
 import java.util.*
 //기록조회 프래그먼트
 class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , SingleLookView {
+    private lateinit var callback: OnBackPressedCallback
     lateinit var binding: FragmentRecordLookBinding
     private val MIN_SCALE = 0.95f
     private val MIN_ALPHA = 0.5f
@@ -56,11 +59,7 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
         //이전페이지로
         binding.recordLookBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, RecordFragment().apply {
-                    arguments = Bundle().apply {
-                    }
-                })
-                .addToBackStack(null)
+                .replace(R.id.main_frm, RecordFragment())
                 .commitAllowingStateLoss()
         }
         return binding.root
@@ -153,8 +152,33 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.e("back","backpress")
+                (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, RecordFragment())
+                    .commitAllowingStateLoss()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
+
+    override fun onFolderLookLoading() {
+        binding.lookRecordBlurView.visibility = View.VISIBLE
+        binding.lookRecordLoadingPb.visibility = View.VISIBLE
+    }
+
     //폴더조회성공
     override fun onFolderLookSuccess(result: FolderLookResult) {
+        binding.lookRecordBlurView.visibility = View.GONE
+        binding.lookRecordLoadingPb.visibility = View.GONE
         var imageList = ArrayList<String>()
 
         try {
@@ -252,7 +276,14 @@ class RecordLookFragment(private val Idx:Int): Fragment() , FolderLookView , Sin
 
     }
 
+    override fun onSingleLookLoading() {
+        binding.lookRecordBlurView.visibility = View.VISIBLE
+        binding.lookRecordLoadingPb.visibility = View.VISIBLE
+    }
+
     override fun onSingleLookSuccess(result: SingleLookResult) {
+        binding.lookRecordBlurView.visibility = View.GONE
+        binding.lookRecordLoadingPb.visibility = View.GONE
         var imageList = ArrayList<String>()
         try {
             if(!result.contentCheck){

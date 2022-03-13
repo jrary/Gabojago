@@ -1,6 +1,7 @@
 package org.techtown.gabojago.menu.record
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -13,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -34,6 +36,7 @@ import kotlin.collections.ArrayList
 
 class SingleRecordFragment(private  val hasRecording:Boolean,private  val recordIdx:Int,private val result:RandomResultListResult) : Fragment() ,SingleRecordingView, SingleLookView, SingleModifyView{
     lateinit var binding: FragmentSinglerecordBinding
+    private lateinit var callback: OnBackPressedCallback
     val imgFileName = java.util.ArrayList<String>()
     val uriList = java.util.ArrayList<Uri?>()
     val urlList = java.util.ArrayList<String>()
@@ -126,11 +129,7 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
 
 
                 (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, RecordFragment().apply {
-                        arguments = Bundle().apply {
-                        }
-                    })
-                    .addToBackStack(null)
+                    .replace(R.id.main_frm, RecordFragment())
                     .commitAllowingStateLoss()
 
             }
@@ -147,11 +146,7 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                 ))
 
                 (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, RecordFragment().apply {
-                        arguments = Bundle().apply {
-                        }
-                    })
-                    .addToBackStack(null)
+                    .replace(R.id.main_frm, RecordFragment())
                     .commitAllowingStateLoss()
 
             }
@@ -176,11 +171,7 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                 ),recordIdx)
 
                 (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, RecordFragment().apply {
-                        arguments = Bundle().apply {
-                        }
-                    })
-                    .addToBackStack(null)
+                    .replace(R.id.main_frm, RecordFragment())
                     .commitAllowingStateLoss()
 
             }
@@ -197,11 +188,7 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                 ),recordIdx)
 
                 (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, RecordFragment().apply {
-                        arguments = Bundle().apply {
-                        }
-                    })
-                    .addToBackStack(null)
+                    .replace(R.id.main_frm, RecordFragment())
                     .commitAllowingStateLoss()
 
             }
@@ -217,11 +204,7 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
     private fun clickevent(){
         binding.singleRecordBackarrow.setOnClickListener{
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, RecordFragment().apply {
-                    arguments = Bundle().apply {
-                    }
-                })
-                .addToBackStack(null)
+                .replace(R.id.main_frm, RecordFragment())
                 .commitAllowingStateLoss()
             }
     }
@@ -249,13 +232,15 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                     ) {
                         if (data == null) {   // 어떤 이미지도 선택하지 않은 경우
                             Toast.makeText(requireContext(), "이미지를 선택해줘!", Toast.LENGTH_LONG)
-                                .show();
+                                .show()
                         } else {   // 이미지를 하나라도 선택한 경우
                             if (data.clipData == null) {     // 이미지를 하나만 선택한 경우
                                 Log.e("single choice: ", data?.data.toString())
                                 val imageUri = data?.data
                                 uriList.add(imageUri)
-                                imgFileName.add("IMAGE_" + timeStamp +"0"+ "_.png")
+                                imgFileName.add("IMAGE_" + timeStamp +"_0"+ "_.png")
+                                funImageUpload()
+                                binding.singleRecordPicturenumTv.text = uriList.size.toString()+"/10"
                                 val recordPictureRVAdapter = RecordPictureRVAdapter(uriList,imageList)
                                 binding.singleRecordPictureRecyclerview.adapter =
                                     recordPictureRVAdapter
@@ -273,7 +258,7 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                                             clipData.getItemAt(i).uri // 선택한 이미지들의 uri를 가져온다.
                                         try {
                                             uriList.add(imageUri)  //uri를 list에 담는다.
-                                            imgFileName.add("IMAGE_" + timeStamp +i.toString()+ "_.png")
+                                            imgFileName.add("IMAGE_" + timeStamp +"_"+i.toString()+ "_.png")
                                         } catch (e: Exception) {
                                             Log.e("선택에러", "File select error", e)
                                         }
@@ -301,11 +286,22 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                 fbStorage?.reference?.child("images")?.child(imgFileName[i])?.putFile(uriList[i]!!)
                     ?.addOnSuccessListener {
                         it.storage.downloadUrl.addOnCompleteListener {
-                            urlList.set(i,it.result.toString())
+                            urlList[i] = it.result.toString()
                             Log.e("url", urlList.toString())
-                            Toast.makeText(requireContext(), "이미지가 업로드 됐어!", Toast.LENGTH_SHORT)
-                                .show()
+                            if(i==uriList.size-1) {
+                                binding.singleRecordBlurView2.visibility=View.GONE
+                                binding.singleRecordBlurView.visibility=View.GONE
+                                binding.singleRecordLoadingPb.visibility=View.GONE
+                                MyToast.createToast(
+                                    requireContext(), "이미지가 업로드 됐어!"
+                                )?.show()
+                            }
                         }
+                    }
+                    ?.addOnProgressListener {
+                        binding.singleRecordBlurView2.visibility=View.VISIBLE
+                        binding.singleRecordBlurView.visibility=View.VISIBLE
+                        binding.singleRecordLoadingPb.visibility=View.VISIBLE
                     }
             }
         }
@@ -317,8 +313,7 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                 if(imageList[i]!=null) {
                     fbStorage?.getReferenceFromUrl(imageList[i])?.delete()
                         ?.addOnSuccessListener {
-                            Toast.makeText(requireContext(), "이미지가 삭제 됐어!", Toast.LENGTH_SHORT)
-                                .show()
+                           Log.e("수정할시 삭제","이미지삭제완료")
                         }
                 }
             }
@@ -338,6 +333,24 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
             bottomNavigation.visibility = View.VISIBLE
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.e("back","backpress")
+                (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, RecordFragment())
+                    .commitAllowingStateLoss()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
+
     override fun onSingleRecordingSuccess() {
         Log.e("개별기록","성공")
     }
@@ -348,7 +361,16 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
         )?.show()
     }
 
+    override fun onSingleLookLoading() {
+        binding.singleRecordBlurView.visibility = View.VISIBLE
+        binding.singleRecordBlurView2.visibility = View.VISIBLE
+        binding.singleRecordLoadingPb.visibility = View.VISIBLE
+    }
+
     override fun onSingleLookSuccess(result: SingleLookResult) {
+        binding.singleRecordBlurView.visibility = View.GONE
+        binding.singleRecordBlurView2.visibility = View.GONE
+        binding.singleRecordLoadingPb.visibility = View.GONE
         try {
             binding.singleRecordTitleEt.setText(result.eachContentResult.recordingTitle)
             binding.singleRecordStarscore.rating = result.eachContentResult.recordingStar.toFloat()
@@ -366,6 +388,9 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
 
 
         } catch (e: NullPointerException) {
+            binding.singleRecordBlurView.visibility = View.GONE
+            binding.singleRecordBlurView2.visibility = View.GONE
+            binding.singleRecordLoadingPb.visibility = View.GONE
             binding.singleRecordTitleEt.setText("제목을 입력해줘!")
             binding.singleRecordStarscore.rating = 3.5F
             binding.singleRecordWriteEt.setText("내용을 입력해줘!")
@@ -374,6 +399,9 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
     }
 
     override fun onSingleLookFailure(code: Int, message: String) {
+        binding.singleRecordBlurView.visibility = View.GONE
+        binding.singleRecordBlurView2.visibility = View.GONE
+        binding.singleRecordLoadingPb.visibility = View.GONE
         MyToast.createToast(
             requireContext(), message
         )?.show()

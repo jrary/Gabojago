@@ -2,6 +2,7 @@ package org.techtown.gabojago.menu.record
 
 import HorizontalItemDecorator
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Point
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,12 +20,14 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.techtown.gabojago.R
+import org.techtown.gabojago.databinding.ActivityMainBinding
 import org.techtown.gabojago.databinding.FragmentRecordBinding
 import org.techtown.gabojago.databinding.ItemRecordFoldernameBinding
 import org.techtown.gabojago.databinding.ItemRecordWeekBinding
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
+import org.techtown.gabojago.menu.home.contents.HomeFragment
 import org.techtown.gabojago.menu.record.calendar.CalendarActivity
 import org.techtown.gabojago.menu.record.dialog.DialogFolderDelete
 import org.techtown.gabojago.menu.record.dialog.DialogFolderModify
@@ -38,8 +42,9 @@ import kotlin.concurrent.schedule
 
 //기록하자 메인화면
 class RecordFragment : Fragment(), RecordCountView, SingleResultListView, FolderResultListView{
-
+    private lateinit var callback: OnBackPressedCallback
     lateinit var binding: FragmentRecordBinding
+    lateinit var binding4: ActivityMainBinding
     lateinit var binding2: ItemRecordFoldernameBinding
     lateinit var binding3: ItemRecordWeekBinding
 
@@ -56,6 +61,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         binding = FragmentRecordBinding.inflate(inflater, container, false)
         binding2 = ItemRecordFoldernameBinding.inflate(inflater, container, false)
         binding3 = ItemRecordWeekBinding.inflate(inflater, container, false)
+        binding4 = ActivityMainBinding.inflate(inflater, container, false)
 
         recordService.setRecordCountView(this@RecordFragment)
         recordService.setSingleResultListView(this@RecordFragment)
@@ -149,11 +155,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         //해당 월 text 클릭 이벤트(캘린터 액티비티로 넘어가기)
         binding.recordMonthTv.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, CalendarActivity().apply {
-                    arguments = Bundle().apply {
-                    }
-                })
-                .addToBackStack(null)
+                .replace(R.id.main_frm, CalendarActivity())
                 .commitAllowingStateLoss()
         }
         //더보기 버튼 클릭 이벤트-> 블러뷰 나타내기
@@ -197,33 +199,21 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
     //개별기록 프래그먼트 이동 함수
     private fun changeSingleRecordFragment(hasRecording:Boolean,recordIdx: Int,result:RandomResultListResult) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, SingleRecordFragment(hasRecording,recordIdx,result).apply {
-                arguments = Bundle().apply {
-                }
-            })
-            .addToBackStack(null)
+            .replace(R.id.main_frm, SingleRecordFragment(hasRecording,recordIdx,result))
             .commitAllowingStateLoss()
 
     }
     //폴더기록 프래그먼트 이동 함수
     private fun changeFolderRecordFragment(hasRecording: Boolean,folderIdx:Int, resultList:ArrayList<InFolderListResult>) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, FolderRecordFragment(hasRecording,folderIdx,resultList).apply {
-                arguments = Bundle().apply {
-                }
-            })
-            .addToBackStack(null)
+            .replace(R.id.main_frm, FolderRecordFragment(hasRecording,folderIdx,resultList))
             .commitAllowingStateLoss()
 
     }
     //개별, 폴더 기록조회 프래그먼트 이동 함수
     private fun changeRecordFragment(folderIdx: Int){
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, RecordLookFragment(folderIdx).apply {
-                arguments = Bundle().apply {
-                }
-            })
-            .addToBackStack(null)
+            .replace(R.id.main_frm, RecordLookFragment(folderIdx))
             .commitAllowingStateLoss()
     }
     //오늘 날짜 설정 함수
@@ -295,6 +285,25 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.e("back","backpress")
+                binding4.mainBnv.selectedItemId = R.id.homeFragment
+                (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, HomeFragment())
+                    .commitAllowingStateLoss()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
+
     override fun onRecordCountLoading() {
         binding.recordCountTv.text = "0"
     }
@@ -311,6 +320,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
 
     override fun onSingleResultListSuccess(result: SingleResult) {
         binding.recordLoadingPb.visibility = View.GONE
+        binding.recordBlurView.visibility = View.GONE
         val now: Long = System.currentTimeMillis()
         val date = Date(now)
         val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
@@ -358,7 +368,8 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
     }
 
     override fun onSingleResultListLoading() {
-       binding.recordLoadingPb.visibility = View.VISIBLE
+        binding.recordBlurView.visibility = View.VISIBLE
+        binding.recordLoadingPb.visibility = View.VISIBLE
     }
 
     override fun onSingleResultListFailure(code: Int, message: String) {
@@ -373,6 +384,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
 
     override fun onFolderResultListSuccess(result: FolderResult) {
         binding.recordLoadingPb.visibility = View.GONE
+        binding.recordBlurView.visibility = View.GONE
         val now: Long = System.currentTimeMillis()
         val date = Date(now)
         val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
@@ -438,6 +450,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
 
     override fun onFolderResultListLoading() {
         binding.recordLoadingPb.visibility = View.VISIBLE
+        binding.recordBlurView.visibility = View.VISIBLE
     }
 
     override fun onFolderResultListFailure(code: Int, message: String) {

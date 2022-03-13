@@ -10,19 +10,16 @@
         android:id="@+id/dialog_modify_cancle_iv"
         android:layout_width="50dp"
         android:layout_height="35dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:src="@drawable/dialog_cancle"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/dialog_modify_nestedscrollview"/>
+        app:layout_constraintEnd_toEndOf="@id/dialog_modify_nestedscrollview"
+        app:layout_constraintBottom_toTopOf="@id/dialog_modify_nestedscrollview"/>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/dialog_modify_nestedscrollview"
-        android:layout_width="330dp"
+        android:layout_width="340dp"
         android:layout_height="350dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
         android:overScrollMode="never"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,10 +32,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/folder_modify_layout"
-                android:layout_width="330dp"
+                android:layout_width="340dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/folderresultbox_orange"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +103,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/dialog_modify_recyclerview2"
-                android:layout_width="330dp"
+                android:layout_width="340dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="100dp"
