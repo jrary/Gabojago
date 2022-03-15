@@ -1,11 +1,11 @@
-package org.techtown.gabojago.menu.manage
+package org.techtown.gabojago.menu.manage.system
 
 import android.util.Log
 import org.techtown.gabojago.main.getRetrofit
 import org.techtown.gabojago.main.withdrawalRetrofit
+import org.techtown.gabojago.menu.manage.*
 import org.techtown.gabojago.menu.manage.auth.LogoutView
 import org.techtown.gabojago.menu.manage.auth.WithdrawalView
-import org.techtown.gabojago.menu.manage.system.ManageRetrofitInterface
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,14 +35,17 @@ class ManageService {
         val manageService = getRetrofit().create(ManageRetrofitInterface::class.java)
         manageService.getNickname(userJwt).enqueue(object : Callback<NicknameResponse> {
             override fun onResponse(call: Call<NicknameResponse>, response: Response<NicknameResponse>) {
-                Log.d("NICKNAMEACT/Response", response.toString())
-                val resp = response.body()!!
+                if (response.body() == null) {
+                    nicknameView.onNicknameFailure(0, "네트워크 연결에 실패하였습니다.")
+                } else {
+                    Log.d("NICKNAMEACT/Response", response.toString())
+                    val resp = response.body()!!
 
-                if(resp.isSuccess){
+                    if (resp.isSuccess) {
                         nicknameView.onNicknameSuccess(resp.result.userNickname)
-                    }
-                else {
+                    } else {
                         nicknameView.onNicknameFailure(resp.code, resp.message)
+                    }
                 }
             }
             override fun onFailure(call: Call<NicknameResponse>, t: Throwable) {
@@ -57,14 +60,17 @@ class ManageService {
 
         manageService.modifyNickname(userJwt, NewNickName(newNickname)).enqueue(object : Callback<CheckUserResponse> {
             override fun onResponse(call: Call<CheckUserResponse>, response: Response<CheckUserResponse>) {
-                Log.d("MODIFYACT/Response", response.toString())
-                val resp = response.body()!!
+                if (response.body() == null) {
+                    newNicknameView.onModifyNicknameFailure(0, "네트워크 연결에 실패하였습니다.")
+                } else {
+                    Log.d("MODIFYACT/Response", response.toString())
+                    val resp = response.body()!!
 
-                if (resp.isSuccess) {
+                    if (resp.isSuccess) {
                         newNicknameView.onModifyNicknameSuccess(newNickname)
-                }
-                else {
+                    } else {
                         newNicknameView.onModifyNicknameFailure(resp.code, resp.message)
+                    }
                 }
             }
             override fun onFailure(call: Call<CheckUserResponse>, t: Throwable) {
@@ -78,14 +84,17 @@ class ManageService {
 
         manageService.logout(userJwt).enqueue(object : Callback<CheckUserResponse> {
             override fun onResponse(call: Call<CheckUserResponse>, response: Response<CheckUserResponse>) {
-                Log.d("LOGOUTACT/Response", response.toString())
-                val resp = response.body()!!
+                if (response.body() == null) {
+                    logoutView.onLogoutFailure(0, "네트워크 연결에 실패하였습니다.")
+                } else {
+                    Log.d("LOGOUTACT/Response", response.toString())
+                    val resp = response.body()!!
 
-                if (resp.isSuccess) {
-                    logoutView.onLogoutSuccess()
-                }
-                else {
-                    logoutView.onLogoutFailure(resp.code, resp.message)
+                    if (resp.isSuccess) {
+                        logoutView.onLogoutSuccess()
+                    } else {
+                        logoutView.onLogoutFailure(resp.code, resp.message)
+                    }
                 }
             }
             override fun onFailure(call: Call<CheckUserResponse>, t: Throwable) {
@@ -99,14 +108,17 @@ class ManageService {
 
         manageService.withdrawal(userJwt).enqueue(object : Callback<CheckUserResponse> {
             override fun onResponse(call: Call<CheckUserResponse>, response: Response<CheckUserResponse>) {
-                Log.d("WITHDRAWALACT/Response", response.toString())
-                val resp = response.body()!!
+                if (response.body() == null) {
+                    withdrawalView.onWithdrawalFailure(0, "네트워크 연결에 실패하였습니다.")
+                } else {
+                    Log.d("WITHDRAWALACT/Response", response.toString())
+                    val resp = response.body()!!
 
-                if (resp.isSuccess) {
-                    withdrawalView.onWithdrawalSuccess()
-                }
-                else {
-                    withdrawalView.onWithdrawalFailure(resp.code, resp.message)
+                    if (resp.isSuccess) {
+                        withdrawalView.onWithdrawalSuccess()
+                    } else {
+                        withdrawalView.onWithdrawalFailure(resp.code, resp.message)
+                    }
                 }
             }
             override fun onFailure(call: Call<CheckUserResponse>, t: Throwable) {
@@ -120,14 +132,15 @@ class ManageService {
 
         naverWithdrawal.naverWithdrawal("delete", clientId, clientSecret, userJwt, "NAVER").enqueue(object : Callback<NaverWithdrawalResponse> {
             override fun onResponse(call: Call<NaverWithdrawalResponse>, response: Response<NaverWithdrawalResponse>) {
-                Log.d("WITHDRAWALACT/Response", response.toString())
-                val resp = response.body()!!
+                if (response.body() != null) {
+                    Log.d("WITHDRAWALACT/Response", response.toString())
+                    val resp = response.body()!!
 
-                if (resp.result == "success") {
-                  Log.d("NAVERWITHDRAWAL", "success")
-                }
-                else {
-                    Log.d("NAVERWITHDRAWAL", "fail")
+                    if (resp.result == "success") {
+                        Log.d("NAVERWITHDRAWAL", "success")
+                    } else {
+                        Log.d("NAVERWITHDRAWAL", "fail")
+                    }
                 }
             }
             override fun onFailure(call: Call<NaverWithdrawalResponse>, t: Throwable) {

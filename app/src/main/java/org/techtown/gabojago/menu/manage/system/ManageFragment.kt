@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,12 +16,10 @@ import org.techtown.gabojago.databinding.FragmentManageBinding
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
-import org.techtown.gabojago.main.setJwt
 import org.techtown.gabojago.menu.home.contents.HomeFragment
 import org.techtown.gabojago.menu.manage.*
 import org.techtown.gabojago.menu.manage.auth.LogoutDialog
 import org.techtown.gabojago.menu.manage.auth.WithdrawalDialog
-import org.techtown.gabojago.start.splash.SplashActivity
 
 class ManageFragment : Fragment(), NicknameView, NewNicknameView {
     lateinit var binding: FragmentManageBinding

@@ -36,8 +36,7 @@ class HomeFragment : Fragment(){
 
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                Log.d("TAG", "뒤로가기")
-                
+
                 if (System.currentTimeMillis() - backPressedTime < 2000) {
                     ActivityCompat.finishAffinity(requireActivity())
                     exitProcess(0)

@@ -23,7 +23,7 @@ import org.techtown.gabojago.databinding.FragmentWheelBinding
 import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.home.contents.HomeMenuFragment
-import org.techtown.gabojago.menu.home.RandomService
+import org.techtown.gabojago.menu.home.contents.RandomService
 import org.techtown.gabojago.menu.home.RandomView
 import org.techtown.gabojago.menu.record.recordRetrofit.RecordService
 import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView

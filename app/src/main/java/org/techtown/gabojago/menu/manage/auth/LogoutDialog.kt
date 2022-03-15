@@ -10,11 +10,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.nhn.android.naverlogin.OAuthLogin
 import org.techtown.gabojago.databinding.DialogLogoutBinding
-import org.techtown.gabojago.databinding.FragmentManageBinding
 import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.main.setJwt
-import org.techtown.gabojago.menu.manage.ManageService
+import org.techtown.gabojago.menu.manage.system.ManageService
 import org.techtown.gabojago.start.splash.SplashActivity
 
 

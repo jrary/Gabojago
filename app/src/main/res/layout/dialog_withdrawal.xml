@@ -23,7 +23,7 @@
         android:id="@+id/dialog_folder_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="정말 회원 탈퇴를\n하시겠습니까?"
+        android:text="정말 회원 탈퇴\n할 거야?"
         android:layout_marginBottom="40dp"
         android:gravity="center"
         android:textColor="#000000"

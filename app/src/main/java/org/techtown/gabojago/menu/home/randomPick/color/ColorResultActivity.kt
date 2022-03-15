@@ -5,13 +5,12 @@ import android.os.Handler
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivityColorResultBinding
 import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
-import org.techtown.gabojago.menu.home.RandomService
+import org.techtown.gabojago.menu.home.contents.RandomService
 import org.techtown.gabojago.menu.home.RandomView
 import org.techtown.gabojago.menu.record.recordRetrofit.RecordService
 import org.techtown.gabojago.menu.record.recordRetrofit.RecordCountView

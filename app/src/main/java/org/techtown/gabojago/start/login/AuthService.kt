@@ -23,15 +23,18 @@ class AuthService {
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         authService.login(AuthRequest(loginToken)).enqueue(object : Callback<AuthResponse> {
             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
-                Log.d("LOGINACT/Response", response.toString())
-                val resp = response.body()!!
-                Log.d("LOGINACT/Code", resp.code.toString())
+                if (response.body() == null) {
+                    remainLoginView.onRemainLoginFailure(0, "네트워크 연결에 실패하였습니다.")
+                } else {
+                    Log.d("LOGINACT/Response", response.toString())
+                    val resp = response.body()!!
+                    Log.d("LOGINACT/Code", resp.code.toString())
 
-                if(resp.isSuccess){
-                    loginView.onLoginSuccess(resp.result.jwt)
-                }
-                else{
-                    loginView.onLoginFailure(resp.code, resp.message)
+                    if (resp.isSuccess) {
+                        loginView.onLoginSuccess(resp.result.jwt)
+                    } else {
+                        loginView.onLoginFailure(resp.code, resp.message)
+                    }
                 }
             }
             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {

@@ -110,26 +110,30 @@ class RecordService {
                 call: Call<SingleResultListResponse>,
                 response: Response<SingleResultListResponse>
             ) {
-                Log.d("SINGLERESULT/Response", response.toString())
-                val resp = response.body()!!
-                Log.d("SINGLERESULT/Code", resp.code.toString())
-
-                if (resp.isSuccess) {
-                    singleResultListView.onSingleResultListSuccess(resp.result!!)
+                if (response.body() == null) {
+                    singleResultListView.onSingleResultListFailure(0, "네트워크 연결에 실패하였습니다.")
                 } else {
-                    when (resp.code) {
-                        2001 -> singleResultListView.onSingleResultListFailure(resp.code,
-                            "회원 정보가 잘못되었습니다.")
-                        2034 -> singleResultListView.onSingleResultListFailure(resp.code,
-                            resp.message)
-                        2002 -> singleResultListView.onSingleResultListFailure(resp.code,
-                            resp.message)
-                        3034 -> singleResultListView.onSingleResultListFailure(resp.code,
-                            resp.message)
-                        2000 -> singleResultListView.onSingleResultListFailure(resp.code,
-                            resp.message)
-                        3000 -> singleResultListView.onSingleResultListFailure(resp.code,
-                            resp.message)
+                    Log.d("SINGLERESULT/Response", response.toString())
+                    val resp = response.body()!!
+                    Log.d("SINGLERESULT/Code", resp.code.toString())
+
+                    if (resp.isSuccess) {
+                        singleResultListView.onSingleResultListSuccess(resp.result!!)
+                    } else {
+                        when (resp.code) {
+                            2001 -> singleResultListView.onSingleResultListFailure(resp.code,
+                                "회원 정보가 잘못되었습니다.")
+                            2034 -> singleResultListView.onSingleResultListFailure(resp.code,
+                                resp.message)
+                            2002 -> singleResultListView.onSingleResultListFailure(resp.code,
+                                resp.message)
+                            3034 -> singleResultListView.onSingleResultListFailure(resp.code,
+                                resp.message)
+                            2000 -> singleResultListView.onSingleResultListFailure(resp.code,
+                                resp.message)
+                            3000 -> singleResultListView.onSingleResultListFailure(resp.code,
+                                resp.message)
+                        }
                     }
                 }
             }
@@ -150,32 +154,36 @@ class RecordService {
                     call: Call<RecordFolderMakeResponse>,
                     response: Response<RecordFolderMakeResponse>
                 ) {
-                    Log.d("RECORDRESULT/Response", response.toString())
-                    val resp = response.body()!!
-                    Log.d("RECORDRESULT/Code", resp.code.toString())
-
-                    if (resp.isSuccess) {
-                        recordFolderMakeView.onRecordFolderMakeSuccess()
+                    if (response.body() == null) {
+                        recordFolderMakeView.onRecordFolderMakeFailure(0, "네트워크 연결에 실패하였습니다.")
                     } else {
-                        when (resp.code) {
-                            2002 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
-                                "회원 정보가 잘못되었습니다.")
-                            2010 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
-                                resp.message)
-                            3007 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
-                                resp.message)
-                            3016 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
-                                resp.message)
-                            4000 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
-                                resp.message)
-                            2001 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
-                                resp.message)
-                            2000 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
-                                resp.message)
-                            3000 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
-                                resp.message)
-                            2013 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
-                                resp.message)
+                        Log.d("RECORDRESULT/Response", response.toString())
+                        val resp = response.body()!!
+                        Log.d("RECORDRESULT/Code", resp.code.toString())
+
+                        if (resp.isSuccess) {
+                            recordFolderMakeView.onRecordFolderMakeSuccess()
+                        } else {
+                            when (resp.code) {
+                                2002 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                                    "회원 정보가 잘못되었습니다.")
+                                2010 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                                    resp.message)
+                                3007 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                                    resp.message)
+                                3016 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                                    resp.message)
+                                4000 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                                    resp.message)
+                                2001 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                                    resp.message)
+                                2000 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                                    resp.message)
+                                3000 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                                    resp.message)
+                                2013 -> recordFolderMakeView.onRecordFolderMakeFailure(resp.code,
+                                    resp.message)
+                            }
                         }
                     }
                 }
@@ -198,20 +206,24 @@ class RecordService {
                 call: Call<RecordCountResponse>,
                 response: Response<RecordCountResponse>
             ) {
-                Log.d("RECORDCOUNT/Response", response.toString())
-                val resp = response.body()!!
-                Log.d("RECORDCOUNT/Code", resp.code.toString())
-
-                if (resp.isSuccess) {
-                    recordCountView.onRecordCountSuccess(resp.result)
+                if (response.body() == null) {
+                    recordCountView.onRecordCountFailure(0, "네트워크 연결에 실패하였습니다.")
                 } else {
-                    when (resp.code) {
-                        2001 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
-                        2000 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
-                        3000 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
-                        2033 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
-                        2002 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
-                        3033 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                    Log.d("RECORDCOUNT/Response", response.toString())
+                    val resp = response.body()!!
+                    Log.d("RECORDCOUNT/Code", resp.code.toString())
+
+                    if (resp.isSuccess) {
+                        recordCountView.onRecordCountSuccess(resp.result)
+                    } else {
+                        when (resp.code) {
+                            2001 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                            2000 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                            3000 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                            2033 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                            2002 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                            3033 -> recordCountView.onRecordCountFailure(resp.code, resp.message)
+                        }
                     }
                 }
             }
@@ -232,26 +244,30 @@ class RecordService {
                 call: Call<FolderResultListResponse>,
                 response: Response<FolderResultListResponse>
             ) {
-                Log.d("FOLDERRESULT/Response", response.toString())
-                val resp = response.body()!!
-                Log.d("FOLDERRESULT/Code", resp.code.toString())
-
-                if (resp.isSuccess) {
-                    folderResultListView.onFolderResultListSuccess(resp.result)
+                if (response.body() == null) {
+                    folderResultListView.onFolderResultListFailure(0, "네트워크 연결에 실패하였습니다.")
                 } else {
-                    when (resp.code) {
-                        2001 -> folderResultListView.onFolderResultListFailure(resp.code,
-                            resp.message)
-                        2034 -> folderResultListView.onFolderResultListFailure(resp.code,
-                            resp.message)
-                        2002 -> folderResultListView.onFolderResultListFailure(resp.code,
-                            resp.message)
-                        3034 -> folderResultListView.onFolderResultListFailure(resp.code,
-                            resp.message)
-                        2000 -> folderResultListView.onFolderResultListFailure(resp.code,
-                            resp.message)
-                        3000 -> folderResultListView.onFolderResultListFailure(resp.code,
-                            resp.message)
+                    Log.d("FOLDERRESULT/Response", response.toString())
+                    val resp = response.body()!!
+                    Log.d("FOLDERRESULT/Code", resp.code.toString())
+
+                    if (resp.isSuccess) {
+                        folderResultListView.onFolderResultListSuccess(resp.result)
+                    } else {
+                        when (resp.code) {
+                            2001 -> folderResultListView.onFolderResultListFailure(resp.code,
+                                resp.message)
+                            2034 -> folderResultListView.onFolderResultListFailure(resp.code,
+                                resp.message)
+                            2002 -> folderResultListView.onFolderResultListFailure(resp.code,
+                                resp.message)
+                            3034 -> folderResultListView.onFolderResultListFailure(resp.code,
+                                resp.message)
+                            2000 -> folderResultListView.onFolderResultListFailure(resp.code,
+                                resp.message)
+                            3000 -> folderResultListView.onFolderResultListFailure(resp.code,
+                                resp.message)
+                        }
                     }
                 }
             }
@@ -272,46 +288,50 @@ class RecordService {
                     call: Call<FolderRecordResponse>,
                     response: Response<FolderRecordResponse>
                 ) {
-                    Log.d("RECORDRESULT/Response", response.toString())
-                    val resp = response.body()!!
-                    Log.d("RECORDRESULT/Code", resp.code.toString())
-
-                    if (resp.isSuccess) {
-                        folderRecordingView.onFolderRecordingSuccess()
+                    if (response.body() == null) {
+                        folderRecordingView.onFolderRecordingFailure(0, "네트워크 연결에 실패하였습니다.")
                     } else {
-                        when (resp.code) {
-                            2001 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                "회원 정보가 잘못되었습니다.")
-                            2002 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                resp.message)
-                            2000 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                resp.message)
-                            3000 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                resp.message)
-                            2031 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                resp.message)
-                            2039 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                resp.message)
-                            2040 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                resp.message)
-                            2041 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                resp.message)
-                            3042 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                resp.message)
-                            3017 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                resp.message)
-                            3006 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                resp.message)
-                            2035 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                resp.message)
-                            2036 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                resp.message)
-                            2038 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                resp.message)
-                            2037 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                resp.message)
-                            4000 -> folderRecordingView.onFolderRecordingFailure(resp.code,
-                                resp.message)
+                        Log.d("RECORDRESULT/Response", response.toString())
+                        val resp = response.body()!!
+                        Log.d("RECORDRESULT/Code", resp.code.toString())
+
+                        if (resp.isSuccess) {
+                            folderRecordingView.onFolderRecordingSuccess()
+                        } else {
+                            when (resp.code) {
+                                2001 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    "회원 정보가 잘못되었습니다.")
+                                2002 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    resp.message)
+                                2000 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    resp.message)
+                                3000 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    resp.message)
+                                2031 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    resp.message)
+                                2039 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    resp.message)
+                                2040 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    resp.message)
+                                2041 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    resp.message)
+                                3042 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    resp.message)
+                                3017 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    resp.message)
+                                3006 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    resp.message)
+                                2035 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    resp.message)
+                                2036 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    resp.message)
+                                2038 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    resp.message)
+                                2037 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    resp.message)
+                                4000 -> folderRecordingView.onFolderRecordingFailure(resp.code,
+                                    resp.message)
+                            }
                         }
                     }
                 }
@@ -332,46 +352,50 @@ class RecordService {
                     call: Call<SingleRecordResponse>,
                     response: Response<SingleRecordResponse>
                 ) {
-                    Log.d("S_RECORDING/Response", response.toString())
-                    val resp = response.body()!!
-                    Log.d("S_RECORDING/Code", resp.code.toString())
-
-                    if (resp.isSuccess) {
-                        singleRecordingView.onSingleRecordingSuccess()
+                    if (response.body() == null) {
+                        singleRecordingView.onSingleRecordingFailure(0, "네트워크 연결에 실패하였습니다.")
                     } else {
-                        when (resp.code) {
-                            2001 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                "회원 정보가 잘못되었습니다.")
-                            2002 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                resp.message)
-                            2000 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                resp.message)
-                            3000 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                resp.message)
-                            2032 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                resp.message)
-                            2039 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                resp.message)
-                            2040 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                resp.message)
-                            2041 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                resp.message)
-                            3043 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                resp.message)
-                            3018 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                resp.message)
-                            3007 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                resp.message)
-                            2035 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                resp.message)
-                            2036 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                resp.message)
-                            2038 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                resp.message)
-                            2037 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                resp.message)
-                            4000 -> singleRecordingView.onSingleRecordingFailure(resp.code,
-                                resp.message)
+                        Log.d("S_RECORDING/Response", response.toString())
+                        val resp = response.body()!!
+                        Log.d("S_RECORDING/Code", resp.code.toString())
+
+                        if (resp.isSuccess) {
+                            singleRecordingView.onSingleRecordingSuccess()
+                        } else {
+                            when (resp.code) {
+                                2001 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    "회원 정보가 잘못되었습니다.")
+                                2002 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    resp.message)
+                                2000 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    resp.message)
+                                3000 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    resp.message)
+                                2032 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    resp.message)
+                                2039 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    resp.message)
+                                2040 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    resp.message)
+                                2041 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    resp.message)
+                                3043 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    resp.message)
+                                3018 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    resp.message)
+                                3007 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    resp.message)
+                                2035 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    resp.message)
+                                2036 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    resp.message)
+                                2038 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    resp.message)
+                                2037 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    resp.message)
+                                4000 -> singleRecordingView.onSingleRecordingFailure(resp.code,
+                                    resp.message)
+                            }
                         }
                     }
                 }
@@ -393,32 +417,36 @@ class RecordService {
                 call: Call<FolderLookResponse>,
                 response: Response<FolderLookResponse>
             ) {
-                Log.d("FOLDERRESULT/Response", response.toString())
-                val resp = response.body()!!
-                Log.d("FOLDERRESULT/Code", resp.code.toString())
-
-                if (resp.isSuccess) {
-                    folderLookView.onFolderLookSuccess(resp.result)
+                if (response.body() == null) {
+                    folderLookView.onFolderLookFailure(0, "네트워크 연결에 실패하였습니다.")
                 } else {
-                    when (resp.code) {
-                        2001 -> folderLookView.onFolderLookFailure(resp.code,
-                            resp.message)
-                        2031 -> folderLookView.onFolderLookFailure(resp.code,
-                            resp.message)
-                        2002 -> folderLookView.onFolderLookFailure(resp.code,
-                            resp.message)
-                        3017 -> folderLookView.onFolderLookFailure(resp.code,
-                            resp.message)
-                        3006 -> folderLookView.onFolderLookFailure(resp.code,
-                            resp.message)
-                        3038 -> folderLookView.onFolderLookFailure(resp.code,
-                            resp.message)
-                        3040 -> folderLookView.onFolderLookFailure(resp.code,
-                            resp.message)
-                        3035 -> folderLookView.onFolderLookFailure(resp.code,
-                            resp.message)
-                        4000 -> folderLookView.onFolderLookFailure(resp.code,
-                            resp.message)
+                    Log.d("FOLDERRESULT/Response", response.toString())
+                    val resp = response.body()!!
+                    Log.d("FOLDERRESULT/Code", resp.code.toString())
+
+                    if (resp.isSuccess) {
+                        folderLookView.onFolderLookSuccess(resp.result)
+                    } else {
+                        when (resp.code) {
+                            2001 -> folderLookView.onFolderLookFailure(resp.code,
+                                resp.message)
+                            2031 -> folderLookView.onFolderLookFailure(resp.code,
+                                resp.message)
+                            2002 -> folderLookView.onFolderLookFailure(resp.code,
+                                resp.message)
+                            3017 -> folderLookView.onFolderLookFailure(resp.code,
+                                resp.message)
+                            3006 -> folderLookView.onFolderLookFailure(resp.code,
+                                resp.message)
+                            3038 -> folderLookView.onFolderLookFailure(resp.code,
+                                resp.message)
+                            3040 -> folderLookView.onFolderLookFailure(resp.code,
+                                resp.message)
+                            3035 -> folderLookView.onFolderLookFailure(resp.code,
+                                resp.message)
+                            4000 -> folderLookView.onFolderLookFailure(resp.code,
+                                resp.message)
+                        }
                     }
                 }
             }
@@ -440,32 +468,36 @@ class RecordService {
                 call: Call<SingleLookResponse>,
                 response: Response<SingleLookResponse>
             ) {
-                Log.d("SINGLERESULT/Response", response.toString())
-                val resp = response.body()!!
-                Log.d("SINGLERESULT/Code", resp.code.toString())
-
-                if (resp.isSuccess) {
-                    singleLookView.onSingleLookSuccess(resp.result)
+                if (response.body() == null) {
+                    singleLookView.onSingleLookFailure(0, "네트워크 연결에 실패하였습니다.")
                 } else {
-                    when (resp.code) {
-                        2001 -> singleLookView.onSingleLookFailure(resp.code,
-                            resp.message)
-                        2031 -> singleLookView.onSingleLookFailure(resp.code,
-                            resp.message)
-                        2002 -> singleLookView.onSingleLookFailure(resp.code,
-                            resp.message)
-                        3017 -> singleLookView.onSingleLookFailure(resp.code,
-                            resp.message)
-                        3006 -> singleLookView.onSingleLookFailure(resp.code,
-                            resp.message)
-                        3038 -> singleLookView.onSingleLookFailure(resp.code,
-                            resp.message)
-                        3040 -> singleLookView.onSingleLookFailure(resp.code,
-                            resp.message)
-                        3035 -> singleLookView.onSingleLookFailure(resp.code,
-                            resp.message)
-                        4000 -> singleLookView.onSingleLookFailure(resp.code,
-                            resp.message)
+                    Log.d("SINGLERESULT/Response", response.toString())
+                    val resp = response.body()!!
+                    Log.d("SINGLERESULT/Code", resp.code.toString())
+
+                    if (resp.isSuccess) {
+                        singleLookView.onSingleLookSuccess(resp.result)
+                    } else {
+                        when (resp.code) {
+                            2001 -> singleLookView.onSingleLookFailure(resp.code,
+                                resp.message)
+                            2031 -> singleLookView.onSingleLookFailure(resp.code,
+                                resp.message)
+                            2002 -> singleLookView.onSingleLookFailure(resp.code,
+                                resp.message)
+                            3017 -> singleLookView.onSingleLookFailure(resp.code,
+                                resp.message)
+                            3006 -> singleLookView.onSingleLookFailure(resp.code,
+                                resp.message)
+                            3038 -> singleLookView.onSingleLookFailure(resp.code,
+                                resp.message)
+                            3040 -> singleLookView.onSingleLookFailure(resp.code,
+                                resp.message)
+                            3035 -> singleLookView.onSingleLookFailure(resp.code,
+                                resp.message)
+                            4000 -> singleLookView.onSingleLookFailure(resp.code,
+                                resp.message)
+                        }
                     }
                 }
             }
@@ -486,30 +518,34 @@ class RecordService {
                 call: Call<FolderDeleteResponse>,
                 response: Response<FolderDeleteResponse>
             ) {
-                Log.d("FOLDERDELETE/Response", response.toString())
-                val resp = response.body()!!
-                Log.d("FOLDERDELETE/Code", resp.code.toString())
-
-                if (resp.isSuccess) {
-                    folderDeleteView.onFolderDeleteSuccess()
+                if (response.body() == null) {
+                    folderDeleteView.onFolderDeleteFailure(0, "네트워크 연결에 실패하였습니다.")
                 } else {
-                    when (resp.code) {
-                        2001 -> folderDeleteView.onFolderDeleteFailure(resp.code,
-                            resp.message)
-                        2002 -> folderDeleteView.onFolderDeleteFailure(resp.code,
-                            resp.message)
-                        2009 -> folderDeleteView.onFolderDeleteFailure(resp.code,
-                            resp.message)
-                        3018 -> folderDeleteView.onFolderDeleteFailure(resp.code,
-                            resp.message)
-                        3007 -> folderDeleteView.onFolderDeleteFailure(resp.code,
-                            resp.message)
-                        3017 -> folderDeleteView.onFolderDeleteFailure(resp.code,
-                            resp.message)
-                        3006 -> folderDeleteView.onFolderDeleteFailure(resp.code,
-                            resp.message)
-                        4000 -> folderDeleteView.onFolderDeleteFailure(resp.code,
-                            resp.message)
+                    Log.d("FOLDERDELETE/Response", response.toString())
+                    val resp = response.body()!!
+                    Log.d("FOLDERDELETE/Code", resp.code.toString())
+
+                    if (resp.isSuccess) {
+                        folderDeleteView.onFolderDeleteSuccess()
+                    } else {
+                        when (resp.code) {
+                            2001 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                                resp.message)
+                            2002 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                                resp.message)
+                            2009 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                                resp.message)
+                            3018 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                                resp.message)
+                            3007 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                                resp.message)
+                            3017 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                                resp.message)
+                            3006 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                                resp.message)
+                            4000 -> folderDeleteView.onFolderDeleteFailure(resp.code,
+                                resp.message)
+                        }
                     }
                 }
             }
@@ -529,34 +565,38 @@ class RecordService {
                 call: Call<FolderUpdateResponse>,
                 response: Response<FolderUpdateResponse>
             ) {
-                Log.d("FOLDERUPDATE/Response", response.toString())
-                val resp = response.body()!!
-                Log.d("FOLDERUPDATE/Code", resp.code.toString())
-
-                if (resp.isSuccess) {
-                    folderUpdateView.onFolderUpdateSuccess()
+                if (response.body() == null) {
+                    folderUpdateView.onFolderUpdateFailure(0, "네트워크 연결에 실패하였습니다.")
                 } else {
-                    when (resp.code) {
-                        2001 -> folderUpdateView.onFolderUpdateFailure(resp.code,
-                            resp.message)
-                        2012 -> folderUpdateView.onFolderUpdateFailure(resp.code,
-                            resp.message)
-                        2011 -> folderUpdateView.onFolderUpdateFailure(resp.code,
-                            resp.message)
-                        2013 -> folderUpdateView.onFolderUpdateFailure(resp.code,
-                            resp.message)
-                        2002 -> folderUpdateView.onFolderUpdateFailure(resp.code,
-                            resp.message)
-                        3017 -> folderUpdateView.onFolderUpdateFailure(resp.code,
-                            resp.message)
-                        3006 -> folderUpdateView.onFolderUpdateFailure(resp.code,
-                            resp.message)
-                        3018 -> folderUpdateView.onFolderUpdateFailure(resp.code,
-                            resp.message)
-                        3007 -> folderUpdateView.onFolderUpdateFailure(resp.code,
-                            resp.message)
-                        4000 -> folderUpdateView.onFolderUpdateFailure(resp.code,
-                            resp.message)
+                    Log.d("FOLDERUPDATE/Response", response.toString())
+                    val resp = response.body()!!
+                    Log.d("FOLDERUPDATE/Code", resp.code.toString())
+
+                    if (resp.isSuccess) {
+                        folderUpdateView.onFolderUpdateSuccess()
+                    } else {
+                        when (resp.code) {
+                            2001 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                                resp.message)
+                            2012 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                                resp.message)
+                            2011 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                                resp.message)
+                            2013 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                                resp.message)
+                            2002 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                                resp.message)
+                            3017 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                                resp.message)
+                            3006 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                                resp.message)
+                            3018 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                                resp.message)
+                            3007 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                                resp.message)
+                            4000 -> folderUpdateView.onFolderUpdateFailure(resp.code,
+                                resp.message)
+                        }
                     }
                 }
             }
@@ -575,30 +615,34 @@ class RecordService {
                 call: Call<FolderBreakResponse>,
                 response: Response<FolderBreakResponse>
             ) {
-                Log.d("FOLDERBREAK/Response", response.toString())
-                val resp = response.body()!!
-                Log.d("FOLDERBREAK/Code", resp.code.toString())
-
-                if (resp.isSuccess) {
-                    folderBreakView.onFolderBreakSuccess()
+                if (response.body() == null) {
+                    folderBreakView.onFolderBreakFailure(0, "네트워크 연결에 실패하였습니다.")
                 } else {
-                    when (resp.code) {
-                        2001-> folderBreakView.onFolderBreakFailure(resp.code,
-                            "회원 정보가 잘못되었습니다.")
-                        2002 -> folderBreakView.onFolderBreakFailure(resp.code,
-                            resp.message)
-                        2009 -> folderBreakView.onFolderBreakFailure(resp.code,
-                            resp.message)
-                        3018 -> folderBreakView.onFolderBreakFailure(resp.code,
-                            resp.message)
-                        3007 -> folderBreakView.onFolderBreakFailure(resp.code,
-                            resp.message)
-                        3017 -> folderBreakView.onFolderBreakFailure(resp.code,
-                            resp.message)
-                        3006 -> folderBreakView.onFolderBreakFailure(resp.code,
-                            resp.message)
-                        4000 -> folderBreakView.onFolderBreakFailure(resp.code,
-                            resp.message)
+                    Log.d("FOLDERBREAK/Response", response.toString())
+                    val resp = response.body()!!
+                    Log.d("FOLDERBREAK/Code", resp.code.toString())
+
+                    if (resp.isSuccess) {
+                        folderBreakView.onFolderBreakSuccess()
+                    } else {
+                        when (resp.code) {
+                            2001 -> folderBreakView.onFolderBreakFailure(resp.code,
+                                "회원 정보가 잘못되었습니다.")
+                            2002 -> folderBreakView.onFolderBreakFailure(resp.code,
+                                resp.message)
+                            2009 -> folderBreakView.onFolderBreakFailure(resp.code,
+                                resp.message)
+                            3018 -> folderBreakView.onFolderBreakFailure(resp.code,
+                                resp.message)
+                            3007 -> folderBreakView.onFolderBreakFailure(resp.code,
+                                resp.message)
+                            3017 -> folderBreakView.onFolderBreakFailure(resp.code,
+                                resp.message)
+                            3006 -> folderBreakView.onFolderBreakFailure(resp.code,
+                                resp.message)
+                            4000 -> folderBreakView.onFolderBreakFailure(resp.code,
+                                resp.message)
+                        }
                     }
                 }
             }
@@ -619,42 +663,46 @@ class RecordService {
                 call: Call<FolderModifyResponse>,
                 response: Response<FolderModifyResponse>
             ) {
-                Log.d("FOLDERMODIFY/Response", response.toString())
-                val resp = response.body()!!
-                Log.d("FOLDERMODIFY/Code", resp.code.toString())
-
-                if (resp.isSuccess) {
-                    folderModifyView.onFolderModifySuccess()
+                if (response.body() == null) {
+                    folderModifyView.onFolderModifyFailure(0, "네트워크 연결에 실패하였습니다.")
                 } else {
-                    when (resp.code) {
-                        2001 -> folderModifyView.onFolderModifyFailure(resp.code,
-                            resp.message)
-                        2031 -> folderModifyView.onFolderModifyFailure(resp.code,
-                            resp.message)
-                        2039 -> folderModifyView.onFolderModifyFailure(resp.code,
-                            resp.message)
-                        2035 -> folderModifyView.onFolderModifyFailure(resp.code,
-                            resp.message)
-                        2040 -> folderModifyView.onFolderModifyFailure(resp.code,
-                            resp.message)
-                        2038 -> folderModifyView.onFolderModifyFailure(resp.code,
-                            resp.message)
-                        2041 -> folderModifyView.onFolderModifyFailure(resp.code,
-                            resp.message)
-                        2036 -> folderModifyView.onFolderModifyFailure(resp.code,
-                            resp.message)
-                        2002 -> folderModifyView.onFolderModifyFailure(resp.code,
-                            resp.message)
-                        3017 -> folderModifyView.onFolderModifyFailure(resp.code,
-                            resp.message)
-                        3006 -> folderModifyView.onFolderModifyFailure(resp.code,
-                            resp.message)
-                        3036 -> folderModifyView.onFolderModifyFailure(resp.code,
-                            resp.message)
-                        2037 -> folderModifyView.onFolderModifyFailure(resp.code,
-                            resp.message)
-                        4000 -> folderModifyView.onFolderModifyFailure(resp.code,
-                            resp.message)
+                    Log.d("FOLDERMODIFY/Response", response.toString())
+                    val resp = response.body()!!
+                    Log.d("FOLDERMODIFY/Code", resp.code.toString())
+
+                    if (resp.isSuccess) {
+                        folderModifyView.onFolderModifySuccess()
+                    } else {
+                        when (resp.code) {
+                            2001 -> folderModifyView.onFolderModifyFailure(resp.code,
+                                resp.message)
+                            2031 -> folderModifyView.onFolderModifyFailure(resp.code,
+                                resp.message)
+                            2039 -> folderModifyView.onFolderModifyFailure(resp.code,
+                                resp.message)
+                            2035 -> folderModifyView.onFolderModifyFailure(resp.code,
+                                resp.message)
+                            2040 -> folderModifyView.onFolderModifyFailure(resp.code,
+                                resp.message)
+                            2038 -> folderModifyView.onFolderModifyFailure(resp.code,
+                                resp.message)
+                            2041 -> folderModifyView.onFolderModifyFailure(resp.code,
+                                resp.message)
+                            2036 -> folderModifyView.onFolderModifyFailure(resp.code,
+                                resp.message)
+                            2002 -> folderModifyView.onFolderModifyFailure(resp.code,
+                                resp.message)
+                            3017 -> folderModifyView.onFolderModifyFailure(resp.code,
+                                resp.message)
+                            3006 -> folderModifyView.onFolderModifyFailure(resp.code,
+                                resp.message)
+                            3036 -> folderModifyView.onFolderModifyFailure(resp.code,
+                                resp.message)
+                            2037 -> folderModifyView.onFolderModifyFailure(resp.code,
+                                resp.message)
+                            4000 -> folderModifyView.onFolderModifyFailure(resp.code,
+                                resp.message)
+                        }
                     }
                 }
             }
@@ -673,42 +721,46 @@ class RecordService {
                 call: Call<SingleModifyResponse>,
                 response: Response<SingleModifyResponse>
             ) {
-                Log.d("SINGLEMODIFY/Response", response.toString())
-                val resp = response.body()!!
-                Log.d("SINGLEMODIFY/Code", resp.code.toString())
-
-                if (resp.isSuccess) {
-                    singleModifyView.onSingleModifySuccess()
+                if (response.body() == null) {
+                    singleModifyView.onSingleModifyFailure(0, "네트워크 연결에 실패하였습니다.")
                 } else {
-                    when (resp.code) {
-                        2001 -> singleModifyView.onSingleModifyFailure(resp.code,
-                            resp.message)
-                        2032 -> singleModifyView.onSingleModifyFailure(resp.code,
-                            resp.message)
-                        2039 -> singleModifyView.onSingleModifyFailure(resp.code,
-                            resp.message)
-                        2035 -> singleModifyView.onSingleModifyFailure(resp.code,
-                            resp.message)
-                        2040 -> singleModifyView.onSingleModifyFailure(resp.code,
-                            resp.message)
-                        2038 -> singleModifyView.onSingleModifyFailure(resp.code,
-                            resp.message)
-                        2041 -> singleModifyView.onSingleModifyFailure(resp.code,
-                            resp.message)
-                        2036 -> singleModifyView.onSingleModifyFailure(resp.code,
-                            resp.message)
-                        2013 -> singleModifyView.onSingleModifyFailure(resp.code,
-                            resp.message)
-                        3018 -> singleModifyView.onSingleModifyFailure(resp.code,
-                            resp.message)
-                        3007 -> singleModifyView.onSingleModifyFailure(resp.code,
-                            resp.message)
-                        3037 -> singleModifyView.onSingleModifyFailure(resp.code,
-                            resp.message)
-                        2037 -> singleModifyView.onSingleModifyFailure(resp.code,
-                            resp.message)
-                        4000 -> singleModifyView.onSingleModifyFailure(resp.code,
-                            resp.message)
+                    Log.d("SINGLEMODIFY/Response", response.toString())
+                    val resp = response.body()!!
+                    Log.d("SINGLEMODIFY/Code", resp.code.toString())
+
+                    if (resp.isSuccess) {
+                        singleModifyView.onSingleModifySuccess()
+                    } else {
+                        when (resp.code) {
+                            2001 -> singleModifyView.onSingleModifyFailure(resp.code,
+                                resp.message)
+                            2032 -> singleModifyView.onSingleModifyFailure(resp.code,
+                                resp.message)
+                            2039 -> singleModifyView.onSingleModifyFailure(resp.code,
+                                resp.message)
+                            2035 -> singleModifyView.onSingleModifyFailure(resp.code,
+                                resp.message)
+                            2040 -> singleModifyView.onSingleModifyFailure(resp.code,
+                                resp.message)
+                            2038 -> singleModifyView.onSingleModifyFailure(resp.code,
+                                resp.message)
+                            2041 -> singleModifyView.onSingleModifyFailure(resp.code,
+                                resp.message)
+                            2036 -> singleModifyView.onSingleModifyFailure(resp.code,
+                                resp.message)
+                            2013 -> singleModifyView.onSingleModifyFailure(resp.code,
+                                resp.message)
+                            3018 -> singleModifyView.onSingleModifyFailure(resp.code,
+                                resp.message)
+                            3007 -> singleModifyView.onSingleModifyFailure(resp.code,
+                                resp.message)
+                            3037 -> singleModifyView.onSingleModifyFailure(resp.code,
+                                resp.message)
+                            2037 -> singleModifyView.onSingleModifyFailure(resp.code,
+                                resp.message)
+                            4000 -> singleModifyView.onSingleModifyFailure(resp.code,
+                                resp.message)
+                        }
                     }
                 }
             }
@@ -726,29 +778,33 @@ class RecordService {
                 call: Call<FolderrecordingDeleteResponse>,
                 response: Response<FolderrecordingDeleteResponse>
             ) {
-                Log.d("FOLDERDelete/Response", response.toString())
-                val resp = response.body()!!
-                Log.d("FOLDERDelete/Code", resp.code.toString())
-
-                if (resp.isSuccess) {
-                    folderrecordingDeleteView.onFolderrecordingDeleteSuccess()
+                if (response.body() == null) {
+                    folderrecordingDeleteView.onFolderrecordingDeleteFailure(0, "네트워크 연결에 실패하였습니다.")
                 } else {
-                    when (resp.code) {
-                        2001 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
-                            "회원 정보가 잘못되었습니다.")
-                        2031 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
-                            resp.message)
-                        2002 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
-                            resp.message)
+                    Log.d("FOLDERDelete/Response", response.toString())
+                    val resp = response.body()!!
+                    Log.d("FOLDERDelete/Code", resp.code.toString())
 
-                        3017 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
-                            resp.message)
-                        3006 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
-                            resp.message)
-                        3036 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
-                            "삭제할 기록이 존재하지 않아!")
-                        4000 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
-                            resp.message)
+                    if (resp.isSuccess) {
+                        folderrecordingDeleteView.onFolderrecordingDeleteSuccess()
+                    } else {
+                        when (resp.code) {
+                            2001 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
+                                "회원 정보가 잘못되었습니다.")
+                            2031 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
+                                resp.message)
+                            2002 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
+                                resp.message)
+
+                            3017 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
+                                resp.message)
+                            3006 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
+                                resp.message)
+                            3036 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
+                                "삭제할 기록이 존재하지 않아!")
+                            4000 -> folderrecordingDeleteView.onFolderrecordingDeleteFailure(resp.code,
+                                resp.message)
+                        }
                     }
                 }
             }
@@ -767,28 +823,39 @@ class RecordService {
                         call: Call<SinglerecordingDeleteResponse>,
                         response: Response<SinglerecordingDeleteResponse>
                     ) {
-                        Log.d("SINGLEDELETE/Response", response.toString())
-                        val resp = response.body()!!
-                        Log.d("SINGLEDELETE/Code", resp.code.toString())
-
-                        if (resp.isSuccess) {
-                            singlerecordingDeleteView.onSinglerecordingDeleteSuccess()
+                        if (response.body() == null) {
+                            singlerecordingDeleteView.onSinglerecordingDeleteFailure(0, "네트워크 연결에 실패하였습니다.")
                         } else {
-                            when (resp.code) {
-                                2001 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(resp.code,
-                                    "회원 정보가 잘못되었습니다.")
-                                2032 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(resp.code,
-                                    resp.message)
-                                2013 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(resp.code,
-                                    resp.message)
-                                3018 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(resp.code,
-                                    resp.message)
-                                3037 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(resp.code,
-                                    "삭제할 기록이 존재하지 않아!")
-                                3007 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(resp.code,
-                                    resp.message)
-                                4000 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(resp.code,
-                                    resp.message)
+                            Log.d("SINGLEDELETE/Response", response.toString())
+                            val resp = response.body()!!
+                            Log.d("SINGLEDELETE/Code", resp.code.toString())
+
+                            if (resp.isSuccess) {
+                                singlerecordingDeleteView.onSinglerecordingDeleteSuccess()
+                            } else {
+                                when (resp.code) {
+                                    2001 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(
+                                        resp.code,
+                                        "회원 정보가 잘못되었습니다.")
+                                    2032 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(
+                                        resp.code,
+                                        resp.message)
+                                    2013 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(
+                                        resp.code,
+                                        resp.message)
+                                    3018 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(
+                                        resp.code,
+                                        resp.message)
+                                    3037 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(
+                                        resp.code,
+                                        "삭제할 기록이 존재하지 않아!")
+                                    3007 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(
+                                        resp.code,
+                                        resp.message)
+                                    4000 -> singlerecordingDeleteView.onSinglerecordingDeleteFailure(
+                                        resp.code,
+                                        resp.message)
+                                }
                             }
                         }
                     }
