@@ -15,10 +15,7 @@ import com.nhn.android.naverlogin.OAuthLogin.mOAuthLoginHandler
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.ActivitySplashBinding
-import org.techtown.gabojago.main.MainActivity
-import org.techtown.gabojago.main.MyToast
-import org.techtown.gabojago.main.getBooleanJwt
-import org.techtown.gabojago.main.getJwt
+import org.techtown.gabojago.main.*
 import org.techtown.gabojago.menu.manage.ManageService
 import org.techtown.gabojago.start.login.AuthService
 import org.techtown.gabojago.start.login.LoginActivity

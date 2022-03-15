@@ -1,7 +1,9 @@
 package org.techtown.gabojago.menu.home.contents
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.Spanned
@@ -13,15 +15,46 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.RotateAnimation
+import androidx.activity.OnBackPressedCallback
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import org.techtown.gabojago.main.MainActivity
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentHomeBinding
+import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.menu.home.info.HomeInfoFragment
+import kotlin.system.exitProcess
 
 class HomeFragment : Fragment(){
     lateinit var binding: FragmentHomeBinding
     private lateinit var loopAnim: LoopAnimation
+    private lateinit var callback: OnBackPressedCallback
+    private var backPressedTime : Long = 0
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.d("TAG", "뒤로가기")
+                
+                if (System.currentTimeMillis() - backPressedTime < 2000) {
+                    ActivityCompat.finishAffinity(requireActivity())
+                    exitProcess(0)
+                }
+
+                MyToast.createToast(
+                    requireContext(), "뒤로가기 버튼을 한 번 더 누르면 앱이 종료됩니다.", 90, false
+                ).show()
+                backPressedTime = System.currentTimeMillis()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
