@@ -4,14 +4,13 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.nhn.android.naverlogin.OAuthLogin
-import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.DialogLogoutBinding
+import org.techtown.gabojago.databinding.FragmentManageBinding
 import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.main.setJwt

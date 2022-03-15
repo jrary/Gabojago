@@ -166,13 +166,13 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
 
     override fun onNicknameAdventureSuccess(userNicknameAdventure: NicknameAdventureResult) {
         binding.calendarNameTv.text = userNicknameAdventure.userNicknameAdventure
-        binding.canlendarBlurView.visibility = View.GONE
+        binding.calendarBlurView.visibility = View.GONE
         binding.calendarLoadingPb.visibility=View.GONE
     }
 
     override fun onNicknameAdventureLoading() {
         binding.calendarLoadingPb.visibility=View.VISIBLE
-        binding.canlendarBlurView.visibility = View.VISIBLE
+        binding.calendarBlurView.visibility = View.VISIBLE
     }
 
     override fun onNicknameAdventureFailure(code: Int, message: String) {
@@ -188,7 +188,7 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
             randomresultdateList.add(i,-1)
         }
         binding.calendarLoadingPb.visibility = View.GONE
-        binding.canlendarBlurView.visibility = View.GONE
+        binding.calendarBlurView.visibility = View.GONE
         userJoinDate = adventureTime.userJoinDate
         Log.e("user", adventureTime.userJoinDate)
         registerDateArray = setRegisterDate(userJoinDate)
@@ -217,12 +217,12 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
 
     override fun onAdventureTimeLoading() {
         binding.calendarLoadingPb.visibility = View.VISIBLE
-        binding.canlendarBlurView.visibility = View.VISIBLE
+        binding.calendarBlurView.visibility = View.VISIBLE
     }
 
     override fun onAdventureTimeFailure(code: Int, message: String) {
         binding.calendarLoadingPb.visibility = View.GONE
-        binding.canlendarBlurView.visibility = View.GONE
+        binding.calendarBlurView.visibility = View.GONE
 
         MyToast.createToast(
             requireContext(), message, 90, true

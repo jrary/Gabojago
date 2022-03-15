@@ -49,8 +49,6 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView {
         callback.remove()
     }
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -94,65 +92,53 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView {
         }
 
         binding.manageLogoutBtn.setOnClickListener {
-            LogoutDialog().show((context as MainActivity).supportFragmentManager,"dialog")
+            LogoutDialog().show(
+                (context as MainActivity).supportFragmentManager,"dialog"
+            )
         }
 
         binding.manageExitTv.setOnClickListener {
-            WithdrawalDialog().show((context as MainActivity).supportFragmentManager,"dialog")
+            WithdrawalDialog().show(
+                (context as MainActivity).supportFragmentManager,"dialog"
+            )
         }
 
         return binding.root
     }
 
     override fun onNicknameLoading() {
-        binding.manageLoadingView.visibility = View.VISIBLE
-        for(i in 0..5){
-            Handler().postDelayed({
-                binding.manageLoadingIv.setImageResource(R.drawable.loading_02)
-            }, (500 + 1500 * i).toLong())
-            Handler().postDelayed({
-                binding.manageLoadingIv.setImageResource(R.drawable.loading_03)
-            }, (1000 + 1500 * i).toLong())
-            Handler().postDelayed({
-                binding.manageLoadingIv.setImageResource(R.drawable.loading_01)
-            }, (1500 + 1500 * i).toLong())
-        }
+        binding.manageBlurView.visibility = View.VISIBLE
+        binding.manageLoadingPb.visibility = View.VISIBLE
     }
 
     override fun onNicknameSuccess(userNickname: String) {
-        binding.manageLoadingView.visibility = View.GONE
+        binding.manageBlurView.visibility = View.GONE
+        binding.manageLoadingPb.visibility = View.GONE
         binding.manageNicknameTv.text = userNickname
     }
 
     override fun onNicknameFailure(code: Int, message: String) {
-        binding.manageLoadingView.visibility = View.GONE
+        binding.manageBlurView.visibility = View.GONE
+        binding.manageLoadingPb.visibility = View.GONE
         MyToast.createToast(
             requireContext(), message, 90, true
         ).show()
     }
 
     override fun onModifyNicknameLoading() {
-        binding.manageLoadingView.visibility = View.VISIBLE
-        for(i in 0..5){
-            Handler().postDelayed({
-                binding.manageLoadingIv.setImageResource(R.drawable.loading_02)
-            }, (500 + 1500 * i).toLong())
-            Handler().postDelayed({
-                binding.manageLoadingIv.setImageResource(R.drawable.loading_03)
-            }, (1000 + 1500 * i).toLong())
-            Handler().postDelayed({
-                binding.manageLoadingIv.setImageResource(R.drawable.loading_01)
-            }, (1500 + 1500 * i).toLong())
-        }
+        binding.manageBlurView.visibility = View.VISIBLE
+        binding.manageLoadingPb.visibility = View.VISIBLE
     }
 
     override fun onModifyNicknameSuccess(newNickName: String) {
-        binding.manageLoadingView.visibility = View.GONE
+        binding.manageBlurView.visibility = View.GONE
+        binding.manageLoadingPb.visibility = View.GONE
         binding.manageNicknameTv.text = newNickName
     }
 
     override fun onModifyNicknameFailure(code: Int, message: String) {
-        binding.manageLoadingView.visibility = View.GONE
+        binding.manageBlurView.visibility = View.GONE
+        binding.manageLoadingPb.visibility = View.GONE
         MyToast.createToast(
             requireContext(), message, 90, true
         ).show()

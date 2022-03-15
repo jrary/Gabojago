@@ -230,7 +230,7 @@
         tools:listitem="@layout/item_calendar_gridview" />
 
     <com.github.mmin18.widget.RealtimeBlurView
-        android:id="@+id/canlendar_blur_view"
+        android:id="@+id/calendar_blur_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:translationZ="3dp"
