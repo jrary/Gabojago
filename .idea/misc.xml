@@ -107,9 +107,11 @@
         <entry key="app/src/main/res/layout/dialog_foldermodify.xml" value="0.35324074074074074" />
         <entry key="app/src/main/res/layout/dialog_folderselect.xml" value="0.35324074074074074" />
         <entry key="app/src/main/res/layout/dialog_realdelete.xml" value="0.36231884057971014" />
+        <entry key="app/src/main/res/layout/fragment_color.xml" value="0.31023550724637683" />
         <entry key="app/src/main/res/layout/fragment_folderrecord.xml" value="0.31987915039062503" />
         <entry key="app/src/main/res/layout/fragment_goagain.xml" value="0.333786231884058" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.333786231884058" />
+        <entry key="app/src/main/res/layout/fragment_info_color.xml" value="0.31023550724637683" />
         <entry key="app/src/main/res/layout/fragment_look_vp.xml" value="0.36231884057971014" />
         <entry key="app/src/main/res/layout/fragment_record.xml" value="0.333786231884058" />
         <entry key="app/src/main/res/layout/fragment_record_look.xml" value="0.36231884057971014" />
