@@ -84,7 +84,12 @@ class ManageFragment : Fragment(), NicknameView, NewNicknameView {
         }
 
         binding.manageChatTv.setOnClickListener {
-            val feedback = Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/bMn73YNkNLKqvWHq9"))
+            val feedback = Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/MuysKeGGvF2AdTi99"))
+            startActivity(feedback)
+        }
+
+        binding.manageMoreTv.setOnClickListener {
+            val feedback = Intent(Intent.ACTION_VIEW, Uri.parse("https://mesquite-flat-28b.notion.site/GO-4b240e10693141688134accdbd3a7741"))
             startActivity(feedback)
         }
 
