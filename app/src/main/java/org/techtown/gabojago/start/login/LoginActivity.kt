@@ -2,6 +2,7 @@ package org.techtown.gabojago.start.login
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Point
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -29,6 +30,18 @@ class LoginActivity :AppCompatActivity(), LoginView {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
+        val display = windowManager.defaultDisplay
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        val height = size.y
+
+        binding.loginBackgroundView.layoutParams.width = width
+        binding.loginBackgroundView.layoutParams.height = height*2/3
+
+        binding.loginNaverBtn.layoutParams.width = width/2
+        binding.loginNaverBtn.layoutParams.height = binding.loginNaverBtn.layoutParams.width/4
 
         Handler().postDelayed({
             binding.loginBackgroundView.visibility = View.VISIBLE

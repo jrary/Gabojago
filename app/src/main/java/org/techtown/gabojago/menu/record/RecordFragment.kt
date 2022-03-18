@@ -177,8 +177,12 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
         binding.recordResultRecyclerview.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         //화면 넓이
-        val width  = getScreenSize(this)
-        binding.recordWeekRecyclerview.addItemDecoration(HorizontalItemDecorator(width/75))
+        val display = requireActivity().windowManager.defaultDisplay
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        val height = size.y
+        binding.recordWeekRecyclerview.addItemDecoration(HorizontalItemDecorator(width/75,height/200))
         //클릭 이벤트 함수
         clickevent()
 
@@ -271,14 +275,7 @@ class RecordFragment : Fragment(), RecordCountView, SingleResultListView, Folder
 
         return stringMonth
     }
-    //화면크기 받아오는 함수
-    fun getScreenSize(fragment : Fragment): Int {
-        val display = requireActivity().windowManager.defaultDisplay
-        val size = Point()
-        display.getSize(size)
-        val width = size.x
-        return width
-    }
+
     //더보기 메뉴 애니메이션 함수
     private fun popupMenu() {
 

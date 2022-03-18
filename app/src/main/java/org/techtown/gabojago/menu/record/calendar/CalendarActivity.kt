@@ -5,6 +5,7 @@ import HorizontalItemDecorator
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -56,7 +57,17 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
         val gridLayoutManager = GridLayoutManager(requireContext(), 7)
         binding.calendarGridview.layoutManager = gridLayoutManager
 
-        binding.calendarGridview.addItemDecoration(HorizontalItemDecorator(28))
+        val display = requireActivity().windowManager.defaultDisplay // in case of Fragment
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        val height = size.y
+        binding.calendarGridview.addItemDecoration(HorizontalItemDecorator(width/50,height/1000))
+
+        binding.calendarEmpty1.layoutParams.height = height/15
+        binding.calendarEmpty3.layoutParams.height = height/100
+        binding.calendarCalendarIv.layoutParams.height = height/2
+        binding.calendarCalendarIv.layoutParams.width = width*4/5
 
         viewDate = initDate().substring(0,6)
 

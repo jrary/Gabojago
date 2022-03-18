@@ -1,6 +1,8 @@
 package org.techtown.gabojago.menu.record.calendar
 
+import android.graphics.Point
 import android.util.Log
+import android.util.TypedValue.COMPLEX_UNIT_PX
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +38,18 @@ class CalendarAdapter(private val viewDate: String,private val randomresultdateL
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemCalendarGridviewBinding =
             ItemCalendarGridviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val display = parent.display
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        val height = size.y
+        binding.itemLayout.layoutParams.height = height/15
+        binding.itemGridviewTv.setTextSize(COMPLEX_UNIT_PX,height/60.toFloat())
+        binding.itemGridviewRecordIv.layoutParams.width = height/30
+        binding.itemGridviewRecordIv.layoutParams.height = height/30
+        binding.itemEmpty.layoutParams.height = height/160
+        binding.itemGridviewTodayIv.layoutParams.height = height/140
+        binding.itemGridviewTodayIv.layoutParams.width = height/140
         setEmptyDate(viewDate)
         return ViewHolder(binding)
     }

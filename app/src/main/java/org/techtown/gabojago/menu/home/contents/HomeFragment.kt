@@ -3,6 +3,7 @@ package org.techtown.gabojago.menu.home.contents
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Point
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -61,6 +62,21 @@ class HomeFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        val display = requireActivity().windowManager.defaultDisplay
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        val height = size.y
+        1
+        binding.homeStartIv.layoutParams.height = height*3/8
+        binding.homeStartIv.layoutParams.width = binding.homeStartIv.layoutParams.height*4/5
+
+        binding.homeDice01Iv.layoutParams.height = height/5
+        binding.homeDice01Iv.layoutParams.width = binding.homeDice01Iv.layoutParams.height*4/5
+
+        binding.homeDice02Iv.layoutParams.height = height/9
+        binding.homeDice02Iv.layoutParams.width = binding.homeDice02Iv.layoutParams.height*8/9
 
         //Set the text color
         var orangeText = SpannableStringBuilder("랜덤에 내 발길을 맡겨볼까?\n새로운 장소를 발견하고 탐험해봐!")

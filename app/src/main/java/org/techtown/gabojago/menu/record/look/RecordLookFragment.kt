@@ -15,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.techtown.gabojago.R
 import org.techtown.gabojago.databinding.FragmentRecordLookBinding
 import org.techtown.gabojago.main.MainActivity
+import org.techtown.gabojago.main.MyToast
 import org.techtown.gabojago.main.getJwt
 import org.techtown.gabojago.menu.record.RecordFragment
 import org.techtown.gabojago.menu.record.recordRetrofit.*
@@ -51,6 +52,10 @@ class RecordLookFragment(private val hasRecording: Boolean, private val Idx:Int,
         if(hasRecording){
             recordService.getFolderLook(userJwt, Idx)
             recordService.getSingleLook(userJwt, Idx)
+        } else{
+            MyToast.createToast(
+                requireContext(), "기록이 없는 항목이야!", 90, true
+            ).show()
         }
 
         //기록리스트 여는 클릭이벤트
