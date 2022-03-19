@@ -44,9 +44,9 @@ class CalendarAdapter(private val viewDate: String,private val randomresultdateL
         val width = size.x
         val height = size.y
         binding.itemLayout.layoutParams.height = height/15
-        binding.itemGridviewTv.setTextSize(COMPLEX_UNIT_PX,height/60.toFloat())
-        binding.itemGridviewRecordIv.layoutParams.width = height/30
-        binding.itemGridviewRecordIv.layoutParams.height = height/30
+//        binding.itemGridviewTv.setTextSize(COMPLEX_UNIT_PX,height/60.toFloat())
+//        binding.itemGridviewRecordIv.layoutParams.width = height/30
+//        binding.itemGridviewRecordIv.layoutParams.height = height/30
         binding.itemEmpty.layoutParams.height = height/160
         binding.itemGridviewTodayIv.layoutParams.height = height/140
         binding.itemGridviewTodayIv.layoutParams.width = height/140

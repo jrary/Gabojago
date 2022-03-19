@@ -62,7 +62,7 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
         display.getSize(size)
         val width = size.x
         val height = size.y
-        binding.calendarGridview.addItemDecoration(HorizontalItemDecorator(width/50,height/1000))
+        binding.calendarGridview.addItemDecoration(HorizontalItemDecorator(width/55,height/1000))
 
         binding.calendarEmpty1.layoutParams.height = height/15
         binding.calendarEmpty3.layoutParams.height = height/100
