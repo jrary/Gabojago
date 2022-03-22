@@ -2,6 +2,7 @@ package org.techtown.gabojago.menu.home.randomPick.color
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Point
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -46,6 +47,8 @@ class ColorFragment : Fragment() {
         super.onCreate(savedInstanceState)
         binding = FragmentColorBinding.inflate(layoutInflater)
 
+        cardSize()
+
         binding.colorCard01View.setImageResource(R.drawable.vending_card_selected)
         binding.colorBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
@@ -66,6 +69,22 @@ class ColorFragment : Fragment() {
 
         return binding.root
     }
+
+    private fun cardSize(){
+        val display = requireActivity().windowManager.defaultDisplay // in case of Fragment
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        val height = size.y
+
+        Log.d("COLORVENDINGSIZE", width.toString()+", "+height.toString())
+        Log.d("COLORCARD", (width*0.1).toString()+", "+(height*0.1).toString())
+        binding.colorCard01View.layoutParams.height = (height*0.1).toInt()
+        binding.colorCard01View.layoutParams.width = (width*0.1).toInt()
+
+
+    }
+
     private fun cardColorAnimation(){
         val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start)
         Handler().postDelayed({

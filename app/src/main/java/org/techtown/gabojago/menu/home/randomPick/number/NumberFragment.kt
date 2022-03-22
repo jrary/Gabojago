@@ -2,6 +2,7 @@ package org.techtown.gabojago.menu.home.randomPick.number
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Point
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -106,6 +107,9 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
             binding.numberResult09Tv,
             binding.numberResult10Tv
         )
+
+        contentsSize()
+
         val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start_longer)
 
         binding.numberBackBtn.setOnClickListener {
@@ -165,6 +169,20 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
             saveNumbers()
         }
         return binding.root
+    }
+
+    private fun contentsSize(){
+        val display = requireActivity().windowManager.defaultDisplay // in case of Fragment
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        val height = size.y
+
+        Log.d("COLORVENDINGSIZE", width.toString()+", "+height.toString())
+        Log.d("COLORCARD", (width*0.1).toString()+", "+(height*0.1).toString())
+        binding.numberMainIv.layoutParams.height = (height*0.6).toInt()
+        binding.numberAnimationMainIv.layoutParams.height = (height*0.6).toInt()
+        binding.numberGroundIv.layoutParams.height = (height*0.3).toInt()
     }
 
     //Get the RESULT NUMBER -> RESARRAY

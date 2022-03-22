@@ -4,6 +4,7 @@ import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Point
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -106,6 +107,8 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
             }
         }
 
+        contentsSize()
+
         binding.clockBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, HomeMenuFragment())
@@ -167,6 +170,19 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
             saveClock()
         }
         return binding.root
+    }
+
+    private fun contentsSize(){
+        val display = requireActivity().windowManager.defaultDisplay // in case of Fragment
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        val height = size.y
+
+        Log.d("COLORVENDINGSIZE", width.toString()+", "+height.toString())
+        Log.d("COLORCARD", (width*0.1).toString()+", "+(height*0.1).toString())
+        binding.clockIv.layoutParams.width = (width*0.8).toInt()
+        binding.clockIv.layoutParams.height = (width*0.8).toInt()
     }
 
     private fun saveClock(){
