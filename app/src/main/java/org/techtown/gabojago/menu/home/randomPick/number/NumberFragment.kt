@@ -377,13 +377,17 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
     override fun onPause() {
         super.onPause()
         val animationOpen = AnimationUtils.loadAnimation(activity, R.anim.anim_open_scale)
-        binding.numberMainIv.startAnimation(animationOpen)
+        binding.numberOptionBtn.visibility = View.INVISIBLE
+        binding.numberGoBtn.visibility = View.INVISIBLE
+        binding.numberContentsView.startAnimation(animationOpen)
     }
 
     override fun onResume() {
         super.onResume()
         val animationClose = AnimationUtils.loadAnimation(activity, R.anim.anim_close_scale)
-        binding.numberMainIv.startAnimation(animationClose)
+        binding.numberOptionBtn.visibility = View.VISIBLE
+        binding.numberGoBtn.visibility = View.VISIBLE
+        binding.numberContentsView.startAnimation(animationClose)
     }
 
     override fun onRandomLoading() {

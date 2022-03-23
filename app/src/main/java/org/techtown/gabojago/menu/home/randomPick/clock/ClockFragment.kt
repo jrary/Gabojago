@@ -221,16 +221,20 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
         super.onPause()
         binding.clockInfoTitleTv.visibility = View.GONE
         binding.clockInfoTv.visibility = View.GONE
+        binding.clockOptionBtn.visibility = View.INVISIBLE
+        binding.clockGoBtn.visibility = View.INVISIBLE
         val animationOpen = AnimationUtils.loadAnimation(activity, R.anim.anim_open_scale)
-        binding.clockMainView.startAnimation(animationOpen)
+        binding.clockContentsView.startAnimation(animationOpen)
     }
 
     override fun onResume() {
         super.onResume()
         val animationClose = AnimationUtils.loadAnimation(activity, R.anim.anim_close_scale)
-        binding.clockMainView.startAnimation(animationClose)
+        binding.clockContentsView.startAnimation(animationClose)
         binding.clockInfoTitleTv.visibility = View.VISIBLE
         binding.clockInfoTv.visibility = View.VISIBLE
+        binding.clockOptionBtn.visibility = View.VISIBLE
+        binding.clockGoBtn.visibility = View.VISIBLE
     }
 
     //startNum, endNum의 범위는 1~12이다.

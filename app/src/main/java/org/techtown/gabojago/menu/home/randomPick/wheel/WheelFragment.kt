@@ -213,16 +213,20 @@ class WheelFragment : Fragment(), RandomView, RecordCountView {
         super.onPause()
         binding.wheelInfoTitleTv.visibility = View.GONE
         binding.wheelInfoTv.visibility = View.GONE
+        binding.wheelOptionBtn.visibility = View.INVISIBLE
+        binding.wheelGoBtn.visibility = View.INVISIBLE
         val animationOpen = AnimationUtils.loadAnimation(activity, R.anim.anim_open_scale)
-        binding.wheelMainView.startAnimation(animationOpen)
+        binding.wheelContentsView.startAnimation(animationOpen)
     }
 
     override fun onResume() {
         super.onResume()
         val animationClose = AnimationUtils.loadAnimation(activity, R.anim.anim_close_scale)
-        binding.wheelMainView.startAnimation(animationClose)
+        binding.wheelContentsView.startAnimation(animationClose)
         binding.wheelInfoTitleTv.visibility = View.VISIBLE
         binding.wheelInfoTv.visibility = View.VISIBLE
+        binding.wheelOptionBtn.visibility = View.VISIBLE
+        binding.wheelGoBtn.visibility = View.VISIBLE
     }
 
     private fun setWheel(wheelArr: Array<Int>){
