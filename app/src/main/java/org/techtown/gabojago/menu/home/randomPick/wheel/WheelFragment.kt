@@ -3,18 +3,19 @@ package org.techtown.gabojago.menu.home.randomPick.wheel
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Point
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.RotateAnimation
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import org.techtown.gabojago.main.MainActivity
@@ -69,11 +70,11 @@ class WheelFragment : Fragment(), RandomView, RecordCountView {
         binding = FragmentWheelBinding.inflate(layoutInflater)
 
         var wheelArr = arrayOf(
-            binding.wheel02,
-            binding.wheel03,
-            binding.wheel04,
-            binding.wheel05,
-            binding.wheel06
+            R.drawable.wheel_02,
+            R.drawable.wheel_03,
+            R.drawable.wheel_04,
+            R.drawable.wheel_05,
+            R.drawable.wheel_06
         )
 
         var wheelOptionNameArr = arrayOf(
@@ -89,6 +90,8 @@ class WheelFragment : Fragment(), RandomView, RecordCountView {
             binding.wheelOption10Tv,
             binding.wheelOption11Tv,
         )
+
+        contentsSize()
 
         var getWheelOptionArray = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()){ result ->
@@ -115,8 +118,8 @@ class WheelFragment : Fragment(), RandomView, RecordCountView {
         binding.wheelGoBtn.setOnClickListener {
             val animationStart = AnimationUtils.loadAnimation(activity, R.anim.anim_wheel_scale)
             binding.wheelMainView.startAnimation(animationStart)
-            binding.wheelOptionBtn.visibility = View.GONE
-            binding.wheelGoBtn.visibility = View.GONE
+            binding.wheelOptionBtn.visibility = View.INVISIBLE
+            binding.wheelGoBtn.visibility = View.INVISIBLE
             binding.wheelInfoTv.visibility = View.INVISIBLE
             binding.wheelInfoTitleTv.visibility = View.INVISIBLE
             res = moveWheel()
@@ -149,6 +152,23 @@ class WheelFragment : Fragment(), RandomView, RecordCountView {
         }
         
         return binding.root
+    }
+
+    private fun contentsSize(){
+        val display = requireActivity().windowManager.defaultDisplay // in case of Fragment
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        val height = size.y
+
+        Log.d("COLORVENDINGSIZE", width.toString()+", "+height.toString())
+        Log.d("WHEELCONTENTS", (binding.wheelIv.layoutParams.width).toString()+","+(binding.wheelIv.layoutParams.height).toString())
+        binding.wheelIv.layoutParams.height = height*2/5
+        binding.wheelPlateIv.layoutParams.height = height*283/1000
+        binding.wheelCircleIv.layoutParams.height = height*3/100
+        binding.wheelTriangleIv.layoutParams.height = height*4/100
+
+        Log.d("WHEELCONTENTS", (binding.wheelIv.layoutParams.width).toString()+","+(binding.wheelIv.layoutParams.height).toString())
     }
 
     private fun saveWheel(){
@@ -205,11 +225,8 @@ class WheelFragment : Fragment(), RandomView, RecordCountView {
         binding.wheelInfoTv.visibility = View.VISIBLE
     }
 
-    private fun setWheel(wheelArr: Array<AppCompatImageView>){
-        for(i: Int in 0..4){
-            wheelArr[i].visibility = View.GONE
-        }
-        wheelArr[optionList.size - 2].visibility = View.VISIBLE
+    private fun setWheel(wheelArr: Array<Int>){
+        binding.wheelPlateIv.setImageResource(wheelArr[optionList.size - 2])
     }
 
     private fun setOptionName(wheelOptionNameArr: Array<AppCompatTextView>){
