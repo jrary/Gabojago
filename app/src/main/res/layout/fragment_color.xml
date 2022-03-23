@@ -79,7 +79,7 @@
             app:layout_constraintStart_toStartOf="@id/color_vending_iv"
             app:layout_constraintEnd_toEndOf="@id/color_vending_iv"
             app:layout_constraintBottom_toBottomOf="@id/color_vending_iv"
-            app:layout_constraintHorizontal_bias="0.135"
+            app:layout_constraintHorizontal_bias="0.13"
             app:layout_constraintVertical_bias="0.13"
             />
 
@@ -118,7 +118,7 @@
             app:layout_constraintStart_toStartOf="@id/color_vending_iv"
             app:layout_constraintEnd_toEndOf="@id/color_vending_iv"
             app:layout_constraintBottom_toBottomOf="@id/color_vending_iv"
-            app:layout_constraintHorizontal_bias="0.135"
+            app:layout_constraintHorizontal_bias="0.13"
             app:layout_constraintVertical_bias="0.345"
             />
 
@@ -157,7 +157,7 @@
             app:layout_constraintStart_toStartOf="@id/color_vending_iv"
             app:layout_constraintEnd_toEndOf="@id/color_vending_iv"
             app:layout_constraintBottom_toBottomOf="@id/color_vending_iv"
-            app:layout_constraintHorizontal_bias="0.135"
+            app:layout_constraintHorizontal_bias="0.13"
             app:layout_constraintVertical_bias="0.561"
             />
 

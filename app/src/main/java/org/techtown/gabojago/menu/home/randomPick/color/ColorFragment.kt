@@ -77,10 +77,17 @@ class ColorFragment : Fragment() {
         val width = size.x
         val height = size.y
 
-        Log.d("COLORVENDINGSIZE", width.toString()+", "+height.toString())
-        Log.d("COLORCARD", (width*0.1).toString()+", "+(height*0.1).toString())
-        binding.colorCard01View.layoutParams.height = (height*0.1).toInt()
-        binding.colorCard01View.layoutParams.width = (width*0.1).toInt()
+        binding.colorCard01View.layoutParams.height = 240*height/2960
+        binding.colorCard02View.layoutParams.height = 240*height/2960
+        binding.colorCard03View.layoutParams.height = 240*height/2960
+        binding.colorCard04View.layoutParams.height = 240*height/2960
+        binding.colorCard05View.layoutParams.height = 240*height/2960
+        binding.colorCard06View.layoutParams.height = 240*height/2960
+        binding.colorCard07View.layoutParams.height = 240*height/2960
+        binding.colorCard08View.layoutParams.height = 240*height/2960
+        binding.colorCard09View.layoutParams.height = 240*height/2960
+  //      binding.colorCard01View.layoutParams.width = width*85/1000
+        Log.d("COLORVENDINGSIZE", (64*height/2960).toString()+","+(binding.colorVendingIv.height).toString())
     }
 
 
