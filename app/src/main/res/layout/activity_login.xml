@@ -67,10 +67,10 @@
 
     <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
         android:id="@+id/login_naver_btn"
-        android:layout_width="230dp"
+        android:layout_width="wrap_content"
         android:layout_height="57dp"
-        android:src="@drawable/login_naver_btn"
-        android:scaleType="fitXY"
+        android:src="@drawable/naver_button"
+        android:adjustViewBounds="true"
         app:layout_constraintTop_toBottomOf="@id/login_title_02_tv"
         app:layout_constraintBottom_toTopOf="@id/login_info_tv"
         app:layout_constraintStart_toStartOf="parent"

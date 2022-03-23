@@ -108,7 +108,7 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
             binding.numberResult10Tv
         )
 
-        contentsSize()
+        contentsSize(ballGroundArr)
 
         val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start_longer)
 
@@ -158,6 +158,8 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
             }
             binding.numberResultBallIv.visibility = View.GONE
             binding.numberResultView.visibility = View.GONE
+            binding.numberRetryBtn.visibility = View.INVISIBLE
+            binding.numberSaveBtn.visibility = View.INVISIBLE
             binding.numberContentsView.visibility = View.VISIBLE
             binding.numberContentsView.startAnimation(animAlphaStart)
             binding.numberSaveBtn.setOnClickListener {
@@ -171,18 +173,22 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
         return binding.root
     }
 
-    private fun contentsSize(){
+    private fun contentsSize(ballGroundArr: Array<AppCompatImageView>){
         val display = requireActivity().windowManager.defaultDisplay // in case of Fragment
         val size = Point()
         display.getSize(size)
         val width = size.x
         val height = size.y
 
-        Log.d("COLORVENDINGSIZE", width.toString()+", "+height.toString())
-        Log.d("COLORCARD", (width*0.1).toString()+", "+(height*0.1).toString())
-        binding.numberMainIv.layoutParams.height = (height*0.6).toInt()
-        binding.numberAnimationMainIv.layoutParams.height = (height*0.6).toInt()
-        binding.numberGroundIv.layoutParams.height = (height*0.3).toInt()
+        binding.numberMainIv.layoutParams.height = height*50/100
+        binding.numberAnimationMainIv.layoutParams.height = height*45/100
+        binding.numberAnimationBallIv.layoutParams.height = height*30/100
+        binding.numberGroundIv.layoutParams.height = height*22/100
+        binding.numberDropBallIv.layoutParams.height = height*38/1000
+        for (i in 0..9){
+            ballGroundArr[i].layoutParams.height = height*38/1000
+        }
+        binding.numberResultMainIv.layoutParams.height = height*65/100
     }
 
     //Get the RESULT NUMBER -> RESARRAY
@@ -301,16 +307,16 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
 
         data class Coord( val ht: Float, val vt: Float)
         val resultBallPosArr = arrayOf(
-            arrayOf(Coord(0.5f, 0.49f)), //1
-            arrayOf(Coord(0.38f, 0.5f), Coord(0.62f, 0.5f)), //2
-            arrayOf(Coord(0.26f, 0.5f), Coord(0.5f, 0.5f), Coord(0.74f, 0.5f)), //3
-            arrayOf(Coord(0.38f, 0.385f), Coord(0.62f, 0.385f), Coord( 0.38f,0.615f), Coord(0.62f,0.615f)), //4
-            arrayOf(Coord(0.262f,0.5f), Coord(0.5f,0.275f), Coord(0.5f,0.5f), Coord(0.5f,0.725f), Coord(0.739f,0.5f)), //5
-            arrayOf(Coord(0.256f,0.4f), Coord(0.5f,0.4f), Coord(0.744f,0.4f), Coord(0.378f,0.5f), Coord(0.621f,0.5f), Coord(0.5f,0.595f)), //6
-            arrayOf(Coord(0.382f,0.385f), Coord(0.62f,0.385f), Coord(0.262f,0.5f), Coord(0.5f,0.5f), Coord(0.741f,0.5f), Coord(0.382f,0.615f), Coord(0.62f,0.615f)), //7
-            arrayOf(Coord(0.255f,0.4f), Coord(0.5f,0.4f), Coord(0.745f,0.4f), Coord(0.378f,0.5f), Coord(0.622f,0.5f), Coord(0.255f,0.6f), Coord(0.5f,0.6f), Coord(0.745f,0.6f)), //8
-            arrayOf(Coord(0.5f,0.275f), Coord(0.382f,0.39f), Coord(0.62f,0.39f), Coord(0.262f,0.5f), Coord(0.5f,0.5f), Coord(0.739f,0.5f), Coord(0.382f,0.615f), Coord(0.62f,0.615f), Coord(0.5f,0.725f)), //9
-            arrayOf(Coord(0.378f,0.35f), Coord(0.622f,0.35f), Coord(0.255f,0.45f), Coord(0.5f,0.45f), Coord(0.745f,0.45f), Coord(0.378f,0.545f), Coord(0.622f,0.548f), Coord(0.255f,0.645f), Coord(0.5f,0.645f), Coord(0.745f,0.645f)), //10
+            arrayOf(Coord(0.5f, 0.4f)), //1
+            arrayOf(Coord(0.055f, 0.47f), Coord(0.94f, 0.47f)), //2
+            arrayOf(Coord(0.03f, 0.5f), Coord(0.5f, 0.5f), Coord(0.97f, 0.5f)), //3
+            arrayOf(Coord(0.06f, 0.14f), Coord(0.94f, 0.14f), Coord( 0.06f,0.86f), Coord(0.94f,0.86f)), //4
+            arrayOf(Coord(0.5f,0.08f), Coord(0.035f,0.5f), Coord(0.5f,0.5f), Coord(0.965f,0.5f), Coord(0.5f,0.92f)), //5
+            arrayOf(Coord(0.03f,0.15f), Coord(0.495f,0.15f), Coord(0.97f,0.15f), Coord(0.262f,0.5f), Coord(0.732f,0.5f), Coord(0.495f,0.84f)), //6
+            arrayOf(Coord(0.266f,0.14f), Coord(0.734f,0.14f), Coord(0.035f,0.5f), Coord(0.5f,0.5f), Coord(0.965f,0.5f), Coord(0.266f,0.86f), Coord(0.734f,0.86f)), //7
+            arrayOf(Coord(0.03f,0.15f), Coord(0.495f,0.15f), Coord(0.968f,0.15f), Coord(0.265f,0.5f), Coord(0.73f,0.5f), Coord(0.03f,0.84f), Coord(0.4955f,0.84f), Coord(0.97f,0.84f)), //8
+            arrayOf(Coord(0.5f,0.08f), Coord(0.268f,0.29f), Coord(0.732f,0.29f), Coord(0.035f,0.5f), Coord(0.5f,0.5f), Coord(0.966f,0.5f), Coord(0.27f,0.71f), Coord(0.73f,0.71f), Coord(0.5f,0.92f)), //9
+            arrayOf(Coord(0.265f,0.11f), Coord(0.735f,0.11f), Coord(0.03f,0.36f), Coord(0.5f,0.36f), Coord(0.97f,0.36f), Coord(0.26f,0.62f), Coord(0.73f,0.623f), Coord(0.025f,0.875f), Coord(0.495f,0.875f), Coord(0.97f,0.875f)), //10
         )
 
         for(i in 0..resArray.size-1) {

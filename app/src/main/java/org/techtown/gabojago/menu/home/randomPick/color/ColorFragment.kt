@@ -48,7 +48,6 @@ class ColorFragment : Fragment() {
         binding = FragmentColorBinding.inflate(layoutInflater)
 
         contentsSize()
-        cardSize()
 
         binding.colorCard01View.setImageResource(R.drawable.vending_card_selected)
         binding.colorBackBtn.setOnClickListener {
@@ -84,27 +83,6 @@ class ColorFragment : Fragment() {
         binding.colorCard01View.layoutParams.width = (width*0.1).toInt()
     }
 
-    private fun cardSize(){
-//        binding.textView.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-//            override fun onGlobalLayout() {
-//                tvWidth = binding.textView.width // 텍스트뷰 width
-//                tvHeight = binding.textView.height // 텍스트뷰 height
-//
-//                // LinearLayout에 width, height 적용하기
-//                val params = binding.dynamicView.layoutParams
-//                params.apply {
-//                    width = tvWidth
-//                    height = tvHeight
-//                }
-//                binding.dynamicView.apply {
-//                    layoutParams = params
-//                }
-//
-//                // 다 쓰고 리스너 삭제
-//                binding.textView.viewTreeObserver.removeOnGlobalLayoutListener(this)
-//            }
-//        })
-    }
 
     private fun cardColorAnimation(){
         val animAlphaStart = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_start)
