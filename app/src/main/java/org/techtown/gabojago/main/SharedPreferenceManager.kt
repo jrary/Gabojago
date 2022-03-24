@@ -42,7 +42,7 @@ val client: OkHttpClient = OkHttpClient.Builder()
 
 fun getRetrofit(): Retrofit {
     val retrofit = Retrofit.Builder()
-        .baseUrl("https://dev.gabojago.shop")
+        .baseUrl("https://prod.gabojago.shop")
         .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()

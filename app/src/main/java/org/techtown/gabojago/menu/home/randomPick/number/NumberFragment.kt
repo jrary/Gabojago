@@ -128,23 +128,30 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
             activity?.overridePendingTransition(R.anim.anim_up, R.anim.anim_none)
         }
 
-        binding.numberGoBtn.setOnClickListener {
-            if(resArray[0] == -1){
+        binding.numberGoBtn.setOnClickListener { //가보자고 버튼을 눌렀을 때
+            if(resArray[0] == -1){  //옵션 설정 안했을 때 validation
                 MyToast.createToast(
                     requireContext(), "옵션을 설정한 후 실행해 주세요", 90, true
                 ).show()
             }
             else{
-                binding.numberContentsView.visibility = View.GONE
                 Handler().postDelayed({
-                    binding.numberAnimationView.visibility = View.VISIBLE
-                    binding.numberAnimationView.startAnimation(animAlphaStart)
+                    binding.numberContentsView.visibility = View.GONE //초기 화면 없애는 거
+                    //
+                    binding.numberMainIv.visibility = View.GONE
+                    binding.numberOptionBtn.visibility = View.GONE
+                    binding.numberGoBtn.visibility = View.GONE
+                    //
+                }, 30)
+                Handler().postDelayed({
+                    binding.numberAnimationView.visibility = View.VISIBLE //애니메이션 화면(공 떨어지고 통 돌아가는 화면) 띄우는 거
+                    binding.numberAnimationView.startAnimation(animAlphaStart) //띄우는 애니메이션 실행하기
                 }, 50)
                 Handler().postDelayed({
-                    showAnimation(ballGroundArr)
+                    showAnimation(ballGroundArr) //애니메이션 돌아가게 하는 함수
                 }, 300)
                 Handler().postDelayed({
-                    resAnimation(resTextArr)
+                    resAnimation(resTextArr) //결과 화면 띄우는 함수
                 }, (1000 + 2250 * resArray.size).toLong())
             }
         }
@@ -158,6 +165,11 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
             binding.numberResultView.visibility = View.GONE
             binding.numberRetryBtn.visibility = View.INVISIBLE
             binding.numberSaveBtn.visibility = View.INVISIBLE
+            //
+            binding.numberMainIv.visibility = View.VISIBLE
+            binding.numberOptionBtn.visibility = View.VISIBLE
+            binding.numberGoBtn.visibility = View.VISIBLE
+            //
             binding.numberContentsView.visibility = View.VISIBLE
             binding.numberContentsView.startAnimation(animAlphaStart)
             binding.numberSaveBtn.setOnClickListener {
