@@ -48,9 +48,12 @@ class RecordFolderResultNameRVAdapter(private val folderList: ArrayList<FolderRe
     //뷰홀더에 데이터를 바인딩해줘야 할 때마다 호출되는 함수 => 엄청나게 많이 호출
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(folderList[position])
-        //아이템 자체 클릭
-        holder.itemView.setOnClickListener {
-            mItemClickListener.onItemView(folderList[position].hasRecording,folderList[position].folderIdx)
+        if(folderList[position].hasRecording) {
+            //아이템 자체 클릭
+            holder.itemView.setOnClickListener {
+                mItemClickListener.onItemView(folderList[position].hasRecording,
+                    folderList[position].folderIdx)
+            }
         }
         //연필이미지 클릭
         holder.binding.folderRecordPecilIv.setOnClickListener {

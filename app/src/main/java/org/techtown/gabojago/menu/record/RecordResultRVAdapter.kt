@@ -33,8 +33,11 @@ class RecordResultRVAdapter(private val recordList: ArrayList<SingleResultListRe
     //뷰홀더에 데이터를 바인딩해줘야 할 때마다 호출되는 함수 => 엄청나게 많이 호출
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(recordList[position])
-        holder.itemView.setOnClickListener{
-            mItemClickListener.onItemView(recordList[position].hasRecording,recordList[position].randomResultListResult.randomResultIdx)
+        if(recordList[position].hasRecording) {
+            holder.itemView.setOnClickListener {
+                mItemClickListener.onItemView(recordList[position].hasRecording,
+                    recordList[position].randomResultListResult.randomResultIdx)
+            }
         }
         holder.binding.itemRecordPecilIv.setOnClickListener {
             mItemClickListener.onItemClick(recordList[position].hasRecording,recordList[position].randomResultListResult.randomResultIdx,recordList[position].randomResultListResult)

@@ -1,6 +1,7 @@
 package org.techtown.gabojago.menu.record
 
 import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -250,7 +251,7 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         var timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             when (requestCode) {
                 101 -> {
                     if (ContextCompat.checkSelfPermission(requireContext(),
