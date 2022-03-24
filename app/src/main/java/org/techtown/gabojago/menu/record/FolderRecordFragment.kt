@@ -101,10 +101,6 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
                     urlList
                 ),folderIdx)
 
-                (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, RecordFragment())
-                    .commitAllowingStateLoss()
-
             }
             //완료 text 누를 시
             binding.folderRecordCompleteTv.setOnClickListener {
@@ -117,14 +113,6 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
                     binding.folderRecordTitleTv.text.toString(),
                     urlList
                 ),folderIdx)
-                var recordFragment = RecordFragment()
-                var bundle = Bundle()
-                bundle.putString("pickDate", day)
-                Log.e("date",day)
-                recordFragment.arguments = bundle
-                (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, recordFragment)
-                    .commitAllowingStateLoss()
 
             }
         }else{
@@ -145,15 +133,6 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
                     urlList
                 ))
 
-                var recordFragment = RecordFragment()
-                var bundle = Bundle()
-                bundle.putString("pickDate", day)
-                Log.e("date",day)
-                recordFragment.arguments = bundle
-                (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, recordFragment)
-                    .commitAllowingStateLoss()
-
             }
             //기록 없을때 완료 text 누를 시
             binding.folderRecordCompleteTv.setOnClickListener {
@@ -166,15 +145,6 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
                     binding.folderRecordTitleTv.text.toString(),
                     urlList
                 ))
-
-                var recordFragment = RecordFragment()
-                var bundle = Bundle()
-                bundle.putString("pickDate", day)
-                Log.e("date",day)
-                recordFragment.arguments = bundle
-                (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, recordFragment)
-                    .commitAllowingStateLoss()
             }
         }
 
@@ -381,6 +351,15 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
         binding.folderRecordBlurView2.visibility = View.GONE
         binding.folderRecordLoadingPb.visibility = View.GONE
         Log.e("폴더기록","성공")
+
+        var recordFragment = RecordFragment()
+        var bundle = Bundle()
+        bundle.putString("pickDate", day)
+        Log.e("date",day)
+        recordFragment.arguments = bundle
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, recordFragment)
+            .commitAllowingStateLoss()
     }
 
     //폴더기록하기 실패
@@ -447,6 +426,15 @@ class FolderRecordFragment(private val hasRecording:Boolean,private val folderId
         binding.folderRecordBlurView2.visibility = View.GONE
         binding.folderRecordLoadingPb.visibility = View.GONE
         Log.e("폴더기록","성공")
+
+        var recordFragment = RecordFragment()
+        var bundle = Bundle()
+        bundle.putString("pickDate", day)
+        Log.e("date",day)
+        recordFragment.arguments = bundle
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, recordFragment)
+            .commitAllowingStateLoss()
     }
 
     //폴더기록수정 실패
