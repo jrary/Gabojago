@@ -1,6 +1,7 @@
 package org.techtown.gabojago.menu.home.info
 
 import android.content.Context
+import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -41,6 +42,13 @@ class InfoNumberFragment : Fragment() {
     ): View? {
         binding = FragmentInfoNumberBinding.inflate(inflater, container, false)
 
+        val display = requireActivity().windowManager.defaultDisplay // in case of Fragment
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        val height = size.y
+
+        binding.infoNumberContentsSv.layoutParams.height = height*55/100
 
         binding.infoNumberBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()

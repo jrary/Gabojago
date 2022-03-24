@@ -135,9 +135,7 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
                 ).show()
             }
             else{
-                Handler().postDelayed({
-                    binding.numberContentsView.visibility = View.GONE
-                }, 50)
+                binding.numberContentsView.visibility = View.GONE
                 Handler().postDelayed({
                     binding.numberAnimationView.visibility = View.VISIBLE
                     binding.numberAnimationView.startAnimation(animAlphaStart)
@@ -188,7 +186,7 @@ class NumberFragment : Fragment(), RandomView, RecordCountView {
         for (i in 0..9){
             ballGroundArr[i].layoutParams.height = height*38/1000
         }
-        binding.numberResultMainIv.layoutParams.height = height*65/100
+        binding.numberResultMainIv.layoutParams.height = height*60/100
     }
 
     //Get the RESULT NUMBER -> RESARRAY

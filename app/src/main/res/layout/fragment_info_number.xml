@@ -52,16 +52,17 @@
         android:text="숫자를 따라 나서는 모험을 즐겨보세요!\n
         아래는 숫자뽑기를 활용할 수 있는 예시입니다."
         android:textSize="10sp"
+        android:gravity="center"
         android:textColor="#000000"
         android:fontFamily="@font/apple_sd_gothic_neo_r"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/info_number_title_view"
-        app:layout_constraintBottom_toTopOf="@id/info_clock_contents_sv"
+        app:layout_constraintBottom_toTopOf="@id/info_number_contents_sv"
         />
 
     <ScrollView
-        android:id="@+id/info_clock_contents_sv"
+        android:id="@+id/info_number_contents_sv"
         android:layout_width="326dp"
         android:layout_height="450dp"
         android:background="@drawable/info_bg"

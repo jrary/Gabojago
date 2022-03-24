@@ -1,6 +1,7 @@
 package org.techtown.gabojago.menu.home.info
 
 import android.content.Context
+import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -43,6 +44,16 @@ class HomeInfoFragment : Fragment() {
     ): View? {
         binding = FragmentHomeInfoBinding.inflate(inflater, container, false)
 
+        val display = requireActivity().windowManager.defaultDisplay // in case of Fragment
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        val height = size.y
+
+        binding.homeInfoWheelView.layoutParams.height = height*12/100
+        binding.homeInfoClockView.layoutParams.height = height*12/100
+        binding.homeInfoColorView.layoutParams.height = height*12/100
+        binding.homeInfoNumberView.layoutParams.height = height*12/100
 
         binding.homeInfoBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
