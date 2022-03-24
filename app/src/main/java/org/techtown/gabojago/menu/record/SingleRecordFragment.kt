@@ -126,16 +126,6 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                     urlList
                 ))
 
-
-                var recordFragment = RecordFragment()
-                var bundle = Bundle()
-                bundle.putString("pickDate", day)
-                Log.e("date",day)
-                recordFragment.arguments = bundle
-                (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, recordFragment)
-                    .commitAllowingStateLoss()
-
             }
 
             binding.singleRecordCompleteTv.setOnClickListener {
@@ -148,15 +138,6 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                     binding.singleRecordTitleEt.text.toString(),
                     urlList
                 ))
-
-                var recordFragment = RecordFragment()
-                var bundle = Bundle()
-                bundle.putString("pickDate", day)
-                Log.e("date",day)
-                recordFragment.arguments = bundle
-                (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, recordFragment)
-                    .commitAllowingStateLoss()
 
             }
 
@@ -180,15 +161,6 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                     urlList
                 ),recordIdx)
 
-                var recordFragment = RecordFragment()
-                var bundle = Bundle()
-                bundle.putString("pickDate", day)
-                Log.e("date",day)
-                recordFragment.arguments = bundle
-                (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, recordFragment)
-                    .commitAllowingStateLoss()
-
             }
 
             binding.singleRecordCompleteTv.setOnClickListener {
@@ -201,15 +173,6 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
                     binding.singleRecordTitleEt.text.toString(),
                     urlList
                 ),recordIdx)
-
-                var recordFragment = RecordFragment()
-                var bundle = Bundle()
-                bundle.putString("pickDate", day)
-                Log.e("date",day)
-                recordFragment.arguments = bundle
-                (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, recordFragment)
-                    .commitAllowingStateLoss()
 
             }
         }
@@ -388,6 +351,15 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
         binding.singleRecordBlurView2.visibility = View.GONE
         binding.singleRecordLoadingPb.visibility = View.GONE
         Log.e("개별기록","성공")
+
+        var recordFragment = RecordFragment()
+        var bundle = Bundle()
+        bundle.putString("pickDate", day)
+        Log.e("date",day)
+        recordFragment.arguments = bundle
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, recordFragment)
+            .commitAllowingStateLoss()
     }
 
     override fun onSingleRecordingFailure(code: Int, message: String) {
@@ -450,6 +422,15 @@ class SingleRecordFragment(private  val hasRecording:Boolean,private  val record
         binding.singleRecordBlurView2.visibility = View.GONE
         binding.singleRecordLoadingPb.visibility = View.GONE
         Log.e("개별기록","성공")
+
+        var recordFragment = RecordFragment()
+        var bundle = Bundle()
+        bundle.putString("pickDate", day)
+        Log.e("date",day)
+        recordFragment.arguments = bundle
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, recordFragment)
+            .commitAllowingStateLoss()
     }
 
     override fun onSingleModifyFailure(code: Int, message: String) {
