@@ -4,6 +4,7 @@ import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Point
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -106,6 +107,8 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
             }
         }
 
+        contentsSize()
+
         binding.clockBackBtn.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, HomeMenuFragment())
@@ -169,6 +172,19 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
         return binding.root
     }
 
+    private fun contentsSize(){
+        val display = requireActivity().windowManager.defaultDisplay // in case of Fragment
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        val height = size.y
+
+        Log.d("COLORVENDINGSIZE", width.toString()+", "+height.toString())
+        Log.d("COLORCARD", (width*0.1).toString()+", "+(height*0.1).toString())
+        binding.clockIv.layoutParams.width = (width*0.8).toInt()
+        binding.clockIv.layoutParams.height = (width*0.8).toInt()
+    }
+
     private fun saveClock(){
         val recordService = RecordService()
         recordService.setRecordCountView(this@ClockFragment)
@@ -205,16 +221,20 @@ class ClockFragment : Fragment(), RandomView, RecordCountView {
         super.onPause()
         binding.clockInfoTitleTv.visibility = View.GONE
         binding.clockInfoTv.visibility = View.GONE
+        binding.clockOptionBtn.visibility = View.INVISIBLE
+        binding.clockGoBtn.visibility = View.INVISIBLE
         val animationOpen = AnimationUtils.loadAnimation(activity, R.anim.anim_open_scale)
-        binding.clockMainView.startAnimation(animationOpen)
+        binding.clockContentsView.startAnimation(animationOpen)
     }
 
     override fun onResume() {
         super.onResume()
         val animationClose = AnimationUtils.loadAnimation(activity, R.anim.anim_close_scale)
-        binding.clockMainView.startAnimation(animationClose)
+        binding.clockContentsView.startAnimation(animationClose)
         binding.clockInfoTitleTv.visibility = View.VISIBLE
         binding.clockInfoTv.visibility = View.VISIBLE
+        binding.clockOptionBtn.visibility = View.VISIBLE
+        binding.clockGoBtn.visibility = View.VISIBLE
     }
 
     //startNum, endNum의 범위는 1~12이다.

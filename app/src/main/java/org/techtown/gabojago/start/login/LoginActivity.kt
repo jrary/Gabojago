@@ -40,7 +40,7 @@ class LoginActivity :AppCompatActivity(), LoginView {
         binding.loginBackgroundView.layoutParams.width = width
         binding.loginBackgroundView.layoutParams.height = height*2/3
 
-        binding.loginNaverBtn.layoutParams.width = width/2
+        binding.loginNaverBtn.layoutParams.width = width*2/3
         binding.loginNaverBtn.layoutParams.height = binding.loginNaverBtn.layoutParams.width/4
 
         Handler().postDelayed({
