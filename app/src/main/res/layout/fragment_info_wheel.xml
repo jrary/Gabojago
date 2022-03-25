@@ -49,8 +49,7 @@
         android:id="@+id/info_wheel_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="머리 속에 떠오르는 다양한 선택지를 돌림판에 넣고 돌려보세요.\n
-        아래는 돌림판을 활용할 수 있는 예시입니다."
+        android:text="머리 속에 떠오르는 다양한 선택지를 돌림판에 넣고 돌려보세요.\n아래는 돌림판을 활용할 수 있는 예시입니다."
         android:textSize="10sp"
         android:gravity="center"
         android:textColor="#000000"

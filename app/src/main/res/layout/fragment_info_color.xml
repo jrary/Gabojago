@@ -49,10 +49,10 @@
         android:id="@+id/info_color_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="럭키박스를 뽑는 마음으로 오늘 모험의 색깔을 정해보세요.\n
-        아래는 컬러박스 뽑기를 활용할 수 있는 예시입니다."
+        android:text="럭키박스를 뽑는 마음으로 오늘 모험의 색깔을 정해보세요.\n아래는 컬러박스 뽑기를 활용할 수 있는 예시입니다."
         android:textSize="10sp"
         android:textColor="#000000"
+        android:gravity="center"
         android:fontFamily="@font/apple_sd_gothic_neo_r"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
