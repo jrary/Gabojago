@@ -4,11 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/drawable-mdpi/info_box.xml" value="0.1" />
+        <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.114" />
         <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/drawable/background_bottom_nav.xml" value="0.128" />
         <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/drawable/bottom_back1.xml" value="0.128" />
         <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/drawable/box.xml" value="0.1" />
         <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/drawable/calendarbox.xml" value="0.128" />
         <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/drawable/gridview_selecter.xml" value="0.1" />
+        <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/drawable/ic_launcher_background.xml" value="0.114" />
         <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/drawable/item_box.xml" value="0.1" />
         <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/drawable/shadow_all_direction.xml" value="0.1335" />
         <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/drawable/toast_shadow.xml" value="0.1335" />
@@ -39,6 +41,9 @@
         <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/layout/fragment_wheel.xml" value="0.152" />
         <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/layout/item_folderresult_modifyversion.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/layout/toast_board_white.xml" value="0.1" />
+        <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/mipmap-anydpi-v26/ic_go.xml" value="0.114" />
+        <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/mipmap-anydpi-v26/ic_go_round.xml" value="0.114" />
+        <entry key="..\:/Users/dahye/AndroidStudioProjects/Gabojago/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.114" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/drawable/background_bottom_nav.xml" value="0.37407407407407406" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/drawable/bottom_back1.xml" value="0.37407407407407406" />
         <entry key="..\:/Users/sec/Documents/GitHub/Gabojago/app/src/main/res/drawable/bottom_back2.xml" value="0.37407407407407406" />
