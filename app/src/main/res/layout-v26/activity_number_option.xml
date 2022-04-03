@@ -59,7 +59,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <EditText
         android:id="@+id/number_start_tv"
         android:inputType="number"
         android:digits="0123456789"
@@ -98,7 +98,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <EditText
         android:id="@+id/number_end_tv"
         android:inputType="number"
         android:digits="0123456789"
