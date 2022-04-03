@@ -57,11 +57,14 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
         val gridLayoutManager = GridLayoutManager(requireContext(), 7)
         binding.calendarGridview.layoutManager = gridLayoutManager
 
-        val display = requireActivity().windowManager.defaultDisplay // in case of Fragment
+        //화면 실제 size 받아오기
+        val display = requireActivity().windowManager.defaultDisplay
         val size = Point()
         display.getSize(size)
         val width = size.x
         val height = size.y
+
+        //받아온 화면 size 달력에 적용
         binding.calendarGridview.addItemDecoration(HorizontalItemDecorator(width/55,height/1000))
 
         binding.calendarEmpty1.layoutParams.height = height/15
@@ -71,6 +74,7 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
 
         viewDate = initDate().substring(0,6)
 
+        //Calendar retrofit
         calendarService.setNicknameAdventureView(this@CalendarActivity)
         calendarService.setAdventureTimeView(this@CalendarActivity)
         calendarService.getNicknameAdventure(userJwt)
@@ -124,6 +128,7 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
         return binding.root
     }
 
+    //초기함수
     private fun init() {
         binding.calendarDateTv.text = setMonth()
         binding.recordLookBackBtn.setOnClickListener{
@@ -133,6 +138,7 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
         }
     }
 
+    //초기 달 설정
     private fun setMonth(): String {
         val now: Long = System.currentTimeMillis()
         val date = Date(now)
@@ -143,6 +149,7 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
         return stringDate
     }
 
+    //초기 날짜 설정
     fun initDate(): String {
         val now: Long = System.currentTimeMillis()
         val date = Date(now)
@@ -152,11 +159,13 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
         return stringDate
     }
 
+    //가입날짜 원하는 형식으로 받아오기
     private fun setRegisterDate(registerDate: String): Array<String> {
         val dateArray = registerDate.split("-").toTypedArray()
         return dateArray
     }
 
+    //뒤로가기 버튼-액션 설정
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callback = object : OnBackPressedCallback(true) {
@@ -175,6 +184,7 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
         callback.remove()
     }
 
+    //닉네임 레트로핏
     override fun onNicknameAdventureSuccess(userNicknameAdventure: NicknameAdventureResult) {
         binding.calendarNameTv.text = userNicknameAdventure.userNicknameAdventure
         binding.calendarBlurView.visibility = View.GONE
@@ -192,6 +202,7 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
         ).show()
     }
 
+    //유저가입날짜, 모험한 날짜 레트로핏
     override fun onAdventureTimeSuccess(adventureTime: AdventureTimeResult) {
         //모험날짜배열 초기화
         randomresultdateList.clear()
