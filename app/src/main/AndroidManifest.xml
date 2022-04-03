@@ -19,9 +19,28 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Gabojago">
 
-        <activity android:name=".start.splash.SplashActivity"
+        <activity
+            android:name="com.nhn.android.naverlogin.ui.OAuthCustomTabActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Intent URL 에서 로그인 액티비티를 실행하기 위해 설정 -->
+                <data
+                    android:host="authorize"
+                    android:path="/"
+                    android:scheme="naver3rdpartylogin" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".start.splash.SplashActivity"
+            android:screenOrientation="portrait"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -51,10 +70,6 @@
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity android:name="org.techtown.gabojago.menu.home.randomPick.number.NumberOptionActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name="org.techtown.gabojago.menu.home.randomPick.number.NumberSelectActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             android:screenOrientation="portrait"/>

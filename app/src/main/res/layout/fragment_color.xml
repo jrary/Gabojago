@@ -206,10 +206,11 @@
             android:layout_height="68dp"
             android:src="@drawable/vending_button_clicked"
             android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/color_vending_iv"
             app:layout_constraintEnd_toEndOf="@id/color_vending_iv"
             app:layout_constraintTop_toTopOf="@id/color_vending_iv"
             app:layout_constraintBottom_toBottomOf="@id/color_vending_iv"
-            app:layout_constraintHorizontal_bias="0.82"
+            app:layout_constraintHorizontal_bias="0.94"
             app:layout_constraintVertical_bias="0.6"
             />
 
