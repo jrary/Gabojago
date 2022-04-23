@@ -113,7 +113,6 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
                 ).show()
             } else {
                 cal.add(Calendar.MONTH, -1)
-                Log.e("이전달",(cal.get(Calendar.MONTH) + 1).toString())
                 binding.calendarDateTv.text = cal.get(Calendar.YEAR)
                     .toString() + ", " + (cal.get(Calendar.MONTH) + 1).toString() + "월"
                 val date = Date(cal.timeInMillis)
@@ -122,7 +121,6 @@ class CalendarActivity : Fragment(), NicknameAdventureView, AdventureTimeView {
                 viewDate = dateFormat2.format(date)
                 val stringDate = dateFormat.format(date)
                 calendarService.getAdventureTime(userJwt, stringDate)
-                Log.e("이전달2",(cal.get(Calendar.MONTH )+1).toString())
             }
         }
         return binding.root
